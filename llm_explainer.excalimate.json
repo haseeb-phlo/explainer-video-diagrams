@@ -1,0 +1,380 @@
+{
+  "version": 1,
+  "title": "What an LLM actually is",
+  "TOTAL_DURATION_MS": 450000,
+  "fps": 24,
+  "background": "#ffffff",
+  "defaults": {
+    "enter": { "type": "draw", "durationMs": 400 },
+    "exit": { "type": "fade", "durationMs": 600 }
+  },
+
+  "sections": [
+
+    {
+      "id": "scene1",
+      "name": "What's an LLM",
+      "startMs": 0,
+      "endMs": 35000,
+      "elements": [
+        { "elementId": "s1_title",     "enter": { "type": "fade", "atMs": 300,   "durationMs": 500 }, "hold": { "fromMs": 800,   "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_llm_big",   "enter": { "type": "draw", "atMs": 1200,  "durationMs": 1400, "style": "stroke-by-stroke" }, "hold": { "fromMs": 2600,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_expansion", "enter": { "type": "fade", "atMs": 2800,  "durationMs": 700 }, "emphasis": [{ "type": "pulse", "atMs": 3500, "durationMs": 500 }], "hold": { "fromMs": 3500,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_sub",       "enter": { "type": "fade", "atMs": 4200,  "durationMs": 500 }, "hold": { "fromMs": 4700,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_models_hdr","enter": { "type": "fade", "atMs": 6800,  "durationMs": 500 }, "hold": { "fromMs": 7300,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_claude_rect",    "enter": { "type": "slide", "atMs": 8500,  "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 9000,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_claude_glyph",   "enter": { "type": "fade",  "atMs": 8800,  "durationMs": 400 }, "hold": { "fromMs": 9200,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_claude_name",    "enter": { "type": "fade",  "atMs": 8900,  "durationMs": 400 }, "hold": { "fromMs": 9300,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_claude_parent",  "enter": { "type": "fade",  "atMs": 9000,  "durationMs": 400 }, "hold": { "fromMs": 9400,  "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_gpt_rect",       "enter": { "type": "slide", "atMs": 10500, "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 11000, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_gpt_glyph",      "enter": { "type": "fade",  "atMs": 10800, "durationMs": 400 }, "hold": { "fromMs": 11200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_gpt_name",       "enter": { "type": "fade",  "atMs": 10900, "durationMs": 400 }, "hold": { "fromMs": 11300, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_gpt_parent",     "enter": { "type": "fade",  "atMs": 11000, "durationMs": 400 }, "hold": { "fromMs": 11400, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_gemini_rect",    "enter": { "type": "slide", "atMs": 12500, "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 13000, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_gemini_glyph",   "enter": { "type": "fade",  "atMs": 12800, "durationMs": 400 }, "hold": { "fromMs": 13200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_gemini_name",    "enter": { "type": "fade",  "atMs": 12900, "durationMs": 400 }, "hold": { "fromMs": 13300, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_gemini_parent",  "enter": { "type": "fade",  "atMs": 13000, "durationMs": 400 }, "hold": { "fromMs": 13400, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_llama_rect",     "enter": { "type": "slide", "atMs": 14500, "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 15000, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_llama_glyph",    "enter": { "type": "fade",  "atMs": 14800, "durationMs": 400 }, "hold": { "fromMs": 15200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_llama_name",     "enter": { "type": "fade",  "atMs": 14900, "durationMs": 400 }, "hold": { "fromMs": 15300, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_llama_parent",   "enter": { "type": "fade",  "atMs": 15000, "durationMs": 400 }, "hold": { "fromMs": 15400, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_mistral_rect",   "enter": { "type": "slide", "atMs": 16500, "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 17000, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_mistral_glyph",  "enter": { "type": "fade",  "atMs": 16800, "durationMs": 400 }, "hold": { "fromMs": 17200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_mistral_name",   "enter": { "type": "fade",  "atMs": 16900, "durationMs": 400 }, "hold": { "fromMs": 17300, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_mistral_parent", "enter": { "type": "fade",  "atMs": 17000, "durationMs": 400 }, "hold": { "fromMs": 17400, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_deepseek_rect",  "enter": { "type": "slide", "atMs": 18500, "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 19000, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_deepseek_glyph", "enter": { "type": "fade",  "atMs": 18800, "durationMs": 400 }, "hold": { "fromMs": 19200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_deepseek_name",  "enter": { "type": "fade",  "atMs": 18900, "durationMs": 400 }, "hold": { "fromMs": 19300, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_deepseek_parent","enter": { "type": "fade",  "atMs": 19000, "durationMs": 400 }, "hold": { "fromMs": 19400, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_brand_grok_rect",      "enter": { "type": "slide", "atMs": 20500, "durationMs": 500, "from": "bottom" }, "hold": { "fromMs": 21000, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_grok_glyph",     "enter": { "type": "fade",  "atMs": 20800, "durationMs": 400 }, "hold": { "fromMs": 21200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_grok_name",      "enter": { "type": "fade",  "atMs": 20900, "durationMs": 400 }, "hold": { "fromMs": 21300, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+        { "elementId": "s1_brand_grok_parent",    "enter": { "type": "fade",  "atMs": 21000, "durationMs": 400 }, "hold": { "fromMs": 21400, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } },
+
+        { "elementId": "s1_tagline",   "enter": { "type": "fade", "atMs": 23500, "durationMs": 700 }, "emphasis": [{ "type": "pulse", "atMs": 25000, "durationMs": 600 }], "hold": { "fromMs": 24200, "toMs": 33800 }, "exit": { "type": "fade", "atMs": 33800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene2",
+      "name": "Neural network",
+      "startMs": 35000,
+      "endMs": 95000,
+      "elements": [
+        { "elementId": "s2_title",    "enter": { "type": "fade", "atMs": 35300, "durationMs": 500 }, "hold": { "fromMs": 35800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_sub",      "enter": { "type": "fade", "atMs": 36500, "durationMs": 500 }, "hold": { "fromMs": 37000, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_net_bg",   "enter": { "type": "draw", "atMs": 37800, "durationMs": 900 }, "hold": { "fromMs": 38700, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+
+        { "elementId": "s2_node_c0_r0", "enter": { "type": "fade", "atMs": 39000, "durationMs": 200 }, "hold": { "fromMs": 39200, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c0_r1", "enter": { "type": "fade", "atMs": 39100, "durationMs": 200 }, "hold": { "fromMs": 39300, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c0_r2", "enter": { "type": "fade", "atMs": 39200, "durationMs": 200 }, "hold": { "fromMs": 39400, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c0_r3", "enter": { "type": "fade", "atMs": 39300, "durationMs": 200 }, "hold": { "fromMs": 39500, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c1_r0", "enter": { "type": "fade", "atMs": 39400, "durationMs": 200 }, "hold": { "fromMs": 39600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c1_r1", "enter": { "type": "fade", "atMs": 39500, "durationMs": 200 }, "hold": { "fromMs": 39700, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c1_r2", "enter": { "type": "fade", "atMs": 39600, "durationMs": 200 }, "hold": { "fromMs": 39800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c1_r3", "enter": { "type": "fade", "atMs": 39700, "durationMs": 200 }, "hold": { "fromMs": 39900, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c2_r0", "enter": { "type": "fade", "atMs": 39800, "durationMs": 200 }, "hold": { "fromMs": 40000, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c2_r1", "enter": { "type": "fade", "atMs": 39900, "durationMs": 200 }, "hold": { "fromMs": 40100, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c2_r2", "enter": { "type": "fade", "atMs": 40000, "durationMs": 200 }, "hold": { "fromMs": 40200, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c2_r3", "enter": { "type": "fade", "atMs": 40100, "durationMs": 200 }, "hold": { "fromMs": 40300, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c3_r0", "enter": { "type": "fade", "atMs": 40200, "durationMs": 200 }, "hold": { "fromMs": 40400, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c3_r1", "enter": { "type": "fade", "atMs": 40300, "durationMs": 200 }, "hold": { "fromMs": 40500, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c3_r2", "enter": { "type": "fade", "atMs": 40400, "durationMs": 200 }, "hold": { "fromMs": 40600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_node_c3_r3", "enter": { "type": "fade", "atMs": 40500, "durationMs": 200 }, "hold": { "fromMs": 40700, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+
+        { "elementId": "s2_line_l1", "enter": { "type": "draw", "atMs": 41000, "durationMs": 300 }, "hold": { "fromMs": 41300, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_line_l2", "enter": { "type": "draw", "atMs": 41200, "durationMs": 300 }, "hold": { "fromMs": 41500, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_line_l3", "enter": { "type": "draw", "atMs": 41400, "durationMs": 300 }, "hold": { "fromMs": 41700, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_line_l4", "enter": { "type": "draw", "atMs": 41600, "durationMs": 300 }, "hold": { "fromMs": 41900, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_line_l5", "enter": { "type": "draw", "atMs": 41800, "durationMs": 300 }, "hold": { "fromMs": 42100, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_line_l6", "enter": { "type": "draw", "atMs": 42000, "durationMs": 300 }, "hold": { "fromMs": 42300, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+
+        { "elementId": "s2_col_label_input", "enter": { "type": "fade", "atMs": 43000, "durationMs": 300 }, "hold": { "fromMs": 43300, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_col_label_h1",    "enter": { "type": "fade", "atMs": 43200, "durationMs": 300 }, "hold": { "fromMs": 43500, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_col_label_h2",    "enter": { "type": "fade", "atMs": 43400, "durationMs": 300 }, "hold": { "fromMs": 43700, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_col_label_out",   "enter": { "type": "fade", "atMs": 43600, "durationMs": 300 }, "hold": { "fromMs": 43900, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+
+        { "elementId": "s2_dials_note", "enter": { "type": "fade", "atMs": 45000, "durationMs": 800 }, "emphasis": [{ "type": "pulse", "atMs": 47000, "durationMs": 600 }], "hold": { "fromMs": 45800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+
+        { "elementId": "s2_learn_hdr",      "enter": { "type": "fade", "atMs": 53000, "durationMs": 500 }, "hold": { "fromMs": 53500, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_box1",      "enter": { "type": "draw", "atMs": 54000, "durationMs": 600 }, "hold": { "fromMs": 54600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_box1_text", "enter": { "type": "fade", "atMs": 54400, "durationMs": 400 }, "hold": { "fromMs": 54800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_arrow1",    "enter": { "type": "draw", "atMs": 55200, "durationMs": 400 }, "hold": { "fromMs": 55600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_box2",      "enter": { "type": "draw", "atMs": 56000, "durationMs": 600 }, "hold": { "fromMs": 56600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_box2_text", "enter": { "type": "fade", "atMs": 56400, "durationMs": 400 }, "hold": { "fromMs": 56800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_arrow2",    "enter": { "type": "draw", "atMs": 57200, "durationMs": 400 }, "hold": { "fromMs": 57600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_box3",      "enter": { "type": "draw", "atMs": 58000, "durationMs": 600 }, "hold": { "fromMs": 58600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_box3_text", "enter": { "type": "fade", "atMs": 58400, "durationMs": 400 }, "emphasis": [{ "type": "pulse", "atMs": 59000, "durationMs": 500 }], "hold": { "fromMs": 58800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_back",      "enter": { "type": "draw", "atMs": 60000, "durationMs": 1200 }, "hold": { "fromMs": 61200, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+        { "elementId": "s2_loop_back_label","enter": { "type": "fade", "atMs": 61200, "durationMs": 400 }, "emphasis": [{ "type": "pulse", "atMs": 63000, "durationMs": 500 }, { "type": "pulse", "atMs": 65000, "durationMs": 500 }], "hold": { "fromMs": 61600, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } },
+
+        { "elementId": "s2_caption", "enter": { "type": "fade", "atMs": 88000, "durationMs": 800 }, "emphasis": [{ "type": "pulse", "atMs": 90000, "durationMs": 600 }], "hold": { "fromMs": 88800, "toMs": 93800 }, "exit": { "type": "fade", "atMs": 93800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene3",
+      "name": "Tokens & vectors",
+      "startMs": 95000,
+      "endMs": 170000,
+      "elements": [
+        { "elementId": "s3_title",    "enter": { "type": "fade", "atMs": 95300,  "durationMs": 500 }, "hold": { "fromMs": 95800,  "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_sub",      "enter": { "type": "fade", "atMs": 96500,  "durationMs": 500 }, "hold": { "fromMs": 97000,  "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+
+        { "elementId": "s3_left_hdr", "enter": { "type": "fade", "atMs": 99000,  "durationMs": 500 }, "hold": { "fromMs": 99500,  "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_word",     "enter": { "type": "draw", "atMs": 100000, "durationMs": 1200, "style": "stroke-by-stroke" }, "hold": { "fromMs": 101200, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_word_arrow","enter": { "type": "draw", "atMs": 102000, "durationMs": 500 }, "hold": { "fromMs": 102500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_tok1",     "enter": { "type": "draw", "atMs": 103000, "durationMs": 500 }, "hold": { "fromMs": 103500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_tok1_text","enter": { "type": "fade", "atMs": 103300, "durationMs": 400 }, "hold": { "fromMs": 103700, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_tok2",     "enter": { "type": "draw", "atMs": 104000, "durationMs": 500 }, "hold": { "fromMs": 104500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_tok2_text","enter": { "type": "fade", "atMs": 104300, "durationMs": 400 }, "hold": { "fromMs": 104700, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_tok3",     "enter": { "type": "draw", "atMs": 105000, "durationMs": 500 }, "hold": { "fromMs": 105500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_tok3_text","enter": { "type": "fade", "atMs": 105300, "durationMs": 400 }, "hold": { "fromMs": 105700, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_left_caption","enter": { "type": "fade", "atMs": 106500, "durationMs": 500 }, "hold": { "fromMs": 107000, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+
+        { "elementId": "s3_divider",  "enter": { "type": "draw", "atMs": 112000, "durationMs": 500 }, "hold": { "fromMs": 112500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_right_hdr","enter": { "type": "fade", "atMs": 113000, "durationMs": 500 }, "hold": { "fromMs": 113500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_yaxis",    "enter": { "type": "draw", "atMs": 114000, "durationMs": 500 }, "hold": { "fromMs": 114500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_xaxis",    "enter": { "type": "draw", "atMs": 114500, "durationMs": 600 }, "hold": { "fromMs": 115100, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+
+        { "elementId": "s3_w_delivered", "enter": { "type": "fade", "atMs": 117000, "durationMs": 400 }, "hold": { "fromMs": 117400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_w_shipped",   "enter": { "type": "fade", "atMs": 118000, "durationMs": 400 }, "hold": { "fromMs": 118400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_w_sent",      "enter": { "type": "fade", "atMs": 119000, "durationMs": 400 }, "hold": { "fromMs": 119400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_w_mailed",    "enter": { "type": "fade", "atMs": 120000, "durationMs": 400 }, "hold": { "fromMs": 120400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_cluster1_ring", "enter": { "type": "draw", "atMs": 122000, "durationMs": 800 }, "emphasis": [{ "type": "pulse", "atMs": 123500, "durationMs": 500 }], "hold": { "fromMs": 122800, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_cluster1_label","enter": { "type": "fade", "atMs": 123500, "durationMs": 500 }, "hold": { "fromMs": 124000, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+
+        { "elementId": "s3_w_cat",  "enter": { "type": "fade", "atMs": 128000, "durationMs": 400 }, "hold": { "fromMs": 128400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_w_dog",  "enter": { "type": "fade", "atMs": 129000, "durationMs": 400 }, "hold": { "fromMs": 129400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_w_fish", "enter": { "type": "fade", "atMs": 130000, "durationMs": 400 }, "hold": { "fromMs": 130400, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_cluster2_ring", "enter": { "type": "draw", "atMs": 132000, "durationMs": 800 }, "emphasis": [{ "type": "pulse", "atMs": 133500, "durationMs": 500 }], "hold": { "fromMs": 132800, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_cluster2_label","enter": { "type": "fade", "atMs": 133500, "durationMs": 500 }, "hold": { "fromMs": 134000, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+
+        { "elementId": "s3_banner",      "enter": { "type": "draw", "atMs": 150000, "durationMs": 800 }, "hold": { "fromMs": 150800, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } },
+        { "elementId": "s3_banner_text", "enter": { "type": "fade", "atMs": 150800, "durationMs": 700 }, "emphasis": [{ "type": "pulse", "atMs": 153000, "durationMs": 600 }, { "type": "pulse", "atMs": 158000, "durationMs": 600 }], "hold": { "fromMs": 151500, "toMs": 168800 }, "exit": { "type": "fade", "atMs": 168800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene4",
+      "name": "Autocomplete in action",
+      "startMs": 170000,
+      "endMs": 250000,
+      "elements": [
+        { "elementId": "s4_title",  "enter": { "type": "fade", "atMs": 170300, "durationMs": 500 }, "hold": { "fromMs": 170800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_prompt", "enter": { "type": "draw", "atMs": 171000, "durationMs": 1500, "style": "typewriter" }, "hold": { "fromMs": 172500, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+
+        { "elementId": "s4_c1_box",       "enter": { "type": "draw", "atMs": 174000, "durationMs": 500 }, "hold": { "fromMs": 174500, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_box_label", "enter": { "type": "fade", "atMs": 174300, "durationMs": 400 }, "hold": { "fromMs": 174700, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t1_label","enter": { "type": "fade", "atMs": 176000, "durationMs": 300 }, "hold": { "fromMs": 176300, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t1_bar",  "enter": { "type": "draw", "atMs": 176300, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 181000, "durationMs": 500 }], "hold": { "fromMs": 176800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t1_pct",  "enter": { "type": "fade", "atMs": 176800, "durationMs": 300 }, "hold": { "fromMs": 177100, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t2_label","enter": { "type": "fade", "atMs": 177500, "durationMs": 300 }, "hold": { "fromMs": 177800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t2_bar",  "enter": { "type": "draw", "atMs": 177800, "durationMs": 500 }, "hold": { "fromMs": 178300, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t2_pct",  "enter": { "type": "fade", "atMs": 178300, "durationMs": 300 }, "hold": { "fromMs": 178600, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t3_label","enter": { "type": "fade", "atMs": 179000, "durationMs": 300 }, "hold": { "fromMs": 179300, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t3_bar",  "enter": { "type": "draw", "atMs": 179300, "durationMs": 500 }, "hold": { "fromMs": 179800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c1_t3_pct",  "enter": { "type": "fade", "atMs": 179800, "durationMs": 300 }, "hold": { "fromMs": 180100, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+
+        { "elementId": "s4_sentence2", "enter": { "type": "slide", "atMs": 184000, "durationMs": 600, "from": "top" }, "hold": { "fromMs": 184600, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+
+        { "elementId": "s4_c2_box",       "enter": { "type": "draw", "atMs": 200000, "durationMs": 500 }, "hold": { "fromMs": 200500, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_box_label", "enter": { "type": "fade", "atMs": 200300, "durationMs": 400 }, "hold": { "fromMs": 200700, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t1_label","enter": { "type": "fade", "atMs": 202000, "durationMs": 300 }, "hold": { "fromMs": 202300, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t1_bar",  "enter": { "type": "draw", "atMs": 202300, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 207000, "durationMs": 500 }], "hold": { "fromMs": 202800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t1_pct",  "enter": { "type": "fade", "atMs": 202800, "durationMs": 300 }, "hold": { "fromMs": 203100, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t2_label","enter": { "type": "fade", "atMs": 203500, "durationMs": 300 }, "hold": { "fromMs": 203800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t2_bar",  "enter": { "type": "draw", "atMs": 203800, "durationMs": 500 }, "hold": { "fromMs": 204300, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t2_pct",  "enter": { "type": "fade", "atMs": 204300, "durationMs": 300 }, "hold": { "fromMs": 204600, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t3_label","enter": { "type": "fade", "atMs": 205000, "durationMs": 300 }, "hold": { "fromMs": 205300, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t3_bar",  "enter": { "type": "draw", "atMs": 205300, "durationMs": 500 }, "hold": { "fromMs": 205800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_c2_t3_pct",  "enter": { "type": "fade", "atMs": 205800, "durationMs": 300 }, "hold": { "fromMs": 206100, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+
+        { "elementId": "s4_final",   "enter": { "type": "slide", "atMs": 215000, "durationMs": 700, "from": "bottom" }, "emphasis": [{ "type": "pulse", "atMs": 218000, "durationMs": 600 }], "hold": { "fromMs": 215700, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } },
+        { "elementId": "s4_caption", "enter": { "type": "fade",  "atMs": 225000, "durationMs": 800 }, "emphasis": [{ "type": "pulse", "atMs": 230000, "durationMs": 600 }], "hold": { "fromMs": 225800, "toMs": 248800 }, "exit": { "type": "fade", "atMs": 248800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene5",
+      "name": "Fluent does not mean true",
+      "startMs": 250000,
+      "endMs": 300000,
+      "elements": [
+        { "elementId": "s5_title",        "enter": { "type": "fade", "atMs": 250300, "durationMs": 500 }, "hold": { "fromMs": 250800, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_left_hdr",     "enter": { "type": "fade", "atMs": 251200, "durationMs": 400 }, "hold": { "fromMs": 251600, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_left_halo",    "enter": { "type": "fade", "atMs": 251800, "durationMs": 600 }, "hold": { "fromMs": 252400, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_left_bubble",  "enter": { "type": "draw", "atMs": 251800, "durationMs": 700 }, "hold": { "fromMs": 252500, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_left_text",    "enter": { "type": "draw", "atMs": 253000, "durationMs": 4000, "style": "typewriter" }, "hold": { "fromMs": 257000, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_green_tick",   "enter": { "type": "draw", "atMs": 257500, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 258000, "durationMs": 500 }], "hold": { "fromMs": 258000, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+
+        { "elementId": "s5_right_hdr",    "enter": { "type": "fade", "atMs": 251200, "durationMs": 400 }, "hold": { "fromMs": 251600, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_right_bubble", "enter": { "type": "draw", "atMs": 251800, "durationMs": 700 }, "hold": { "fromMs": 252500, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_right_text",   "enter": { "type": "draw", "atMs": 253000, "durationMs": 4000, "style": "typewriter" }, "hold": { "fromMs": 257000, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_right_halo",   "enter": { "type": "fade", "atMs": 257500, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 258000, "durationMs": 500 }, { "type": "pulse", "atMs": 258800, "durationMs": 500 }, { "type": "pulse", "atMs": 259600, "durationMs": 500 }], "hold": { "fromMs": 258000, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_warning",      "enter": { "type": "fade", "atMs": 260500, "durationMs": 500 }, "hold": { "fromMs": 261000, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+
+        { "elementId": "s5_arrow_up",     "enter": { "type": "draw", "atMs": 265000, "durationMs": 500 }, "hold": { "fromMs": 265500, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_banner",       "enter": { "type": "draw", "atMs": 265500, "durationMs": 700 }, "hold": { "fromMs": 266200, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } },
+        { "elementId": "s5_banner_text",  "enter": { "type": "fade", "atMs": 266200, "durationMs": 700 }, "emphasis": [{ "type": "pulse", "atMs": 273000, "durationMs": 600 }], "hold": { "fromMs": 266900, "toMs": 298800 }, "exit": { "type": "fade", "atMs": 298800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene6",
+      "name": "No memory by default",
+      "startMs": 300000,
+      "endMs": 345000,
+      "elements": [
+        { "elementId": "s6_title",       "enter": { "type": "fade", "atMs": 300300, "durationMs": 500 }, "hold": { "fromMs": 300800, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv1",       "enter": { "type": "draw", "atMs": 301200, "durationMs": 600 }, "hold": { "fromMs": 301800, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv1_hdr",   "enter": { "type": "fade", "atMs": 301800, "durationMs": 400 }, "hold": { "fromMs": 302200, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv1_user",  "enter": { "type": "draw", "atMs": 302500, "durationMs": 1800, "style": "typewriter" }, "hold": { "fromMs": 304300, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv1_model", "enter": { "type": "draw", "atMs": 304800, "durationMs": 1200, "style": "typewriter" }, "hold": { "fromMs": 306000, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+
+        { "elementId": "s6_door",        "enter": { "type": "fade", "atMs": 307000, "durationMs": 400 }, "emphasis": [{ "type": "pulse", "atMs": 307500, "durationMs": 500 }], "hold": { "fromMs": 307400, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+
+        { "elementId": "s6_conv2",       "enter": { "type": "draw", "atMs": 308500, "durationMs": 600 }, "hold": { "fromMs": 309100, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv2_hdr",   "enter": { "type": "fade", "atMs": 309100, "durationMs": 400 }, "hold": { "fromMs": 309500, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv2_user",  "enter": { "type": "draw", "atMs": 309800, "durationMs": 1200, "style": "typewriter" }, "hold": { "fromMs": 311000, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv2_model", "enter": { "type": "draw", "atMs": 311500, "durationMs": 1400, "style": "typewriter" }, "emphasis": [{ "type": "shake", "atMs": 312900, "durationMs": 700 }], "hold": { "fromMs": 312900, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+
+        { "elementId": "s6_callout",     "enter": { "type": "slide","atMs": 318000, "durationMs": 700, "from": "bottom" }, "hold": { "fromMs": 318700, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_callout_text","enter": { "type": "fade", "atMs": 318700, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 320500, "durationMs": 600 }], "hold": { "fromMs": 319200, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_loop_arrow",  "enter": { "type": "draw", "atMs": 322500, "durationMs": 500 }, "hold": { "fromMs": 323000, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+
+        { "elementId": "s6_conv3",       "enter": { "type": "draw", "atMs": 324000, "durationMs": 600 }, "hold": { "fromMs": 324600, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv3_hdr",   "enter": { "type": "fade", "atMs": 324600, "durationMs": 400 }, "hold": { "fromMs": 325000, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv3_user",  "enter": { "type": "draw", "atMs": 325300, "durationMs": 1200, "style": "typewriter" }, "hold": { "fromMs": 326500, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } },
+        { "elementId": "s6_conv3_model", "enter": { "type": "draw", "atMs": 327000, "durationMs": 1400, "style": "typewriter" }, "emphasis": [{ "type": "pulse", "atMs": 328500, "durationMs": 600 }], "hold": { "fromMs": 328400, "toMs": 343800 }, "exit": { "type": "fade", "atMs": 343800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene7",
+      "name": "Tools and recency",
+      "startMs": 345000,
+      "endMs": 395000,
+      "elements": [
+        { "elementId": "s7_title",        "enter": { "type": "fade", "atMs": 345300, "durationMs": 500 }, "hold": { "fromMs": 345800, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_model_box",    "enter": { "type": "draw", "atMs": 346200, "durationMs": 600 }, "hold": { "fromMs": 346800, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_model_label",  "enter": { "type": "fade", "atMs": 346800, "durationMs": 400 }, "hold": { "fromMs": 347200, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_cutoff_note",  "enter": { "type": "fade", "atMs": 347500, "durationMs": 500 }, "hold": { "fromMs": 348000, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_question",     "enter": { "type": "draw", "atMs": 348500, "durationMs": 2000, "style": "typewriter" }, "hold": { "fromMs": 350500, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+
+        { "elementId": "s7_reply_halo",   "enter": { "type": "fade", "atMs": 351500, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 352000, "durationMs": 500 }, { "type": "pulse", "atMs": 353000, "durationMs": 500 }], "hold": { "fromMs": 352000, "toMs": 365000 }, "exit": { "type": "fade", "atMs": 365000, "durationMs": 800 } },
+        { "elementId": "s7_reply_text",   "enter": { "type": "draw", "atMs": 351500, "durationMs": 2200, "style": "typewriter" }, "hold": { "fromMs": 353700, "toMs": 365000 }, "exit": { "type": "fade", "atMs": 365000, "durationMs": 800 } },
+
+        { "elementId": "s7_tool_web",         "enter": { "type": "slide", "atMs": 368000, "durationMs": 600, "from": "left" }, "hold": { "fromMs": 368600, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_tool_web_label",   "enter": { "type": "fade",  "atMs": 368600, "durationMs": 400 }, "hold": { "fromMs": 369000, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_plug_web",         "enter": { "type": "draw",  "atMs": 369000, "durationMs": 400 }, "hold": { "fromMs": 369400, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_tool_file",        "enter": { "type": "slide", "atMs": 370000, "durationMs": 600, "from": "bottom" }, "hold": { "fromMs": 370600, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_tool_file_label",  "enter": { "type": "fade",  "atMs": 370600, "durationMs": 400 }, "hold": { "fromMs": 371000, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_plug_file",        "enter": { "type": "draw",  "atMs": 371000, "durationMs": 400 }, "hold": { "fromMs": 371400, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_tool_conn",        "enter": { "type": "slide", "atMs": 372000, "durationMs": 600, "from": "right" }, "hold": { "fromMs": 372600, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_tool_conn_label",  "enter": { "type": "fade",  "atMs": 372600, "durationMs": 400 }, "hold": { "fromMs": 373000, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_plug_conn",        "enter": { "type": "draw",  "atMs": 373000, "durationMs": 400 }, "hold": { "fromMs": 373400, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+
+        { "elementId": "s7_reply_halo_v2",    "enter": { "type": "fade",  "atMs": 376000, "durationMs": 700 }, "hold": { "fromMs": 376700, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_reply_text_v2",    "enter": { "type": "draw",  "atMs": 376500, "durationMs": 1800, "style": "typewriter" }, "emphasis": [{ "type": "pulse", "atMs": 378500, "durationMs": 500 }], "hold": { "fromMs": 378300, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } },
+        { "elementId": "s7_caption",          "enter": { "type": "fade",  "atMs": 382000, "durationMs": 700 }, "emphasis": [{ "type": "pulse", "atMs": 385000, "durationMs": 600 }], "hold": { "fromMs": 382700, "toMs": 393800 }, "exit": { "type": "fade", "atMs": 393800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene8",
+      "name": "Pattern, not knowledge",
+      "startMs": 395000,
+      "endMs": 435000,
+      "elements": [
+        { "elementId": "s8_title",       "enter": { "type": "fade", "atMs": 395300, "durationMs": 500 }, "hold": { "fromMs": 395800, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_cloud",       "enter": { "type": "draw", "atMs": 396000, "durationMs": 900 }, "hold": { "fromMs": 396900, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_cloud_label", "enter": { "type": "fade", "atMs": 396900, "durationMs": 500 }, "hold": { "fromMs": 397400, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_books",       "enter": { "type": "fade", "atMs": 397500, "durationMs": 300 }, "hold": { "fromMs": 397800, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_news",        "enter": { "type": "fade", "atMs": 397800, "durationMs": 300 }, "hold": { "fromMs": 398100, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_forum",       "enter": { "type": "fade", "atMs": 398100, "durationMs": 300 }, "hold": { "fromMs": 398400, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_paper",       "enter": { "type": "fade", "atMs": 398400, "durationMs": 300 }, "hold": { "fromMs": 398700, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_code",        "enter": { "type": "fade", "atMs": 398700, "durationMs": 300 }, "hold": { "fromMs": 399000, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+
+        { "elementId": "s8_arrow_down",  "enter": { "type": "draw", "atMs": 400000, "durationMs": 500 }, "hold": { "fromMs": 400500, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_model_box",   "enter": { "type": "draw", "atMs": 400500, "durationMs": 600 }, "hold": { "fromMs": 401100, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_model_label", "enter": { "type": "fade", "atMs": 401100, "durationMs": 400 }, "hold": { "fromMs": 401500, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+
+        { "elementId": "s8_zone_green",       "enter": { "type": "draw", "atMs": 404000, "durationMs": 600 }, "emphasis": [{ "type": "pulse", "atMs": 405000, "durationMs": 600 }], "hold": { "fromMs": 404600, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_zone_green_label", "enter": { "type": "fade", "atMs": 404600, "durationMs": 500 }, "hold": { "fromMs": 405100, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_zone_yellow",      "enter": { "type": "draw", "atMs": 410000, "durationMs": 600 }, "emphasis": [{ "type": "pulse", "atMs": 411000, "durationMs": 600 }], "hold": { "fromMs": 410600, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_zone_yellow_label","enter": { "type": "fade", "atMs": 410600, "durationMs": 500 }, "hold": { "fromMs": 411100, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_zone_pink",        "enter": { "type": "draw", "atMs": 416000, "durationMs": 600 }, "emphasis": [{ "type": "pulse", "atMs": 417000, "durationMs": 600 }, { "type": "pulse", "atMs": 418500, "durationMs": 600 }], "hold": { "fromMs": 416600, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_zone_pink_label",  "enter": { "type": "fade", "atMs": 416600, "durationMs": 500 }, "hold": { "fromMs": 417100, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+
+        { "elementId": "s8_sticky",      "enter": { "type": "slide", "atMs": 423000, "durationMs": 600, "from": "bottom" }, "hold": { "fromMs": 423600, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } },
+        { "elementId": "s8_sticky_text", "enter": { "type": "fade",  "atMs": 423600, "durationMs": 500 }, "emphasis": [{ "type": "pulse", "atMs": 425500, "durationMs": 600 }], "hold": { "fromMs": 424100, "toMs": 433800 }, "exit": { "type": "fade", "atMs": 433800, "durationMs": 1000 } }
+      ]
+    },
+
+    {
+      "id": "scene9",
+      "name": "Closing",
+      "startMs": 435000,
+      "endMs": 450000,
+      "elements": [
+        { "elementId": "s9_main",      "enter": { "type": "draw", "atMs": 435200, "durationMs": 1500, "style": "stroke-by-stroke" }, "emphasis": [{ "type": "pulse", "atMs": 437000, "durationMs": 600 }], "hold": { "fromMs": 436700, "toMs": 449500 }, "exit": { "type": "fade", "atMs": 449500, "durationMs": 500 } },
+        { "elementId": "s9_underline", "enter": { "type": "draw", "atMs": 437200, "durationMs": 700 }, "hold": { "fromMs": 437900, "toMs": 449500 }, "exit": { "type": "fade", "atMs": 449500, "durationMs": 500 } },
+        { "elementId": "s9_subtitle",  "enter": { "type": "fade", "atMs": 439500, "durationMs": 500 }, "hold": { "fromMs": 440000, "toMs": 449500 }, "exit": { "type": "fade", "atMs": 449500, "durationMs": 500 } }
+      ]
+    }
+  ],
+
+  "cameraHints": [
+    { "atMs": 0,      "focusElementId": "s1_llm_big",        "zoom": 1.0 },
+    { "atMs": 7000,   "focusElementId": "s1_models_hdr",     "zoom": 0.85 },
+    { "atMs": 23000,  "focusElementId": "s1_tagline",        "zoom": 1.05 },
+
+    { "atMs": 35000,  "focusElementId": "s2_net_bg",         "zoom": 0.9 },
+    { "atMs": 45000,  "focusElementId": "s2_dials_note",     "zoom": 1.0 },
+    { "atMs": 54000,  "focusElementId": "s2_loop_box2",      "zoom": 0.95 },
+    { "atMs": 88000,  "focusElementId": "s2_caption",        "zoom": 1.0 },
+
+    { "atMs": 95000,  "focusElementId": "s3_title",          "zoom": 0.9 },
+    { "atMs": 100000, "focusElementId": "s3_word",           "zoom": 1.05 },
+    { "atMs": 117000, "focusElementId": "s3_cluster1_ring",  "zoom": 1.1 },
+    { "atMs": 128000, "focusElementId": "s3_cluster2_ring",  "zoom": 1.1 },
+    { "atMs": 150000, "focusElementId": "s3_banner_text",    "zoom": 1.0 },
+
+    { "atMs": 170000, "focusElementId": "s4_prompt",         "zoom": 0.95 },
+    { "atMs": 176000, "focusElementId": "s4_c1_t1_bar",      "zoom": 1.15 },
+    { "atMs": 202000, "focusElementId": "s4_c2_t1_bar",      "zoom": 1.15 },
+    { "atMs": 215000, "focusElementId": "s4_final",          "zoom": 1.0 },
+
+    { "atMs": 250000, "focusElementId": "s5_title",          "zoom": 0.9 },
+    { "atMs": 253000, "focusElementId": "s5_left_bubble",    "zoom": 1.1 },
+    { "atMs": 257000, "focusElementId": "s5_right_halo",     "zoom": 1.1 },
+    { "atMs": 265000, "focusElementId": "s5_banner_text",    "zoom": 1.0 },
+
+    { "atMs": 300000, "focusElementId": "s6_conv1",          "zoom": 1.05 },
+    { "atMs": 308000, "focusElementId": "s6_conv2",          "zoom": 1.1 },
+    { "atMs": 318000, "focusElementId": "s6_callout_text",   "zoom": 1.0 },
+    { "atMs": 324000, "focusElementId": "s6_conv3",          "zoom": 1.05 },
+
+    { "atMs": 345000, "focusElementId": "s7_model_box",      "zoom": 1.0 },
+    { "atMs": 351000, "focusElementId": "s7_reply_halo",     "zoom": 1.05 },
+    { "atMs": 368000, "focusElementId": "s7_model_box",      "zoom": 0.85 },
+    { "atMs": 376000, "focusElementId": "s7_reply_halo_v2",  "zoom": 1.05 },
+
+    { "atMs": 395000, "focusElementId": "s8_cloud",          "zoom": 0.85 },
+    { "atMs": 404000, "focusElementId": "s8_zone_green",     "zoom": 1.2 },
+    { "atMs": 410000, "focusElementId": "s8_zone_yellow",    "zoom": 1.2 },
+    { "atMs": 416000, "focusElementId": "s8_zone_pink",      "zoom": 1.2 },
+    { "atMs": 423000, "focusElementId": "s8_sticky",         "zoom": 1.3 },
+
+    { "atMs": 435000, "focusElementId": "s9_main",           "zoom": 1.0 },
+    { "atMs": 440000, "focusElementId": "s9_subtitle",       "zoom": 1.0 }
+  ]
+}
