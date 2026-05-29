@@ -76,8 +76,8 @@ NODE_MAJOR=$(node -v | sed 's/v//' | cut -d. -f1)
 
 command -v claude >/dev/null 2>&1 || fail "Claude Code CLI not found. Install: npm install -g @anthropic-ai/claude-code"
 
-[ -d "$PROJECT_DIR/.claude/skills/phlo-learn-videos" ] \
-  || fail "Phlo Learn skill not found at $PROJECT_DIR/.claude/skills/phlo-learn-videos"
+[ -f "$PROJECT_DIR/.claude/skills/SKILL.md" ] \
+  || fail "Phlo Learn skill not found at $PROJECT_DIR/.claude/skills/SKILL.md"
 
 ok "Node $(node -v), Claude $(claude --version 2>/dev/null | head -1)"
 ok "Project directory: $PROJECT_DIR"
