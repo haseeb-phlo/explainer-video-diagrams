@@ -1,0 +1,25 @@
+Video script (7 minutes, Loom)
+Cues: [CAM] = talking to camera, [SCREEN] = share the Excalidraw board, [DEMO] = share live Claude. Frame numbers match the file above.
+0:00 - 0:12 · Hook [CAM]
+If you're still pasting the same instructions into Claude every morning, this video saves you about an hour a week for the rest of your career. Set up once, use forever. Let me show you Projects.
+0:12 - 0:55 · The problem [SCREEN: Frame 02]
+Here's the thing nobody clocks. Every time you open a fresh chat, you re-explain yourself. Who you are, your role, how Phlo sounds, the things we never say. Then you ask your actual question. That's maybe ten minutes a day of just setting the scene - and you do it again tomorrow, and the day after. Call it an hour a week, every week, forever. It's invisible, so it never lands on a to-do list. Projects delete that hour.
+0:55 - 1:50 · What a Project is [SCREEN: Frame 03]
+A Project is a permanent space in Claude built from three parts. First, custom instructions - your standing brief. Your role, Phlo's voice, what to avoid. Written once. Second, knowledge files - reference material Claude reads before it answers anything: a style guide, examples, a template. And third, the conversations themselves. Here's the part that matters: every chat you start inside the Project automatically inherits the instructions and the files. You never paste them again. The context lives in the Project, not in your clipboard.
+1:50 - 2:20 · The shift [SCREEN: Frame 04]
+So the whole shift is this. Before: paste context every time, hope you remembered all of it. After: context is permanent, applied to every chat without you lifting a finger. You write the brief once, and Claude uses it every single time.
+2:20 - 3:15 · Three Phlo examples [SCREEN: Frame 05]
+What does that look like at Phlo? Three real examples. One - "Patient comms drafting": Phlo's tone guide, a set of genuinely good replies, and the do-not-say list. Patient Care and Pharmacy live in it. Two - "Engineering PR review": our coding standards, the review patterns that come up again and again, the Phlo style guide. Three - "Weekly board prep": the board memo format, the last four memos so the structure stays consistent, and the questions the board actually cares about. Different teams, same pattern - the context that makes the work good, captured once.
+3:15 - 5:10 · Live build [DEMO: live Claude] (Frame 08 is the holding frame if you cut back)
+Let's build one now. I'll take Patient comms drafting. I go to claude.ai/projects, click New Project, and name it. Notice Claude can't see the name or description - that's just for us. If you're on our Team plan you'll also choose who can see it; I'll set this so the clinical team can use it.
+Now the custom instructions - the standing brief. I'll write something like: "You help the Patient Care team draft replies to patients. Use Phlo's tone: warm, clear, human, never clinical or cold. Keep replies short. Never give medical advice that should come from a pharmacist - flag it instead. Use British English." That's the bit you'd otherwise type every morning.
+Then knowledge files, on the right. I'll add our tone guide, a handful of example replies we're proud of, and the do-not-say list. One sensible habit for us: keep these examples anonymised - no patient-identifiable detail in the files.
+Now I just chat. "Draft a reply to a patient asking why their order is delayed." And look - it already sounds like Phlo, because the brief and the examples are doing the work. Here's the magic: I'll open a brand-new chat inside the same Project and ask something completely different. Same voice, same rules, no pasting. That's the unlock.
+5:10 - 5:35 · Pause and try [SCREEN: Frame 09]
+Your turn. Pause the video right here. Think of one task you repeat - drafting, reviewing, summarising, anything. Open claude.ai/projects and create it now, even if it's empty. Then fill it in as you watch the rest of this module. Go.
+5:35 - 6:15 · The maths and the multiplier [SCREEN: Frame 06, then Frame 07]
+Quick maths. Setup is about twenty minutes, once. The saving is hours a week, for as long as you do the job. That's the best twenty minutes you'll spend this month. And it gets better, because Projects are shareable. One person builds Patient Comms properly, and the whole clinical team drafts in Phlo's voice from day one - nobody else has to figure it out. That's why this is a multiplier and not just a personal tidy-up. Sharing's available on our Team and Enterprise plans.
+6:15 - 6:45 · Resources [SCREEN: Frame 10]
+Two things to take away. Anthropic's Help Centre has a short guide - search "How can I create and manage projects" on support.claude.com. And in AI Ops Learn, the Prompt Library holds Phlo's shared Projects, so check there before you build from scratch - someone may have started yours already.
+6:45 - 7:00 · Close [CAM]
+One Project. Twenty minutes. Use it once a day for a month. Then tell me Projects didn't change how you work.
