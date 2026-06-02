@@ -1,60 +1,45 @@
 ---
 name: phlo-learn-videos
-description: Generate animated diagrams for Phlo AI Ops Learn series. Use whenever creating short explainer video content about AI tools, AI concepts, or AI-augmented workflows intended for training Phlo staff (pharmacists, operations, engineering, design, commercial, customer support). Triggered by phrases like "Learn video", "explainer", "training diagram", "Phlo AI Ops", or any request to make an animated diagram for internal Phlo education.
+description: Generate illustrated explainer diagrams for Phlo's AI Ops Learn series. Use whenever creating short explainer video content about AI tools, AI concepts, or AI-augmented workflows intended for training Phlo staff (pharmacists, operations, engineering, design, commercial, customer support). Triggered by phrases like "Learn video", "explainer", "training diagram", "Phlo AI Ops", or any request to make a diagram for internal Phlo education.
 ---
 
 # Phlo Learn Video Diagrams
 
-You are producing diagrams for short (60–180 second) animated explainer videos in Phlo's AI Ops "Learn" series. These videos run inside Phlo and are watched by everyone — clinical, ops, engineering, design, commercial, customer support. Default to plain-English labels over jargon. If you must use a technical term, also show a short plain-English gloss.
+You are producing the diagrams for short (≈3–7 minute) explainer videos in Phlo's AI Ops "Learn" series. These videos are watched by everyone at Phlo — clinical, ops, engineering, design, commercial, customer support. Default to plain-English labels over jargon. If you must use a technical term, also show a short plain-English gloss.
 
-## CRITICAL — colours to replace before first use
+This skill owns the **drawing rules, safety guardrails, and vocabulary**. The human production workflow (record-in-Loom, handoff, course conventions) lives in `README.md`; the repo operating map for the agent lives in `CLAUDE.md`.
 
-These placeholder values keep the workflow working out of the box. **Replace them with the real Phlo brand HEX codes from the design system before publishing any video.**
+## How these videos are made now (read first)
 
-```
-PRIMARY      = #1E8E7A   (placeholder teal — replace with Phlo brand primary)
-SECONDARY    = #0F3D3E   (placeholder deep teal — replace with Phlo brand secondary)
-ACCENT       = #F4A261   (placeholder warm orange — replace with Phlo brand accent)
-NEUTRAL_BG   = #FAFAF7   (off-white background)
-NEUTRAL_INK  = #1A1A1A   (text colour, near-black not pure black)
-REGULATED    = #C44545   (red — clinical/regulated step indicator, do not change)
-SUCCESS      = #2E7D5B   (green for positive outcomes, only when needed)
-```
+A video is **one hand-drawn, frameless Excalidraw scene** that the presenter pans and zooms through on screen while narrating. It is generated programmatically by a per-video `build_excalidraw.py`, eyeballed with `preview.py`, then recorded in Loom. There is no animation engine, no keyframes, and no MP4 export — **the camera move is performed live by the presenter**. (The repo's old Excalimate animation pipeline is dead; ignore it.)
 
-## Visual conventions (apply these to every diagram)
+## Visual conventions — the house style
 
-Element types are recognisable at a glance because their shape + border tells you what they are:
+The style is **one flowing, illustrated, hand-drawn journey**, left to right — not a row of bordered slides. Canonical reference: `videos/claude/3-artefacts/`.
 
-- **Patient-facing surface** → rounded rectangle, PRIMARY fill, white text
-- **Internal Phlo staff surface** → sharp rectangle, SECONDARY fill, white text
-- **AI / automated step** → dashed border, NEUTRAL_BG fill, prefix label with sparkle marker `✦`
-- **Human-in-loop step** → solid 2px black border, NEUTRAL_BG fill, small person glyph or "👤" before label
-- **Regulated / clinical-safety step** → red (REGULATED) dashed border, label includes the relevant regulator: "MHRA", "GPhC", or "CQC"
-- **Data store / record** → cylinder shape, SECONDARY fill
-- **External system** (NHS, GP surgery, courier) → rectangle with double-line top, NEUTRAL_BG fill
+- **No frames, no boxes.** One continuous canvas. Beats are separated by whitespace and a **connector spine** (a wavy hand-drawn arrow threading the beats), never by rectangles.
+- **White background.** All text hand-drawn in **Excalifont** (`fontFamily: 5`), `roughness: 1` on everything. No typed sans/mono.
+- **Lively colour, coded per beat** — violet / orange / green / blue / red / teal / yellow / indigo strokes, each with a matching pastel fill. This is a deliberate house palette, **not** Phlo brand colours — do not "correct" it to brand hex.
+- **Fun in dose order:** heavy colour-blocking (highlighter sweeps, pastel sticky notes) + scribbled annotations (underlines, circled words, freehand arrows, sparkles, strike-throughs) do the heavy lifting; charming primitive illustrations on hero beats; light rotation jitter on notes/chips. Prefer hand-drawn icons over emoji.
+- **Wide gaps between beats** (the `GAP` constant) so a single beat frames cleanly on a 14" laptop while recording — the whitespace is the camera.
 
-Arrows:
-- Always labelled with the **action verb** (e.g. "verifies", "drafts", "approves", "sends"). Never an unlabelled line.
-- Forward flow → solid arrow
-- Optional / conditional path → dashed arrow with the condition labelled mid-line
-- Loop-back / iteration → curved arrow
+### Safety-bearing visual markers (must survive the house style)
 
-Layout:
-- Left-to-right reading order by default; top-to-bottom only if showing layered abstractions
-- Max 7 visible elements at any one time (cognitive load limit for video)
-- 16:9 canvas at 1920×1080; keep critical elements inside the centre 80% (avoid edges — Loom and embeds crop)
-- Minimum text size: 24pt — videos play on phones, smaller text becomes unreadable
+These three markers carry the regulatory semantics below — keep them legible in every diagram, drawn in the hand-drawn style:
 
-## Animation defaults
+- **AI / automated step** → mark with a sparkle `✦` and a dashed/sketchy outline so it reads as "done by AI", not by a person.
+- **Human-in-loop step** → mark with a person glyph / "👤"-equivalent hand-drawn figure or a solid checkmark gate, so the human decision point is unmistakable.
+- **Regulated / clinical-safety step** → draw in **red** and label the regulator inline ("MHRA", "GPhC", or "CQC"). Never hide a regulated step inside a generic-coloured beat.
 
-Every Learn video diagram is animated, not static:
+### Layout & legibility
 
-- **Sequence reveal is mandatory** — never show the whole diagram from frame one
-- **Stagger** between reveals: 600–800ms (matches calm narration pace)
-- **Hold per element**: 3 seconds of narration per major element — plan element count around video length (60s ≈ 5 elements, 180s ≈ 12 elements broken into reveal groups)
-- **Camera moves**: gently pan/zoom to centre the currently revealed element. Camera should never be jarring.
-- **Final state**: hold the full diagram for 2 seconds at the end before clip ends, so it can be paused on
-- **Easing**: `easeOutCubic` for reveals, `easeInOutQuad` for camera moves — avoid linear or bouncy easing
+- Left-to-right reading order. Roughly one beat per ~3s of narration; plan beat count to the target length.
+- Keep critical content away from the extreme edges — Loom and embeds crop.
+- Minimum text size large enough to read on a phone; these play on small screens.
+
+## Pacing (manual, in Loom)
+
+There is no timeline. "Animation" = the camera move the presenter performs while recording: reveal each beat by **panning to it**, hold for the narration, move left-to-right, and end framed on the final beat so it can be paused on. Plan the scene so panning beat-by-beat tells the story in order.
 
 ## Vocabulary (use these exact terms)
 
@@ -69,41 +54,37 @@ Every Learn video diagram is animated, not static:
 | Beacon | "discovery tool", "the pre-interview thing" |
 | AI Ops | "the AI team", "AI rollout" |
 
-Capitalisation matters — Claude, Granola, Beacon, MCP are all proper nouns. "Claude code" is wrong; "Claude Code" is right.
+Capitalisation matters — Claude, Granola, Beacon, MCP are all proper nouns. "Claude code" is wrong; "Claude Code" is right. British English; hyphens, not em-dashes.
 
 ## Safety guardrails (non-negotiable, Phlo is regulated)
 
 These must hold for every diagram:
 
-1. **No real patient identifiers.** Use obviously fictional placeholders: `Patient_001`, `J. Doe`, `NHS_TEST_123`, `acme.pharmacy@example.com`. Never plausible-looking names.
+1. **No real patient identifiers.** Use obviously fictional placeholders: `Patient_001`, `J. Doe`, `NHS_TEST_123`, `acme.pharmacy@example.com`. Never plausible-looking real names.
 
-2. **Always show the human verification gate** in any workflow that touches clinical decisions, dispensing, prescriptions, or patient records. Even simplified diagrams must not imply an AI is making unsupervised clinical decisions. If a workflow legitimately has no human gate (e.g. an AI just summarising internal Slack), that's fine — the rule is "show it when it exists".
+2. **Always show the human verification gate** (the human-in-loop marker above) in any workflow that touches clinical decisions, dispensing, prescriptions, or patient records. Even a simplified diagram must not imply an AI makes unsupervised clinical decisions. If a workflow legitimately has no human gate (e.g. AI summarising internal Slack), that's fine — the rule is "show it when it exists".
 
-3. **AI never writes directly to patient records.** Draw AI as drafting → human approves → record updated. The arrow from AI to the data store must go through a human-in-loop node.
+3. **AI never writes directly to patient records.** Draw AI as drafting → human approves → record updated. Any arrow from an AI step to a data store must pass through a human-in-loop marker.
 
-4. **Regulator visibility.** If a step is governed by MHRA, GPhC, or CQC, label it. Don't hide the regulatory layer behind generic boxes.
+4. **Regulator visibility.** If a step is governed by MHRA, GPhC, or CQC, use the red regulated marker and name the regulator. Don't bury the regulatory layer in a generic beat.
 
-5. **No screenshots of internal tools.** Diagrams are abstractions, not UI mockups. If asked for a UI-style diagram, push back and offer an abstracted version instead.
+5. **No screenshots of internal tools.** Diagrams are abstractions, not UI mockups. If asked for a UI-style diagram, push back and offer an abstracted version. (A stylised, obviously-hand-drawn "Claude window" illustration on a hero beat is fine — a faithful screenshot is not.)
 
 ## Output behaviour (what to do when asked for a Learn diagram)
 
 When the user requests a Learn diagram, execute this sequence:
 
-1. **Confirm the slug**: derive a kebab-case topic slug from the request (e.g. "How Claude reads emails" → `how-claude-reads-emails`). State the slug in your response.
-2. **Plan the reveal sequence**: list the elements in narration order before generating. Brief 1-line description per element.
-3. **Generate the static diagram** following the conventions above.
-4. **Add sequence reveal animation** with 600–800ms stagger and the easing rules above.
-5. **Add camera focus moves** to track the active element.
-6. **Export as MP4** at 1920×1080.
-7. **Save to** `~/phlo-learn/videos/[slug].mp4`.
-8. **Confirm** the full file path in your response, plus the total duration of the animation, so the user knows whether it fits their target Loom length.
+1. **Confirm the slug**: derive a kebab-case topic slug and its `videos/<series>/<NN-slug>/` folder (e.g. "Claude Projects", module 2.2 → `videos/claude/2-projects/`). State it in your response.
+2. **Plan the beats**: list the beats in narration order before generating — one line each. This is the left-to-right journey.
+3. **Generate the scene with a self-contained `build_excalidraw.py`** in that folder, following the house style above. Copy the closest existing build script (canonical: `videos/claude/3-artefacts/`) and adapt — each script embeds its own helpers + palette; nothing is shared.
+4. **Eyeball it with `preview.py`** (rasterises to PNG). Fix palette drift, text overflow, and any caption/caption collisions it warns about.
+5. **Confirm** the output `.excalidraw` path and the beat count, so the user knows roughly how long the pan-through narration will run.
 
-If the user has not specified a target video length, ask once: "What's the target length — 60s, 90s, or 180s?" Then plan element count accordingly.
+If the target length isn't given, ask once ("Roughly how long — 3, 5, or 7 minutes?") and plan the beat count accordingly (~1 beat per 3s of narration).
 
 ## When NOT to use this skill
 
-Don't apply these conventions if the user is asking for:
-- A diagram for engineering documentation (use the standard mermaid/architecture-diagrams skill)
-- A diagram for a customer-facing surface (different brand application rules)
-- A diagram for an external presentation to investors, regulators, or partners (those need design team review, not skill output)
-- A static screenshot to embed in a Confluence page (use the regular Excalidraw MCP, not Excalimate)
+- A diagram for engineering documentation (use a standard architecture-diagram approach, not this house style).
+- A diagram for a customer-facing surface (different brand rules apply).
+- A diagram for an external presentation to investors, regulators, or partners (those need design-team review, not skill output).
+- Videos that aren't explainer diagrams at all — talking-head, screen-share demos, "watch me fail/prompt" — those are recorded directly, with no diagram. See `README.md` for which course videos are diagram-fit.
