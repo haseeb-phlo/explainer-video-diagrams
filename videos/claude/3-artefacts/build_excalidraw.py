@@ -41,8 +41,11 @@ OBJS = [
 # ----------------------------------------------------------------------------
 # Wide gaps so a single beat can be framed on a 14" laptop without neighbours
 # peeking in - the empty space IS the zoom-to-one-beat affordance.
-GAP = 1800
-WID = {1: 2300, 2: 2050, 3: 2350, 4: 1950, 5: 2100, 6: 2500, 7: 2200, 8: 2000, 9: 1900}
+GAP = 800
+# every beat uses the SAME slot, shaped like the "Words left, a thing right" beat
+# (~1120 wide x ~980 tall content, ~1.15 : 1) so framing is identical and it fits
+# a 14" MacBook screen. Content fills the slot; it never spreads wider or taller.
+WID = {i: 1200 for i in range(1, 10)}
 ACCENT = {1: ORANGE, 2: VIOLET, 3: BLUE, 4: GREEN, 5: TEAL, 6: VIOLET, 7: INDIGO, 8: RED, 9: YELLOW}
 ABG = {1: ORANGE_BG, 2: VIOLET_BG, 3: BLUE_BG, 4: GREEN_BG, 5: TEAL_BG, 6: VIOLET_BG,
        7: INDIGO_BG, 8: RED_BG, 9: YELLOW_BG}
@@ -57,29 +60,18 @@ HEAD_Y = 60          # heading baseline band
 MY = 620             # mid-height for the connector spine
 
 def beat_head(i, title, sub=None):
+    # QUIET heading: plain hand title in the beat's accent colour, no step circle,
+    # no highlighter sweep, no scribble underline - the unpolished natural-flow look.
     ox = OX[i]
-    acc, abg = ACCENT[i], ABG[i]
-    # step circle
-    ellipse(ox, HEAD_Y, 60, 60, stroke=acc, bg=WHITE, sw=3, rough=1)
-    text_centered(ox + 30, HEAD_Y + 12, str(i), size=H2, color=acc)
-    tx = ox + 86
-    tw = text_w(title, H1, HAND)
-    highlighter(tx - 8, HEAD_Y + 2, tw + 50, H1 * LINE_H + 14, abg)
-    text(tx, HEAD_Y + 6, title, size=H1, color=INK)
-    scribble_underline(tx, HEAD_Y + 6 + H1 * LINE_H + 8, min(tw, 420), acc, sw=4)
-    if sub:
-        text(tx, HEAD_Y + 6 + H1 * LINE_H + 26, sub, size=BODY, color=GREYD)
+    heading(ox, HEAD_Y, title, color=ACCENT[i], sub=sub)
     return ox
 
 # ----------------------------------------------------------------------------
 # BOARD TITLE
 # ----------------------------------------------------------------------------
 text(OX[1], -300, "Artifacts", size=HERO, color=INK)
-sparkles(OX[1] + text_w("Artifacts", HERO) + 70, -230, ORANGE)
 text(OX[1] + 6, -300 + HERO * LINE_H + 4, "when Claude makes things, not just text",
      size=H2, color=VIOLET)
-text(OX[1] + 6, -300 + HERO * LINE_H + 4 + H2 * LINE_H + 10,
-     "Phlo AI training  -  module 2.3  -  about 5 minutes", size=SMALL, color=GREY)
 
 # ============================================================================
 # BEAT 1 - HOOK + CORE IDEA
@@ -90,18 +82,17 @@ ox = beat_head(1, "Ask, and Claude builds it",
 by = 360
 bw, bh = 520, 130
 sticky(ox + 40, by, bw, bh, GREY, angle=jit(1.5))
-text(ox + 72, by + 30, "build me a tool to work\nout days of supply", size=BODY, color=WHITE)
+text(ox + 72, by + 30, "build me a tool to work\nout unit costs", size=BODY, color=WHITE)
 line(ox + 90, by + bh, [[0, 0], [-18, 30], [22, -2]], stroke=GREY, sw=3)  # tail
 arrow(ox + 40 + bw + 30, by + bh / 2, [[0, 0], [150, 0]], stroke=ORANGE, sw=5, rough=1)
 # burst behind calc
 calc_x = ox + 40 + bw + 240
 ellipse(calc_x - 30, by - 20, 200, 200, stroke=ORANGE, bg=ORANGE_BG, sw=2, rough=1,
         fill="solid", opacity=55)
-sparkles(calc_x + 150, by - 10, ORANGE)
 obj_calc(calc_x, by + 4)
 text(calc_x - 10, by + 168, "the actual thing - not a\ndescription of it", size=SMALL, color=ORANGE)
 # advisor -> maker motif
-amy = 560
+amy = 620
 text(ox + 40, amy, "advisor", size=H3, color=GREY)
 line(ox + 40, amy + 22, [[0, 0], [text_w('advisor', H3) + 6, 4]], stroke=RED, sw=3)  # strike
 arrow(ox + 40 + text_w("advisor", H3) + 24, amy + 18, [[0, 0], [70, 0]], stroke=GREEN, sw=4)
@@ -110,25 +101,25 @@ text(ox + 40 + text_w("advisor", H3) + 110, amy, "maker", size=H3, color=GREEN)
 # ============================================================================
 # BEAT 2 - WORDS LEFT, THING RIGHT
 # ============================================================================
-ox = beat_head(2, "Words left, a thing right")
-cw_x, cw_y, cw_w, cw_h = ox + 40, 300, WID[2] - 120, 460
+ox = beat_head(2, "Words left, a thing right",
+               "Normally Claude talks in the chat. An Artifact\nis a separate panel holding an actual thing.")
+cw_x, cw_y, cw_w, cw_h = ox + 40, 330, 1080, 600
 claude_window(cw_x, cw_y, cw_w, cw_h, tiny=obj_doc)
-# annotation arrows
-text(cw_x - 20, cw_y + cw_h + 30, "the chat, like always", size=SMALL, color=GREY)
-arrow(cw_x + cw_w * 0.72, cw_y + cw_h + 60, [[0, 0], [80, -70]], stroke=VIOLET, sw=3, rough=1)
-text(cw_x + cw_w * 0.62, cw_y + cw_h + 64,
+# annotation
+text(cw_x, cw_y + cw_h + 24, "the chat, like always", size=SMALL, color=GREY)
+arrow(cw_x + cw_w * 0.74, cw_y + cw_h + 56, [[0, 0], [70, -60]], stroke=VIOLET, sw=3, rough=1)
+text(cw_x + cw_w * 0.56, cw_y + cw_h + 60,
      "a panel holding something\nyou can edit, run and reuse", size=SMALL, color=VIOLET)
-text(cw_x, cw_y - 56, "Words on the left.  A thing you can use on the right.",
-     size=H3, color=VIOLET)
 
 # ============================================================================
 # BEAT 3 - IT CAN BE ALMOST ANYTHING
 # ============================================================================
-ox = beat_head(3, "It can be almost anything")
-# playful cluster - two rows, jittered
+ox = beat_head(3, "It can be almost anything",
+               "Same feature, very different outputs.\nThe skill is knowing it's there and asking for it.")
+# playful cluster - 2 columns x 3 rows (portrait, fits the screen), jittered
 positions = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1)]
-cellw, cellh = 700, 250
-gx, gy = ox + 60, 320
+cellw, cellh = 360, 350
+gx, gy = ox + 60, 330
 for (fn, cap, acc, abg), (cxi, cyi) in zip(OBJS, positions):
     bx = gx + cxi * cellw + random.uniform(-20, 20)
     byy = gy + cyi * cellh + random.uniform(-14, 14)
@@ -139,21 +130,22 @@ for (fn, cap, acc, abg), (cxi, cyi) in zip(OBJS, positions):
 # ============================================================================
 # BEAT 4 - TWO WAYS YOU GET ONE
 # ============================================================================
-ox = beat_head(4, "Two ways you get one")
-note_y, note_w, note_h = 320, 820, 420
-# left: appears on its own
+ox = beat_head(4, "Two ways you get one",
+               "Claude makes one on its own - or you ask, on purpose.\nTwo phrasings do most of the work.")
+note_y, note_w, note_h = 300, 1040, 320
+# top: appears on its own
 sticky(ox + 40, note_y, note_w, note_h, GREEN_BG, angle=jit(1.6))
-text(ox + 80, note_y + 36, "Appears on its own", size=H3, color=GREEN)
+text(ox + 80, note_y + 28, "Appears on its own", size=H3, color=GREEN)
 for k, item in enumerate(["long documents", "code", "tables and structured output",
                           "anything you'll clearly reuse"]):
-    text(ox + 96, note_y + 120 + k * 64, "- " + item, size=BODY, color=INK)
-# right: ask on purpose
-rx = ox + 40 + note_w + 120
-sticky(rx, note_y, note_w, note_h, BLUE_BG, angle=jit(-1.4))
-text(rx + 40, note_y + 36, "Ask for one on purpose", size=H3, color=BLUE)
-chip(rx + 56, note_y + 150, "make me a one-page Artifact summarising X",
+    text(ox + 96, note_y + 96 + k * 52, "- " + item, size=BODY, color=INK)
+# bottom: ask on purpose
+ny2 = note_y + note_h + 44
+sticky(ox + 40, ny2, note_w, note_h, BLUE_BG, angle=jit(-1.4))
+text(ox + 80, ny2 + 28, "Ask for one on purpose", size=H3, color=BLUE)
+chip(ox + 56, ny2 + 108, "make me a one-page Artifact summarising X",
      fill=WHITE, text_color=BLUE, border=BLUE, size=SMALL)
-chip(rx + 56, note_y + 250, "build me a tool to calculate Y",
+chip(ox + 56, ny2 + 200, "build me a tool to calculate Y",
      fill=WHITE, text_color=BLUE, border=BLUE, size=SMALL)
 
 # ============================================================================
@@ -165,14 +157,15 @@ fx, fy = ox + 50, 340
 for k, lab in enumerate(flow):
     w, h = chip(fx, fy, lab, fill=TEAL_BG, text_color=INK, border=TEAL, size=BODY)
     if k < len(flow) - 1:
-        arrow(fx + w + 10, fy + h / 2, [[0, 0], [54, 0]], stroke=TEAL, sw=4)
-    fx += w + 64
+        arrow(fx + w + 8, fy + h / 2, [[0, 0], [40, 0]], stroke=TEAL, sw=4)
+    fx += w + 44
 # loop-back curved arrow under the flow
 arrow(fx - 30, fy + 70, [[0, 0], [-(fx - ox - 90), 40], [-(fx - ox - 120), -20]],
       stroke=TEAL, sw=3, rough=1, dashed=True)
-text(ox + 60, fy + 120, "roll back to any version - every one is kept", size=BODY, color=GREYD)
+text(ox + 60, fy + 132, "roll back to any version - every one is kept", size=BODY, color=GREYD)
+text(ox + 60, fy + 178, "edit on the canvas yourself, or just tell Claude in plain English", size=SMALL, color=GREYD)
 # version chips
-vy = fy + 200
+vy = fy + 248
 vx = ox + 60
 for k, lab in enumerate(["v1", "v2", "v3"]):
     last = (k == 2)
@@ -182,7 +175,7 @@ for k, lab in enumerate(["v1", "v2", "v3"]):
     if not last:
         arrow(vx + 8, vy + h / 2, [[0, 0], [36, 0]], stroke=GREY, sw=3)
         vx += 52
-demo_badge(ox + 60, vy + 110, "live demo:  a meeting-prep one-pager")
+demo_badge(ox + 60, vy + 110, "show in Claude desktop app:  a meeting-prep one-pager")
 
 # ============================================================================
 # BEAT 6 - BUILD ONCE, SHARE (hero)
@@ -197,9 +190,9 @@ link_icon(src_x + 250, src_y + 44, color=VIOLET)
 text_centered(src_x + 290, src_y + 130, "publish -> link", size=SMALL, color=VIOLET)
 # fan out to three team cards
 fan_x = src_x + 420
-cards = [("Patient Care", "reply-template one-pager", GREEN, GREEN_BG),
+cards = [("Support", "reply-template one-pager", GREEN, GREEN_BG),
          ("Anyone", "meeting-prep one-pager", BLUE, BLUE_BG),
-         ("Ops", "reorder-date calculator", ORANGE, ORANGE_BG)]
+         ("Ops", "a budget calculator", ORANGE, ORANGE_BG)]
 for k, (who, what, acc, abg) in enumerate(cards):
     cy = src_y - 110 + k * 150
     arrow(src_x + 320, src_y + 60, [[0, 0], [fan_x - (src_x + 320) - 10, cy + 40 - (src_y + 60)]],
@@ -209,48 +202,44 @@ for k, (who, what, acc, abg) in enumerate(cards):
     text(fan_x + 28, cy + 60, what, size=SMALL, color=INK)
 text(src_x, src_y + 300, "anyone with the link can use it - no Claude account needed to open it",
      size=BODY, color=GREYD)
-demo_badge(src_x, src_y + 350, "live demo:  a supply calculator, then publish")
+demo_badge(src_x, src_y + 350, "show in Claude desktop app:  a budget calculator, then publish")
 
 # ============================================================================
 # BEAT 7 - SUPERPOWERS (new)
 # ============================================================================
 ox = beat_head(7, "The panel just got superpowers")
-sparkles(ox + text_w("The panel just got superpowers", H1) + 150, HEAD_Y + 30, INDIGO)
 feats = [("AI inside the Artifact", "it can think, not just sit there"),
          ("Live data", "refreshes when you reopen it"),
          ("Remembers between visits", "saves what you put in"),
          ("Connects to your tools", "calendar, email, chat and more")]
-fx0, fy0 = ox + 60, 340
+fy0 = 310
 for k, (head, cap) in enumerate(feats):
-    cx = fx0 + (k % 2) * 1040
-    cy = fy0 + (k // 2) * 200
-    sticky(cx, cy, 960, 150, INDIGO_BG, angle=jit(1.3))
-    sparkle(cx + 36, cy + 40, 14, INDIGO)
-    text(cx + 70, cy + 26, head, size=H3, color=INDIGO)
-    text(cx + 70, cy + 80, cap, size=BODY, color=INK)
+    cy = fy0 + k * 174
+    sticky(ox + 40, cy, 1040, 150, INDIGO_BG, angle=jit(1.3))
+    text(ox + 120, cy + 26, head, size=H3, color=INDIGO)
+    text(ox + 120, cy + 82, cap, size=BODY, color=INK)
 
 # ============================================================================
 # BEAT 8 - ONE RULE, ONE REALITY CHECK
 # ============================================================================
 ox = beat_head(8, "One rule, one reality check")
-cy0, cw, ch = 330, 860, 380
-# the rule (red caution)
+cy0, cw, ch = 300, 1040, 300
+# the rule (red caution) - top
 rect(ox + 40, cy0, cw, ch, stroke=RED, bg=RED_BG, sw=3, rough=1, rounded=True,
      fill="solid", opacity=35, angle=jit(-1.2))
-text(ox + 80, cy0 + 30, "The rule", size=H3, color=RED)
 diamond(ox + 80, cy0 - 56, 56, 56, stroke=RED, bg=RED_BG, sw=3)  # caution
 text_centered(ox + 108, cy0 - 44, "!", size=H2, color=RED)
-text(ox + 80, cy0 + 110,
-     "Publishing or connecting an\nArtifact changes who can see it.\n\n"
-     "Keep anything patient-identifiable,\nand any logins or keys, out of\n"
-     "anything you share.", size=BODY, color=INK)
-# when not to bother
-rx = ox + 40 + cw + 120
-sticky(rx, cy0, cw, ch, FAINT, angle=jit(1.2))
-text(rx + 40, cy0 + 30, "When not to bother", size=H3, color=GREYD)
-text(rx + 40, cy0 + 110,
-     "A quick one-off answer\ndoesn't need an Artifact.\n\n"
-     "Reach for one when you'll\nreuse it, edit it, or hand it on.", size=BODY, color=INK)
+text(ox + 80, cy0 + 24, "The rule", size=H3, color=RED)
+text(ox + 80, cy0 + 90,
+     "Publishing or connecting an Artifact\nchanges who can see it. Keep anything\n"
+     "confidential, and any logins or keys,\nout of anything you share.", size=BODY, color=INK)
+# when not to bother - below
+ny2 = cy0 + ch + 44
+sticky(ox + 40, ny2, cw, ch, FAINT, angle=jit(1.2))
+text(ox + 80, ny2 + 24, "When not to bother", size=H3, color=GREYD)
+text(ox + 80, ny2 + 90,
+     "A quick one-off answer doesn't need an\nArtifact. Reach for one when you'll\n"
+     "reuse it, edit it, or hand it on.", size=BODY, color=INK)
 
 # ============================================================================
 # BEAT 9 - PAUSE & TRY / CLOSE
@@ -272,26 +261,11 @@ my2 = 726
 text(ox + 40, my2, "advisor", size=H3, color=GREY)
 arrow(ox + 40 + text_w("advisor", H3) + 20, my2 + 18, [[0, 0], [70, 0]], stroke=GREEN, sw=4)
 text(ox + 40 + text_w("advisor", H3) + 110, my2, "maker", size=H3, color=GREEN)
-sparkles(ox + 60, 808, YELLOW)
 text(ox + 110, 798, "Docs: Anthropic - What are Artifacts and how do I use them",
      size=SMALL, color=VIOLET)
-text(ox + 40, 858, "Phlo AI training  -  module 2.3", size=SMALL, color=GREY)
 
-# ============================================================================
-# CONNECTOR SPINE - the load-bearing through-line that makes it ONE picture
-# ============================================================================
-for i in range(1, 9):
-    x0 = OX[i] + WID[i]
-    x1 = OX[i + 1]
-    acc = ACCENT[i + 1]
-    midx = (x0 + x1) / 2
-    # a gentle wavy hand-drawn arrow across the gap
-    arrow(x0 + 20, MY, [[0, 0], [(x1 - x0) * 0.4, -36], [(x1 - x0) * 0.6, 30],
-                        [x1 - x0 - 40, 0]], stroke=acc, sw=4, rough=1)
-
-# faint dotted journey baseline under everything (drawn last, low opacity)
-line(OX[1] + 40, MY + 320, [[0, 0], [TOTAL_W - 400, 0]], stroke=FAINT, sw=2,
-     rough=1, dashed=True, opacity=60)
+# No connector spine and no branding footer: beats read as one picture through
+# layout + consistent rhythm (the ai-foundations natural-flow look), not arrows.
 
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE  (shared excalidraw_kit)

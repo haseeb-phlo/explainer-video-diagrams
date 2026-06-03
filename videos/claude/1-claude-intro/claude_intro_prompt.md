@@ -1,61 +1,95 @@
-Create a single valid Excalidraw file named `claude-interface-properly.excalidraw` for a 4-minute internal training video at Phlo (a UK digital pharmacy). Output strictly valid Excalidraw JSON: { "type": "excalidraw", "version": 2, "source": "https://excalidraw.com", "elements": [...], "appState": { "viewBackgroundColor": "#FFFFFF", "gridSize": null }, "files": {} }. Every element needs a unique id, correct type, x/y, width/height, angle:0, strokeColor, backgroundColor, fillStyle:"solid", strokeWidth, strokeStyle:"solid", roughness:1, opacity:100, seed, version, versionNonce, isDeleted:false, boundElements, updated, link:null, locked:false. Text elements need fontSize, fontFamily, textAlign, verticalAlign, baseline, containerId, originalText. Arrows need points arrays and startBinding/endBinding. Validate the JSON parses before finishing.
+GOAL
+Produce ONE file: `claude_intro.excalidraw` - a valid Excalidraw scene (schema version 2) for the ~4-minute "Claude: the interface, properly" training video (Phlo AI training, module 2, video 1), shown beat-by-beat and talked over in Loom. The single required deliverable is the .excalidraw file.
 
-DESIGN DIRECTION
-- Clean, confident, editorial. NOT a sketchy doodle. Use roughness 0 or 1 max, generous whitespace, strong alignment to an 8px grid, clear hierarchy. This is mandatory training, so legibility beats decoration.
-- Typography: fontFamily 2 (the clean Helvetica-style font) throughout for legibility on video. Title ~48px, frame headings ~30px, card titles ~22px, body ~16-18px. Never centre long body text; left-align body, centre only short titles.
-- Phlo-aligned purple palette (these match Phlo's violet brand identity; if you have the exact brand-guide hex, substitute it):
-  - Deep purple (primary): #4A1F7A
-  - Brand purple (accent): #6B2FB5
-  - Bright violet (highlight): #8B5CF6
-  - Lavender tint (fills/backgrounds): #F3EEFB
-  - Soft lavender (secondary fill): #E7DBF7
-  - Ink (body text): #1E1B2E
-  - Mid grey (secondary text): #6B6480
-  - White: #FFFFFF
-  - Use one restrained teal #0FB5A6 ONLY for the single "do this" highlight on the pause card.
-- Rounded rectangles for all cards/containers. Consistent corner feel. Cards sit on white or lavender-tint backgrounds with the deep purple as the stroke and headings.
-- Accessibility: keep text-on-background contrast at AA or better. No light grey text on lavender.
+METHOD (do it this way - it is what keeps the result clean and on-style)
+Write a THIN Python build script `build_claude_interface.py` that imports the shared Style B engine and composes the scene - do NOT hand-place raw JSON, and do NOT re-implement helpers.
 
-LAYOUT
-Create FIVE Excalidraw "frame" elements laid out left to right in one row, each 1600 wide x 1000 tall, with a 400px horizontal gap between frames. Name each frame (frame name shows in Excalidraw). Keep ~120px internal padding inside every frame. Snap everything to the grid; align card edges.
+```python
+import os, sys
+_d = os.path.dirname(os.path.abspath(__file__))
+while _d != os.path.dirname(_d) and not os.path.exists(os.path.join(_d, "excalidraw_kit.py")):
+    _d = os.path.dirname(_d)
+sys.path.insert(0, _d)
+import random
+from excalidraw_kit import *
+random.seed(40404)   # deterministic - re-runs produce an identical file
+# ... compose the scene with the helpers below ...
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "claude_intro.excalidraw")
+finish(out, MAXW, TOTAL_W)   # validates (palette, no frames, overflow, collisions) then writes + reloads
+```
 
-FRAME 1 - name "01_Hook"
-- Top-left small kicker in mid grey: "PHLO · AI TRAINING · 4 MIN"
-- Large title in deep purple: "The Claude interface, properly"
-- Subtitle in ink, left-aligned, max ~14 words per line: "Five things on screen most people never touch. They're where the productivity is."
-- A thin brand-purple underline rule beneath the title.
-- Bottom: five small lavender pills in a row, each with one word in deep purple: "Conversations"  "Projects"  "Artifacts"  "File uploads"  "Model picker". Even spacing, vertically centred text.
+The engine (`excalidraw_kit.py`, repo root) owns the palette, element factory, fun primitives, reusable illustrations and the validate/write tail. Your script holds only the composition: the per-video beat scaffold plus any bespoke one-off illustration (here, the Claude.ai window). Preview without opening the app:
+`python3 ../../../preview.py claude_intro.excalidraw out.png [XMIN XMAX]`
 
-FRAME 2 - name "02_The_map" (the core diagram)
-- Heading in deep purple: "One window. Five parts."
-- Draw a stylised Claude.ai window: a large rounded rectangle (white fill, deep-purple stroke) occupying the centre. Inside, sketch a simple layout: a narrow left sidebar column (lavender tint), a wide central chat area (white) with two or three rounded "message" bars, a small model-picker chip at the top-right of the window, and a paperclip/upload glyph near a bottom input bar. A right-hand panel tab to suggest the Artifacts panel.
-- Add FIVE numbered callout labels connected to the relevant part of the window with thin brand-purple arrows. Each callout is a small rounded card (soft lavender fill) with a deep-purple number badge, a bold card title, and one line of ink body:
-  1. "Conversations" - "Where most people live. Useful, but volatile - context doesn't carry between chats."
-  2. "Projects" - "The multiplier. Persistent instructions, files and memory across every chat inside it. (Video 2.2)"
-  3. "Artifacts" - "When Claude builds a document or tool, not just text. Opens a side panel. Persistent and editable."
-  4. "File uploads" - "PDFs, images, spreadsheets, code. Claude reads them. The most underused feature."
-  5. "Model picker" - "Match the model to the task."
-- Arrange callouts around the window without crossing arrows; keep arrows short and tidy.
+STYLE B - NON-NEGOTIABLES (house style; see CLAUDE.md + .claude/skills/SKILL.md)
+- ONE flowing, illustrated, hand-drawn journey, left to right. NO frames, NO bordered slides. Beats are separated by whitespace and a connector spine, never by rectangles.
+- White canvas (`viewBackgroundColor #ffffff`).
+- ALL text hand-drawn in Excalifont (`fontFamily 5` = the kit's `HAND`), `roughness 1` on everything. No typed sans/mono.
+- Lively palette, colour-coded per beat. Heavy colour-blocking (highlighter sweeps, pastel sticky notes) + scribbled annotations (underlines, circled words, freehand arrows, sparkles) do the work; a charming primitive illustration (the Claude.ai window) carries the hero beat; light rotation jitter on notes/chips.
+- No emoji - draw any icon from primitives (the kit has `pause_icon`, `sparkles`, warning triangles via `line`, etc.).
+- British English. Hyphens "-", never em dashes. Use the verbatim copy below; do not "improve" it.
+- Vocabulary: Claude / Opus / Sonnet / Haiku / MCP are proper nouns; "Patient" not "user/customer"; "Phlo" not "we/us".
 
-FRAME 3 - name "03_Model_picker"
-- Heading in deep purple: "Pick the model deliberately"
-- Three equal cards side by side (white fill, deep-purple stroke, brand-purple title bar):
-  - Card 1 "Opus" - small subhead "Claude Opus 4.8" - body: "Heavyweight. Deep reasoning, long-form writing, complex analysis. Slowest, deepest."
-  - Card 2 "Sonnet" - small subhead "Claude Sonnet 4.6" - body: "The default. Balanced speed and quality. Most day-to-day work." Add a small "DEFAULT" tag in brand purple.
-  - Card 3 "Haiku" - small subhead "Claude Haiku 4.5" - body: "Fast and light. Quick lookups, simple drafts."
-- A full-width footer strip in lavender tint with deep-purple text: "Heavier models think longer and use more of your usage allowance. Lighter models are faster. Choose to fit the job."
+PALETTE & TYPE (constants exported by the kit - never introduce a colour outside PALETTE)
+- Neutrals: WHITE, INK, GREYD, GREY, FAINT.
+- Beat colours, each with a matching pastel `_BG`: VIOLET, ORANGE, GREEN, BLUE, RED, TEAL, YELLOW, INDIGO.
+- Type scale (px): HERO 96 · H1 48 · H2 34 · H3 28 · BODY 22 · LABEL 20 · SMALL 17. Font: HAND (5) throughout.
 
-FRAME 4 - name "04_Pause_and_try"
-- Centre a single bold rounded card (lavender tint, teal #0FB5A6 stroke 3px to signal action).
-- Eyebrow in teal: "PAUSE AND TRY"
-- Big ink instruction, left-aligned: "Open Claude. Switch to a model that isn't your default. Run one prompt. Notice the difference."
-- Small mid-grey note beneath: "60 seconds. Then carry on."
+HELPERS available from the kit (use these; don't redefine)
+rect, ellipse, line, arrow, text, text_centered, text_w; highlighter, sticky, chip, scribble_underline,
+circle_around, sparkle, sparkles, pause_icon, num_badge, jit; finish(out, max_w, total_w).
 
-FRAME 5 - name "05_Close"
-- Heading in deep purple: "Five features. Four minutes."
-- Line in ink: "Next: Projects - the one that compounds for years."
-- A resource card (white fill, brand-purple stroke): title "Resource" in brand purple, body in ink: "Claude Help Centre - support.claude.com"
-- Bottom-right small mid-grey tag: "Phlo · AI training"
+LAYOUT - beat scaffold (wide gaps so a single beat frames cleanly on a 14" laptop)
+- `GAP = 1800`. Four beats keyed 1-4: `WID = {1:3120, 2:2600, 3:2000, 4:2300}`. Per-beat accent: `ACCENT = {1:VIOLET, 2:BLUE, 3:YELLOW, 4:GREEN}` with matching `ABG`. Lay beats out left-to-right: `OX[i]` accumulates `WID[i] + GAP`; `TOTAL_W` is the running total; `MAXW = max(WID.values()) + 200`.
+- A `head(ox, title, accent, abg)` helper draws each beat heading: a highlighter sweep behind a HAND H1 title with a scribbled underline. The five PARTS carry the number badges, so headings have no step number.
 
-FINAL CHECKS
-- Confirm valid JSON, all ids unique, all arrows bound or with explicit points, no overlapping text, consistent padding and alignment, AA contrast. Save as `claude-interface-properly.excalidraw`. Tell me the file path.
+BOARD TITLE (above beat 1, around y=-300)
+- HERO INK: "The interface, properly"  (+ a VIOLET `sparkles` to its right)
+- H2 VIOLET: "five things on screen most people never touch"
+- H3 GREYD: "- and they're where the productivity is"
+- SMALL GREY: "Phlo AI training  -  about 4 minutes"
+
+BEAT 1 - "One window. Five parts."  (accent VIOLET)
+Bespoke illustration `claude_window_full(x, y, w, h)`: a rounded white Claude.ai window (~1500x420), thin top bar with three grey dots, and inside it the five real parts so every callout arrow lands on something:
+  - a left sidebar (VIOLET_BG tint, a few white rows) -> Projects;
+  - a central chat column (grey "message" bars) -> Conversations;
+  - a small TEAL "Sonnet v" model chip top-right -> Model picker;
+  - a BLUE-edged "Artifact" side panel on the right -> Artifacts;
+  - a bottom input bar with a GREEN paperclip glyph -> File uploads.
+  It returns anchor points for those five targets.
+Five numbered callouts (a jittered `sticky` + `num_badge` + H3 title + SMALL body, with a coloured `arrow` to the matching anchor). Verbatim copy:
+  1. Conversations (ORANGE) - "Where most people live. Useful,\nbut volatile - context doesn't\ncarry between chats."
+  2. Projects (VIOLET) - "The multiplier. Persistent\ninstructions, files and memory\nacross every chat inside it.\n(Video 2.2)"
+  3. Artifacts (BLUE) - "When Claude builds a document\nor tool, not just text. Opens a\nside panel - persistent, editable."
+  4. File uploads (GREEN) - "PDFs, images, spreadsheets, code.\nClaude reads them. The most\nunderused feature."
+  5. Model picker (TEAL) - "Match the model to the task."
+SAFETY CAUTION (Phlo, regulated pharmacy) - directly under the File uploads callout, draw a small RED warning triangle (a `line` filled RED_BG) with a "!" and a RED `chip`: "Never upload patient-identifiable data". This guardrail is required, not decorative.
+
+BEAT 2 - "Pick the model deliberately"  (accent BLUE)
+Three jittered `sticky` cards side by side, each with a HAND title, a SMALL subhead, a small primitive illustration, and a BODY description. Models are current as of today - do not change the versions:
+  - Opus (INDIGO) - "Claude Opus 4.8" - "Deep reasoning, long-form\nwriting, complex analysis.\nSlowest, deepest."   illustration: a stacked weight.
+  - Sonnet (GREEN) - "Claude Sonnet 4.6" - "Balanced speed and quality.\nMost day-to-day work."   add a GREEN "DEFAULT" chip.   illustration: a bright star (`sparkle`).
+  - Haiku (YELLOW) - "Claude Haiku 4.5" - "Fast and light.\nQuick lookups, simple drafts."   illustration: motion lines + a zippy dot.
+Under the cards:
+  - GREYD BODY: "Heavier models think longer and use more of your allowance.  Lighter ones are faster."
+  - a "faster -> deeper" spectrum: the label "faster", then chips Haiku (YELLOW) -> Sonnet (GREEN) -> Opus (INDIGO) joined by small grey arrows, then "deeper".
+  - GREYD BODY: "Switch any time - even mid-conversation."
+
+BEAT 3 - "Pause here, and try it"  (accent YELLOW)
+A `pause_icon` + a YELLOW_BG `highlighter` sweep behind H3 INK: "Open Claude. Switch to a model that\nisn't your default. Run one prompt."
+A row of three YELLOW-outlined chips: "try Opus", "or Haiku", "notice the difference". A YELLOW `sparkles`. GREYD BODY: "60 seconds - then carry on."
+
+BEAT 4 - "Five features. Four minutes."  (accent GREEN)
+- Recap: five chips in beat colours - "Conversations" (ORANGE), "Projects" (VIOLET), "Artifacts" (BLUE), "File uploads" (GREEN), "Model picker" (TEAL).
+- H3 INK: "Next: Projects - the one that compounds for years." with a VIOLET `circle_around` "Projects".
+- Roadmap (signpost only, planned not shipped): SMALL GREY "Later in this module:" then faint white/FAINT-outline chips "Skills", "Scheduled tasks", "Connectors (MCP)", "Cowork", then SMALL GREY "+ more".  (Confirm this slate against the course curriculum before recording.)
+- A `sparkles` + VIOLET SMALL: "Docs: Claude Help Centre - support.claude.com"
+- Footer SMALL GREY: "Phlo AI training  -  the interface"
+
+CONNECTOR SPINE (makes it ONE picture, not "boxes minus the borders")
+Across each gap, draw a wavy hand-drawn `arrow` from the end of beat i to the start of beat i+1, in the NEXT beat's accent colour. Add one faint dashed FAINT baseline `line` running the full width beneath the beats.
+
+ACCEPTANCE CHECKS (`finish()` enforces these before it writes)
+- Valid Excalidraw v2 JSON; `appState.viewBackgroundColor` is WHITE.
+- Zero frames (Style B). No off-palette colours. No text overflow or text/text collisions (collisions print as warnings - resolve them, aim for 0).
+- All ids unique. Print the final element count, total width, and collisions at the end.

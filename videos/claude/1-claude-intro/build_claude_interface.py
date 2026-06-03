@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build claude-interface-properly.excalidraw - ONE flowing, illustrated explainer
+"""Build claude_intro.excalidraw - ONE flowing, illustrated explainer
 for the "Claude interface, properly" training video (Phlo AI training, ~4 min).
 
 Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
@@ -10,7 +10,7 @@ Modelled on videos/claude/3-artefacts/2-3-artifacts.excalidraw - self-contained,
 embeds its own helpers + palette as the repo convention requires.
 
 Run:  python3 build_claude_interface.py   # writes the file, reloads, asserts, prints counts
-      python3 ../3-artefacts/preview.py claude-interface-properly.excalidraw out.png
+      python3 ../../../preview.py claude_intro.excalidraw out.png
 """
 import os
 import sys
@@ -80,190 +80,189 @@ def claude_window_full(x, y, w, h):
     }
 
 # ----------------------------------------------------------------------------
-# BEAT SCAFFOLD - wide gaps so a single beat frames cleanly on a 14" laptop
+# BEAT SCAFFOLD - wide gaps so a single beat frames cleanly on a 14" laptop.
+# Every beat uses the SAME ~1120-wide x ~980-tall slot (~1.15 : 1) so framing is
+# identical and fits a 14" MacBook screen.
 # ----------------------------------------------------------------------------
-GAP = 1800
-WID = {1: 3120, 2: 2600, 3: 2000, 4: 2300}
+N = 4
+GAP = 800
+WID = {i: 1200 for i in range(1, N + 1)}
 ACCENT = {1: VIOLET, 2: BLUE, 3: YELLOW, 4: GREEN}
 ABG = {1: VIOLET_BG, 2: BLUE_BG, 3: YELLOW_BG, 4: GREEN_BG}
 OX, _c = {}, 0
-for _i in range(1, 5):
+for _i in range(1, N + 1):
     OX[_i] = _c
     _c += WID[_i] + GAP
 TOTAL_W = _c
 
 HEAD_Y = 60
-MY = 620
 
-def head(ox, title, accent, abg, sub=None):
-    """Section heading: highlighter sweep + hand title + scribbled underline. No
-    step-number circle here - in this video the five PARTS carry the numbers."""
-    tw = text_w(title, H1, HAND)
-    highlighter(ox - 8, HEAD_Y + 2, tw + 50, H1 * LINE_H + 14, abg)
-    text(ox, HEAD_Y + 6, title, size=H1, color=INK)
-    scribble_underline(ox, HEAD_Y + 6 + H1 * LINE_H + 8, min(tw, 520), accent, sw=4)
-    if sub:
-        text(ox, HEAD_Y + 6 + H1 * LINE_H + 26, sub, size=BODY, color=GREYD)
+def head(ox, title, accent, abg=None, sub=None):
+    """QUIET heading: kit heading() draws a prominent hand title in the beat's
+    accent colour + a lively hand underline. No step circle, no highlighter sweep,
+    no scribble of its own (abg kept for call-site compatibility, unused)."""
+    heading(ox, HEAD_Y, title, color=accent, sub=sub)
 
 # ============================================================================
 # BOARD TITLE
 # ============================================================================
 text(OX[1], -300, "The interface, properly", size=HERO, color=INK)
-sparkles(OX[1] + text_w("The interface, properly", HERO) + 70, -230, VIOLET)
 text(OX[1] + 6, -300 + HERO * LINE_H + 4,
      "five things on screen most people never touch", size=H2, color=VIOLET)
 text(OX[1] + 6, -300 + HERO * LINE_H + 4 + H2 * LINE_H + 8,
      "- and they're where the productivity is", size=H3, color=GREYD)
-text(OX[1] + 6, -300 + HERO * LINE_H + 4 + H2 * LINE_H + 8 + H3 * LINE_H + 10,
-     "Phlo AI training  -  about 4 minutes", size=SMALL, color=GREY)
 
 # ============================================================================
 # BEAT 1 - ONE WINDOW, FIVE PARTS (the hero map)
 # ============================================================================
 ox = OX[1]
-head(ox, "One window. Five parts.", ACCENT[1], ABG[1])
-win_x, win_y, win_w, win_h = ox + 760, 320, 1500, 420
+head(ox, "One window. Five parts.", ACCENT[1])
+# Compact hero: a wide-but-short Claude window across the top, with the five
+# callouts stacked in a 2-column grid below, arrows pointing UP to real anchors.
+win_x, win_y, win_w, win_h = ox + 30, 250, 1100, 300
 anch = claude_window_full(win_x, win_y, win_w, win_h)
 
-def callout(sx, sy, w, h, n, accent, abg, title, body, target, frm):
+def callout(sx, sy, w, h, n, accent, abg, title, body, target):
     sticky(sx, sy, w, h, abg, angle=jit(1.3))
     num_badge(sx + 16, sy + 16, n, accent)
-    text(sx + 78, sy + 26, title, size=H3, color=accent)
-    text(sx + 30, sy + 88, body, size=SMALL, color=INK)
-    fx0, fy0 = frm
+    text(sx + 78, sy + 24, title, size=H3, color=accent)
+    text(sx + 30, sy + 80, body, size=SMALL, color=INK)
+    # arrow from the top edge of the sticky up to its target anchor in the window
+    fx0, fy0 = sx + w * 0.5, sy
     arrow(fx0, fy0, [[0, 0], [target[0] - fx0, target[1] - fy0]], stroke=accent, sw=3, rough=1)
 
-# 2 Projects -> sidebar (top-left)
-callout(ox + 40, 300, 660, 200, 2, VIOLET, VIOLET_BG, "Projects",
-        "The multiplier. Persistent\ninstructions, files and memory\nacross every chat inside it.\n(Video 2.2)",
-        anch["sidebar"], (ox + 700, 400))
-# 1 Conversations -> chat (left, below Projects)
-callout(ox + 40, 548, 660, 184, 1, ORANGE, ORANGE_BG, "Conversations",
-        "Where most people live. Useful,\nbut volatile - context doesn't\ncarry between chats.",
-        anch["chat"], (ox + 700, 612))
-# 5 Model picker -> chip (top-right)
-callout(ox + 2360, 300, 660, 156, 5, TEAL, TEAL_BG, "Model picker",
+col_l, col_r = ox + 30, ox + 600
+row1, row2, row3 = 600, 800, 1000
+cw, ch = 530, 180
+# Callouts assigned by SIDE so arrows stay short + don't cross: left-column
+# callouts point to left/centre anchors, right-column to right-side anchors.
+# LEFT column: Projects -> sidebar | Conversations -> chat | File uploads -> clip
+callout(col_l, row1, cw, ch, 2, VIOLET, VIOLET_BG, "Projects",
+        "The multiplier. Persistent\ninstructions, files and memory\nacross every chat. (Video 2.2)",
+        anch["sidebar"])
+callout(col_l, row2, cw, ch, 1, ORANGE, ORANGE_BG, "Conversations",
+        "Where most people live.\nUseful, but volatile - context\ndoesn't carry between chats.",
+        anch["chat"])
+callout(col_l, row3, cw, 120, 4, GREEN, GREEN_BG, "File uploads",
+        "PDFs, images, spreadsheets, code -\nClaude reads them. Most underused.",
+        anch["clip"])
+# RIGHT column: Model picker -> chip (top-right) | Artifacts -> panel (right)
+callout(col_r, row1, cw, 120, 5, TEAL, TEAL_BG, "Model picker",
         "Match the model to the task.",
-        anch["chip"], (ox + 2360, 372))
-# 3 Artifacts -> panel (right, below)
-callout(ox + 2360, 504, 660, 204, 3, BLUE, BLUE_BG, "Artifacts",
-        "When Claude builds a document\nor tool, not just text. Opens a\nside panel - persistent, editable.",
-        anch["panel"], (ox + 2360, 590))
-# 4 File uploads -> paperclip (bottom-centre)
-callout(ox + 1180, 804, 720, 150, 4, GREEN, GREEN_BG, "File uploads",
-        "PDFs, images, spreadsheets, code.\nClaude reads them. The most\nunderused feature.",
-        anch["clip"], (ox + 1300, 804))
-# Safety caution on uploads - regulated pharmacy (SKILL.md guardrail).
-warn_x, warn_y = ox + 1180, 968
+        anch["chip"])
+callout(col_r, row2, cw, ch, 3, BLUE, BLUE_BG, "Artifacts",
+        "When Claude builds a document\nor tool, not just text. A side\npanel - persistent, editable.",
+        anch["panel"])
+# Safety caution on uploads (SKILL.md guardrail) - generic, no clinical wording.
+warn_x, warn_y = col_r, row3 + 30
 line(warn_x, warn_y + 34, [[0, 0], [18, -34], [36, 0], [0, 0]],
      stroke=RED, sw=3, rough=1, bg=RED_BG, fill="solid", prefix="warn")
 text(warn_x + 13, warn_y + 4, "!", size=H3, color=RED)
-chip(warn_x + 58, warn_y, "Never upload patient-identifiable data",
+chip(warn_x + 58, warn_y, "Never upload confidential data",
      fill=RED_BG, text_color=RED, border=RED, size=SMALL, angle=0.0)
 
 # ============================================================================
 # BEAT 2 - PICK THE MODEL DELIBERATELY
 # ============================================================================
 ox = OX[2]
-head(ox, "Pick the model deliberately", ACCENT[2], ABG[2])
+head(ox, "Pick the model deliberately", ACCENT[2])
 
 def opus_illus(cx, cy, accent):     # heavy: a stacked weight
-    rect(cx - 70, cy + 56, 140, 30, stroke=INK, bg=accent, sw=2, rough=1, rounded=True)
-    rect(cx - 48, cy + 28, 96, 30, stroke=INK, bg=accent, sw=2, rough=1, rounded=True)
-    rect(cx - 28, cy, 56, 30, stroke=INK, bg=accent, sw=2, rough=1, rounded=True)
+    rect(cx - 60, cy + 40, 120, 24, stroke=INK, bg=accent, sw=2, rough=1, rounded=True)
+    rect(cx - 42, cy + 18, 84, 24, stroke=INK, bg=accent, sw=2, rough=1, rounded=True)
+    rect(cx - 24, cy - 4, 48, 24, stroke=INK, bg=accent, sw=2, rough=1, rounded=True)
 
-def sonnet_illus(cx, cy, accent):   # balanced: a bright star
-    sparkle(cx, cy + 44, 38, accent, sw=3)
+def sonnet_illus(cx, cy, accent):   # balanced: a little balance scale (no sparkle)
+    line(cx, cy - 8, [[0, 0], [0, 50]], stroke=accent, sw=3, rough=1)        # post
+    line(cx - 44, cy, [[0, 0], [88, 0]], stroke=accent, sw=3, rough=1)       # beam
+    line(cx, cy + 50, [[0, 0], [-24, 0], [24, 0]], stroke=accent, sw=3, rough=1)  # foot
+    ellipse(cx - 58, cy + 6, 28, 16, stroke=accent, bg=accent, sw=2, rough=1)     # left pan
+    ellipse(cx + 30, cy + 6, 28, 16, stroke=accent, bg=accent, sw=2, rough=1)     # right pan
 
 def haiku_illus(cx, cy, accent):    # light + fast: motion lines + a zippy dot
-    for k, ln in enumerate((120, 92, 64)):
-        line(cx - 60, cy + 20 + k * 24, [[0, 0], [ln, 0]], stroke=accent, sw=4, rough=1)
-    ellipse(cx + 66, cy + 36, 16, 16, stroke=accent, bg=accent, sw=2)
+    for k, ln in enumerate((100, 76, 52)):
+        line(cx - 50, cy + 8 + k * 20, [[0, 0], [ln, 0]], stroke=accent, sw=4, rough=1)
+    ellipse(cx + 56, cy + 20, 14, 14, stroke=accent, bg=accent, sw=2)
 
 cards = [
-    ("Opus", "Claude Opus 4.8", "Deep reasoning, long-form\nwriting, complex analysis.\nSlowest, deepest.",
+    ("Opus", "Claude Opus 4.8", "Deep reasoning, long-form writing,\ncomplex analysis. Slowest, deepest.",
      INDIGO, INDIGO_BG, opus_illus, None),
     ("Sonnet", "Claude Sonnet 4.6", "Balanced speed and quality.\nMost day-to-day work.",
      GREEN, GREEN_BG, sonnet_illus, "DEFAULT"),
     ("Haiku", "Claude Haiku 4.5", "Fast and light.\nQuick lookups, simple drafts.",
      YELLOW, YELLOW_BG, haiku_illus, None),
 ]
-cw, cgap, cy0, ch = 720, 120, 320, 430
+cw, cy0, ch, cvg = 1100, 250, 200, 20
 for k, (name, sub, body, acc, abg, illus, tag) in enumerate(cards):
-    cx = ox + 40 + k * (cw + cgap)
-    sticky(cx, cy0, cw, ch, abg, angle=jit(1.1))
-    text(cx + 40, cy0 + 28, name, size=H2, color=acc)
-    text(cx + 40, cy0 + 84, sub, size=SMALL, color=GREYD)
+    cy = cy0 + k * (ch + cvg)
+    sticky(ox + 30, cy, cw, ch, abg, angle=jit(1.0))
+    text(ox + 70, cy + 24, name, size=H2, color=acc)
+    text(ox + 70, cy + 80, sub, size=SMALL, color=GREYD)
     if tag:
-        chip(cx + cw - 224, cy0 + 30, tag, fill=acc, text_color=WHITE, border=acc, size=SMALL)
-    illus(cx + cw * 0.5, cy0 + 150, acc)
-    text(cx + 40, cy0 + 300, body, size=BODY, color=INK)
+        chip(ox + 70, cy + 130, tag, fill=acc, text_color=WHITE, border=acc, size=SMALL)
+    illus(ox + cw - 220, cy + 90, acc)
+    text(ox + cw - 480, cy + 24, body, size=BODY, color=INK)
 # usage note + a faster->deeper gradient of chips
-text(ox + 40, cy0 + ch + 60, "Heavier models think longer and use more of your allowance.  Lighter ones are faster.",
+fy = cy0 + 3 * (ch + cvg) + 12
+text(ox + 30, fy, "Heavier models think longer and use more of your\nallowance.  Lighter ones are faster.",
      size=BODY, color=GREYD)
-gx = ox + 40
-text(gx, cy0 + ch + 110, "faster", size=SMALL, color=GREY)
+gy = fy + 96
+gx = ox + 30
+text(gx, gy + 10, "faster", size=SMALL, color=GREY)
 gx += 120
 for lab, acc, abg in [("Haiku", YELLOW, YELLOW_BG), ("Sonnet", GREEN, GREEN_BG), ("Opus", INDIGO, INDIGO_BG)]:
-    w, h = chip(gx, cy0 + ch + 100, lab, fill=abg, text_color=acc, border=acc, size=SMALL)
+    w, h = chip(gx, gy, lab, fill=abg, text_color=acc, border=acc, size=SMALL)
     gx += w
-    arrow(gx + 6, cy0 + ch + 100 + h / 2, [[0, 0], [40, 0]], stroke=GREY, sw=3)
-    gx += 52
-text(gx + 6, cy0 + ch + 110, "deeper", size=SMALL, color=GREY)
-text(ox + 40, cy0 + ch + 160, "Switch any time - even mid-conversation.", size=BODY, color=GREYD)
+    arrow(gx + 6, gy + h / 2, [[0, 0], [36, 0]], stroke=GREY, sw=3)
+    gx += 48
+text(gx + 6, gy + 10, "deeper", size=SMALL, color=GREY)
+text(ox + 30, gy + 70, "Switch any time - even mid-conversation.", size=BODY, color=GREYD)
 
 # ============================================================================
 # BEAT 3 - PAUSE HERE, AND TRY IT
 # ============================================================================
 ox = OX[3]
-head(ox, "Pause here, and try it", ACCENT[3], ABG[3])
+head(ox, "Pause here, and try it", ACCENT[3])
 pause_icon(ox + 40, 322, 76, color=YELLOW)
-highlighter(ox + 150, 318, 940, 130, YELLOW_BG, angle=0.0)
+highlighter(ox + 150, 318, 960, 130, YELLOW_BG, angle=0.0)
 text(ox + 174, 336, "Open Claude. Switch to a model that\nisn't your default. Run one prompt.",
      size=H3, color=INK)
 ex_x = ox + 60
 for lab in ["try Opus", "or Haiku", "notice the difference"]:
-    w, h = chip(ex_x, 510, lab, fill=WHITE, text_color=YELLOW, border=YELLOW, size=SMALL)
+    w, h = chip(ex_x, 560, lab, fill=WHITE, text_color=YELLOW, border=YELLOW, size=SMALL)
     ex_x += w + 40
-sparkles(ox + 90, 300, YELLOW)
-text(ox + 60, 610, "60 seconds - then carry on.", size=BODY, color=GREYD)
+text(ox + 60, 700, "60 seconds - then carry on.", size=BODY, color=GREYD)
+# hands-on beat -> cue the recorder to cut to the live app
+demo_badge(ox + 60, 820, "show in Claude desktop app:  the model picker")
 
 # ============================================================================
 # BEAT 4 - FIVE FEATURES, FOUR MINUTES (close)
 # ============================================================================
 ox = OX[4]
-head(ox, "Five features. Four minutes.", ACCENT[4], ABG[4])
+head(ox, "Five features. Four minutes.", ACCENT[4])
 recap = [("Conversations", ORANGE, ORANGE_BG), ("Projects", VIOLET, VIOLET_BG),
          ("Artifacts", BLUE, BLUE_BG), ("File uploads", GREEN, GREEN_BG),
          ("Model picker", TEAL, TEAL_BG)]
-rx = ox + 40
+# the five features recapped as a vertical stack of chips
+ry = 260
 for lab, acc, abg in recap:
-    w, h = chip(rx, 320, lab, fill=abg, text_color=acc, border=acc, size=SMALL)
-    rx += w + 32
+    w, h = chip(ox + 40, ry, lab, fill=abg, text_color=acc, border=acc, size=BODY)
+    ry += h + 24
 nxt = "Next: Projects - the one that compounds for years."
-text(ox + 40, 440, nxt, size=H3, color=INK)
-circle_around(ox + 40 + text_w("Next: ", H3) - 6, 434, text_w("Projects", H3) + 24, H3 * LINE_H + 16, VIOLET, sw=3)
+text(ox + 40, ry + 30, nxt, size=H3, color=INK)
+circle_around(ox + 40 + text_w("Next: ", H3) - 6, ry + 24, text_w("Projects", H3) + 24,
+              H3 * LINE_H + 16, VIOLET, sw=3)
 # roadmap - the rest of the Claude module (planned, not yet shipped)
-text(ox + 40, 516, "Later in this module:", size=SMALL, color=GREY)
-rmx = ox + 40 + text_w("Later in this module: ", SMALL) + 16
-for lab in ["Skills", "Scheduled tasks", "Connectors (MCP)", "Cowork"]:
-    w, h = chip(rmx, 504, lab, fill=WHITE, text_color=GREYD, border=FAINT, size=SMALL)
+rdy = ry + 120
+text(ox + 40, rdy, "Later in this module:", size=SMALL, color=GREY)
+rmx = ox + 40
+for lab in ["Skills", "Scheduled tasks", "Connectors (MCP)", "Cowork", "+ more"]:
+    w, h = chip(rmx, rdy + 40, lab, fill=WHITE, text_color=GREYD, border=FAINT, size=SMALL)
     rmx += w + 22
-text(rmx + 4, 516, "+ more", size=SMALL, color=GREY)
-sparkles(ox + 80, 600, YELLOW)
-text(ox + 130, 590, "Docs: Claude Help Centre - support.claude.com", size=SMALL, color=VIOLET)
-text(ox + 40, 700, "Phlo AI training  -  the interface", size=SMALL, color=GREY)
+text(ox + 40, rdy + 130, "Docs: Claude Help Centre - support.claude.com", size=SMALL, color=VIOLET)
 
-# ============================================================================
-# CONNECTOR SPINE - the through-line that makes it ONE picture
-# ============================================================================
-for i in range(1, 4):
-    x0 = OX[i] + WID[i]
-    x1 = OX[i + 1]
-    acc = ACCENT[i + 1]
-    arrow(x0 + 20, MY, [[0, 0], [(x1 - x0) * 0.4, -36], [(x1 - x0) * 0.6, 30], [x1 - x0 - 40, 0]],
-          stroke=acc, sw=4, rough=1)
-line(OX[1] + 40, MY + 340, [[0, 0], [TOTAL_W - 400, 0]], stroke=FAINT, sw=2, rough=1, dashed=True, opacity=60)
+# No connector spine and no branding footer: beats read as one picture through
+# consistent layout + rhythm (the natural-flow look), not arrows in the gaps.
 
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE  (shared excalidraw_kit)

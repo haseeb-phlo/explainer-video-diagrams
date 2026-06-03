@@ -18,7 +18,7 @@ Now the most underused feature: file uploads. This paperclip takes PDFs, images,
 I've dropped in a PDF, and now I can just ask -
 [Type: "Summarise the key points on page two."]
 
-and it answers from the document itself. One firm rule for us, though: never upload patient-identifiable data. We're a regulated pharmacy, so anything with patient or personal detail stays out. For everything else - policies, rotas, templates, code - this is what turns Claude from a chatbot into something that works with your actual material.
+and it answers from the document itself. One firm rule for us, though: never upload confidential data. We're a regulated pharmacy, so anything with patient or personal detail stays out. For everything else - policies, rotas, templates, code - this is what turns Claude from a chatbot into something that works with your actual material.
 
 [2:50 - 3:35] Model picker — demo, the key moment]
 Last one, and the one I want you to try: the model picker, up here. Three families. Opus, currently Opus 4.8, is the heavyweight: deep reasoning and long writing. Sonnet, the default, balances speed and quality for most day-to-day work. And Haiku is the quick one, for light, fast tasks. Watch the same prompt on Sonnet, then on Opus.
@@ -33,7 +33,7 @@ A couple of production notes for the recording: keep the camera bubble bottom-ri
 
 ---
 
-## AI Ops Learn - video description
+## the AI training series - video description
 
 **Claude: the interface, properly** (Module 2 - Claude · video 1 · ~4 min)
 
@@ -46,9 +46,9 @@ In this video:
 - **File uploads** - Claude reads PDFs, images, spreadsheets and code
 - **Model picker** - Opus, Sonnet and Haiku, and how to match the model to the task
 
-For: all Phlo staff. No prior Claude experience needed.
+For: all staff. No prior Claude experience needed.
 
-Safety: this is mandatory training for a regulated pharmacy. Never upload patient-identifiable data to Claude - keep anything with patient or personal detail out, and use non-sensitive material only.
+Safety: this is mandatory training for a regulated pharmacy. Never upload confidential data to Claude - keep anything with patient or personal detail out, and use non-sensitive material only.
 
 Next: Projects - the one that compounds for years.
 
@@ -60,6 +60,6 @@ Everything in this video lives in the Claude Help Centre - **support.claude.com*
 - Uploading files: search "upload files"
 - Projects (next video): search "How can I create and manage projects"
 
-Phlo reminder: never upload patient-identifiable data. Use `Patient_001` / `J. Doe` style placeholders if you need an example.
+Reminder: never upload confidential data. Use `Customer_001` / `J. Doe` style placeholders if you need an example.
 
-Check AI Ops Learn's Prompt Library before building from scratch - someone may have started a shared Project you can reuse.
+Check the AI training series's Prompt Library before building from scratch - someone may have started a shared Project you can reuse.

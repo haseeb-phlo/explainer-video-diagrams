@@ -17,17 +17,19 @@ A video is **one hand-drawn, frameless Excalidraw scene** that the presenter pan
 
 The style is **one flowing, illustrated, hand-drawn journey**, left to right — not a row of bordered slides. Canonical reference: `videos/claude/3-artefacts/`.
 
-- **No frames, no boxes.** One continuous canvas. Beats are separated by whitespace and a **connector spine** (a wavy hand-drawn arrow threading the beats), never by rectangles.
-- **White background.** All text hand-drawn in **Excalifont** (`fontFamily: 5`), `roughness: 1` on everything. No typed sans/mono.
-- **Lively colour, coded per beat** — violet / orange / green / blue / red / teal / yellow / indigo strokes, each with a matching pastel fill. This is a deliberate house palette, **not** Phlo brand colours — do not "correct" it to brand hex.
-- **Fun in dose order:** heavy colour-blocking (highlighter sweeps, pastel sticky notes) + scribbled annotations (underlines, circled words, freehand arrows, sparkles, strike-throughs) do the heavy lifting; charming primitive illustrations on hero beats; light rotation jitter on notes/chips. Prefer hand-drawn icons over emoji.
-- **Wide gaps between beats** (the `GAP` constant) so a single beat frames cleanly on a 14" laptop while recording — the whitespace is the camera.
+- **No frames, no boxes, no connector spine.** One continuous canvas; beats are separated by whitespace only. No wavy through-line, no inter-beat arrows, no baseline, and no colour-band washes behind beats — the white background stays white.
+- **White background.** All text hand-drawn in the **Virgil hand font** (`fontFamily: 1`, the kit's `HAND`), `roughness: 1`, `lineHeight: 1.4`. No typed sans/mono.
+- **Lively colour, coded per beat** — violet / orange / green / blue / red / teal / yellow / indigo strokes, each with a matching pastel fill and ultra-light tint. A deliberate house palette, **not** Phlo brand colours — do not "correct" it to brand hex. Colour comes from **vivid elements** (accent headings, saturated stickies, coloured illustrations), not background panels.
+- **Prominent but unpolished headings** via the kit's `heading()`: a big hand title in the beat's accent colour with a hand-drawn underline. **No step-number circle, no highlighter sweep behind the title, and no decorative sparkles/twinkles anywhere** (they read as AI slop). Body/explanation text stays ink/grey for legibility.
+- **Charming primitive illustrations** carry the visual interest on hero beats; light rotation jitter on notes/chips. Prefer hand-drawn icons over emoji.
+- **Uniform beat dimensions:** every beat occupies the same slot — content ≈ 1120 × 980 (~1.15 : 1, the "Words left, a thing right" shape), `GAP = 800` — so each frames identically and fits a 14" laptop. Stack pairs vertically and grids into ~square layouts instead of spreading wide.
+- **Live-demo cut-aways:** mark each cut to the live app with `demo_badge(x, y, "show in Claude desktop app: …")` on the board and `[CUT TO CLAUDE DESKTOP]` / `[BACK TO BOARD]` in the script.
 
 ### Safety-bearing visual markers (must survive the house style)
 
 These three markers carry the regulatory semantics below — keep them legible in every diagram, drawn in the hand-drawn style:
 
-- **AI / automated step** → mark with a sparkle `✦` and a dashed/sketchy outline so it reads as "done by AI", not by a person.
+- **AI / automated step** → mark with a dashed/sketchy outline (and an accent colour) so it reads as "done by AI", not by a person. (No sparkles — they're banned as decoration.)
 - **Human-in-loop step** → mark with a person glyph / "👤"-equivalent hand-drawn figure or a solid checkmark gate, so the human decision point is unmistakable.
 - **Regulated / clinical-safety step** → draw in **red** and label the regulator inline ("MHRA", "GPhC", or "CQC"). Never hide a regulated step inside a generic-coloured beat.
 
@@ -43,12 +45,13 @@ There is no timeline. "Animation" = the camera move the presenter performs while
 
 ## Vocabulary (use these exact terms)
 
+**Examples are GENERIC, not Phlo-specific.** Diagrams and scripts use everyday business scenarios (a customer reply, a budget calculator, a team tone guide, Support / Ops) and carry no Phlo branding/logo and no patient/clinical specifics — so a video is reusable. The pharmacy-specific terms below (Patient, Pharmacist, Repeat prescription, Granola, Beacon, AI Ops) apply ONLY if a video is genuinely about a Phlo clinical workflow; for the general Claude/AI-literacy videos, prefer the generic equivalents.
+
 | Use | Avoid |
 |---|---|
-| Phlo | "we", "the company", "us" |
-| Patient | user, customer, end-user |
-| Pharmacist | unless precision needed, then "Responsible Pharmacist" or "PIC" |
-| Repeat prescription | refill, re-order |
+| your team / the team (generic) | naming Phlo in on-screen examples |
+| customer (generic example) | patient, unless the video is a real clinical workflow |
+| Pharmacist (clinical videos only) | unless precision needed, then "Responsible Pharmacist" or "PIC" |
 | Claude | "the AI", "the model", "AI" alone |
 | Granola | "the notes tool", "transcription" |
 | Beacon | "discovery tool", "the pre-interview thing" |
@@ -76,8 +79,8 @@ When the user requests a Learn diagram, execute this sequence:
 
 1. **Confirm the slug**: derive a kebab-case topic slug and its `videos/<series>/<NN-slug>/` folder (e.g. "Claude Projects", module 2.2 → `videos/claude/2-projects/`). State it in your response.
 2. **Plan the beats**: list the beats in narration order before generating — one line each. This is the left-to-right journey.
-3. **Generate the scene with a self-contained `build_excalidraw.py`** in that folder, following the house style above. Copy the closest existing build script (canonical: `videos/claude/3-artefacts/`) and adapt — each script embeds its own helpers + palette; nothing is shared.
-4. **Eyeball it with `preview.py`** (rasterises to PNG). Fix palette drift, text overflow, and any caption/caption collisions it warns about.
+3. **Generate the scene with a thin `build*.py`** in that folder that does `from excalidraw_kit import *` (the shared engine: palette, primitives, illustrations, `heading()`, `finish()`), then defines the scene + its per-video scaffold and calls `finish(out, max_w, total_w)`. Copy the closest existing build (canonical: `videos/claude/3-artefacts/`) as a template — the *look* is centralised in the kit; only the scene is per-video. Keep beats to the uniform ~1120×980 slot.
+4. **Eyeball it with the repo-root `preview.py`** (rasterises to PNG; pass the scene path), then run `python3 build_all.py` — it rebuilds every video and runs the Style-B guard (hard-fails on frames / non-hand fonts / off-palette). Fix overflow and any collisions it warns about.
 5. **Confirm** the output `.excalidraw` path and the beat count, so the user knows roughly how long the pan-through narration will run.
 
 If the target length isn't given, ask once ("Roughly how long — 3, 5, or 7 minutes?") and plan the beat count accordingly (~1 beat per 3s of narration).

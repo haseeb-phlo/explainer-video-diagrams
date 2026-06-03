@@ -21,7 +21,7 @@ For each video:
    ```
    `finish()` self-checks before writing: palette discipline, no stray frames, text-overflow, and text/text collisions (printed as warnings). `build_all.py` rebuilds all videos and runs the **Style-B guard**, which hard-fails on the Style A signature (frames, or typed non-hand fonts) so the editorial style can never silently return; off-palette colours are warnings.
 
-2. **Eyeball it with the PIL preview.** There's no Excalidraw CLI, so the repo-root `preview.py` rasterises a scene to a PNG — approximate (flat fills, macOS hand-font stand-ins for Excalifont) but enough to check composition, colour, overlap and text overflow without opening the app.
+2. **Eyeball it with the PIL preview.** There's no Excalidraw CLI, so the repo-root `preview.py` rasterises a scene to a PNG — approximate (flat fills, macOS hand-font stand-ins for the Virgil hand font) but enough to check composition, colour, overlap and text overflow without opening the app.
    ```bash
    python3 preview.py videos/claude/3-artefacts/2-3-artifacts.excalidraw out.png            # whole board
    python3 preview.py videos/claude/3-artefacts/2-3-artifacts.excalidraw out.png XMIN XMAX  # close-up x-window
@@ -31,16 +31,18 @@ For each video:
 
 ## Design system (current house style)
 
-The style is **one flowing, illustrated, hand-drawn journey** — modelled on `videos/ai-foundations/1-what-is-ai/llm_explainer.excalidraw` (the preferred reference) and pushed further toward "fun and visual". The canonical build is `videos/claude/3-artefacts/`. Rules:
+The style is **one flowing, illustrated, hand-drawn journey** — modelled on `videos/ai-foundations/1-what-is-ai/llm_explainer.excalidraw` (the preferred reference). The canonical build is `videos/claude/3-artefacts/`. Rules:
 
-- **No frames, no boxes.** One continuous left-to-right canvas, not a row of bordered slides. Beats are separated by whitespace + a connector spine, never by rectangles.
-- **White background** (`viewBackgroundColor: #ffffff`).
-- **All text hand-drawn** in Excalifont (`fontFamily: 5`), `roughness: 1` on everything. No typed sans/mono — the hand-drawn line is the whole point.
-- **Lively Excalidraw palette**, colour-coded per beat: violet / orange / green / blue / red / teal / yellow / indigo strokes, each with a matching pastel fill. This deliberately replaces the old restrained "Riso Workshop" four-colour palette, which read as flat and boring.
-- **Fun applied in dose order:** heavy colour-blocking (highlighter sweeps, pastel sticky notes) + scribbled annotations (underlines, circled words, freehand arrows, sparkles, strike-throughs) do the heavy lifting; charming primitive illustrations (sketched Claude face, chat-left/Artifact-panel-right window, colour-coded object doodles) on hero beats; light rotation jitter on notes/chips. Prefer hand-drawn icons over emoji.
-- **A load-bearing connector spine** — wavy hand-drawn arrows across the gaps — threads the beats so the whole thing reads as one picture, not "boxes minus the borders."
+- **No frames, no boxes.** Beats are separated by whitespace only. **No connector spine / no inter-beat arrows / no baseline** — beats read as one picture through consistent shape and rhythm, not a wavy through-line (removed: it read as clutter).
+- **White background** (`viewBackgroundColor: #ffffff`). **No colour-band washes behind beats** — the background stays white; colour comes from the *elements*.
+- **All text hand-drawn** in the Virgil hand font (`fontFamily: 1`, the kit's `HAND`), `roughness: 1`, `lineHeight: 1.4` (roomy). No typed sans/mono.
+- **Lively Excalidraw palette**, colour-coded per beat: violet / orange / green / blue / red / teal / yellow / indigo strokes, each with a matching pastel fill and an ultra-light tint. Colour comes from **vivid elements** — accent headings, saturated sticky notes, coloured illustrations — not from background panels.
+- **Prominent but unpolished headings.** A big hand title in the beat's accent colour with a lively hand-drawn underline. **No step-number circle, no highlighter sweep behind the title, and no decorative sparkles/twinkles anywhere** (they read as AI slop). Use the kit's `heading()`.
+- **Charming primitive illustrations** (sketched Claude face, chat-left/Artifact-panel-right window, colour-coded object doodles) carry visual interest on hero beats; light rotation jitter on notes/chips. Prefer hand-drawn icons over emoji.
+- **Uniform beat dimensions.** Every beat occupies the SAME slot — content ≈ 1120 wide × 980 tall (~1.15 : 1, the shape of the "Words left, a thing right" beat), `GAP = 800` between slots — so each beat frames identically and fits a 14" MacBook screen when you pan to it. Stack side-by-side pairs vertically and grids into ~square layouts rather than spreading wide; an inherently-wide flow/diagram beat may run a little wider, within reason. Body/explanation text stays ink/grey for legibility; accents are for headings, labels, shapes and fills.
+- **Live-demo cut-aways.** Where the presenter drops out to the live Claude desktop app, mark it on the board with a `demo_badge(x, y, "show in Claude desktop app: …")`, and use `[CUT TO CLAUDE DESKTOP]` / `[BACK TO BOARD]` cues in the matching script. The flowing per-beat layout supports cutting away and returning to the same beat with no structural change.
 
-Keep British English, hyphens not em-dashes, fictional identifiers only, and the SKILL.md vocabulary (Claude / Granola / Beacon / Patient are proper nouns).
+Keep British English, hyphens not em-dashes, and fictional identifiers only. **Examples must be generic, not Phlo-specific** — no Phlo branding/logo, and no patient/clinical specifics. Use everyday business scenarios (a customer reply, a budget calculator, a team tone guide, Support / Ops) so a video is reusable. Product proper nouns stay exact: Claude, Artifact, Project, Skill, MCP, Connector, Cowork, Claude Desktop. (This supersedes SKILL.md's older "use *Patient*" vocabulary rule.)
 
 ## Legacy Excalimate pipelines (kept for reference, not used)
 
@@ -51,7 +53,7 @@ Earlier videos were authored by driving Excalimate. These are retained as histor
 
 The launcher scripts `scripts/make-learn-video.sh` and `scripts/start-excalimate.sh` start the `@excalimate/mcp-server` MCP and belong to these legacy pipelines only.
 
-**The shared engine lives in the repo-root `excalidraw_kit.py`; build scripts import it.** This replaced the older "each build is self-contained and embeds its own helpers" convention — the engine was duplicated across videos and copies drifted (it's how a couple of off-style files once crept in). Now: the *look* (palette, primitives, illustrations, validate/write) is centralised in the kit; each video's `build*.py` keeps only its *composition* (scene + the per-video beat scaffold: `OX`/`WID`/`ACCENT`, `beat_head`, the connector spine) plus any bespoke one-off illustrations. When adding a new video, copy the closest existing `build*.py` as a scene template — it already imports the kit. A change to the kit re-styles every video on next `build_all.py`; the design is intended to be stable, so kit edits are rare and deliberate.
+**The shared engine lives in the repo-root `excalidraw_kit.py`; build scripts import it.** This replaced the older "each build is self-contained and embeds its own helpers" convention — the engine was duplicated across videos and copies drifted (it's how a couple of off-style files once crept in). Now: the *look* (palette, primitives, illustrations, validate/write) is centralised in the kit; each video's `build*.py` keeps only its *composition* (scene + the per-video beat scaffold: `OX`/`WID`/`ACCENT`, `beat_head`) plus any bespoke one-off illustrations. When adding a new video, copy the closest existing `build*.py` as a scene template — it already imports the kit. A change to the kit re-styles every video on next `build_all.py`; the design is intended to be stable, so kit edits are rare and deliberate.
 
 ## File layout
 

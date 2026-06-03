@@ -1,0 +1,1 @@
+Make everything consistent so the off palette colour can be hard asserted throughout. The font enforcement can be asserted throughout using the current style in the 2-3-artifact-dot-excali-draw file. fail.

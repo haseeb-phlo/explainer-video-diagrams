@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """excalidraw_kit - the shared Style B engine for Phlo AI-training diagrams.
 
-ONE flowing, illustrated, hand-drawn journey: no frames, white canvas, Excalifont
-(fontFamily 5), roughness 1, a lively colour-coded Excalidraw palette, colour
+ONE flowing, illustrated, hand-drawn journey: no frames, white canvas, the hand
+font (fontFamily 1, as in the canonical 2-3-artifacts build), roughness 1, a
+lively colour-coded Excalidraw palette, colour
 blocking, scribbled annotations, charming primitive illustrations and a connector
 spine. This module is the single source of truth for the LOOK - the palette, the
 element factory, the fun primitives, the reusable illustrations, and the
@@ -37,25 +38,27 @@ GREYD = "#495057"   # secondary text
 GREY  = "#868e96"   # captions, faint lines
 FAINT = "#dee2e6"   # very light guide lines
 
-VIOLET, VIOLET_BG = "#7048e8", "#d0bfff"
-ORANGE, ORANGE_BG = "#e8590c", "#ffd8a8"
-GREEN,  GREEN_BG  = "#2f9e44", "#b2f2bb"
-BLUE,   BLUE_BG   = "#1971c2", "#a5d8ff"
-RED,    RED_BG     = "#c92a2a", "#ffc9c9"
-TEAL,   TEAL_BG    = "#0c8599", "#99e9f2"
-YELLOW, YELLOW_BG = "#f08c00", "#ffec99"
-INDIGO, INDIGO_BG = "#364fc7", "#bac8ff"
+# accent stroke + pastel fill + ultra-light tint (the soft full-beat wash)
+VIOLET, VIOLET_BG, VIOLET_T = "#7048e8", "#d0bfff", "#f3f0ff"
+ORANGE, ORANGE_BG, ORANGE_T = "#e8590c", "#ffd8a8", "#fff4e6"
+GREEN,  GREEN_BG,  GREEN_T  = "#2f9e44", "#b2f2bb", "#ebfbee"
+BLUE,   BLUE_BG,   BLUE_T   = "#1971c2", "#a5d8ff", "#e7f5ff"
+RED,    RED_BG,    RED_T     = "#c92a2a", "#ffc9c9", "#fff5f5"
+TEAL,   TEAL_BG,   TEAL_T    = "#0c8599", "#99e9f2", "#e6fcf5"
+YELLOW, YELLOW_BG, YELLOW_T = "#f08c00", "#ffec99", "#fff9db"
+INDIGO, INDIGO_BG, INDIGO_T = "#364fc7", "#bac8ff", "#edf2ff"
 
 PALETTE = {WHITE, INK, GREYD, GREY, FAINT, "transparent",
-           VIOLET, VIOLET_BG, ORANGE, ORANGE_BG, GREEN, GREEN_BG,
-           BLUE, BLUE_BG, RED, RED_BG, TEAL, TEAL_BG, YELLOW, YELLOW_BG,
-           INDIGO, INDIGO_BG}
+           VIOLET, VIOLET_BG, VIOLET_T, ORANGE, ORANGE_BG, ORANGE_T,
+           GREEN, GREEN_BG, GREEN_T, BLUE, BLUE_BG, BLUE_T,
+           RED, RED_BG, RED_T, TEAL, TEAL_BG, TEAL_T,
+           YELLOW, YELLOW_BG, YELLOW_T, INDIGO, INDIGO_BG, INDIGO_T}
 
 # Type scale
 HERO, H1, H2, H3, BODY, LABEL, SMALL = 96, 48, 34, 28, 22, 20, 17
-HAND = 5  # Excalifont everywhere
-LINE_H = 1.25
-WFAC = 0.56  # generous glyph-width factor for Excalifont (over-estimate is safe)
+HAND = 1  # the canonical hand font (Virgil) - the ONLY font allowed (see 2-3-artifacts)
+LINE_H = 1.4  # roomier line spacing between lines within a text block
+WFAC = 0.56  # generous glyph-width factor (over-estimate is safe)
 
 # ----------------------------------------------------------------------------
 # ELEMENT FACTORY  (verbatim from the canonical build)
@@ -230,6 +233,28 @@ def num_badge(x, y, n, accent, d=44):
     ellipse(x, y, d, d, stroke=accent, bg=accent, sw=2)
     text_centered(x + d / 2, y + d / 2 - H3 * 0.55, str(n), size=H3, color=WHITE)
 
+TINT = {VIOLET: VIOLET_T, ORANGE: ORANGE_T, GREEN: GREEN_T, BLUE: BLUE_T,
+        RED: RED_T, TEAL: TEAL_T, YELLOW: YELLOW_T, INDIGO: INDIGO_T}
+
+def heading(x, y, title, color=INK, sub=None, kicker=None):
+    """A prominent-but-unpolished section heading: a big hand title in the beat's
+    accent colour with a lively hand-drawn underline (no highlighter block, no
+    number badge). Optional small grey kicker above and a sub line below."""
+    yy = y
+    if kicker:
+        text(x, yy, kicker, size=SMALL, color=GREY)
+        yy += SMALL * LINE_H + 6
+    text(x, yy, title, size=H1, color=color)
+    scribble_underline(x, yy + H1 * LINE_H + 4, min(text_w(title, H1), 520), color, sw=3)
+    if sub:
+        text(x, yy + H1 * LINE_H + 30, sub, size=BODY, color=GREYD)
+
+def beat_band(x, y, w, h, accent, opacity=100):
+    """A soft, borderless ultra-light colour wash behind a beat - 'more colour' +
+    makes each beat read as an individual zone. Not a bordered box."""
+    rect(x, y, w, h, stroke="transparent", bg=TINT.get(accent, VIOLET_T), sw=1,
+         rough=1, rounded=True, fill="solid", opacity=opacity, prefix="band")
+
 def clock(cx, cy, r, color):
     ellipse(cx - r, cy - r, 2 * r, 2 * r, stroke=color, bg=WHITE, sw=3, rough=1)
     line(cx, cy, [[0, 0], [0, -r * 0.6]], stroke=color, sw=3)
@@ -333,11 +358,17 @@ def claude_window(x, y, w, h, tiny=None):
 # VALIDATE + WRITE  (the acceptance checks + JSON tail, shared by every build)
 # ----------------------------------------------------------------------------
 def validate(max_w):
-    """Style B acceptance checks: palette discipline, no frames, text overflow,
-    text/text collisions (printed as warnings). Returns the collision count."""
+    """Style B acceptance checks: palette discipline, the hand font, no frames,
+    text overflow, text/text collisions (printed as warnings). Off-palette colours
+    and non-hand fonts are HARD asserts here, mirrored by build_all's guard so the
+    same rules apply to kit-built scenes and to files on disk. Returns the
+    collision count."""
     for e in E:
         for key in ("strokeColor", "backgroundColor"):
             assert e.get(key) in PALETTE, f"{e['type']} {e['id']} off-palette {key}={e.get(key)}"
+        if e["type"] == "text":
+            assert e.get("fontFamily") == HAND, \
+                f"text {e['id']} non-hand fontFamily={e.get('fontFamily')} (must be {HAND})"
     assert not any(e["type"] == "frame" for e in E), "Style B has no frames"
     overflow = [e["id"] for e in E if e["type"] == "text" and e.get("_mw", 0) > max_w]
     assert not overflow, f"text too wide: {overflow}"
