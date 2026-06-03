@@ -12,173 +12,18 @@ embeds its own helpers + palette as the repo convention requires.
 Run:  python3 build_claude_interface.py   # writes the file, reloads, asserts, prints counts
       python3 ../3-artefacts/preview.py claude-interface-properly.excalidraw out.png
 """
-import json
-import math
 import os
+import sys
+
+_d = os.path.dirname(os.path.abspath(__file__))
+while _d != os.path.dirname(_d) and not os.path.exists(os.path.join(_d, "excalidraw_kit.py")):
+    _d = os.path.dirname(_d)
+sys.path.insert(0, _d)
+
 import random
+from excalidraw_kit import *
 
 random.seed(40404)  # deterministic - re-runs produce identical files
-
-# ----------------------------------------------------------------------------
-# DESIGN SYSTEM - lively Excalidraw palette (matches the house style)
-# ----------------------------------------------------------------------------
-WHITE = "#ffffff"
-INK   = "#1e1e1e"
-GREYD = "#495057"
-GREY  = "#868e96"
-FAINT = "#dee2e6"
-
-VIOLET, VIOLET_BG = "#7048e8", "#d0bfff"
-ORANGE, ORANGE_BG = "#e8590c", "#ffd8a8"
-GREEN,  GREEN_BG  = "#2f9e44", "#b2f2bb"
-BLUE,   BLUE_BG   = "#1971c2", "#a5d8ff"
-RED,    RED_BG     = "#c92a2a", "#ffc9c9"
-TEAL,   TEAL_BG    = "#0c8599", "#99e9f2"
-YELLOW, YELLOW_BG = "#f08c00", "#ffec99"
-INDIGO, INDIGO_BG = "#364fc7", "#bac8ff"
-
-PALETTE = {WHITE, INK, GREYD, GREY, FAINT, "transparent",
-           VIOLET, VIOLET_BG, ORANGE, ORANGE_BG, GREEN, GREEN_BG,
-           BLUE, BLUE_BG, RED, RED_BG, TEAL, TEAL_BG, YELLOW, YELLOW_BG,
-           INDIGO, INDIGO_BG}
-
-HERO, H1, H2, H3, BODY, LABEL, SMALL = 96, 48, 34, 28, 22, 20, 17
-HAND = 5
-LINE_H = 1.25
-WFAC = 0.56
-
-# ----------------------------------------------------------------------------
-# ELEMENT FACTORY
-# ----------------------------------------------------------------------------
-E = []
-_seq = 0
-def _uid(p):
-    global _seq
-    _seq += 1
-    return f"{p}-{_seq:03d}"
-
-def jit(maxdeg=2.5):
-    return random.uniform(-maxdeg, maxdeg) * math.pi / 180.0
-
-def _base(eid, etype, x, y, w, h, angle=0.0, opacity=100):
-    return {
-        "id": eid, "type": etype,
-        "x": float(x), "y": float(y), "width": float(w), "height": float(h),
-        "angle": float(angle),
-        "strokeColor": INK, "backgroundColor": "transparent",
-        "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
-        "roughness": 1, "opacity": opacity, "groupIds": [],
-        "frameId": None, "roundness": None,
-        "seed": random.randint(1, 2**31), "version": 1,
-        "versionNonce": random.randint(1, 2**31), "isDeleted": False,
-        "boundElements": None, "updated": 1717200000000,
-        "link": None, "locked": False,
-    }
-
-def rect(x, y, w, h, stroke=INK, bg="transparent", sw=2, rough=1, rounded=True,
-         fill="solid", angle=0.0, opacity=100, prefix="rect"):
-    e = _base(_uid(prefix), "rectangle", x, y, w, h, angle, opacity)
-    e.update(strokeColor=stroke, backgroundColor=bg, strokeWidth=sw, roughness=rough,
-             fillStyle=fill, roundness=({"type": 3} if rounded else None))
-    E.append(e); return e
-
-def ellipse(x, y, w, h, stroke=INK, bg="transparent", sw=2, rough=1, fill="solid",
-            angle=0.0, opacity=100, prefix="ell"):
-    e = _base(_uid(prefix), "ellipse", x, y, w, h, angle, opacity)
-    e.update(strokeColor=stroke, backgroundColor=bg, strokeWidth=sw, roughness=rough,
-             fillStyle=fill, roundness=None)
-    E.append(e); return e
-
-def line(x, y, points, stroke=INK, sw=2, rough=1, bg="transparent", fill="solid",
-         opacity=100, prefix="line", dashed=False):
-    xs = [p[0] for p in points]; ys = [p[1] for p in points]
-    e = _base(_uid(prefix), "line", x, y, max(xs) - min(xs), max(ys) - min(ys), 0.0, opacity)
-    e.update(strokeColor=stroke, backgroundColor=bg, strokeWidth=sw, roughness=rough,
-             fillStyle=fill, strokeStyle=("dashed" if dashed else "solid"),
-             points=[[float(px), float(py)] for px, py in points],
-             startArrowhead=None, endArrowhead=None, lastCommittedPoint=None, roundness=None)
-    E.append(e); return e
-
-def arrow(x, y, points, stroke=INK, sw=2, rough=1, prefix="arr", dashed=False, head="arrow"):
-    xs = [p[0] for p in points]; ys = [p[1] for p in points]
-    e = _base(_uid(prefix), "arrow", x, y, max(xs) - min(xs), max(ys) - min(ys))
-    e.update(strokeColor=stroke, backgroundColor="transparent", strokeWidth=sw, roughness=rough,
-             strokeStyle=("dashed" if dashed else "solid"),
-             points=[[float(px), float(py)] for px, py in points],
-             startArrowhead=None, endArrowhead=head, lastCommittedPoint=None, roundness=None)
-    E.append(e); return e
-
-def text_w(s, size, font=HAND):
-    longest = max((len(ln) for ln in s.split("\n")), default=0)
-    return longest * size * WFAC
-
-def text_h(s, size):
-    return len(s.split("\n")) * size * LINE_H
-
-def text(x, y, s, size=BODY, font=HAND, color=INK, align="left", width=None,
-         angle=0.0, opacity=100):
-    w = width if width is not None else text_w(s, size, font)
-    h = text_h(s, size)
-    e = _base(_uid("txt"), "text", x, y, w, h, angle, opacity)
-    e.update(strokeColor=color, backgroundColor="transparent", roughness=1,
-             text=s, fontSize=size, fontFamily=font, textAlign=align,
-             verticalAlign="top", containerId=None, originalText=s,
-             lineHeight=LINE_H, roundness=None)
-    E.append(e)
-    e["_mw"] = text_w(s, size, font)
-    return e
-
-def text_centered(cx, y, s, size=BODY, font=HAND, color=INK, angle=0.0):
-    w = text_w(s, size, font)
-    return text(cx - w / 2, y, s, size=size, font=font, color=color, align="center",
-                width=w, angle=angle)
-
-# ----------------------------------------------------------------------------
-# FUN PRIMITIVES
-# ----------------------------------------------------------------------------
-def highlighter(x, y, w, h, color, angle=None):
-    rect(x, y, w, h, stroke="transparent", bg=color, sw=1, rough=1, rounded=True,
-         fill="solid", opacity=26, angle=(jit(2.0) if angle is None else angle), prefix="hl")
-
-def sticky(x, y, w, h, fill, angle=None, prefix="sticky"):
-    return rect(x, y, w, h, stroke="transparent", bg=fill, sw=1, rough=1, rounded=True,
-                fill="solid", angle=(jit(2.2) if angle is None else angle), prefix=prefix)
-
-def chip(x, y, label, fill=WHITE, text_color=INK, border=GREYD, size=LABEL, angle=None, sw=2):
-    tw = text_w(label, size, HAND)
-    px, py = 22, 12
-    w, h = tw + 2 * px, size * LINE_H + 2 * py
-    a = jit(1.8) if angle is None else angle
-    rect(x, y, w, h, stroke=border, bg=fill, sw=sw, rough=1, rounded=True, fill="solid", angle=a, prefix="chip")
-    text(x + px, y + py, label, size=size, color=text_color, angle=a, width=tw)
-    return w, h
-
-def scribble_underline(x, y, w, color, sw=3):
-    n = max(3, int(w / 80))
-    pts = [[i * w / n, math.sin(i) * 4] for i in range(n + 1)]
-    line(x, y, pts, stroke=color, sw=sw, rough=1, prefix="ul")
-
-def circle_around(x, y, w, h, color, sw=3):
-    ellipse(x, y, w, h, stroke=color, bg="transparent", sw=sw, rough=2, prefix="circ")
-
-def sparkle(cx, cy, s, color, sw=2):
-    p = [[0, -s], [0.28 * s, -0.28 * s], [s, 0], [0.28 * s, 0.28 * s],
-         [0, s], [-0.28 * s, 0.28 * s], [-s, 0], [-0.28 * s, -0.28 * s], [0, -s]]
-    line(cx, cy, p, stroke=color, sw=sw, rough=1, bg=color, fill="solid", prefix="spk")
-
-def sparkles(cx, cy, color):
-    sparkle(cx, cy, 22, color, sw=2)
-    sparkle(cx + 38, cy - 30, 12, color, sw=2)
-    sparkle(cx - 30, cy - 22, 9, color, sw=2)
-
-def pause_icon(x, y, size, color=YELLOW):
-    bw = size * 0.32
-    rect(x, y, bw, size, stroke=color, bg=color, sw=2, rough=1, rounded=False, prefix="pause")
-    rect(x + bw + size * 0.3, y, bw, size, stroke=color, bg=color, sw=2, rough=1, rounded=False, prefix="pause")
-
-def num_badge(x, y, n, accent, d=44):
-    ellipse(x, y, d, d, stroke=accent, bg=accent, sw=2)
-    text_centered(x + d / 2, y + d / 2 - H3 * 0.55, str(n), size=H3, color=WHITE)
 
 # ----------------------------------------------------------------------------
 # THE HERO ILLUSTRATION - a Claude.ai window with all five parts drawn,
@@ -308,6 +153,13 @@ callout(ox + 2360, 504, 660, 204, 3, BLUE, BLUE_BG, "Artifacts",
 callout(ox + 1180, 804, 720, 150, 4, GREEN, GREEN_BG, "File uploads",
         "PDFs, images, spreadsheets, code.\nClaude reads them. The most\nunderused feature.",
         anch["clip"], (ox + 1300, 804))
+# Safety caution on uploads - regulated pharmacy (SKILL.md guardrail).
+warn_x, warn_y = ox + 1180, 968
+line(warn_x, warn_y + 34, [[0, 0], [18, -34], [36, 0], [0, 0]],
+     stroke=RED, sw=3, rough=1, bg=RED_BG, fill="solid", prefix="warn")
+text(warn_x + 13, warn_y + 4, "!", size=H3, color=RED)
+chip(warn_x + 58, warn_y, "Never upload patient-identifiable data",
+     fill=RED_BG, text_color=RED, border=RED, size=SMALL, angle=0.0)
 
 # ============================================================================
 # BEAT 2 - PICK THE MODEL DELIBERATELY
@@ -358,6 +210,7 @@ for lab, acc, abg in [("Haiku", YELLOW, YELLOW_BG), ("Sonnet", GREEN, GREEN_BG),
     arrow(gx + 6, cy0 + ch + 100 + h / 2, [[0, 0], [40, 0]], stroke=GREY, sw=3)
     gx += 52
 text(gx + 6, cy0 + ch + 110, "deeper", size=SMALL, color=GREY)
+text(ox + 40, cy0 + ch + 160, "Switch any time - even mid-conversation.", size=BODY, color=GREYD)
 
 # ============================================================================
 # BEAT 3 - PAUSE HERE, AND TRY IT
@@ -390,8 +243,15 @@ for lab, acc, abg in recap:
 nxt = "Next: Projects - the one that compounds for years."
 text(ox + 40, 440, nxt, size=H3, color=INK)
 circle_around(ox + 40 + text_w("Next: ", H3) - 6, 434, text_w("Projects", H3) + 24, H3 * LINE_H + 16, VIOLET, sw=3)
-sparkles(ox + 80, 590, YELLOW)
-text(ox + 130, 580, "Docs: Claude Help Centre - support.claude.com", size=SMALL, color=VIOLET)
+# roadmap - the rest of the Claude module (planned, not yet shipped)
+text(ox + 40, 516, "Later in this module:", size=SMALL, color=GREY)
+rmx = ox + 40 + text_w("Later in this module: ", SMALL) + 16
+for lab in ["Skills", "Scheduled tasks", "Connectors (MCP)", "Cowork"]:
+    w, h = chip(rmx, 504, lab, fill=WHITE, text_color=GREYD, border=FAINT, size=SMALL)
+    rmx += w + 22
+text(rmx + 4, 516, "+ more", size=SMALL, color=GREY)
+sparkles(ox + 80, 600, YELLOW)
+text(ox + 130, 590, "Docs: Claude Help Centre - support.claude.com", size=SMALL, color=VIOLET)
 text(ox + 40, 700, "Phlo AI training  -  the interface", size=SMALL, color=GREY)
 
 # ============================================================================
@@ -406,52 +266,8 @@ for i in range(1, 4):
 line(OX[1] + 40, MY + 340, [[0, 0], [TOTAL_W - 400, 0]], stroke=FAINT, sw=2, rough=1, dashed=True, opacity=60)
 
 # ----------------------------------------------------------------------------
-# ACCEPTANCE CHECKS (Style B): palette discipline, no frames, overflow, collisions
+# WRITE + VALIDATE  (shared excalidraw_kit)
 # ----------------------------------------------------------------------------
-for e in E:
-    for key in ("strokeColor", "backgroundColor"):
-        assert e.get(key) in PALETTE, f"{e['type']} {e['id']} off-palette {key}={e.get(key)}"
-
-assert not any(e["type"] == "frame" for e in E), "this design has no frames"
-
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "claude_intro.excalidraw")
 MAXW = max(WID.values()) + 200
-overflow = [e["id"] for e in E if e["type"] == "text" and e.get("_mw", 0) > MAXW]
-assert not overflow, f"text too wide: {overflow}"
-
-texts = [e for e in E if e["type"] == "text"]
-def _box(e):
-    return (e["x"], e["y"], e["x"] + e.get("_mw", e["width"]), e["y"] + e["height"])
-collisions = []
-for a in range(len(texts)):
-    ax0, ay0, ax1, ay1 = _box(texts[a])
-    for b in range(a + 1, len(texts)):
-        bx0, by0, bx1, by1 = _box(texts[b])
-        if min(ax1, bx1) - max(ax0, bx0) > 6 and min(ay1, by1) - max(ay0, by0) > 6:
-            collisions.append((texts[a]["text"][:18], texts[b]["text"][:18]))
-if collisions:
-    print(f"[warn] {len(collisions)} text/text overlaps:")
-    for c in collisions[:20]:
-        print("   ", c)
-
-for e in E:
-    e.pop("_mw", None)
-
-# ----------------------------------------------------------------------------
-# WRITE + RELOAD
-# ----------------------------------------------------------------------------
-scene = {
-    "type": "excalidraw", "version": 2, "source": "https://excalidraw.com",
-    "elements": E,
-    "appState": {"viewBackgroundColor": WHITE, "gridSize": None},
-    "files": {},
-}
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "claude-interface-properly.excalidraw")
-with open(out, "w") as fh:
-    json.dump(scene, fh, indent=2, ensure_ascii=False)
-with open(out) as fh:
-    reloaded = json.load(fh)
-assert reloaded["type"] == "excalidraw" and reloaded["version"] == 2
-assert reloaded["appState"]["viewBackgroundColor"] == WHITE
-ids = [e["id"] for e in reloaded["elements"]]
-assert len(ids) == len(set(ids)), "duplicate ids"
-print(f"frames: 0, elements: {len(reloaded['elements'])}, width: {TOTAL_W}px, collisions: {len(collisions)}")
+finish(out, MAXW, TOTAL_W)

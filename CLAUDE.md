@@ -14,16 +14,17 @@ Phlo is a regulated UK digital pharmacy. The safety guardrails in the skill (bel
 
 For each video:
 
-1. **Generate the scene with a Python script.** Each video folder has a `build_excalidraw.py` that builds the `.excalidraw` programmatically — reusable component/illustration helpers, one design system, a deterministic `random.seed` so re-runs are identical — then writes the JSON. Don't hand-place raw elements. Canonical example: `videos/claude/3-artefacts/build_excalidraw.py`.
+1. **Generate the scene with a Python script.** Each video folder has a thin `build*.py` that imports the shared engine (`from excalidraw_kit import *`), defines its scene + beat scaffold, and calls `finish(out, max_w, total_w)` to validate + write. The engine — palette, element factory, fun primitives, reusable illustrations, the validate/write tail — lives once in the repo-root `excalidraw_kit.py`; each `build*.py` holds only the composition (scene + scaffold) and any bespoke one-off illustrations. A deterministic `random.seed` keeps re-runs identical. Don't hand-place raw elements. Canonical example: `videos/claude/3-artefacts/build_excalidraw.py`.
    ```bash
-   python3 build_excalidraw.py    # writes the .excalidraw, reloads + asserts, prints element count
+   python3 videos/claude/3-artefacts/build_excalidraw.py   # build one video (finds the kit via a sys.path walk-up)
+   python3 build_all.py                                    # rebuild EVERY video, then run the Style-B guard
    ```
-   The script self-checks before writing: palette discipline, no stray frames, text-overflow, and text/text collisions (printed as warnings).
+   `finish()` self-checks before writing: palette discipline, no stray frames, text-overflow, and text/text collisions (printed as warnings). `build_all.py` rebuilds all videos and runs the **Style-B guard**, which hard-fails on the Style A signature (frames, or typed non-hand fonts) so the editorial style can never silently return; off-palette colours are warnings.
 
-2. **Eyeball it with the PIL preview.** There's no Excalidraw CLI, so `preview.py` rasterises the scene to a PNG — approximate (flat fills, macOS hand-font stand-ins for Excalifont) but enough to check composition, colour, overlap and text overflow without opening the app.
+2. **Eyeball it with the PIL preview.** There's no Excalidraw CLI, so the repo-root `preview.py` rasterises a scene to a PNG — approximate (flat fills, macOS hand-font stand-ins for Excalifont) but enough to check composition, colour, overlap and text overflow without opening the app.
    ```bash
-   python3 preview.py                                            # whole board -> preview.png
-   python3 preview.py 2-3-artifacts.excalidraw out.png XMIN XMAX # close-up x-window for one beat
+   python3 preview.py videos/claude/3-artefacts/2-3-artifacts.excalidraw out.png            # whole board
+   python3 preview.py videos/claude/3-artefacts/2-3-artifacts.excalidraw out.png XMIN XMAX  # close-up x-window
    ```
 
 3. **Record in Loom.** Open the `.excalidraw` at excalidraw.com (or the desktop app), full-screen the canvas, and pan/zoom beat-by-beat, left to right, while narrating. The beats are spaced with wide gaps (the `GAP` constant) precisely so you can frame one beat at a time on a 14" laptop without neighbours peeking in — the whitespace *is* the camera.
@@ -50,12 +51,15 @@ Earlier videos were authored by driving Excalimate. These are retained as histor
 
 The launcher scripts `scripts/make-learn-video.sh` and `scripts/start-excalimate.sh` start the `@excalimate/mcp-server` MCP and belong to these legacy pipelines only.
 
-Build scripts live **next to the video they produce**, not in a shared lib — each is self-contained and embeds its own helpers and palette. When adding a new video, copy the closest existing `build_excalidraw.py` (plus `preview.py`) as a starting point rather than importing.
+**The shared engine lives in the repo-root `excalidraw_kit.py`; build scripts import it.** This replaced the older "each build is self-contained and embeds its own helpers" convention — the engine was duplicated across videos and copies drifted (it's how a couple of off-style files once crept in). Now: the *look* (palette, primitives, illustrations, validate/write) is centralised in the kit; each video's `build*.py` keeps only its *composition* (scene + the per-video beat scaffold: `OX`/`WID`/`ACCENT`, `beat_head`, the connector spine) plus any bespoke one-off illustrations. When adding a new video, copy the closest existing `build*.py` as a scene template — it already imports the kit. A change to the kit re-styles every video on next `build_all.py`; the design is intended to be stable, so kit edits are rare and deliberate.
 
 ## File layout
 
 ```
-videos/<series>/<NN-slug>/    # one folder per video; build script + .excalidraw + plan/script live together
+excalidraw_kit.py             # shared Style B engine: palette, factory, primitives, illustrations, validate/finish
+build_all.py                  # rebuild every video + run the Style-B guard
+preview.py                    # PIL rasteriser for eyeballing a scene (takes a scene path + optional x-window)
+videos/<series>/<NN-slug>/    # one folder per video; thin build*.py + .excalidraw + plan/script live together
 .claude/skills/SKILL.md       # the phlo-learn-videos skill (visual + safety conventions)
 scripts/                      # session launchers + compile_excalimate.py
 ```
@@ -78,6 +82,6 @@ Read `.claude/skills/SKILL.md` in full before authoring a diagram. The hard rule
 - **Ownership, to stop drift recurring:** `.claude/skills/SKILL.md` owns the drawing rules, safety guardrails, and vocabulary; `README.md` owns the human production workflow; this file is the operating map and cross-references the other two rather than restating them. SKILL.md uses the lively non-brand Excalidraw palette deliberately — there is no "replace the brand hex" step.
 - `scripts/compile_excalimate.py` (legacy) hardcodes `llm_explainer.*` paths relative to repo root.
 - **Module 2 Claude videos in active build** use Style B `build_*.py` scripts that live next to their video (output filename is named in the folder's `*_prompt`): `videos/claude/1-claude-intro/build_claude_interface.py` → `claude-interface-properly.excalidraw`; `videos/claude/2-projects/build_projects.py` → `phlo-2.2-claude-projects.excalidraw`. Both write output via `os.path.dirname(__file__)` (lands in-folder) and reference the shared rasteriser as `../3-artefacts/preview.py`. The Projects video was **converted from a rejected frame-based "Style A" deck** (10 fixed `1920x1080` frames, purple/lilac palette); that old generator (`build_projects_2_2.py`) has been deleted — do not reintroduce a frame-based build.
-- `videos/claude/1-claude-intro/` holds **two** scenes with near-identical content: the older `claude_intro.excalidraw` and the script-generated `claude-interface-properly.excalidraw`. The latter is the canonical output of `build_claude_interface.py`; treat `claude_intro.excalidraw` as superseded unless told otherwise.
+- `videos/claude/1-claude-intro/` has a single canonical scene, `claude_intro.excalidraw`, generated by `build_claude_interface.py`. (The script's docstring + `claude_intro_prompt.md` still say `claude-interface-properly.excalidraw`; the live `out =` target is `claude_intro.excalidraw` — trust the code. Regenerate from the script; don't keep a second hand-named copy.)
 - Several `*_prompt`/`*_prompt.md` files (e.g. `1-claude-intro/claude_intro_prompt.md`) still describe the **old editorial Style A** (fontFamily 2, five `1600x1000` frames, purple brand palette). The shipped build scripts are Style B; trust the `build_*.py` + script over the prompt file when they disagree.
 ```
