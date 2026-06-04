@@ -6,7 +6,7 @@ Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
 boxes, white canvas, everything in Excalifont (fontFamily 5), roughness 1. A lively
 Excalidraw palette colour-coded per beat, big colour-blocking, scribbled
 annotations, charming primitive illustrations, and a load-bearing connector spine.
-Modelled on videos/claude/3-artefacts/2-3-artifacts.excalidraw - self-contained,
+Modelled on videos/claude/3-artefacts/3-artifacts.excalidraw - self-contained,
 embeds its own helpers + palette as the repo convention requires.
 
 Run:  python3 build_claude_interface.py   # writes the file, reloads, asserts, prints counts

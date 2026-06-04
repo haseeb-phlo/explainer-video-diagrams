@@ -14,7 +14,7 @@ phlo-learn/
 ├── videos/<series>/<NN-slug>/                # one folder per video, e.g. videos/claude/3-artefacts/
 │   ├── build_excalidraw.py                   # generates the hand-drawn .excalidraw scene  ← current
 │   ├── preview.py                            # PIL rasteriser to eyeball the scene as a PNG ← current
-│   ├── 2-3-artifacts.excalidraw              # the generated scene (open + record in Loom)
+│   ├── 3-artifacts.excalidraw                # the generated scene (open + record in Loom)
 │   └── *-script.md / *-prompt.md             # narration + the prompt that produced it
 ├── scripts/
 │   ├── start-excalimate.sh                   # legacy: starts the Excalimate server (no longer used)

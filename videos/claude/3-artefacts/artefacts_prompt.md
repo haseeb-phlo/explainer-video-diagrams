@@ -1,5 +1,5 @@
 GOAL
-Produce ONE file: `2-3-artifacts.excalidraw` - a valid Excalidraw scene (schema version 2) for a training video shown frame-by-frame and talked over in Loom. The single required deliverable is the .excalidraw file. Do not output anything that is not needed to produce it.
+Produce ONE file: `3-artifacts.excalidraw` - a valid Excalidraw scene (schema version 2) for a training video shown frame-by-frame and talked over in Loom. The single required deliverable is the .excalidraw file. Do not output anything that is not needed to produce it.
 
 METHOD (do it this way - it is what keeps the result clean, not sloppy)
 Write a Python script `build_excalidraw.py` that builds the scene programmatically, then writes the JSON. Do NOT hand-place raw elements one by one. Implement a layout grid and a small set of reusable component builders so spacing, sizing and styling are identical everywhere. After writing the file, load it back, assert the JSON parses, and print the frame count and element count. Then stop.

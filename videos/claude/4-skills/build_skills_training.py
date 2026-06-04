@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build claude-skills-training.excalidraw - ONE flowing, illustrated explainer
+"""Build skills.excalidraw - ONE flowing, illustrated explainer
 for the "Claude Skills" training video (AI literacy series).
 
 Style B (the house style): a single hand-drawn journey that reads left-to-right -
@@ -11,7 +11,7 @@ the whitespace IS the camera. Modelled on the canonical videos/claude/3-artefact
 build; the look lives in the shared excalidraw_kit.
 
 Run:  python3 videos/claude/4-skills/build_skills_training.py
-      python3 preview.py videos/claude/4-skills/claude-skills-training.excalidraw out.png
+      python3 preview.py videos/claude/4-skills/skills.excalidraw out.png
 """
 import os
 import sys
@@ -281,6 +281,6 @@ text(ox + 76, 784, "Next: browse the Skills directory and\nenable one this week"
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE  (shared excalidraw_kit; hard-fails on frames / off-palette)
 # ----------------------------------------------------------------------------
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "claude-skills-training.excalidraw")
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "skills.excalidraw")
 MAXW = max(WID.values()) + 200
 finish(out, MAXW, TOTAL_W)

@@ -2,7 +2,7 @@
 """excalidraw_kit - the shared Style B engine for Phlo AI-training diagrams.
 
 ONE flowing, illustrated, hand-drawn journey: no frames, white canvas, the hand
-font (fontFamily 1, as in the canonical 2-3-artifacts build), roughness 1, a
+font (fontFamily 1, as in the canonical 3-artefacts build), roughness 1, a
 lively colour-coded Excalidraw palette, colour
 blocking, scribbled annotations, charming primitive illustrations and a connector
 spine. This module is the single source of truth for the LOOK - the palette, the
@@ -56,7 +56,7 @@ PALETTE = {WHITE, INK, GREYD, GREY, FAINT, "transparent",
 
 # Type scale
 HERO, H1, H2, H3, BODY, LABEL, SMALL = 96, 48, 34, 28, 22, 20, 17
-HAND = 1  # the canonical hand font (Virgil) - the ONLY font allowed (see 2-3-artifacts)
+HAND = 1  # the canonical hand font (Virgil) - the ONLY font allowed (see 3-artefacts)
 LINE_H = 1.4  # roomier line spacing between lines within a text block
 WFAC = 0.56  # generous glyph-width factor (over-estimate is safe)
 

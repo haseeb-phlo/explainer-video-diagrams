@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build 2-3-artifacts.excalidraw - ONE flowing, illustrated explainer for the
+"""Build 3-artifacts.excalidraw - ONE flowing, illustrated explainer for the
 "Artifacts" training video (Phlo AI training, module 2.3).
 
 Design: a single hand-drawn journey that reads left-to-right - NO frames, NO
@@ -270,6 +270,6 @@ text(ox + 110, 798, "Docs: Anthropic - What are Artifacts and how do I use them"
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE  (shared excalidraw_kit)
 # ----------------------------------------------------------------------------
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "2-3-artifacts.excalidraw")
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "3-artifacts.excalidraw")
 MAXW = max(WID.values()) + 200
 finish(out, MAXW, TOTAL_W)

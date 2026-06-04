@@ -16,7 +16,7 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SCENE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "2-3-artifacts.excalidraw")
+SCENE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "videos/claude/3-artefacts/3-artifacts.excalidraw")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, "preview.png")
 # optional x-window for close-up inspection:  preview.py scene out XMIN XMAX
 WIN_XMIN = float(sys.argv[3]) if len(sys.argv) > 3 else None
