@@ -81,13 +81,6 @@ def swatch_strip(x, y, cols):
     text(bx + 22, y + 14, "Button", size=SMALL, color=WHITE)
 
 
-def file_icon(x, y, w=58, h=74, accent=BLUE, abg=BLUE_BG):
-    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="fic")
-    rect(x, y, w, 14, stroke="transparent", bg=abg, sw=1, rough=1, rounded=True, prefix="fich")
-    for k in range(3):
-        line(x + 10, y + 30 + k * 14, [[0, 0], [w - 22, 0]], stroke=GREY, sw=2)
-
-
 # ============================================================================
 # BOARD TITLE
 # ============================================================================
@@ -131,8 +124,8 @@ for lab in ["research preview", "powered by Claude Opus", "Pro and up"]:
 # ============================================================================
 ox = beat_head(3, "It learns your house style",
                "Onboarding, once: Claude reads your codebase and\ndesign files and builds your design system.")
-file_icon(ox + 70, 360, accent=GREEN, abg=GREEN_BG)
-file_icon(ox + 140, 380, accent=BLUE, abg=BLUE_BG)
+file_icon(ox + 70, 360, abg=GREEN_BG)
+file_icon(ox + 140, 380, abg=BLUE_BG)
 text(ox + 60, 470, "your codebase\n+ design files", size=SMALL, color=GREYD)
 arrow(ox + 230, 400, [[0, 0], [110, 0]], stroke=GREEN, sw=4)
 # the learned design system

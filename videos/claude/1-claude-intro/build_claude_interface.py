@@ -3,11 +3,10 @@
 for the "Claude interface, properly" training video (Phlo AI training, ~4 min).
 
 Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
-boxes, white canvas, everything in Excalifont (fontFamily 5), roughness 1. A lively
-Excalidraw palette colour-coded per beat, big colour-blocking, scribbled
-annotations, charming primitive illustrations, and a load-bearing connector spine.
-Modelled on videos/claude/3-artefacts/3-artifacts.excalidraw - self-contained,
-embeds its own helpers + palette as the repo convention requires.
+boxes, white canvas, everything in the hand font (fontFamily 1), roughness 1. A
+lively Excalidraw palette colour-coded per beat, big colour-blocking, scribbled
+annotations and charming primitive illustrations. Modelled on the canonical
+videos/claude/3-artefacts build; the look lives in the shared excalidraw_kit.
 
 Run:  python3 build_claude_interface.py   # writes the file, reloads, asserts, prints counts
       python3 ../../../preview.py claude_intro.excalidraw out.png
@@ -88,7 +87,6 @@ N = 4
 GAP = 800
 WID = {i: 1200 for i in range(1, N + 1)}
 ACCENT = {1: VIOLET, 2: BLUE, 3: YELLOW, 4: GREEN}
-ABG = {1: VIOLET_BG, 2: BLUE_BG, 3: YELLOW_BG, 4: GREEN_BG}
 OX, _c = {}, 0
 for _i in range(1, N + 1):
     OX[_i] = _c
@@ -97,10 +95,10 @@ TOTAL_W = _c
 
 HEAD_Y = 60
 
-def head(ox, title, accent, abg=None, sub=None):
+def head(ox, title, accent, sub=None):
     """QUIET heading: kit heading() draws a prominent hand title in the beat's
     accent colour + a lively hand underline. No step circle, no highlighter sweep,
-    no scribble of its own (abg kept for call-site compatibility, unused)."""
+    no scribble of its own."""
     heading(ox, HEAD_Y, title, color=accent, sub=sub)
 
 # ============================================================================

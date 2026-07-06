@@ -44,7 +44,8 @@ def guard():
     ok = True
     for f in sorted(glob.glob(os.path.join(ROOT, "**", "*.excalidraw"), recursive=True)):
         rel = os.path.relpath(f, ROOT)
-        els = json.load(open(f)).get("elements", [])
+        with open(f, encoding="utf-8") as fh:
+            els = json.load(fh).get("elements", [])
         hard = []
         frames = sum(1 for e in els if e.get("type") == "frame")
         if frames:

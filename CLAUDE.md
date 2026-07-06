@@ -66,7 +66,7 @@ videos/<series>/<NN-slug>/    # one folder per video; thin build*.py + .excalidr
 scripts/                      # session launchers + compile_excalimate.py
 ```
 
-Series seen so far: `ai-foundations/` (Module 1 concepts), `claude/` (Module 2 Claude walkthrough), and a stubbed `copilot/`. Each video folder also tends to hold a narration/voiceover script (`*.md` or `*-script`) and an `animation-plan.md` documenting the build so it can be rebuilt or re-exported by hand. As of 2026-06-04 **all twelve `claude/` videos (1-12) and both built `ai-foundations/` videos have a Style-B `build*.py` + `.excalidraw`**; the only remaining **empty placeholder** is `ai-foundations/3-context-windows/` — an empty folder means "not started", not "lost work".
+Series seen so far: `ai-foundations/` (Module 1 concepts), `claude/` (Module 2 Claude walkthrough), and a stubbed `copilot/`. Each video folder also tends to hold a narration/voiceover script (`*.md` or `*-script`) and an `animation-plan.md` documenting the build so it can be rebuilt or re-exported by hand. As of 2026-06-04 **all twelve `claude/` videos (1-12) have a Style-B `build*.py` + `.excalidraw`**; the two built `ai-foundations/` videos have Style-B-guard-clean `.excalidraw` scenes but no `build*.py` (they were authored by hand / via the legacy pipelines); the only remaining **empty placeholder** is `ai-foundations/3-context-windows/` — an empty folder means "not started", not "lost work".
 
 ## Non-negotiable conventions (from `.claude/skills/SKILL.md`)
 

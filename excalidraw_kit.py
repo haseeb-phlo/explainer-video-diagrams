@@ -3,18 +3,17 @@
 
 ONE flowing, illustrated, hand-drawn journey: no frames, white canvas, the hand
 font (fontFamily 1, as in the canonical 3-artefacts build), roughness 1, a
-lively colour-coded Excalidraw palette, colour
-blocking, scribbled annotations, charming primitive illustrations and a connector
-spine. This module is the single source of truth for the LOOK - the palette, the
-element factory, the fun primitives, the reusable illustrations, and the
-validate/finish tail.
+lively colour-coded Excalidraw palette, colour blocking, scribbled annotations
+and charming primitive illustrations. This module is the single source of truth
+for the LOOK - the palette, the element factory, the fun primitives, the
+reusable illustrations, and the validate/finish tail.
 
 Each video's `build.py` does:
 
     import random
     from excalidraw_kit import *
     random.seed(<n>)                 # deterministic - re-runs are identical
-    # ... define the scene + its own beat scaffold (OX/WID/ACCENT, beat_head, spine)
+    # ... define the scene + its own beat scaffold (OX/WID/ACCENT, beat_head)
     finish(out_path, max_w=<n>, total_w=<n>)
 
 Scene-level layout (how many beats, their widths/accents, the heading style) lives
@@ -193,16 +192,6 @@ def scribble_underline(x, y, w, color, sw=3):
 def circle_around(x, y, w, h, color, sw=3):
     ellipse(x, y, w, h, stroke=color, bg="transparent", sw=sw, rough=2, prefix="circ")
 
-def sparkle(cx, cy, s, color, sw=2):
-    p = [[0, -s], [0.28 * s, -0.28 * s], [s, 0], [0.28 * s, 0.28 * s],
-         [0, s], [-0.28 * s, 0.28 * s], [-s, 0], [-0.28 * s, -0.28 * s], [0, -s]]
-    line(cx, cy, p, stroke=color, sw=sw, rough=1, bg=color, fill="solid", prefix="spk")
-
-def sparkles(cx, cy, color):
-    sparkle(cx, cy, 22, color, sw=2)
-    sparkle(cx + 38, cy - 30, 12, color, sw=2)
-    sparkle(cx - 30, cy - 22, 9, color, sw=2)
-
 def play_icon(x, y, size, color=ORANGE):
     line(x, y, [[0, 0], [size, size / 2], [0, size], [0, 0]], stroke=color, sw=2,
          rough=1, bg=color, fill="solid", prefix="play")
@@ -233,9 +222,6 @@ def num_badge(x, y, n, accent, d=44):
     ellipse(x, y, d, d, stroke=accent, bg=accent, sw=2)
     text_centered(x + d / 2, y + d / 2 - H3 * 0.55, str(n), size=H3, color=WHITE)
 
-TINT = {VIOLET: VIOLET_T, ORANGE: ORANGE_T, GREEN: GREEN_T, BLUE: BLUE_T,
-        RED: RED_T, TEAL: TEAL_T, YELLOW: YELLOW_T, INDIGO: INDIGO_T}
-
 def heading(x, y, title, color=INK, sub=None, kicker=None):
     """A prominent-but-unpolished section heading: a big hand title in the beat's
     accent colour with a lively hand-drawn underline (no highlighter block, no
@@ -249,16 +235,33 @@ def heading(x, y, title, color=INK, sub=None, kicker=None):
     if sub:
         text(x, yy + H1 * LINE_H + 30, sub, size=BODY, color=GREYD)
 
-def beat_band(x, y, w, h, accent, opacity=100):
-    """A soft, borderless ultra-light colour wash behind a beat - 'more colour' +
-    makes each beat read as an individual zone. Not a bordered box."""
-    rect(x, y, w, h, stroke="transparent", bg=TINT.get(accent, VIOLET_T), sw=1,
-         rough=1, rounded=True, fill="solid", opacity=opacity, prefix="band")
-
 def clock(cx, cy, r, color):
     ellipse(cx - r, cy - r, 2 * r, 2 * r, stroke=color, bg=WHITE, sw=3, rough=1)
     line(cx, cy, [[0, 0], [0, -r * 0.6]], stroke=color, sw=3)
     line(cx, cy, [[0, 0], [r * 0.5, 0]], stroke=color, sw=3)
+
+def tick(x, y, color=GREEN, s=26, sw=4):
+    """A hand-drawn check mark."""
+    line(x, y, [[0, s * 0.5], [s * 0.42, s], [s, 0]], stroke=color, sw=sw, rough=1, prefix="tick")
+
+def xmark(x, y, color=RED, s=20, sw=4):
+    """A hand-drawn cross."""
+    line(x, y, [[0, 0], [s, s]], stroke=color, sw=sw, rough=1, prefix="xm")
+    line(x, y, [[s, 0], [0, s]], stroke=color, sw=sw, rough=1, prefix="xm")
+
+def check_item(x, y, s, color=INK, accent=GREEN, size=BODY):
+    """A checklist row: tick + label."""
+    tick(x, y + 2, accent)
+    text(x + 46, y, s, size=size, color=color)
+
+def button(x, y, label, accent, w=300, h=66, filled=True):
+    """A control button: filled accent + white label, or an outline + accent label."""
+    if filled:
+        rect(x, y, w, h, stroke=accent, bg=accent, sw=2, rough=1, rounded=True, prefix="btn")
+        text_centered(x + w / 2, y + h / 2 - LABEL * 0.6, label, size=LABEL, color=WHITE)
+    else:
+        rect(x, y, w, h, stroke=accent, bg=WHITE, sw=2, rough=1, rounded=True, prefix="btn")
+        text_centered(x + w / 2, y + h / 2 - LABEL * 0.6, label, size=LABEL, color=accent)
 
 # ----------------------------------------------------------------------------
 # REUSABLE ILLUSTRATIONS - charming, from primitives, colour-coded
@@ -311,6 +314,13 @@ def obj_files(x, y, accent=GREEN, abg=GREEN_BG):       # a stack of reference fi
         rect(x + 18 + off, y + off, 92, 120, stroke=INK, bg=(WHITE if k == 2 else abg), sw=2, rough=1, rounded=True)
     for k in range(3):
         line(x + 34, y + 40 + k * 22, [[0, 0], [60, 0]], stroke=GREY, sw=2)
+
+def file_icon(x, y, w=58, h=74, abg=BLUE_BG):
+    """A small page icon with a coloured header strip and faint text lines."""
+    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="fic")
+    rect(x, y, w, 14, stroke="transparent", bg=abg, sw=1, rough=1, rounded=True, prefix="fich")
+    for k in range(3):
+        line(x + 10, y + 30 + k * 14, [[0, 0], [w - 22, 0]], stroke=GREY, sw=2)
 
 def claude_face(cx, cy, r=44, color=ORANGE):
     """A friendly sketch of Claude - rounded head, two eyes, a little smile."""
@@ -399,9 +409,9 @@ def finish(out_path, max_w, total_w=None):
         "appState": {"viewBackgroundColor": WHITE, "gridSize": None},
         "files": {},
     }
-    with open(out_path, "w") as fh:
+    with open(out_path, "w", encoding="utf-8") as fh:
         json.dump(scene, fh, indent=2, ensure_ascii=False)
-    with open(out_path) as fh:
+    with open(out_path, encoding="utf-8") as fh:
         reloaded = json.load(fh)
     assert reloaded["type"] == "excalidraw" and reloaded["version"] == 2
     assert reloaded["appState"]["viewBackgroundColor"] == WHITE

@@ -3,7 +3,7 @@
 for the "Claude Skills" training video (AI literacy series).
 
 Style B (the house style): a single hand-drawn journey that reads left-to-right -
-NO frames, NO boxed slides, white canvas, everything in Excalifont (fontFamily 5),
+NO frames, NO boxed slides, white canvas, everything in the hand font (fontFamily 1),
 roughness 1, a lively colour-coded Excalidraw palette, colour blocking, scribbled
 annotations and charming primitive illustrations. The eleven sections are eleven
 WIDE-GAP beats: you frame one beat at a time and pan left-to-right while narrating -

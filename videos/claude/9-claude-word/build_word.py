@@ -79,15 +79,6 @@ def tiny_doc(x, y):
     doc_page(x, y, 150, 180, accent=BLUE, abg=BLUE_BG, lines=7, tracked=True)
 
 
-def tick(x, y, color=GREEN, s=22):
-    line(x, y, [[0, s * 0.5], [s * 0.42, s], [s, 0]], stroke=color, sw=4, rough=1, prefix="tick")
-
-
-def xmark(x, y, color=RED, s=20):
-    line(x, y, [[0, 0], [s, s]], stroke=color, sw=4, rough=1, prefix="xm")
-    line(x, y, [[s, 0], [0, s]], stroke=color, sw=4, rough=1, prefix="xm")
-
-
 # ============================================================================
 # BOARD TITLE
 # ============================================================================

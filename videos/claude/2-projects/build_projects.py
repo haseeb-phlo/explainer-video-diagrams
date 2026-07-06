@@ -3,14 +3,14 @@
 for the "Claude Projects" training video (Phlo AI training, module 2.2, ~7 min).
 
 Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
-boxes, white canvas, everything in Excalifont (fontFamily 5), roughness 1, a lively
-colour-coded Excalidraw palette, big colour-blocking, scribbled annotations,
-charming primitive illustrations and a load-bearing connector spine. Self-contained,
-embeds its own helpers + palette as the repo convention requires. Converted from the
-old 10-frame editorial "Style A" deck of the same name.
+boxes, white canvas, everything in the hand font (fontFamily 1), roughness 1, a
+lively colour-coded Excalidraw palette, big colour-blocking, scribbled annotations
+and charming primitive illustrations. The look lives in the shared excalidraw_kit;
+this file holds only the composition. Converted from the old 10-frame editorial
+"Style A" deck of the same name.
 
 Run:  python3 build_projects.py
-      python3 ../3-artefacts/preview.py phlo-2.2-claude-projects.excalidraw out.png
+      python3 ../../../preview.py phlo-2.2-claude-projects.excalidraw out.png
 """
 import os
 import sys
@@ -35,8 +35,6 @@ random.seed(22022)
 GAP = 800
 WID = {i: 1200 for i in range(1, 10)}
 ACCENT = {1: RED, 2: VIOLET, 3: BLUE, 4: GREEN, 5: ORANGE, 6: TEAL, 7: INDIGO, 8: YELLOW, 9: VIOLET}
-ABG = {1: RED_BG, 2: VIOLET_BG, 3: BLUE_BG, 4: GREEN_BG, 5: ORANGE_BG, 6: TEAL_BG,
-       7: INDIGO_BG, 8: YELLOW_BG, 9: VIOLET_BG}
 OX, _c = {}, 0
 for _i in range(1, 10):
     OX[_i] = _c

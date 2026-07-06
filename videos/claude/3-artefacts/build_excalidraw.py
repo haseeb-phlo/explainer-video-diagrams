@@ -3,10 +3,9 @@
 "Artifacts" training video (Phlo AI training, module 2.3).
 
 Design: a single hand-drawn journey that reads left-to-right - NO frames, NO
-boxes, white canvas, everything in Excalifont (fontFamily 5), roughness 1. A
+boxes, white canvas, everything in the hand font (fontFamily 1), roughness 1. A
 lively Excalidraw palette, colour-coded per beat, with big colour blocking,
-scribbled annotations, charming primitive illustrations and a load-bearing
-connector spine that threads the nine beats into one picture.
+scribbled annotations and charming primitive illustrations.
 
 This replaces the old boxed "Riso Workshop" 12-frame storyboard. The flowing
 style mirrors llm_explainer.excalidraw, which the team preferred.
@@ -47,8 +46,6 @@ GAP = 800
 # a 14" MacBook screen. Content fills the slot; it never spreads wider or taller.
 WID = {i: 1200 for i in range(1, 10)}
 ACCENT = {1: ORANGE, 2: VIOLET, 3: BLUE, 4: GREEN, 5: TEAL, 6: VIOLET, 7: INDIGO, 8: RED, 9: YELLOW}
-ABG = {1: ORANGE_BG, 2: VIOLET_BG, 3: BLUE_BG, 4: GREEN_BG, 5: TEAL_BG, 6: VIOLET_BG,
-       7: INDIGO_BG, 8: RED_BG, 9: YELLOW_BG}
 OX = {}
 _c = 0
 for _i in range(1, 10):
@@ -57,7 +54,6 @@ for _i in range(1, 10):
 TOTAL_W = _c
 
 HEAD_Y = 60          # heading baseline band
-MY = 620             # mid-height for the connector spine
 
 def beat_head(i, title, sub=None):
     # QUIET heading: plain hand title in the beat's accent colour, no step circle,

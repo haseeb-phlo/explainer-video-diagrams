@@ -57,17 +57,6 @@ def folder(x, y, w=96, h=70, accent=YELLOW, abg=YELLOW_BG):
     rect(x, y, w * 0.5, 22, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="foldtab")
 
 
-def file_icon(x, y, w=58, h=74, accent=BLUE, abg=BLUE_BG):
-    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="fic")
-    rect(x, y, w, 14, stroke="transparent", bg=abg, sw=1, rough=1, rounded=True, prefix="fich")
-    for k in range(3):
-        line(x + 10, y + 30 + k * 14, [[0, 0], [w - 22, 0]], stroke=GREY, sw=2)
-
-
-def tick(x, y, color=GREEN, s=30):
-    line(x, y, [[0, s * 0.5], [s * 0.42, s], [s, 0]], stroke=color, sw=5, rough=1, prefix="tick")
-
-
 def deliverable(x, y, accent=GREEN, abg=GREEN_BG):
     """A finished one-pager with a green tick badge."""
     rect(x, y, 150, 196, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="del")
@@ -75,7 +64,7 @@ def deliverable(x, y, accent=GREEN, abg=GREEN_BG):
     for k in range(5):
         line(x + 18, y + 58 + k * 22, [[0, 0], [(96 if k % 2 else 70), 0]], stroke=GREY, sw=2)
     ellipse(x + 108, y + 150, 54, 54, stroke=GREEN, bg=WHITE, sw=3)
-    tick(x + 122, y + 164, color=GREEN, s=26)
+    tick(x + 122, y + 164, color=GREEN, s=26, sw=5)
 
 
 def monitor(x, y, w, h, accent=BLUE, abg=BLUE_BG):
@@ -117,7 +106,7 @@ monitor(ox + 200, 340, 760, 420, accent=BLUE, abg=BLUE_BG)
 folder(ox + 250, 400, accent=YELLOW, abg=YELLOW_BG)
 folder(ox + 380, 400, accent=ORANGE, abg=ORANGE_BG)
 file_icon(ox + 520, 396)
-file_icon(ox + 600, 396, accent=GREEN, abg=GREEN_BG)
+file_icon(ox + 600, 396, abg=GREEN_BG)
 claude_face(ox + 800, 470, r=44, color=BLUE)
 text(ox + 250, 600, "Claude moves between them, the way you would", size=BODY, color=GREYD)
 chx = ox + 250
@@ -158,7 +147,7 @@ for k, (lab, fn, acc, abg) in enumerate(items):
     if fn is folder:
         folder(sx + 20, yy + 24, accent=acc, abg=abg)
     elif fn is file_icon:
-        file_icon(sx + 28, yy + 18, accent=acc, abg=abg)
+        file_icon(sx + 28, yy + 18, abg=abg)
     else:
         rect(sx + 22, yy + 22, 80, 60, stroke=acc, bg=WHITE, sw=2, rough=1, rounded=True)
         ellipse(sx + 36, yy + 36, 12, 12, stroke=acc, bg=acc, sw=1)
@@ -207,7 +196,7 @@ for k, a in enumerate(asks):
     for i in range(3):
         line(ox + 812, yy + 14 + i * 12, [[0, 0], [34, 0]], stroke=GREY, sw=2)
     ellipse(ox + 842, yy + 44, 30, 30, stroke=GREEN, bg=WHITE, sw=2)
-    tick(ox + 850, yy + 50, color=GREEN, s=16)
+    tick(ox + 850, yy + 50, color=GREEN, s=16, sw=5)
 demo_badge(ox + 60, 384 + len(asks) * 96 + 6,
            "show in Claude desktop:  Cowork turning a folder of notes into one summary")
 
@@ -245,7 +234,7 @@ text(nx + 28, 432, "one folder for the task, not the whole machine", size=BODY, 
 rect(nx, 500, 460, 120, stroke=GREYD, bg=FAINT, sw=2, rough=1, rounded=True)
 text(nx + 28, 520, "Keep it clean", size=H3, color=GREYD)
 text(nx + 28, 572, "confidential or patient data stays out unless approved", size=BODY, color=INK)
-tick(nx + 28, 660, color=GREEN, s=28)
+tick(nx + 28, 660, color=GREEN, s=28, sw=5)
 text(nx + 72, 656, "and read the deliverable before it goes anywhere", size=BODY, color=INK)
 
 # ============================================================================

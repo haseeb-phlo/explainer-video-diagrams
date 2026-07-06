@@ -101,11 +101,6 @@ def shield(x, y, w, h, color=RED, bg=RED_BG):
     line(x, y, pts, stroke=color, sw=3, rough=1, bg=bg, fill="solid", prefix="shield")
 
 
-def xmark(x, y, color=RED, s=18):
-    line(x, y, [[0, 0], [s, s]], stroke=color, sw=4, rough=1, prefix="xm")
-    line(x, y, [[s, 0], [0, s]], stroke=color, sw=4, rough=1, prefix="xm")
-
-
 # ============================================================================
 # BOARD TITLE
 # ============================================================================

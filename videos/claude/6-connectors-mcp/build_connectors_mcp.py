@@ -6,7 +6,7 @@ This is a conversion of an externally-supplied brief that asked for a 10-frame,
 teal/lime/cream, mixed-font deck. The CONTENT (the ten scenes, the literal copy)
 is preserved verbatim; the STYLING is dropped in favour of the project's house
 Style B: a single hand-drawn journey that reads left-to-right - NO frames, NO
-boxed slides, white canvas, everything in Excalifont, roughness 1, a lively
+boxed slides, white canvas, everything in the hand font, roughness 1, a lively
 colour-coded Excalidraw palette, colour blocking, scribbled annotations and
 charming primitive illustrations. The "look here" accent and "caution" colour
 the brief reserved for lime/coral map onto each beat's own accent and onto RED
@@ -41,8 +41,6 @@ GAP = 800
 WID = {i: 1200 for i in range(1, N + 1)}
 ACCENT = {1: VIOLET, 2: ORANGE, 3: BLUE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: VIOLET, 8: RED, 9: GREEN, 10: ORANGE}
-ABG = {1: VIOLET_BG, 2: ORANGE_BG, 3: BLUE_BG, 4: GREEN_BG, 5: TEAL_BG,
-       6: INDIGO_BG, 7: VIOLET_BG, 8: RED_BG, 9: GREEN_BG, 10: ORANGE_BG}
 OX = {}
 _c = 0
 for _i in range(1, N + 1):
@@ -61,34 +59,9 @@ def beat_head(i, title, sub=None):
     return ox
 
 
-BEATS = []
-def mark(label):
-    prev = BEATS[-1][2] if BEATS else 0
-    BEATS.append((label, len(E) - prev, len(E)))
-
-
 # ----------------------------------------------------------------------------
 # LOCAL ONE-OFF ILLUSTRATIONS  (bespoke to this video, kept out of the kit)
 # ----------------------------------------------------------------------------
-def tick(x, y, color=GREEN, s=26):
-    line(x, y, [[0, s * 0.5], [s * 0.42, s], [s, 0]], stroke=color, sw=4, rough=1, prefix="tick")
-
-
-def check_item(x, y, s, color=INK, accent=GREEN, size=BODY):
-    tick(x, y + 2, accent)
-    text(x + 46, y, s, size=size, color=color)
-
-
-def button(x, y, label, accent, w=300, h=66, filled=True):
-    """A control button: filled accent + white label, or an outline + ink label."""
-    if filled:
-        rect(x, y, w, h, stroke=accent, bg=accent, sw=2, rough=1, rounded=True, prefix="btn")
-        text_centered(x + w / 2, y + h / 2 - LABEL * 0.6, label, size=LABEL, color=WHITE)
-    else:
-        rect(x, y, w, h, stroke=accent, bg=WHITE, sw=2, rough=1, rounded=True, prefix="btn")
-        text_centered(x + w / 2, y + h / 2 - LABEL * 0.6, label, size=LABEL, color=accent)
-
-
 def tool_box(x, y, label, accent, abg, w=170, h=96):
     """A small generic 'a tool you use' tile."""
     rect(x, y, w, h, stroke=accent, bg=abg, sw=2, rough=1, rounded=True, prefix="tool")
@@ -107,7 +80,6 @@ text(ox + 76, 300 + H1 * LINE_H + 2 * HERO * LINE_H + 30,
 chip(ox + 76, 300 + H1 * LINE_H + 2 * HERO * LINE_H + 30 + 2 * H2 * LINE_H + 40,
      "Internal training - AI Ops Learn",
      fill=WHITE, text_color=GREY, border=GREY, size=SMALL)
-mark("1. Title")
 
 # ============================================================================
 # BEAT 2 - CLAUDE ON ITS OWN  (the problem we're about to solve)
@@ -129,7 +101,6 @@ for k, s in enumerate(cards):
     yy = cy + k * (ch + 28)
     rect(cx, yy, cw, ch, stroke=GREYD, bg=WHITE, sw=2, rough=1, rounded=True, prefix="cap")
     text(cx + 30, yy + 22, s, size=BODY, color=INK)
-mark("2. Claude on its own")
 
 # ============================================================================
 # BEAT 3 - WHAT IS A CONNECTOR  (the bridge)
@@ -156,7 +127,6 @@ text(ox + 60, row_y + 230,
 text(ox + 60, row_y + 230 + 2 * H3 * LINE_H + 30,
      "Think: a visitor pass to one room, with a key you can take back at any time.",
      size=SMALL, color=GREY)
-mark("3. What is a Connector")
 
 # ============================================================================
 # BEAT 4 - WHAT IS MCP  (one universal plug)
@@ -196,7 +166,6 @@ for k, lab in enumerate(rtools):
 text(lx, bot_y + ph + 110,
      "Like a single standard socket for AI - over 9,000 connectable services already exist.",
      size=SMALL, color=GREY)
-mark("4. What is MCP")
 
 # ============================================================================
 # BEAT 5 - HOW IT WORKS  (4-step pipeline, step 4 is the accent)
@@ -224,7 +193,6 @@ for k, s in enumerate(steps):
     if k < len(steps) - 1:
         arrow(nx + nw / 2, ny + h, [[0, 0], [0, 40]], stroke=TEAL, sw=4)
     ny += h + 40
-mark("5. How it works")
 
 # ============================================================================
 # BEAT 6 - TWO TYPES  (directory vs custom)
@@ -254,7 +222,6 @@ highlighter(ox + 60, sy, 2 * pw + 40, 70, INDIGO_T, angle=0.0)
 text(ox + 84, sy + 20,
      "Some are 'interactive' - they show cards, tables or\nforms right inside the chat, instead of plain text.",
      size=SMALL, color=INK)
-mark("6. Two types")
 
 # ============================================================================
 # BEAT 7 - WHAT YOU'LL SEE  (settings mock + permission dialog)
@@ -283,7 +250,6 @@ text(dx + dw + 60, dy + 40,
      "You stay in control -\naccess is asked for, and\ncan be switched off\nwhenever you like.",
      size=BODY, color=GREY)
 demo_badge(dx, dy + dh + 6, "show in Claude desktop app:  turn on a connector")
-mark("7. What you'll see")
 
 # ============================================================================
 # BEAT 8 - USING IT SAFELY  (the ONLY beat that uses red / caution)
@@ -309,7 +275,6 @@ for k, s in enumerate(rules):
     cyk = gy + (k // 2) * (chh + 30)
     sticky(cxk, cyk, cw, chh, RED_T, angle=jit(1.2))
     text(cxk + 30, cyk + 30, s, size=BODY, color=INK)
-mark("8. Using it safely")
 
 # ============================================================================
 # BEAT 9 - GOOD HABITS  (vertical checklist, green ticks)
@@ -326,7 +291,6 @@ py = 290
 for s in habits:
     check_item(ox + 60, py, s, color=INK, accent=GREEN, size=H3)
     py += 150
-mark("9. Good habits")
 
 # ============================================================================
 # BEAT 10 - RECAP & CLOSE
@@ -346,7 +310,6 @@ for k, s in enumerate(takeaways):
 band_y = cy + 3 * (ch + 40) + 30
 rect(ox + 60, band_y, cw, 110, stroke=ORANGE, bg=ORANGE, sw=2, rough=1, rounded=True, prefix="cta")
 text_centered(ox + 60 + cw / 2, band_y + 34, "Questions? [owner / channel placeholder]", size=H3, color=WHITE)
-mark("10. Recap & close")
 
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE  (shared excalidraw_kit; hard-fails on frames / off-palette)
@@ -354,8 +317,3 @@ mark("10. Recap & close")
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "connectors-mcp-training.excalidraw")
 MAXW = max(WID.values()) + 200
 finish(out, MAXW, TOTAL_W)
-
-print("\nbeats (the Style-B analogue of frames) and their element counts:")
-for label, count, _total in BEATS:
-    print(f"  {label:<28} {count:>4} elements")
-print(f"  {'TOTAL':<28} {len(E):>4} elements")

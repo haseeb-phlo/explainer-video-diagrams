@@ -23,7 +23,6 @@ _d = os.path.dirname(os.path.abspath(__file__))
 while _d != os.path.dirname(_d) and not os.path.exists(os.path.join(_d, "excalidraw_kit.py")):
     _d = os.path.dirname(_d)
 sys.path.insert(0, _d)
-_REPO_ROOT = _d
 
 import random
 from excalidraw_kit import *
@@ -40,8 +39,6 @@ GAP = 800  # wide gaps so one beat frames cleanly on a 14" laptop while panning
 WID = {i: 1200 for i in range(1, 12)}
 ACCENT = {1: VIOLET, 2: ORANGE, 3: BLUE, 4: GREEN, 5: RED, 6: TEAL,
           7: INDIGO, 8: VIOLET, 9: YELLOW, 10: GREEN, 11: ORANGE}
-ABG = {1: VIOLET_BG, 2: ORANGE_BG, 3: BLUE_BG, 4: GREEN_BG, 5: RED_BG, 6: TEAL_BG,
-       7: INDIGO_BG, 8: VIOLET_BG, 9: YELLOW_BG, 10: GREEN_BG, 11: ORANGE_BG}
 OX = {}
 _c = 0
 for _i in range(1, 12):
@@ -56,28 +53,9 @@ def beat_head(i, title, sub=None):
     heading(ox, HEAD_Y, title, color=ACCENT[i], sub=sub)
     return ox
 
-# per-beat element counts (the Style-B analogue of "elements per frame")
-BEATS = []
-def mark(label):
-    prev = BEATS[-1][2] if BEATS else 0
-    BEATS.append((label, len(E) - prev, len(E)))
-
 # ----------------------------------------------------------------------------
 # LOCAL ONE-OFF ILLUSTRATIONS  (bespoke to this video, kept out of the kit)
 # ----------------------------------------------------------------------------
-def tick(x, y, color=GREEN, s=26):
-    """A hand-drawn green check mark."""
-    line(x, y, [[0, s * 0.5], [s * 0.42, s], [s, 0]], stroke=color, sw=4, rough=1, prefix="tick")
-
-def check_item(x, y, s, color=INK, accent=GREEN, size=BODY):
-    tick(x, y + 2, accent)
-    text(x + 46, y, s, size=size, color=color)
-
-def button(x, y, label, accent, w=300, h=66):
-    """A solid accent control button with a white label."""
-    rect(x, y, w, h, stroke=accent, bg=accent, sw=2, rough=1, rounded=True, prefix="btn")
-    text_centered(x + w / 2, y + h / 2 - LABEL * 0.6, label, size=LABEL, color=WHITE)
-
 def node(x, y, label, accent, abg, w=760, h=66, text_color=INK):
     rect(x, y, w, h, stroke=accent, bg=abg, sw=2, rough=1, rounded=True, prefix="node")
     text_centered(x + w / 2, y + h / 2 - BODY * 0.6, label, size=BODY, color=text_color)
@@ -90,7 +68,6 @@ clock(ox + 120, 360, 78, VIOLET)
 text(ox + 250, 300, "Scheduled Tasks", size=HERO, color=VIOLET)
 text(ox + 256, 300 + HERO * LINE_H + 6, "putting your repeat work on autopilot", size=H2, color=GREYD)
 text(ox + 256, 300 + HERO * LINE_H + 70, "A team guide - Cowork on Claude Desktop", size=BODY, color=GREY)
-mark("1. Title")
 
 # ============================================================================
 # BEAT 2 - WHAT IT IS
@@ -112,7 +89,6 @@ text(ax + 36, by + 26, "After", size=H3, color=WHITE)
 for k, item in enumerate(["set it once", "it runs on its own",
                           "the result is\nwaiting for you"]):
     text(ax + 52, by + 96 + k * 64, "- " + item, size=BODY, color=WHITE)
-mark("2. What it is")
 
 # ============================================================================
 # BEAT 3 - PREREQUISITES
@@ -130,7 +106,6 @@ for s in prereqs:
     py += 90 + (40 if "\n" in s else 0)
 text(ox + 50, py + 10, "Scheduled tasks live inside Cowork, in the Desktop app only.",
      size=SMALL, color=GREY)
-mark("3. Prerequisites")
 
 # ============================================================================
 # BEAT 4 - HOW IT RUNS
@@ -148,7 +123,6 @@ for k, s in enumerate(steps):
     if k == 2:  # caption beside the middle node
         text(nx + nw + 40, ny + 6, "Each run is its own\nfresh Cowork session.", size=SMALL, color=GREY)
     ny += 110
-mark("4. How it runs")
 
 # ============================================================================
 # BEAT 5 - THE BIG CAVEAT  (red caution, the load-bearing safety point)
@@ -173,7 +147,6 @@ for k, ((lab, acc, abg), w) in enumerate(zip(states, widths)):
     tx += w + 36
 text(ox + 40, ty + 170, "You get a notification on the re-run. Skipped runs show in the task history.",
      size=SMALL, color=GREY)
-mark("5. The big caveat")
 
 # ============================================================================
 # BEAT 6 - TWO WAYS TO CREATE
@@ -192,7 +165,6 @@ text(ox + 92, 396 + chh + 44, "click Scheduled in the sidebar  ->  click + New t
                               "fill the form  ->  Save", size=BODY, color=INK)
 text(ox + 40, 300 + 2 * chh + 110, "Same result. Use whichever you prefer.", size=SMALL, color=GREY)
 demo_badge(ox + 40, 300 + 2 * chh + 150, "show in Claude desktop app:  type /schedule in a chat")
-mark("6. Two ways to create")
 
 # ============================================================================
 # BEAT 7 - THE FORM, ANNOTATED
@@ -216,7 +188,6 @@ for label, hint in fields:
     text(mx + 52, ry + 16, label, size=LABEL, color=INK)
     text(mx + 350, ry + 18, hint, size=SMALL, color=GREY)
     ry += 80
-mark("7. The form")
 
 # ============================================================================
 # BEAT 8 - MANAGING TASKS
@@ -231,7 +202,6 @@ for k, lab in enumerate(ctrls):
 text(ox + 50, by0 + 2 * (bh0 + 36) + 24,
      "Find all of this under Scheduled in the left sidebar, with upcoming and past runs.",
      size=SMALL, color=GREY)
-mark("8. Managing tasks")
 
 # ============================================================================
 # BEAT 9 - EVERYDAY USE CASES  (single-column rows)
@@ -252,7 +222,6 @@ for k, (head, body) in enumerate(cases):
     sticky(gx, cyk, cardw, cardh, YELLOW_T, angle=jit(1.0))
     text(gx + 34, cyk + 20, head, size=H3, color=VIOLET)
     text(gx + 34, cyk + 72, body, size=BODY, color=GREYD)
-mark("9. everyday use cases")
 
 # ============================================================================
 # BEAT 10 - SAFE AND SENSIBLE
@@ -269,7 +238,6 @@ for s in safes:
     check_item(ox + 50, py, s, color=INK, accent=GREEN)
     py += 84 + (40 if "\n" in s else 0)
 text(ox + 50, py + 10, "If in doubt, ask before you automate.", size=SMALL, color=GREY)
-mark("10. Safe and sensible")
 
 # ============================================================================
 # BEAT 11 - RECAP AND NEXT STEP
@@ -290,7 +258,6 @@ rect(ox + 40, band_y, WID[11] - 80, 110, stroke=ORANGE, bg=ORANGE, sw=2, rough=1
 text_centered(ox + 40 + (WID[11] - 80) / 2, band_y + 32,
               "Pick one repetitive job. Schedule it this week.", size=H3, color=WHITE)
 text(ox + 40, band_y + 140, "Questions? Post in #ai-ops.", size=SMALL, color=GREY)
-mark("11. Recap and next step")
 
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE
@@ -298,8 +265,3 @@ mark("11. Recap and next step")
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scheduled_tasks.excalidraw")
 MAXW = max(WID.values()) + 200
 finish(out, MAXW, TOTAL_W)
-
-print("\nbeats (the Style-B analogue of frames) and their element counts:")
-for label, count, _total in BEATS:
-    print(f"  {label:<28} {count:>4} elements")
-print(f"  {'TOTAL':<28} {len(E):>4} elements")

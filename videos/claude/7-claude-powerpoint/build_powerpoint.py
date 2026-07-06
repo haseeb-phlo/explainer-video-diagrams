@@ -45,8 +45,6 @@ GAP = 800
 WID = {i: 1200 for i in range(1, N + 1)}
 ACCENT = {1: ORANGE, 2: VIOLET, 3: BLUE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: ORANGE, 8: GREEN, 9: ORANGE}
-ABG = {1: ORANGE_BG, 2: VIOLET_BG, 3: BLUE_BG, 4: GREEN_BG, 5: TEAL_BG,
-       6: INDIGO_BG, 7: YELLOW_BG, 8: RED_BG, 9: GREEN_BG}
 OX = {}
 _c = 0
 for _i in range(1, N + 1):
@@ -107,10 +105,6 @@ def src_card(x, y, label, accent, abg):
         line(x + 26, y + 34 + k * 12, [[0, 0], [24, 0]], stroke=GREY, sw=2)
     text(x + 78, y + 36, label, size=SMALL, color=accent, width=w - 96)
     return w, h
-
-
-def tick(x, y, color=GREEN, s=28):
-    line(x, y, [[0, s * 0.5], [s * 0.42, s], [s, 0]], stroke=color, sw=5, rough=1, prefix="tick")
 
 
 # ============================================================================
@@ -271,7 +265,7 @@ for k, it in enumerate(["the facts and numbers are right",
                         "nothing confidential is in a deck you'll send",
                         "you've read it - you own the final"]):
     yy = cardy + 96 + k * 64
-    tick(cardx + 48, yy, color=GREEN, s=28)
+    tick(cardx + 48, yy, color=GREEN, s=28, sw=5)
     text(cardx + 96, yy - 4, it, size=BODY, color=INK)
 warny = cardy + 340
 rect(cardx, warny, cardw, 120, stroke=ORANGE, bg=ORANGE_T, sw=2, rough=1, rounded=True)
