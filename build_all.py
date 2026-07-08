@@ -31,7 +31,7 @@ def build():
     ok = True
     for s in scripts:
         rel = os.path.relpath(s, ROOT)
-        r = subprocess.run([sys.executable, s], capture_output=True, text=True)
+        r = subprocess.run([sys.executable, s], capture_output=True, text=True, check=False)
         if r.returncode == 0:
             print(f"  built  {rel}  ->  {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ''}")
         else:

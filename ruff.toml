@@ -1,0 +1,15 @@
+# Lint config for the diagram-build tooling.  Run:  ruff check .
+target-version = "py310"
+
+[lint]
+select = ["E", "F", "W", "B", "C4", "SIM", "RUF"]
+ignore = [
+    "E501",           # narration strings stay on one line; width limits don't help here
+    "E701", "E702",   # the kit's compact `E.append(e); return e` factory style
+    "SIM108",         # ternaries are not forced over readable if/else
+]
+
+[lint.per-file-ignores]
+# Each build*.py must run a sys.path walk-up BEFORE importing the kit, and
+# `from excalidraw_kit import *` is the documented scene DSL (see CLAUDE.md).
+"videos/**/build*.py" = ["E402", "F403", "F405"]

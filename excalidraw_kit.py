@@ -68,8 +68,8 @@ _seq = 0
 def reset():
     """Clear the scene. A fresh process starts empty, so this is only needed if a
     single process builds more than one scene."""
-    global E, _seq
-    E = []
+    global _seq
+    E.clear()  # in place, so `from excalidraw_kit import *` copies stay live
     _seq = 0
 
 def _uid(p):

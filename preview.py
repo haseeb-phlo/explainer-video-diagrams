@@ -50,7 +50,8 @@ def get_font(family, size):
 
 
 def main():
-    scene = json.load(open(SCENE))
+    with open(SCENE, encoding="utf-8") as fh:
+        scene = json.load(fh)
     els = scene["elements"]
     bg = scene.get("appState", {}).get("viewBackgroundColor", "#ffffff")
 

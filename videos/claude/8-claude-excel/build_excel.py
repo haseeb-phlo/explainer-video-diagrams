@@ -35,7 +35,7 @@ random.seed(80810)
 # ----------------------------------------------------------------------------
 N = 9
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: GREEN, 2: BLUE, 3: ORANGE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: VIOLET, 8: ORANGE, 9: GREEN}
 OX = {}
@@ -247,7 +247,7 @@ text(ox + 512, 410, "“walk me through\nthis workbook”", size=H3, color=INK)
 line(ox + 480, 470, [[0, 0], [-34, 14], [0, 26]], stroke=GREEN, sw=3)  # bubble tail
 ex_x = ox + 60
 for lab in ["a budget tracker", "a forecast model", "a messy data export"]:
-    w, h = chip(ex_x, 636, lab, fill=WHITE, text_color=GREEN, border=GREEN, size=SMALL)
+    w, _ = chip(ex_x, 636, lab, fill=WHITE, text_color=GREEN, border=GREEN, size=SMALL)
     ex_x += w + 32
 text(ox + 60, 724, "let it explain the sheet - then change one assumption and watch it update", size=BODY, color=GREYD)
 text(ox + 40, 784, "Claude keeps your formulas alive - you keep the final say on the numbers.",

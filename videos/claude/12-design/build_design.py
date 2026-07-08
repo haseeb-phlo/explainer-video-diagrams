@@ -33,7 +33,7 @@ random.seed(121210)
 
 N = 9
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: VIOLET, 2: BLUE, 3: GREEN, 4: ORANGE, 5: TEAL,
           6: INDIGO, 7: YELLOW, 8: ORANGE, 9: VIOLET}
 OX = {}
@@ -212,7 +212,7 @@ mw, mh = 240, 190
 xs = [ox + 60, ox + 440, ox + 820]
 accs = [(ORANGE, ORANGE_BG), (BLUE, BLUE_BG), (GREEN, GREEN_BG)]
 labs = ["first draft", "you refine it", "your final"]
-for k, (mxx, (acc, abg), lab) in enumerate(zip(xs, accs, labs)):
+for k, (mxx, (acc, abg), lab) in enumerate(zip(xs, accs, labs, strict=True)):
     mockup(mxx, 380, mw, mh, accent=acc, abg=abg)
     text_centered(mxx + mw / 2, 590, lab, size=BODY, color=acc)
     if k < 2:
@@ -234,7 +234,7 @@ arrow(ox + 620, 420, [[0, 0], [70, 0]], stroke=VIOLET, sw=4)
 mockup(ox + 720, 350, 240, 200, accent=VIOLET, abg=VIOLET_BG)
 ex_x = ox + 60
 for lab in ["a landing page", "a pitch deck", "a settings screen"]:
-    w, h = chip(ex_x, 560, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
+    w, _ = chip(ex_x, 560, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
     ex_x += w + 32
 text(ox + 60, 648, "see the first design, then refine it in plain English", size=BODY, color=GREYD)
 text(ox + 40, 708, "Claude gets you a polished start - you shape it into the finished thing.",

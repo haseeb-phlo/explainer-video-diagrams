@@ -38,7 +38,7 @@ random.seed(60610)  # deterministic - re-runs produce identical files
 # no neighbours peeking in - the empty space IS the zoom-to-one-beat affordance.
 N = 10
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: VIOLET, 2: ORANGE, 3: BLUE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: VIOLET, 8: RED, 9: GREEN, 10: ORANGE}
 OX = {}
@@ -117,7 +117,7 @@ text_centered(nx + nw / 2, row_y + nh / 2 - H3 * 0.6, "Connector", size=H3, colo
 # a tool you already use (a real connector, not an abstract box)
 tx, tw, th = ox + 800, 300, 130
 rect(tx, row_y, tw, th, stroke=GREEN, bg=GREEN_BG, sw=2, rough=1, rounded=True, prefix="usetool")
-text_centered(tx + tw / 2, row_y + nh / 2 - LABEL * 0.6, "Slack / Granola /\nBeacon ...", size=LABEL, color=INK)
+text_centered(tx + tw / 2, row_y + th / 2 - LABEL * 0.6, "Slack / Granola /\nBeacon ...", size=LABEL, color=INK)
 arrow(ox + 280, row_y + nh / 2, [[0, 0], [70, 0]], stroke=GREYD, sw=4)
 arrow(nx + nw + 10, row_y + nh / 2, [[0, 0], [60, 0]], stroke=GREYD, sw=4)
 # definition + caption

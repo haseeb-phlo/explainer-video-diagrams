@@ -33,7 +33,7 @@ GAP = 800
 # every beat uses the SAME slot, shaped ~1.15:1 (content ~1120 wide x ~980 tall,
 # heading at y60 counted in) so framing is identical on a 14" laptop. Content
 # fills the slot; it never spreads wider than ox+1120 or below y~1050.
-WID = {i: 1200 for i in range(1, 12)}
+WID = dict.fromkeys(range(1, 12), 1200)
 ACCENT = {1: VIOLET, 2: BLUE, 3: ORANGE, 4: GREEN, 5: TEAL, 6: INDIGO,
           7: VIOLET, 8: ORANGE, 9: GREEN, 10: RED, 11: YELLOW}
 OX = {}
@@ -159,7 +159,7 @@ text(fx5 + 36, fy5 + fh5 + 66,
 # optional extras - chips below the card
 cy5 = fy5 + fh5 + 130
 cx5 = ox + 40
-for k, lab in enumerate(["scripts/", "resources/"]):
+for lab in ["scripts/", "resources/"]:
     w, h = chip(cx5, cy5, lab, fill=WHITE, text_color=TEAL, border=TEAL, size=BODY)
     cx5 += w + 50
 text(cx5 + 20, cy5 + 8, "optional extras for advanced Skills", size=SMALL, color=GREYD)

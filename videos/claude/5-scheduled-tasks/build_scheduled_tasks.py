@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build phlo-scheduled-tasks.excalidraw - ONE flowing, illustrated explainer for
+"""Build scheduled_tasks.excalidraw - ONE flowing, illustrated explainer for
 the "Claude Scheduled Tasks" training video (Phlo AI training, module 2.5, Cowork).
 
 Design: a single hand-drawn journey that reads left-to-right - NO frames, NO
@@ -36,7 +36,7 @@ GAP = 800  # wide gaps so one beat frames cleanly on a 14" laptop while panning
 # every beat uses the SAME slot, shaped like the reference's "Words left, a thing
 # right" beat (~1120 wide x ~980 tall content, ~1.15 : 1) so framing is identical
 # and fits a 14" MacBook screen. Content fills the slot; never spreads wider/taller.
-WID = {i: 1200 for i in range(1, 12)}
+WID = dict.fromkeys(range(1, 12), 1200)
 ACCENT = {1: VIOLET, 2: ORANGE, 3: BLUE, 4: GREEN, 5: RED, 6: TEAL,
           7: INDIGO, 8: VIOLET, 9: YELLOW, 10: GREEN, 11: ORANGE}
 OX = {}
@@ -140,7 +140,7 @@ states = [("Laptop closed\nat run time", RED, RED_T),
           ("It runs automatically when\nyou next open the app", GREEN, GREEN_T)]
 tx = ox + 40
 widths = [300, 280, 400]
-for k, ((lab, acc, abg), w) in enumerate(zip(states, widths)):
+for k, ((lab, acc, abg), w) in enumerate(zip(states, widths, strict=True)):
     node(tx, ty, lab, acc, abg, w=w, h=120)
     if k < len(states) - 1:
         arrow(tx + w + 6, ty + 60, [[0, 0], [24, 0]], stroke=GREYD, sw=4)

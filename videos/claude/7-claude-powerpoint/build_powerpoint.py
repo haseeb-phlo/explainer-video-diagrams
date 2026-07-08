@@ -42,7 +42,7 @@ random.seed(70710)  # deterministic - re-runs produce identical files
 # frames cleanly with no neighbours peeking in - the whitespace IS the camera.
 N = 9
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: ORANGE, 2: VIOLET, 3: BLUE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: ORANGE, 8: GREEN, 9: ORANGE}
 OX = {}
@@ -284,7 +284,7 @@ text(ox + 96, 422, "take something you already wrote\nand ask Claude for a 5-sli
 slide_deck(ox + 770, 356, accent=ORANGE, abg=ORANGE_BG)
 ex_x = ox + 60
 for lab in ["a project update", "a process you explain", "last month's numbers"]:
-    w, h = chip(ex_x, 624, lab, fill=WHITE, text_color=ORANGE, border=ORANGE, size=SMALL)
+    w, _ = chip(ex_x, 624, lab, fill=WHITE, text_color=ORANGE, border=ORANGE, size=SMALL)
     ex_x += w + 30
 text(ox + 60, 716, "open it in PowerPoint and change one thing - it's yours now", size=BODY, color=GREYD)
 text(ox + 40, 776, "Claude turns raw material into a finished deck - you still hold the pen.",

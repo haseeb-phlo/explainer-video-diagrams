@@ -31,7 +31,7 @@ random.seed(111110)
 
 N = 9
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: VIOLET, 2: BLUE, 3: ORANGE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: YELLOW, 8: GREEN, 9: VIOLET}
 OX = {}
@@ -52,12 +52,12 @@ def beat_head(i, title, sub=None):
 # ----------------------------------------------------------------------------
 # LOCAL ONE-OFF ILLUSTRATIONS
 # ----------------------------------------------------------------------------
-def folder(x, y, w=96, h=70, accent=YELLOW, abg=YELLOW_BG):
+def folder(x, y, w=96, h=70, abg=YELLOW_BG):
     rect(x, y + 14, w, h, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="fold")
     rect(x, y, w * 0.5, 22, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="foldtab")
 
 
-def deliverable(x, y, accent=GREEN, abg=GREEN_BG):
+def deliverable(x, y, accent=GREEN):
     """A finished one-pager with a green tick badge."""
     rect(x, y, 150, 196, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="del")
     rect(x + 18, y + 22, 90, 14, stroke="transparent", bg=accent, sw=1, rough=1, rounded=True, prefix="deltt")
@@ -67,7 +67,7 @@ def deliverable(x, y, accent=GREEN, abg=GREEN_BG):
     tick(x + 122, y + 164, color=GREEN, s=26, sw=5)
 
 
-def monitor(x, y, w, h, accent=BLUE, abg=BLUE_BG):
+def monitor(x, y, w, h, abg=BLUE_BG):
     rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="mon")
     rect(x + 10, y + 10, w - 20, h - 20, stroke=GREY, bg=abg, sw=1, rough=1,
          rounded=True, fill="solid", opacity=30, prefix="monscr")
@@ -94,7 +94,7 @@ arrow(ox + 420, by + 70, [[0, 0], [110, 0]], stroke=VIOLET, sw=5, rough=1)
 claude_face(ox + 600, by + 60, r=50, color=VIOLET)
 text_centered(ox + 600, by + 130, "Claude works", size=SMALL, color=GREYD)
 arrow(ox + 670, by + 60, [[0, 0], [110, 0]], stroke=VIOLET, sw=5, rough=1)
-deliverable(ox + 800, by - 30, accent=VIOLET, abg=VIOLET_BG)
+deliverable(ox + 800, by - 30, accent=VIOLET)
 text(ox + 790, by + 196, "a finished deliverable,\nnot a to-do list", size=SMALL, color=VIOLET)
 
 # ============================================================================
@@ -102,9 +102,9 @@ text(ox + 790, by + 196, "a finished deliverable,\nnot a to-do list", size=SMALL
 # ============================================================================
 ox = beat_head(2, "It works on your computer",
                "Cowork runs in the Claude desktop app, where the\nwork already is - your files, folders and apps.")
-monitor(ox + 200, 340, 760, 420, accent=BLUE, abg=BLUE_BG)
-folder(ox + 250, 400, accent=YELLOW, abg=YELLOW_BG)
-folder(ox + 380, 400, accent=ORANGE, abg=ORANGE_BG)
+monitor(ox + 200, 340, 760, 420, abg=BLUE_BG)
+folder(ox + 250, 400, abg=YELLOW_BG)
+folder(ox + 380, 400, abg=ORANGE_BG)
 file_icon(ox + 520, 396)
 file_icon(ox + 600, 396, abg=GREEN_BG)
 claude_face(ox + 800, 470, r=44, color=BLUE)
@@ -145,7 +145,7 @@ for k, (lab, fn, acc, abg) in enumerate(items):
     yy = sy + k * 130
     sticky(sx, yy, 300, 104, abg, angle=jit(1.4))
     if fn is folder:
-        folder(sx + 20, yy + 24, accent=acc, abg=abg)
+        folder(sx + 20, yy + 24, abg=abg)
     elif fn is file_icon:
         file_icon(sx + 28, yy + 18, abg=abg)
     else:
@@ -157,7 +157,7 @@ for k, (lab, fn, acc, abg) in enumerate(items):
           stroke=GREY, sw=2, rough=1)
 claude_face(ox + 540, sy + 200, r=46, color=GREEN)
 arrow(ox + 600, sy + 200, [[0, 0], [110, 0]], stroke=GREEN, sw=4)
-deliverable(ox + 730, sy + 100, accent=GREEN, abg=GREEN_BG)
+deliverable(ox + 730, sy + 100, accent=GREEN)
 text(ox + 60, sy + 410, "synthesised into one finished thing - 'let Claude use your computer'", size=SMALL, color=GREYD)
 
 # ============================================================================
@@ -220,10 +220,10 @@ text(ox + 60, 700, "not just developers - no code, no setup, just plain English"
 ox = beat_head(8, "Scope it tight, then sign it off")
 rect(ox + 60, 360, 520, 250, stroke=GREYD, bg=WHITE, sw=2, rough=1, rounded=True)
 text(ox + 84, 374, "your whole computer", size=SMALL, color=GREY)
-folder(ox + 96, 456, accent=GREY, abg=FAINT)
-folder(ox + 220, 456, accent=GREY, abg=FAINT)
-folder(ox + 420, 456, accent=GREY, abg=FAINT)
-folder(ox + 340, 456, accent=GREEN, abg=GREEN_BG)
+folder(ox + 96, 456, abg=FAINT)
+folder(ox + 220, 456, abg=FAINT)
+folder(ox + 420, 456, abg=FAINT)
+folder(ox + 340, 456, abg=GREEN_BG)
 line(ox + 326, 446, [[0, 0], [128, 0], [128, 104], [0, 104], [0, 0]],
      stroke=GREEN, sw=3, rough=1, dashed=True, prefix="scope")
 text(ox + 300, 566, "just this folder, for this task", size=SMALL, color=GREEN)
@@ -245,10 +245,10 @@ sticky(ox + 60, 340, 560, 160, VIOLET_BG, angle=jit(1.3))
 text(ox + 96, 366, "Try this", size=H3, color=VIOLET)
 text(ox + 96, 426, "give it one whole task you'd\nnormally dread assembling", size=BODY, color=INK)
 arrow(ox + 640, 420, [[0, 0], [70, 0]], stroke=VIOLET, sw=4)
-deliverable(ox + 740, 350, accent=VIOLET, abg=VIOLET_BG)
+deliverable(ox + 740, 350, accent=VIOLET)
 ex_x = ox + 60
 for lab in ["merge a few documents", "tidy a messy folder", "draft a recurring update"]:
-    w, h = chip(ex_x, 560, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
+    w, _ = chip(ex_x, 560, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
     ex_x += w + 30
 text(ox + 60, 648, "point it at one folder, watch it work, then check the result", size=BODY, color=GREYD)
 text(ox + 40, 708, "Cowork does the legwork - you keep the judgement calls.", size=H3, color=INK)

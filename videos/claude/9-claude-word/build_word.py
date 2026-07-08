@@ -31,7 +31,7 @@ random.seed(90910)
 
 N = 9
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: BLUE, 2: VIOLET, 3: ORANGE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: YELLOW, 8: INDIGO, 9: BLUE}
 OX = {}
@@ -226,7 +226,7 @@ doc_page(ox + 530, 380, 240, 300, accent=BLUE, abg=BLUE_BG, lines=7)
 text(ox + 540, 696, "shorter, and tracked", size=SMALL, color=BLUE)
 ex_x = ox + 60
 for lab in ["a process note", "a long email", "a draft policy"]:
-    w, h = chip(ex_x, 756, lab, fill=WHITE, text_color=BLUE, border=BLUE, size=SMALL)
+    w, _ = chip(ex_x, 756, lab, fill=WHITE, text_color=BLUE, border=BLUE, size=SMALL)
     ex_x += w + 32
 text(ox + 60, 820, "read the tracked changes, then accept the ones you like", size=BODY, color=GREYD)
 text(ox + 40, 868, "Claude works in the document - you keep the final word on the words.",

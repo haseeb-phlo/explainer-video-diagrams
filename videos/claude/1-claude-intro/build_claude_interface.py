@@ -37,14 +37,14 @@ def claude_window_full(x, y, w, h):
     sb_x, sb_w = x + 18, 248
     rect(sb_x, y + 56, sb_w, h - 74, stroke="transparent", bg=VIOLET_BG, sw=1, rough=1,
          rounded=True, fill="solid", opacity=45, prefix="side")
-    for k in range(5):
+    for k in range(4):
         rect(sb_x + 20, y + 78 + k * 54, sb_w - 40, 30, stroke="transparent", bg=WHITE,
              sw=1, rough=1, rounded=True, prefix="srow")
     # chat -> Conversations
     cx = sb_x + sb_w + 44
     cw = w * 0.42
     my = y + 78
-    for f in (1.0, 0.7, 0.92, 0.6):
+    for f in (1.0, 0.7, 0.92):
         rect(cx, my, cw * f, 32, stroke="transparent", bg=FAINT, sw=1, rough=1,
              rounded=True, prefix="msg")
         my += 50
@@ -85,7 +85,7 @@ def claude_window_full(x, y, w, h):
 # ----------------------------------------------------------------------------
 N = 4
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: VIOLET, 2: BLUE, 3: YELLOW, 4: GREEN}
 OX, _c = {}, 0
 for _i in range(1, N + 1):

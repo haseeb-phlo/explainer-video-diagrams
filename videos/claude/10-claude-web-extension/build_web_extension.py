@@ -32,7 +32,7 @@ random.seed(101010)
 
 N = 9
 GAP = 800
-WID = {i: 1200 for i in range(1, N + 1)}
+WID = dict.fromkeys(range(1, N + 1), 1200)
 ACCENT = {1: VIOLET, 2: BLUE, 3: ORANGE, 4: GREEN, 5: TEAL,
           6: INDIGO, 7: YELLOW, 8: RED, 9: VIOLET}
 OX = {}
@@ -53,8 +53,7 @@ def beat_head(i, title, sub=None):
 # ----------------------------------------------------------------------------
 # LOCAL ONE-OFF ILLUSTRATIONS
 # ----------------------------------------------------------------------------
-def browser(x, y, w, h, accent=VIOLET, abg=VIOLET_BG, panel=True, tabs=3, table=False,
-            content=True):
+def browser(x, y, w, h, accent=VIOLET, abg=VIOLET_BG, panel=True, tabs=3, content=True):
     """A browser window: chrome bar with traffic dots + tabs + URL bar, a page
     area, and an optional Claude side panel. content=False leaves the page blank
     so the caller can place its own labelled page elements."""
@@ -68,17 +67,7 @@ def browser(x, y, w, h, accent=VIOLET, abg=VIOLET_BG, panel=True, tabs=3, table=
     rect(x + 16, y + 54, w - 32, 26, stroke=FAINT, bg=WHITE, sw=1, rough=1, rounded=True, prefix="url")
     page_r = (x + w * 0.62) if panel else (x + w - 24)
     cx, cy = x + 24, y + 104
-    if not content:
-        pass
-    elif table:
-        tw = page_r - cx - 20
-        rect(cx, cy, tw, 24, stroke="transparent", bg=abg, sw=1, rough=1, rounded=False, prefix="trh")
-        rows = int((h - (cy - y) - 30) / 34)
-        for r in range(rows):
-            line(cx, cy + 24 + r * 30, [[0, 0], [tw, 0]], stroke=FAINT, sw=1)
-        for c in range(1, 4):
-            line(cx + c * tw / 4, cy, [[0, 0], [0, 24 + rows * 30]], stroke=FAINT, sw=1)
-    else:
+    if content:
         for k in range(5):
             line(cx, cy + k * 34, [[0, 0], [page_r - cx - 30, 0]], stroke=GREY, sw=2)
     if panel:
@@ -252,7 +241,7 @@ rect(ox + 110, 446, 230, 60, stroke=GREEN, bg=GREEN_BG, sw=2, rough=1, rounded=T
 text(ox + 134, 462, "read-only - safe", size=BODY, color=GREEN)
 ex_x = ox + 60
 for lab in ["summarise this page", "pull a table into a list", "compare two open tabs"]:
-    w, h = chip(ex_x, 700, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
+    w, _ = chip(ex_x, 700, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
     ex_x += w + 30
 text(ox + 60, 772, "watch what it does - then decide what you'd trust it to click", size=BODY, color=GREYD)
 text(ox + 40, 832, "Claude can use the browser for you - you decide what it's allowed to touch.",

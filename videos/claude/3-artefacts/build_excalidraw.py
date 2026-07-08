@@ -44,7 +44,7 @@ GAP = 800
 # every beat uses the SAME slot, shaped like the "Words left, a thing right" beat
 # (~1120 wide x ~980 tall content, ~1.15 : 1) so framing is identical and it fits
 # a 14" MacBook screen. Content fills the slot; it never spreads wider or taller.
-WID = {i: 1200 for i in range(1, 10)}
+WID = dict.fromkeys(range(1, 10), 1200)
 ACCENT = {1: ORANGE, 2: VIOLET, 3: BLUE, 4: GREEN, 5: TEAL, 6: VIOLET, 7: INDIGO, 8: RED, 9: YELLOW}
 OX = {}
 _c = 0
@@ -112,11 +112,11 @@ text(cw_x + cw_w * 0.56, cw_y + cw_h + 60,
 # ============================================================================
 ox = beat_head(3, "It can be almost anything",
                "Same feature, very different outputs.\nThe skill is knowing it's there and asking for it.")
-# playful cluster - 2 columns x 3 rows (portrait, fits the screen), jittered
+# playful cluster - 3 columns x 2 rows, jittered
 positions = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1)]
 cellw, cellh = 360, 350
 gx, gy = ox + 60, 330
-for (fn, cap, acc, abg), (cxi, cyi) in zip(OBJS, positions):
+for (fn, cap, acc, abg), (cxi, cyi) in zip(OBJS, positions, strict=True):
     bx = gx + cxi * cellw + random.uniform(-20, 20)
     byy = gy + cyi * cellh + random.uniform(-14, 14)
     sticky(bx - 20, byy - 24, 210, 234, abg, angle=jit(2.2))

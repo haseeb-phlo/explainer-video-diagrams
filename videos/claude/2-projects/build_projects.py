@@ -33,7 +33,7 @@ random.seed(22022)
 # uses the SAME slot (~1120 wide x ~980 tall content, ~1.15 : 1) so framing is
 # identical and fits a 14" MacBook screen.
 GAP = 800
-WID = {i: 1200 for i in range(1, 10)}
+WID = dict.fromkeys(range(1, 10), 1200)
 ACCENT = {1: RED, 2: VIOLET, 3: BLUE, 4: GREEN, 5: ORANGE, 6: TEAL, 7: INDIGO, 8: YELLOW, 9: VIOLET}
 OX, _c = {}, 0
 for _i in range(1, 10):

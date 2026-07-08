@@ -32,9 +32,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PLAN_PATH = ROOT / "llm_explainer.excalimate.json"
-DIAG_PATH = ROOT / "llm_explainer.excalidraw"
-OUT_PATH = ROOT / "llm_explainer.checkpoint.json"
+VIDEO_DIR = ROOT / "videos" / "ai-foundations" / "1-what-is-ai"
+PLAN_PATH = VIDEO_DIR / "llm_explainer.excalimate.json"
+DIAG_PATH = VIDEO_DIR / "llm_explainer.excalidraw"
+OUT_PATH = VIDEO_DIR / "llm_explainer.checkpoint.json"
 
 SLIDE_OFFSET = 150
 PULSE_SCALE = 1.1
@@ -288,6 +289,8 @@ def main():
         ref = elements_by_id.get(first["focusElementId"])
         if ref is not None:
             cam_x, cam_y = element_center(ref)
+        else:
+            missing.append(first["focusElementId"])
         first_zoom = first.get("zoom", 1.0) or 1.0
         first_scale = 1.0 / first_zoom
         tb.add("__camera_frame__", "translateX", 0, 0)
