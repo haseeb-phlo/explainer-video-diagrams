@@ -37,7 +37,7 @@ The Mandatory AI Course is 5 modules, ~34 videos, ~6 hours of content. Not every
 | 1.3 — What AI is good at, bad at | A visual "good vs bad" map lands faster than slides. |
 | 1.4 — Hallucinations and verification | Animated "plausible vs true" walkthrough. |
 | 1.7 — When AI gets it wrong: response playbook | 4-step flow visualised. |
-| 3.2 — The CRISP framework | Building up the framework letter by letter, animated. |
+| 3.2 — The CRISPE framework | Building up the framework letter by letter, animated. |
 | 4.1 — AI Ops, what it is and why | System diagram of how AI Ops fits into Phlo. |
 | 4.9 — Choosing the right tool in 30 seconds | The decision tree — perfect illustrated-diagram content. |
 | 5.5 — Anti-AI: where this should make things slower | Conceptual map of "where the human time is the point." |
@@ -128,7 +128,7 @@ The course launches on a drip-and-iterate schedule. Record in this order so the 
 1. **1.1 — Why this matters now (CEO/leadership talking head)** — single most important video in the whole course. Not a diagram video. Schedule this first.
 2. **Module 1 in full (1.2–1.7)** — the policy and judgement videos must ship before anyone uses AI on patient data. Diagram videos fit 1.2, 1.3, 1.4, 1.7. Talking-head/screen-share for 1.5 and 1.6.
 3. **Module 2 (2.1–2.6)** — Claude walkthrough. Mostly screen-share, not diagrams.
-4. **Module 3** — record 3.3 (Watch me prompt) and 3.6 (Watch me fail) with proper production time. 3.2 (CRISP) is the natural diagram fit in this module.
+4. **Module 3** — record 3.3 (Watch me prompt) and 3.6 (Watch me fail) with proper production time. 3.2 (CRISPE) is the natural diagram fit in this module.
 5. **Module 4** — mostly screen-share for AI Ops, Copilot, and the wider stack. 4.1 and 4.9 are diagram fits.
 6. **Module 5** — short module. 5.5 (Anti-AI) is the diagram fit.
 
