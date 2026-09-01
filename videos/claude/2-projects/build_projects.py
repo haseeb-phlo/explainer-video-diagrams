@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build phlo-2.2-claude-projects.excalidraw - ONE flowing, illustrated explainer
-for the "Claude Projects" training video (Phlo AI training, module 2.2, ~7 min).
+for the "Claude Projects" training video (Phlo AI training, module 2.2, ~9 min).
 
 Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
 boxes, white canvas, everything in the hand font (fontFamily 1), roughness 1, a
@@ -8,6 +8,26 @@ lively colour-coded Excalidraw palette, big colour-blocking, scribbled annotatio
 and charming primitive illustrations. The look lives in the shared excalidraw_kit;
 this file holds only the composition. Converted from the old 10-frame editorial
 "Style A" deck of the same name.
+
+PAN ORDER (left to right - the whitespace between slots IS the camera; frame one
+beat at a time, ~20-40s each):
+
+     1  RED     The tax you pay every morning
+     2  ORANGE  Every chat starts from zero        <- cold chat
+     3  GREEN   Every chat starts briefed          <- briefed chat  [CUT TO CLAUDE DESKTOP]
+     4  VIOLET  What a Project actually is
+     5  BLUE    The shift
+     6  VIOLET  The instructions field             <- the highest-leverage square inch
+     7  GREEN   Three Projects you could build this week
+     8  ORANGE  The maths
+     9  TEAL    Why it's a multiplier
+    10  INDIGO  Let's build one - live             [CUT TO CLAUDE DESKTOP]
+    11  YELLOW  Pause here, and try it
+    12  BLUE    Slow vs live                       <- signposts Connectors and MCP
+    13  VIOLET  One Project. Twenty minutes.       (closing chip, lower-left)
+
+Beats 2, 3, 6 and 12 were added later; beats 1 and 4-11 and 13 are the original
+nine, unchanged and in their original order.
 
 Run:  python3 build_projects.py
       python3 ../../../preview.py phlo-2.2-claude-projects.excalidraw out.png
@@ -31,12 +51,15 @@ random.seed(22022)
 # Wide gaps so a single beat can be framed on a 14" laptop without neighbours
 # peeking in - the empty space IS the zoom-to-one-beat affordance. Every beat
 # uses the SAME slot (~1120 wide x ~980 tall content, ~1.15 : 1) so framing is
-# identical and fits a 14" MacBook screen.
+# identical and fits a 14" MacBook screen. No two neighbouring beats share an
+# accent, so a pan always lands on a fresh colour.
 GAP = 800
-WID = {i: 1200 for i in range(1, 10)}
-ACCENT = {1: RED, 2: VIOLET, 3: BLUE, 4: GREEN, 5: ORANGE, 6: TEAL, 7: INDIGO, 8: YELLOW, 9: VIOLET}
+N_BEATS = 13
+WID = {i: 1200 for i in range(1, N_BEATS + 1)}
+ACCENT = {1: RED, 2: ORANGE, 3: GREEN, 4: VIOLET, 5: BLUE, 6: VIOLET, 7: GREEN,
+          8: ORANGE, 9: TEAL, 10: INDIGO, 11: YELLOW, 12: BLUE, 13: VIOLET}
 OX, _c = {}, 0
-for _i in range(1, 10):
+for _i in range(1, N_BEATS + 1):
     OX[_i] = _c
     _c += WID[_i] + GAP
 TOTAL_W = _c
@@ -47,6 +70,51 @@ def beat_head(i, title, sub=None):
     # accent colour + a hand underline. No step circle, no highlighter sweep.
     heading(OX[i], HEAD_Y, title, color=ACCENT[i], sub=sub)
     return OX[i]
+
+# ----------------------------------------------------------------------------
+# LOCAL ONE-OFF ILLUSTRATIONS  (bespoke to this board - the kit owns the rest)
+# ----------------------------------------------------------------------------
+def chat_window(x, y, w, h):
+    """A plain chat window: title bar with three dots, empty thread below.
+    (Not the kit's claude_window - that one carries an Artifact panel.)"""
+    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="chatw")
+    line(x, y + 44, [[0, 0], [w, 0]], stroke=GREY, sw=1)
+    for k in range(3):
+        ellipse(x + 18 + k * 18, y + 16, 10, 10, stroke=GREY, bg=GREY, sw=1)
+
+def context_note(x, y, w=300, h=112, accent=ORANGE, abg=ORANGE_BG, angle=None):
+    """The pasted brief - a small note doodle. Every part carries the SAME angle
+    so a rotated paste stays a paste and not a pile of loose parts."""
+    a = jit(3.0) if angle is None else angle
+    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, angle=a, prefix="ctx")
+    rect(x, y, w, 30, stroke="transparent", bg=abg, sw=1, rough=1, rounded=True, angle=a, prefix="ctxh")
+    text(x + 16, y + 4, "team tone guide", size=SMALL, color=accent, angle=a)
+    for k, f in enumerate((0.84, 0.62, 0.74)):
+        rect(x + 16, y + 48 + k * 20, (w - 32) * f, 10, stroke="transparent", bg=FAINT,
+             sw=1, rough=1, rounded=True, angle=a, prefix="ctxl")
+
+def folder(x, y, w=300, h=200, accent=GREEN, abg=GREEN_BG):
+    """A closed Project folder - tabbed, filled in the beat accent, with a few
+    papers peeking over the top edge."""
+    rect(x, y, w * 0.5, 24, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="foldtab")
+    for k in range(3):
+        rect(x + w * 0.5 + k * 44, y - 4, 40, 44, stroke=INK, bg=WHITE, sw=2, rough=1,
+             rounded=True, prefix="foldpaper")
+    rect(x, y + 16, w, h, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="fold")
+
+def open_folder(x, y, w, h, abg=VIOLET_T):
+    """The same folder opened out flat: tabbed back panel + a shallow front lip,
+    so its contents can be laid out and read."""
+    rect(x, y - 30, w * 0.3, 34, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="ofoldtab")
+    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="ofold")
+    rect(x, y + h - 44, w, 44, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="ofoldlip")
+
+def pipe(x, y, w=160, h=60, accent=BLUE, abg=BLUE_BG):
+    """A short length of pipe: flanged ends, a dashed flow running through it."""
+    rect(x + 22, y, w - 44, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=False, prefix="pipe")
+    rect(x, y - 10, 22, h + 20, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="pipef")
+    rect(x + w - 22, y - 10, 22, h + 20, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="pipef")
+    arrow(x - 30, y + h / 2, [[0, 0], [w + 60, 0]], stroke=accent, sw=3, rough=1, dashed=True)
 
 # ============================================================================
 # BOARD TITLE
@@ -73,9 +141,49 @@ text(ox + 180, 726, "= about 1 hour a week. Every week.", size=H3, color=RED)
 text(ox + 40, 830, "Re-explaining yourself is invisible work. It adds up.", size=BODY, color=GREYD)
 
 # ============================================================================
-# BEAT 2 - WHAT A PROJECT ACTUALLY IS
+# BEAT 2 - EVERY CHAT STARTS FROM ZERO  (the cold chat)
 # ============================================================================
-ox = beat_head(2, "What a Project actually is")
+ox = beat_head(2, "Every chat starts from zero")
+cwx, cwy, cww, cwh = ox + 40, 300, 700, 566
+chat_window(cwx, cwy, cww, cwh)
+# explicit, visibly-different angles - a paste you can see is a re-paste
+asks = [("Mon - draft a reply", 0.048), ("Wed - rewrite an update", -0.030),
+        ("Fri - draft a reply", 0.022)]
+ty = cwy + 66
+for ask, pang in asks:
+    context_note(cwx + 30, ty, 300, 112, ORANGE, ORANGE_BG, angle=pang)
+    rect(cwx + 372, ty + 34, 296, 46, stroke="transparent", bg=FAINT, sw=1, rough=1,
+         rounded=True, prefix="msg")
+    text(cwx + 392, ty + 44, ask, size=SMALL, color=GREYD)
+    ty += 172
+text(ox + 40, 900, "the same context, re-pasted into every new thread", size=BODY, color=GREYD)
+claude_face(ox + 940, 440, r=46, color=ORANGE)
+text_centered(ox + 940, 530, "no memory of\nyesterday's brief", size=SMALL, color=GREYD)
+text(ox + 806, 660, "So you paste the\nsame tone guide\nagain. And again.", size=H3, color=ORANGE)
+
+# ============================================================================
+# BEAT 3 - EVERY CHAT STARTS BRIEFED  (the briefed chat)
+# ============================================================================
+ox = beat_head(3, "Every chat starts briefed")
+folder(ox + 60, 350, 300, 200, GREEN, GREEN_BG)
+text(ox + 60, 600, "Project:  Customer replies", size=H3, color=GREEN)
+text(ox + 60, 654, "team tone guide\nexample replies\nthe do-not-say list", size=SMALL, color=GREYD)
+arrow(ox + 384, 466, [[0, 0], [126, 0]], stroke=GREEN, sw=5, rough=1)
+text(ox + 396, 406, "written once", size=SMALL, color=GREEN)
+chat_window(ox + 540, 320, 580, 470)
+rect(ox + 572, 396, 380, 48, stroke="transparent", bg=FAINT, sw=1, rough=1, rounded=True, prefix="msg")
+text(ox + 592, 406, "draft a reply - order late", size=SMALL, color=GREYD)
+rect(ox + 572, 476, 500, 186, stroke=GREEN, bg=GREEN_BG, sw=2, rough=1, rounded=True,
+     fill="solid", opacity=40)
+text(ox + 598, 506, "warm, clear, on-brand -\nfirst time, and every\ntime after that.", size=BODY, color=INK)
+text(ox + 598, 692, "nothing pasted", size=SMALL, color=GREEN)
+text(ox + 60, 830, "one Project, one arrow - a fresh chat is briefed before you type.", size=BODY, color=GREYD)
+demo_badge(ox + 60, 886, "show in Claude desktop app: build the Project live")
+
+# ============================================================================
+# BEAT 4 - WHAT A PROJECT ACTUALLY IS
+# ============================================================================
+ox = beat_head(4, "What a Project actually is")
 cont_x, cont_y, cont_w, cont_h = ox + 40, 300, 1080, 560
 rect(cont_x, cont_y, cont_w, cont_h, stroke=VIOLET, bg=VIOLET_BG, sw=3, rough=1, rounded=True,
      fill="solid", opacity=22, angle=jit(0.8))
@@ -98,9 +206,9 @@ for k, (ttl, body, illus, acc, abg) in enumerate(parts):
 text(cont_x + 20, cont_y + cont_h + 24, "One persistent space. Context lives here,\nnot in your clipboard.", size=H3, color=VIOLET)
 
 # ============================================================================
-# BEAT 3 - THE SHIFT (before -> after)
+# BEAT 5 - THE SHIFT (before -> after)
 # ============================================================================
-ox = beat_head(3, "The shift")
+ox = beat_head(5, "The shift")
 # BEFORE - top
 bx, by = ox + 60, 300
 text(bx, by - 36, "BEFORE", size=H3, color=RED)
@@ -124,9 +232,30 @@ text(bx + 660, ay + 170, "context is permanent", size=SMALL, color=BLUE)
 text(ox + 40, ay + 290, "Write the brief once.\nClaude applies it every time.", size=H3, color=BLUE)
 
 # ============================================================================
-# BEAT 4 - THREE PROJECTS YOU COULD BUILD THIS WEEK
+# BEAT 6 - THE INSTRUCTIONS FIELD  (the folder, opened out)
 # ============================================================================
-ox = beat_head(4, "Three Projects you could build this week")
+ox = beat_head(6, "The instructions field")
+open_folder(ox + 40, 336, 1080, 520, VIOLET_T)
+# the one thing in the folder that is not reference material: saturated, and far
+# bigger than everything around it. The size and the fill do the work - no glow,
+# no highlighter sweep, no sparkles.
+ia = jit(1.5)
+sticky(ox + 80, 386, 470, 360, VIOLET, angle=ia)
+text(ox + 112, 416, "Custom instructions", size=H3, color=WHITE, angle=ia)
+text(ox + 112, 484, "who you are\nyour house voice\nwhat never to say\nBritish English", size=BODY, color=WHITE, angle=ia)
+# the rest of the folder: small, neutral, ink-and-grey reference doodles
+refs = [("tone guide", 620, 396), ("example replies", 860, 396),
+        ("do-not-say list", 620, 560), ("past conversations", 860, 560)]
+for lab, rx, ry in refs:
+    file_icon(ox + rx, ry, 66, 84, abg=FAINT)
+    text(ox + rx, ry + 96, lab, size=SMALL, color=GREYD)
+text(ox + 620, 706, "everything else is reference.\nThis is the part that changes\nevery answer you get.", size=SMALL, color=GREYD)
+text(ox + 40, 886, "the highest-leverage square inch", size=H3, color=INK)
+
+# ============================================================================
+# BEAT 7 - THREE PROJECTS YOU COULD BUILD THIS WEEK
+# ============================================================================
+ox = beat_head(7, "Three Projects you could build this week")
 projects = [
     ("A", "Customer reply drafting", "Support and Ops",
      "your tone guide - examples of\ngreat replies - the do-not-say list", GREEN, GREEN_BG, True),
@@ -151,9 +280,9 @@ for k, (letter, ttl, who, files, acc, abg, gate) in enumerate(projects):
         text(ox + 150, cy + 164, "Drafts only - a person checks\nand sends. Never auto-sent.", size=SMALL, color=RED)
 
 # ============================================================================
-# BEAT 5 - THE MATHS
+# BEAT 8 - THE MATHS
 # ============================================================================
-ox = beat_head(5, "The maths")
+ox = beat_head(8, "The maths")
 base = 700
 line(ox + 60, base, [[0, 0], [560, 0]], stroke=INK, sw=2)
 # setup bar (small) vs saving bar (big)
@@ -170,9 +299,9 @@ highlighter(ox + 56, base + 70, 940, 60, ORANGE_BG, angle=0.0)
 text(ox + 70, base + 82, "The best twenty minutes you'll spend this month.", size=BODY, color=INK)
 
 # ============================================================================
-# BEAT 6 - WHY IT'S A MULTIPLIER
+# BEAT 9 - WHY IT'S A MULTIPLIER
 # ============================================================================
-ox = beat_head(6, "Why it's a multiplier")
+ox = beat_head(9, "Why it's a multiplier")
 sx, sy = ox + 120, 460
 claude_face(sx, sy, r=48, color=TEAL)
 text_centered(sx, sy + 80, "builds the\nProject once", size=SMALL, color=GREYD)
@@ -186,9 +315,9 @@ text(ox + 40, 800, "One person builds Customer Replies. The support team\ndrafts
 text(ox + 40, 900, "Sharing is available on Team and Enterprise plans.", size=SMALL, color=GREY)
 
 # ============================================================================
-# BEAT 7 - LET'S BUILD ONE, LIVE
+# BEAT 10 - LET'S BUILD ONE, LIVE
 # ============================================================================
-ox = beat_head(7, "Let's build one - live")
+ox = beat_head(10, "Let's build one - live")
 steps = ["Name it, and set who can see it",
          "Write the custom instructions",
          "Add two or three reference files, then chat"]
@@ -200,29 +329,48 @@ for k, s in enumerate(steps):
 demo_badge(ox + 140, 320 + 3 * 150 + 10, "show in Claude desktop app:  building a Customer Replies Project")
 
 # ============================================================================
-# BEAT 8 - PAUSE HERE, AND TRY IT
+# BEAT 11 - PAUSE HERE, AND TRY IT
 # ============================================================================
-ox = beat_head(8, "Pause here, and try it")
+ox = beat_head(11, "Pause here, and try it")
 pause_icon(ox + 40, 322, 80, color=YELLOW)
-lines8 = ["Think of one task you repeat.",
-          "Open claude.ai/projects and create it\nnow - even empty.",
-          "Fill it as you watch the rest of\nthis module."]
+lines11 = ["Think of one task you repeat.",
+           "Open claude.ai/projects and create it\nnow - even empty.",
+           "Fill it as you watch the rest of\nthis module."]
 yy = 332
-for s in lines8:
+for s in lines11:
     text(ox + 170, yy, s, size=H3, color=INK)
     yy += text_h(s, H3) + 28
 text(ox + 170, yy + 8, "two minutes - then carry on.", size=BODY, color=GREYD)
 
 # ============================================================================
-# BEAT 9 - ONE PROJECT, TWENTY MINUTES (close)
+# BEAT 12 - SLOW VS LIVE  (two halves, stacked)
 # ============================================================================
-ox = beat_head(9, "One Project. Twenty minutes.")
+ox = beat_head(12, "Slow vs live")
+# TOP half - the slow-changing stuff, which is exactly what a Project holds
+obj_files(ox + 80, 340, BLUE, BLUE_BG)
+text(ox + 320, 350, "slow-changing lives here", size=H3, color=BLUE)
+text(ox + 320, 412, "the tone guide, the templates, the standards -\nthings that change monthly, not hourly.", size=BODY, color=GREYD)
+text(ox + 320, 508, "Drop them into the Project once.", size=BODY, color=INK)
+line(ox + 60, 620, [[0, 0], [1000, 0]], stroke=FAINT, sw=2, dashed=True)
+# BOTTOM half - live data, which is a different tool's job
+pipe(ox + 110, 730, 160, 60, BLUE, BLUE_BG)
+text(ox + 320, 700, "live data comes next: Connectors and MCP", size=H3, color=BLUE)
+text(ox + 320, 762, "stock levels, tickets, today's numbers -\nstale the moment you paste them.", size=BODY, color=GREYD)
+text(ox + 320, 858, "That is a Connector's job, not a Project's.", size=BODY, color=INK)
+
+# ============================================================================
+# BEAT 13 - ONE PROJECT, TWENTY MINUTES (close)
+# ============================================================================
+ox = beat_head(13, "One Project. Twenty minutes.")
 highlighter(ox + 36, 318, 620, 64, VIOLET_BG, angle=0.0)
 text(ox + 50, 330, "Use it once a day for a month.", size=H3, color=INK)
 text(ox + 50, 410, "Then tell me Projects didn't\nchange how you work.", size=H3, color=VIOLET)
 text(ox + 40, 540, "Resources", size=H3, color=VIOLET)
 text(ox + 60, 606, "Anthropic Help Centre - 'How can I create and\nmanage projects' (support.claude.com)", size=SMALL, color=VIOLET)
 text(ox + 60, 700, "AI Ops Learn - Prompt Library - the team's\nshared Projects", size=SMALL, color=VIOLET)
+# the one line to leave them with, as a chip in the beat's own accent
+chip(ox + 40, 860, "third paste of the week = it wants a Project",
+     fill=VIOLET_BG, text_color=INK, border=VIOLET)
 
 # No connector spine and no branding footer: beats read as one picture through
 # layout + consistent rhythm (the ai-foundations natural-flow look), not arrows.
