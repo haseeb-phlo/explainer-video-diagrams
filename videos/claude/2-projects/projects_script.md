@@ -1,6 +1,10 @@
-# Claude Projects - narration script (~9 minutes, Loom)
+# Claude Projects - narration script (~12 minutes, Loom)
 
-Board: `phlo-2.2-claude-projects.excalidraw` (13 beats, one slot each, `GAP = 800`).
+Board: `phlo-2.2-claude-projects.excalidraw` (16 beats, one slot each, `GAP = 800`).
+
+Beats 10 and 12 are the plan / sharing mechanics. If you need a shorter cut for
+an all-staff audience, those two are the ones to drop - nothing later depends on
+them.
 
 Cues:
 - `[CAM]` - talking to camera, board not shared
@@ -87,7 +91,27 @@ square inch in the whole product. Four lines in there - who you are, your house 
 what never to say, British English - will do more for your output than another ten files.
 Spend your twenty minutes here.
 
-## 4:45 - 5:40 · Three examples [BOARD: beat 7]
+## 4:45 - 5:35 · Write it like you mean it [BOARD: beat 7]
+
+So how do you write four good lines? The same way you would write anything someone has
+to act on: make it checkable. "Be professional" is not an instruction - nobody can tell
+whether it was followed. "Warm, plain English, no jargon, under 120 words" is. "Follow
+our format" tells Claude nothing; "greeting, answer, next step, sign-off, in that order"
+tells it everything.
+
+Four rules and you are done. Specific beats vague - write what you could check. Short
+beats long, because this is read before every single answer. Give it structure, headings
+and bullets, not one long paragraph. And keep it consistent: two rules that contradict
+each other means Claude picks one at random, and you will never work out why.
+
+The trigger for adding a line is simple - if you have re-explained something twice, it
+belongs in the instructions.
+
+And for the engineers watching: this is exactly the job a CLAUDE.md file does in Claude
+Code. You write the standing rules, Claude keeps its own notes alongside them, and the
+same discipline applies - specific, short, no contradictions. Link is at the end.
+
+## 5:35 - 6:30 · Three examples [BOARD: beat 8]
 
 What does that look like on your team? Three real examples. One - "customer reply
 drafting": your house tone guide, a set of genuinely good replies, and the do-not-say
@@ -100,17 +124,44 @@ pattern - the context that makes the work good, captured once.
 Note the red bar on the first one: Claude drafts, a person checks and sends. Nothing goes
 out on its own.
 
-## 5:40 - 6:20 · The maths and the multiplier [BOARD: beat 8, then beat 9]
+## 6:30 - 7:00 · The maths [BOARD: beat 9]
 
 Quick maths. Setup is about twenty minutes, once. The saving is hours a week, for as long
 as you do the job. That's the best twenty minutes you'll spend this month.
+
+## 7:00 - 7:45 · What you get on your plan [BOARD: beat 10]
+
+Two practical questions before you go and build one.
+
+First, do you have this? Yes. Projects are on every plan, including free - free accounts
+just cap out at five of them. On Pro, Max, Team and Enterprise, make as many as you like.
+
+Second, how much can you put in one? More than you think. As a knowledge base gets close
+to the context limit, Claude switches to retrieval on its own - pulling in the relevant
+parts rather than everything - which stretches capacity by up to ten times while keeping
+the answers as good. That happens automatically, on paid plans; you don't configure
+anything. So don't ration your files.
+
+## 7:45 - 8:10 · Why it's a multiplier [BOARD: beat 11]
 
 And it gets better, because Projects are shareable. One person builds Customer Replies
 properly, and the whole support team drafts in your house voice from day one - nobody
 else has to figure it out. That's why this is a multiplier and not just a personal
 tidy-up. Sharing's available on our Team and Enterprise plans.
 
-## 6:20 - 7:40 · Build one, properly [BOARD: beat 10]
+## 8:10 - 8:55 · Sharing, and who can do what [BOARD: beat 12]
+
+Worth knowing how that actually works, because you get to choose. There are two levels.
+"Can view" means someone can read what's in the Project and chat in it, but not change
+it - that's what you want for most of the team. "Can edit" means they can rewrite the
+instructions and add or remove files - keep that to the one or two people who own it.
+
+You can share with one person, add people in bulk, or make it visible to the whole
+organisation. Whoever you share with gets an email and finds it under "Shared with me".
+Two caveats: sharing is Team and Enterprise only, and an admin can switch
+organisation-wide sharing off, so if you can't see that option, that's why.
+
+## 8:55 - 10:15 · Build one, properly [BOARD: beat 13]
 
 Three steps, and you've seen them all already. Name it and set who can see it. Write the
 custom instructions. Add two or three reference files, then chat.
@@ -139,13 +190,13 @@ completely different. Same voice, same rules, no pasting. That's the unlock.
 
 `[BACK TO BOARD]`
 
-## 7:40 - 8:05 · Pause and try [BOARD: beat 11]
+## 10:15 - 10:40 · Pause and try [BOARD: beat 14]
 
 Your turn. Pause the video right here. Think of one task you repeat - drafting, reviewing,
 summarising, anything. Open claude.ai/projects and create it now, even if it's empty. Then
 fill it in as you watch the rest of this module. Go.
 
-## 8:05 - 8:40 · Slow vs live [BOARD: beat 12]
+## 10:40 - 11:15 · Slow vs live [BOARD: beat 15]
 
 One thing to be clear about, so you don't get disappointed. A Project holds slow-changing
 material: the tone guide, the templates, the standards - things that change monthly, not
@@ -156,16 +207,17 @@ that is stale the moment you paste it. That's a Connector's job, not a Project's
 it's the next video in this module. Projects give Claude your standards; Connectors give
 it today's numbers.
 
-## 8:40 - 9:05 · Resources [BOARD: beat 13]
+## 11:15 - 11:40 · Resources [BOARD: beat 16]
 
-Two things to take away. Anthropic's Help Centre has a short guide - search "How can I
-create and manage projects" on support.claude.com. And in the AI training series, the
-Prompt Library holds the team's shared Projects, so check there before you build from
-scratch - someone may have started yours already.
+Three things to take away. Anthropic's Help Centre has a short guide - search "How can I
+create and manage projects" on support.claude.com. In the AI training series, the Prompt
+Library holds the team's shared Projects, so check there before you build from scratch -
+someone may have started yours already. And if you write code, the same idea in Claude
+Code is documented at code.claude.com/docs/en/memory.
 
 And the rule of thumb that's on the board: third paste of the week, it wants a Project.
 
-## 9:05 - 9:20 · Close [CAM]
+## 11:40 - 11:55 · Close [CAM]
 
 One Project. Twenty minutes. Use it once a day for a month. Then tell me Projects didn't
 change how you work.

@@ -29,7 +29,7 @@ overflow and text/text collisions before writing. The board must build with
 
 ## Layout
 
-Thirteen beats, one uniform slot each - content ~1120 x 980 (~1.15 : 1), `GAP = 800`
+Sixteen beats, one uniform slot each - content ~1120 x 980 (~1.15 : 1), `GAP = 800`
 of whitespace between slots. You record by panning left to right and framing one beat
 at a time on a 14" laptop; the whitespace is the camera. No two neighbouring beats
 share an accent, so every pan lands on a fresh colour.
@@ -42,18 +42,57 @@ share an accent, so every pan lands on a fresh colour.
 | 4 | What a Project actually is | violet | |
 | 5 | The shift | blue | |
 | 6 | The instructions field | violet | the highest-leverage square inch |
-| 7 | Three Projects you could build this week | green | |
-| 8 | The maths | orange | |
-| 9 | Why it's a multiplier | teal | |
-| 10 | Let's build one - live | indigo | demo badge |
-| 11 | Pause here, and try it | yellow | |
-| 12 | Slow vs live | blue | signposts Connectors and MCP |
-| 13 | One Project. Twenty minutes. | violet | closing chip, lower-left |
+| 7 | Write it like you mean it | indigo | how to write the instructions |
+| 8 | Three Projects you could build this week | green | |
+| 9 | The maths | orange | |
+| 10 | What you get on your plan | blue | plans, the five-Project cap, retrieval |
+| 11 | Why it's a multiplier | teal | |
+| 12 | Sharing, and who can do what | violet | view / edit, and who can see it |
+| 13 | Let's build one - live | indigo | demo badge |
+| 14 | Pause here, and try it | yellow | |
+| 15 | Slow vs live | blue | signposts Connectors and MCP |
+| 16 | One Project. Twenty minutes. | violet | closing chip, lower-left |
 
-Beats 2, 3, 6 and 12 were added after the first cut. Beats 1 and 4-11 and 13 are the
-original nine, unchanged and in their original order.
+Beats 2, 3, 6 and 15 were added in the first extension, 7, 10 and 12 in the second.
+Beats 1, 4, 5, 8, 9, 11, 13, 14 and 16 are the original nine, unchanged and in their
+original order.
 
-## The four added beats, as specified
+## Sources, and what was taken from them
+
+Two documents are the factual backing for the board. Check the board against them
+before re-recording; the plan and capacity figures date faster than anything else.
+
+**[What are Projects?](https://support.claude.com/en/articles/9517075-what-are-projects)**
+- Projects are self-contained workspaces with their own chat histories and knowledge
+  bases - beats 3, 4
+- A knowledge base takes documents, text, code or other files - beat 4
+- Project instructions tailor the responses, including tone and role - beats 4, 6, 7
+- Available on **every plan including free**; free caps at **five** Projects, Pro, Max,
+  Team and Enterprise are uncapped - beat 10
+- On paid plans Claude enables **retrieval (RAG) automatically** when content approaches
+  the context limit, expanding capacity **by up to 10x** at the same response quality -
+  beat 10
+- Sharing is **Team and Enterprise only**: "Can view" and "Can edit" permission levels,
+  individual / bulk / organisation-wide, a "Shared with me" tab, an email on share, and
+  an admin switch that disables organisation-wide sharing - beats 11, 12
+
+**[How Claude remembers your project](https://code.claude.com/docs/en/memory)** - this is
+Claude Code, a developer tool, and this board is watched by all staff. Only the
+transferable part is on the board, per the same filter the Day 3 board uses: **what
+changes what a person types**.
+- Taken: write instructions that are specific enough to verify, keep them short because
+  they load before every answer, structure them with headings and bullets, avoid rules
+  that contradict each other, and write down whatever you would otherwise re-explain -
+  beat 7
+- Taken: one signpost that a CLAUDE.md file does the same job in Claude Code, that you
+  write the rules and Claude keeps its own notes alongside them, plus the doc link on
+  the close beat - beats 7, 16
+- **Deliberately left off**: file paths and precedence, `.claude/rules/`, path-scoped
+  rules, imports, `CLAUDE.local.md`, `claudeMdExcludes`, managed policy files, the
+  `/memory` command, auto-memory storage and settings. Don't add them back - this
+  audience uses the Claude app.
+
+## The seven added beats, as specified
 
 **2 - Cold chat (orange).** A chat window doodle with the same context doodle pasted
 in three times down the thread, each paste slightly rotated. Heading: "every chat
@@ -70,11 +109,25 @@ violet sticky, larger than everything else in the folder, light rotation jitter.
 Caption in ink: "the highest-leverage square inch". **No glow, no highlighter sweep,
 no sparkles** - the size and the saturated fill do the work.
 
-**12 - Slow vs live (blue).** Two halves stacked vertically, not side by side. Top: a
+**15 - Slow vs live (blue).** Two halves stacked vertically, not side by side. Top: a
 documents doodle, label "slow-changing lives here". Bottom: a small pipe doodle,
 label "live data comes next: Connectors and MCP".
 
-**Closing chip.** In the lower-left of beat 13, in that beat's accent, with rotation
+**7 - Write it like you mean it (indigo).** Two vague-versus-checkable instruction
+pairs, crossed and ticked, over a five-line checklist of the writing rules. Closes on
+a chip: "in Claude Code the same job is a CLAUDE.md file".
+
+**10 - What you get on your plan (blue).** Two stacked halves split by a faint dashed
+rule. Top: exactly five grey folder doodles - the free cap, counted rather than
+described. Bottom: six blue folders and an ellipsis, with the retrieval paragraph and
+a "retrieval is a paid-plan feature" chip.
+
+**12 - Sharing, and who can do what (violet).** Two permission cards side by side,
+each a list of ticks (and one cross on "Can view - change it"), over the three ways to
+share and the three caveats. Ticks and crosses, not prose - the difference between the
+levels has to be readable at a glance.
+
+**Closing chip.** In the lower-left of beat 16, in that beat's accent, with rotation
 jitter: "third paste of the week = it wants a Project". A chip inside a beat slot -
 the board has no footers.
 
