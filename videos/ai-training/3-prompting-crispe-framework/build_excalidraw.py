@@ -8,17 +8,31 @@ palette colour-coded per beat. Composition + the one-off illustrations (crumpled
 note, dial, quill, phone, microphone, monitor) live here; the look lives in the
 kit.
 
-SIX BEATS, each in its own 1200-wide slot with GAP = 800 of whitespace between
-them. Style B has no frames - a literal Excalidraw frame is a hard Style-B guard
-failure - so the beat slots ARE the "frames": you pan to one at a time and the
-whitespace keeps its neighbours off-screen.
+ELEVEN BEATS, each in its own 1200-wide slot with GAP = 800 of whitespace
+between them. Style B has no frames - a literal Excalidraw frame is a hard
+Style-B guard failure - so the beat slots ARE the "frames": you pan to one at a
+time and the whitespace keeps its neighbours off-screen.
 
-  1 orange  vague in, vague out - the one-liner on a crumpled note
-  2 green   the same ask rebuilt as three sticky notes  [demo]
-  3 violet  CRISPE as six dials, 3 x 2
-  4 blue    fault-finder - symptom -> the dial that fixes it
-  5 teal    set once, never repeat - Styles + preferences  [demo]
-  6 yellow  capture by voice, shape at your desk
+   1 orange  vague in, vague out - the one-liner on a crumpled note
+   2 green   the same ask rebuilt as three sticky notes  [demo]
+   3 violet  CRISPE as six dials, 3 x 2
+   4 blue    fault-finder - symptom -> the dial that fixes it
+   5 indigo  tell it why - the reason travels further than the rule
+   6 green   three examples beat a paragraph
+   7 red     say what to do, not what not to do
+   8 blue    paste first, ask last - and ask for the quotes
+   9 teal    set once, never repeat - Styles + preferences  [demo]
+  10 violet  different models, different habits
+  11 yellow  capture by voice, shape at your desk
+
+Beats 5-8 and 10 come from Anthropic's "Prompting best practices" page
+(platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
+and its per-model sub-pages. Only the parts that change what a person TYPES are
+on the board: the API-only material (effort, adaptive thinking, budget_tokens,
+prefill migration, computer-use toolsets, code-review harnesses, subagent caps)
+is deliberately left off, because this audience uses the Claude app, not the API.
+Beat 10's model habits date faster than anything else here - the beat says so on
+the board.
 
 Recording: there is no animation any more, the camera IS the reveal. Pan
 left-to-right, one beat per frame, ~3s of narration each; cut away to the Claude
@@ -44,10 +58,11 @@ random.seed(30330)  # deterministic - re-runs produce identical files
 # ----------------------------------------------------------------------------
 # BEAT SCAFFOLD
 # ----------------------------------------------------------------------------
-N = 6
+N = 11
 GAP = 800
 WID = {i: 1200 for i in range(1, N + 1)}
-ACCENT = {1: ORANGE, 2: GREEN, 3: VIOLET, 4: BLUE, 5: TEAL, 6: YELLOW}
+ACCENT = {1: ORANGE, 2: GREEN, 3: VIOLET, 4: BLUE, 5: INDIGO, 6: GREEN,
+          7: RED, 8: BLUE, 9: TEAL, 10: VIOLET, 11: YELLOW}
 OX = {}
 _c = 0
 for _i in range(1, N + 1):
@@ -247,9 +262,83 @@ text(ox + 60, 760, "The fault is almost never \"Claude got it wrong\".\nIt's a d
      size=BODY, color=BLUE)
 
 # ============================================================================
-# BEAT 5 - SET ONCE, NEVER REPEAT  (teal)
+# BEAT 5 - TELL IT WHY  (indigo)
 # ============================================================================
-ox = beat_head(5, "Set once, never repeat",
+ox = beat_head(5, "Tell it why",
+               "Claude is a brilliant new colleague on their first day.\nGive the reason and it works out the rest itself.")
+text(ox + 40, 250, "the rule on its own", size=SMALL, color=GREY)
+sticky(ox + 40, 280, 560, 92, FAINT, angle=jit(1.3))
+text(ox + 72, 310, "NEVER use ellipses", size=BODY, color=GREYD)
+text(ox + 40, 400, "the rule plus the reason", size=SMALL, color=GREY)
+sticky(ox + 40, 430, 760, 172, INDIGO_BG, angle=jit(-1.2))
+text(ox + 72, 458, "This will be read aloud by a text-to-speech\nengine, so never use ellipses - it won't\nknow how to pronounce them.", size=BODY, color=INK)
+text(ox + 40, 626, "Same rule. Only the second one lets Claude work out the cases you\ndidn't think to list.", size=SMALL, color=INDIGO)
+sticky(ox + 40, 730, 1040, 156, INDIGO_T, angle=jit(1.1))
+text(ox + 76, 754, "Golden rule", size=H3, color=INDIGO)
+text(ox + 76, 806, "Show your prompt to a colleague with no context. If they'd\nbe confused, Claude will be too.", size=BODY, color=INK)
+
+# ============================================================================
+# BEAT 6 - THREE EXAMPLES BEAT A PARAGRAPH  (green)
+# ============================================================================
+ox = beat_head(6, "Show, don't just tell",
+               "Examples are the most reliable way to steer format,\ntone and structure. Three to five is the sweet spot.")
+for k in range(3):
+    cx0 = ox + 60 + k * 360
+    sticky(cx0, 296, 300, 216, GREEN_BG, angle=jit(1.8))
+    rect(cx0 + 24, 320, 252, 168, stroke=GREEN, bg=WHITE, sw=2, rough=1, rounded=True, prefix="excard")
+    text(cx0 + 44, 336, "<example>", size=SMALL, color=GREEN)
+    for r in range(4):
+        line(cx0 + 44, 384 + r * 24, [[0, 0], [(200 if r % 2 else 152), 0]], stroke=GREY, sw=2)
+check_item(ox + 60, 570, "Relevant - mirror the job you actually do", accent=GREEN)
+check_item(ox + 60, 632, "Diverse - vary them, or Claude copies a quirk", accent=GREEN)
+check_item(ox + 60, 694, "Structured - wrap each one in <example> tags", accent=GREEN)
+text(ox + 60, 780, "Stuck for examples? Paste your best one and ask Claude to write\nthree more like it, then keep the ones that fit.", size=BODY, color=GREYD)
+
+# ============================================================================
+# BEAT 7 - SAY WHAT TO DO  (red)
+# ============================================================================
+ox = beat_head(7, "Say what to do",
+               "\"Don't do X\" leaves Claude guessing at what you\nwanted instead. Name the thing you want.")
+PAIRS = [
+    ("Do not use markdown",
+     "Write in smoothly flowing prose paragraphs."),
+    ("Don't write so much",
+     "Give me a high-level summary unless I ask\nfor the detail."),
+    ("Create a dashboard",
+     "Create a dashboard. Include as many relevant\nfeatures and interactions as possible. Go\nbeyond the basics."),
+]
+for k, (bad, good) in enumerate(PAIRS):
+    ry = 290 + k * 186
+    xmark(ox + 60, ry + 6, RED, s=20, sw=4)
+    text(ox + 106, ry, bad, size=BODY, color=GREYD)
+    tick(ox + 58, ry + 54, GREEN)
+    text(ox + 106, ry + 50, good, size=BODY, color=INK)
+text(ox + 60, 848, "Your prompt's style rubs off too: drop the markdown out of the prompt\nand you get less of it back.", size=SMALL, color=RED)
+
+# ============================================================================
+# BEAT 8 - PASTE FIRST, ASK LAST  (blue)
+# ============================================================================
+ox = beat_head(8, "Paste first, ask last",
+               "On a long or multi-document paste, put the documents\nat the top and your question at the very end.")
+rect(ox + 60, 300, 440, 400, stroke=BLUE, bg=WHITE, sw=3, rough=1, rounded=True, prefix="prompt")
+text(ox + 60, 264, "one prompt, in this order", size=SMALL, color=GREY)
+arrow(ox + 30, 312, [[0, 0], [0, 376]], stroke=BLUE, sw=3, rough=1)
+rect(ox + 88, 330, 384, 104, stroke=GREYD, bg=BLUE_T, sw=2, rough=1, rounded=True, prefix="doc")
+text(ox + 112, 368, "the document", size=BODY, color=INK)
+rect(ox + 88, 452, 384, 104, stroke=GREYD, bg=BLUE_T, sw=2, rough=1, rounded=True, prefix="doc")
+text(ox + 112, 490, "the other document", size=BODY, color=INK)
+rect(ox + 88, 578, 384, 96, stroke=BLUE, bg=BLUE_BG, sw=3, rough=1, rounded=True, prefix="q")
+text(ox + 112, 612, "your question", size=BODY, color=BLUE)
+sticky(ox + 560, 330, 580, 300, BLUE_BG, angle=jit(-1.2))
+text(ox + 596, 356, "Then ask for the quotes", size=H3, color=BLUE)
+text(ox + 596, 416, "\"Quote the lines that answer\nthis, then answer using only\nthose quotes.\"", size=BODY, color=INK)
+text(ox + 596, 556, "an answer you can check, not one\nyou have to take on trust", size=SMALL, color=GREYD)
+text(ox + 60, 748, "Question-at-the-end matters most on long, multi-document pastes.\nOn a one-line ask it makes no difference - don't overthink it.", size=SMALL, color=GREYD)
+
+# ============================================================================
+# BEAT 9 - SET ONCE, NEVER REPEAT  (teal)
+# ============================================================================
+ox = beat_head(9, "Set once, never repeat",
                "Two settings that carry across every chat, so you\nstop retyping the same instructions.")
 quill(ox + 300, 500, 200, TEAL, TEAL_T)
 text_centered(ox + 300, 610, "Styles", size=H3, color=TEAL)
@@ -262,9 +351,37 @@ text(ox + 56, 722, "set once, never repeat", size=BODY, color=TEAL)
 demo_badge(ox + 40, 790, "show in Claude desktop app:  set a Style and preferences")
 
 # ============================================================================
-# BEAT 6 - CAPTURE BY VOICE  (yellow)
+# BEAT 10 - DIFFERENT MODELS, DIFFERENT HABITS  (violet)
 # ============================================================================
-ox = beat_head(6, "Capture by voice",
+ox = beat_head(10, "Different models, different habits",
+               "The model you pick changes what comes back. These\nhabits move with every new model - check the docs.")
+MODELS = [
+    ("Claude Opus 5",
+     "answers run long, and it already checks its own work",
+     "ask for brief - and don't tell it to double-check itself"),
+    ("Claude Sonnet 5",
+     "length tracks the task, and it reads you very literally",
+     "spell out the scope: \"every section, not just the first\""),
+    ("Claude Fable 5 / Mythos 5",
+     "built to run on its own for a long time",
+     "ask it to back progress claims with evidence"),
+    ("Claude Opus 4.8",
+     "reasons rather than reaching for tools, and has a strong house look",
+     "say when to search, and describe the look you want"),
+]
+for k, (name, habit, todo) in enumerate(MODELS):
+    ry = 300 + k * 150
+    sticky(ox + 40, ry, 1080, 140, VIOLET_T, angle=jit(1.0))
+    text(ox + 76, ry + 18, name, size=H3, color=VIOLET)
+    text(ox + 76, ry + 64, habit, size=SMALL, color=GREYD)
+    text(ox + 76, ry + 96, todo, size=BODY, color=INK)
+text(ox + 40, 918, "Docs: Anthropic - Prompting best practices, platform.claude.com",
+     size=SMALL, color=VIOLET)
+
+# ============================================================================
+# BEAT 11 - CAPTURE BY VOICE  (yellow)
+# ============================================================================
+ox = beat_head(11, "Capture by voice",
                "Talking is faster than typing, and a rambling\nspoken prompt still beats a vague written one.")
 phone(ox + 90, 320, 250, 460, YELLOW_T)
 mic_icon(ox + 215, 540, 92, YELLOW)
