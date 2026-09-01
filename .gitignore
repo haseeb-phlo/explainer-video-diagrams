@@ -2,3 +2,6 @@ __pycache__/
 .superset/
 preview.png
 out.png
+
+# macOS
+.DS_Store
