@@ -18,21 +18,22 @@ PAN ORDER (left to right - the whitespace between slots IS the camera; frame one
 beat at a time, ~20-40s each):
 
      1  RED     The tax you pay every morning
-     2  ORANGE  Every chat starts from zero        <- cold chat
+     2  ORANGE  It remembers you, not the job      <- cold chat
      3  GREEN   Every chat starts briefed          <- briefed chat  [CUT TO CLAUDE DESKTOP]
      4  VIOLET  What a Project actually is
-     5  BLUE    The shift
-     6  VIOLET  The instructions field             <- the highest-leverage square inch
-     7  INDIGO  Write it like you mean it          <- how to write the instructions
-     8  GREEN   Three Projects you could build this week
-     9  ORANGE  The maths
-    10  BLUE    What you get on your plan          <- plans, the five-Project cap, retrieval
-    11  TEAL    Why it's a multiplier
-    12  VIOLET  Sharing, and who can do what       <- view / edit, and who can see it
-    13  INDIGO  Let's build one - live             [CUT TO CLAUDE DESKTOP]
-    14  YELLOW  Pause here, and try it
-    15  BLUE    Slow vs live                       <- signposts Connectors and MCP
-    16  VIOLET  One Project. Twenty minutes.       (closing chip, lower-left)
+     5  TEAL    Three places context can live      <- Instructions / Memory / Project
+     6  BLUE    The shift
+     7  VIOLET  The instructions field             <- the highest-leverage square inch
+     8  INDIGO  Write it like you mean it          <- how to write the instructions
+     9  GREEN   Three Projects you could build this week
+    10  ORANGE  The maths
+    11  BLUE    What you get on your plan          <- plans, the five-Project cap, retrieval
+    12  TEAL    Why it's a multiplier
+    13  VIOLET  Sharing, and who can do what       <- view / edit, and who can see it
+    14  INDIGO  Let's build one - live             [CUT TO CLAUDE DESKTOP]
+    15  YELLOW  Pause here, and try it
+    16  BLUE    Slow vs live                       <- signposts Connectors and MCP
+    17  VIOLET  One Project. Twenty minutes.       (closing chip, lower-left)
 
 Beats 2, 3, 6 and 15 were added in the first extension; 7, 10 and 12 in the
 second, which folded in the Claude Projects help-centre article (plans, the
@@ -65,11 +66,11 @@ random.seed(22022)
 # identical and fits a 14" MacBook screen. No two neighbouring beats share an
 # accent, so a pan always lands on a fresh colour.
 GAP = 800
-N_BEATS = 16
+N_BEATS = 17
 WID = {i: 1200 for i in range(1, N_BEATS + 1)}
-ACCENT = {1: RED, 2: ORANGE, 3: GREEN, 4: VIOLET, 5: BLUE, 6: VIOLET, 7: INDIGO,
-          8: GREEN, 9: ORANGE, 10: BLUE, 11: TEAL, 12: VIOLET, 13: INDIGO,
-          14: YELLOW, 15: BLUE, 16: VIOLET}
+ACCENT = {1: RED, 2: ORANGE, 3: GREEN, 4: VIOLET, 5: TEAL, 6: BLUE, 7: VIOLET,
+          8: INDIGO, 9: GREEN, 10: ORANGE, 11: BLUE, 12: TEAL, 13: VIOLET,
+          14: INDIGO, 15: YELLOW, 16: BLUE, 17: VIOLET}
 OX, _c = {}, 0
 for _i in range(1, N_BEATS + 1):
     OX[_i] = _c
@@ -154,9 +155,13 @@ text(ox + 180, 726, "= about 1 hour a week. Every week.", size=H3, color=RED)
 text(ox + 40, 830, "Re-explaining yourself is invisible work. It adds up.", size=BODY, color=GREYD)
 
 # ============================================================================
-# BEAT 2 - EVERY CHAT STARTS FROM ZERO  (the cold chat)
+# BEAT 2 - IT REMEMBERS YOU, NOT THE JOB  (the cold chat)
+# Claude carries memory and your "Instructions for Claude" across chats - so the
+# old "every chat starts from zero" framing was simply false, and contradicted
+# Day 3. What does NOT carry over is THIS job's rules and files. That is the gap
+# a Project fills, and it is the honest reason you still re-paste.
 # ============================================================================
-ox = beat_head(2, "Every chat starts from zero")
+ox = beat_head(2, "It remembers you, not the job")
 cwx, cwy, cww, cwh = ox + 40, 300, 700, 566
 chat_window(cwx, cwy, cww, cwh)
 # explicit, visibly-different angles - a paste you can see is a re-paste
@@ -169,10 +174,17 @@ for ask, pang in asks:
          rounded=True, prefix="msg")
     text(cwx + 392, ty + 44, ask, size=SMALL, color=GREYD)
     ty += 172
-text(ox + 40, 900, "the same context, re-pasted into every new thread", size=BODY, color=GREYD)
-claude_face(ox + 940, 440, r=46, color=ORANGE)
-text_centered(ox + 940, 530, "no memory of\nyesterday's brief", size=SMALL, color=GREYD)
-text(ox + 806, 660, "So you paste the\nsame tone guide\nagain. And again.", size=H3, color=ORANGE)
+text(ox + 40, 900, "the job context, re-pasted into every new thread", size=BODY, color=GREYD)
+claude_face(ox + 940, 400, r=46, color=ORANGE)
+text(ox + 800, 490, "carries over:", size=SMALL, color=GREEN)
+for _k, _lab in enumerate(["how you like answers", "what it knows about you"]):
+    tick(ox + 800, 526 + _k * 40, GREEN, s=20, sw=4)
+    text(ox + 838, 520 + _k * 40, _lab, size=SMALL, color=GREYD)
+text(ox + 800, 620, "does not:", size=SMALL, color=RED)
+for _k, _lab in enumerate(["this job's tone guide", "its examples and rules"]):
+    xmark(ox + 802, 658 + _k * 40, RED, s=18, sw=4)
+    text(ox + 838, 650 + _k * 40, _lab, size=SMALL, color=GREYD)
+text(ox + 800, 748, "So you paste the\nsame tone guide\nagain. And again.", size=H3, color=ORANGE)
 
 # ============================================================================
 # BEAT 3 - EVERY CHAT STARTS BRIEFED  (the briefed chat)
@@ -219,9 +231,34 @@ for k, (ttl, body, illus, acc, abg) in enumerate(parts):
 text(cont_x + 20, cont_y + cont_h + 24, "One persistent space. Context lives here,\nnot in your clipboard.", size=H3, color=VIOLET)
 
 # ============================================================================
-# BEAT 5 - THE SHIFT (before -> after)
+# BEAT 5 - THREE PLACES CONTEXT CAN LIVE
 # ============================================================================
-ox = beat_head(5, "The shift")
+# Answers the obvious objection raised by Day 3: "Claude already remembers me,
+# why do I need a Project?" Facts from support.claude.com/en/articles/11817273
+# and .../10185728 - memory is on by default on Pro and Max, off until an owner
+# enables it on Team and Enterprise, and absent on Free; "Instructions for
+# Claude" is account-wide on every plan; each Project keeps its OWN memory space.
+ox = beat_head(5, "Three places context can live")
+places = [("Instructions for Claude", "Settings - every plan",
+           "How you like answers, everywhere.\nSet once, applies to every chat.",
+           290, 140, GREYD, FAINT),
+          ("Memory", "Settings > Memory",
+           "What Claude picks up about you as you\nwork. On by default on Pro and Max; an\nowner switches it on for Team and\nEnterprise; not on Free.",
+           460, 200, GREYD, FAINT),
+          ("A Project", "this job, and this job only",
+           "This job's rules and this job's files -\nplus its own separate memory space.\nThe only one you can hand to the team.",
+           690, 170, TEAL, TEAL_BG)]
+for ttl, scope, body, py, ph, acc, abg in places:
+    sticky(ox + 40, py, 1080, ph, abg, angle=jit(0.7))
+    text(ox + 76, py + 24, ttl, size=H3, color=acc)
+    text(ox + 76, py + 74, scope, size=SMALL, color=GREY)
+    text(ox + 460, py + 24, body, size=BODY, color=INK)
+text(ox + 40, 886, "the first two follow you everywhere. Only the last is about one job -\nand only the last can be handed to someone else.", size=BODY, color=GREYD)
+
+# ============================================================================
+# BEAT 6 - THE SHIFT (before -> after)
+# ============================================================================
+ox = beat_head(6, "The shift")
 # BEFORE - top
 bx, by = ox + 60, 300
 text(bx, by - 36, "BEFORE", size=H3, color=RED)
@@ -245,9 +282,9 @@ text(bx + 660, ay + 170, "context is permanent", size=SMALL, color=BLUE)
 text(ox + 40, ay + 290, "Write the brief once.\nClaude applies it every time.", size=H3, color=BLUE)
 
 # ============================================================================
-# BEAT 6 - THE INSTRUCTIONS FIELD  (the folder, opened out)
+# BEAT 7 - THE INSTRUCTIONS FIELD  (the folder, opened out)
 # ============================================================================
-ox = beat_head(6, "The instructions field")
+ox = beat_head(7, "The instructions field")
 open_folder(ox + 40, 336, 1080, 520, VIOLET_T)
 # the one thing in the folder that is not reference material: saturated, and far
 # bigger than everything around it. The size and the fill do the work - no glow,
@@ -266,41 +303,41 @@ text(ox + 620, 706, "everything else is reference.\nThis is the part that change
 text(ox + 40, 886, "the highest-leverage square inch", size=H3, color=INK)
 
 # ============================================================================
-# BEAT 7 - WRITE IT LIKE YOU MEAN IT  (how to write the instructions)
+# BEAT 8 - WRITE IT LIKE YOU MEAN IT  (how to write the instructions)
 # ============================================================================
 # Distilled from Claude Code's memory docs (code.claude.com/docs/en/memory):
 # only the part that changes what a PERSON TYPES - specific over vague, short,
 # structured, no contradictions, write down what you would otherwise re-explain.
 # The developer machinery (.claude/rules/, claudeMdExcludes, /memory, auto
 # memory settings) is deliberately off the board; this audience uses the app.
-ox = beat_head(7, "Write it like you mean it")
-py7 = 300
-pairs7 = [("be professional", "warm, plain English, no jargon,\nunder 120 words"),
+ox = beat_head(8, "Write it like you mean it")
+py8 = 300
+pairs8 = [("be professional", "warm, plain English, no jargon,\nunder 120 words"),
           ("follow our format", "greeting, answer, next step,\nsign-off - in that order")]
-for vague, precise in pairs7:
-    xmark(ox + 46, py7 + 10, RED, s=22, sw=4)
-    text(ox + 96, py7, '"' + vague + '"', size=BODY, color=GREYD)
-    arrow(ox + 420, py7 + 20, [[0, 0], [90, 0]], stroke=INDIGO, sw=3, rough=1)
-    tick(ox + 550, py7 + 2, GREEN)
-    text(ox + 600, py7, '"' + precise + '"', size=BODY, color=INK)
-    py7 += 150
-ry7 = 610
-for r7 in ["Specific beats vague - write what you could check.",
+for vague, precise in pairs8:
+    xmark(ox + 46, py8 + 10, RED, s=22, sw=4)
+    text(ox + 96, py8, '"' + vague + '"', size=BODY, color=GREYD)
+    arrow(ox + 420, py8 + 20, [[0, 0], [90, 0]], stroke=INDIGO, sw=3, rough=1)
+    tick(ox + 550, py8 + 2, GREEN)
+    text(ox + 600, py8, '"' + precise + '"', size=BODY, color=INK)
+    py8 += 150
+ry8 = 610
+for r8 in ["Specific beats vague - write what you could check.",
            "Short beats long - it is read before every answer.",
            "Structure it: headings and bullets, not a paragraph.",
            "Two rules that contradict each other get picked at random.",
            "Re-explained it twice? It belongs in here."]:
-    check_item(ox + 46, ry7, r7, accent=INDIGO)
-    ry7 += 52
+    check_item(ox + 46, ry8, r8, accent=INDIGO)
+    ry8 += 52
 chip(ox + 46, 890, "in Claude Code the same job is a CLAUDE.md file",
      fill=INDIGO_BG, text_color=INK, border=INDIGO)
 text(ox + 46, 960, "you write the rules; Claude keeps its own notes alongside them",
      size=SMALL, color=GREY)
 
 # ============================================================================
-# BEAT 8 - THREE PROJECTS YOU COULD BUILD THIS WEEK
+# BEAT 9 - THREE PROJECTS YOU COULD BUILD THIS WEEK
 # ============================================================================
-ox = beat_head(8, "Three Projects you could build this week")
+ox = beat_head(9, "Three Projects you could build this week")
 projects = [
     ("A", "Customer reply drafting", "Support and Ops",
      "your tone guide - examples of\ngreat replies - the do-not-say list", GREEN, GREEN_BG, True),
@@ -325,9 +362,9 @@ for k, (letter, ttl, who, files, acc, abg, gate) in enumerate(projects):
         text(ox + 150, cy + 164, "Drafts only - a person checks\nand sends. Never auto-sent.", size=SMALL, color=RED)
 
 # ============================================================================
-# BEAT 9 - THE MATHS
+# BEAT 10 - THE MATHS
 # ============================================================================
-ox = beat_head(9, "The maths")
+ox = beat_head(10, "The maths")
 base = 700
 line(ox + 60, base, [[0, 0], [560, 0]], stroke=INK, sw=2)
 # setup bar (small) vs saving bar (big)
@@ -344,12 +381,12 @@ highlighter(ox + 56, base + 70, 940, 60, ORANGE_BG, angle=0.0)
 text(ox + 70, base + 82, "The best twenty minutes you'll spend this month.", size=BODY, color=INK)
 
 # ============================================================================
-# BEAT 10 - WHAT YOU GET ON YOUR PLAN
+# BEAT 11 - WHAT YOU GET ON YOUR PLAN
 # ============================================================================
 # Figures from the Claude Projects help-centre article: Projects are on every
 # plan, free is capped at five, paid plans are uncapped and fall back to
 # retrieval (up to 10x capacity) when a knowledge base outgrows the context.
-ox = beat_head(10, "What you get on your plan")
+ox = beat_head(11, "What you get on your plan")
 text(ox + 40, 296, "Free", size=H2, color=GREYD)
 for k in range(5):
     folder(ox + 44 + k * 116, 362, 96, 62, GREYD, FAINT, papers=False)
@@ -366,9 +403,9 @@ text(ox + 44, 736, "As many as you like. And as a knowledge base gets close to t
 chip(ox + 44, 880, "retrieval is a paid-plan feature", fill=BLUE_BG, text_color=INK, border=BLUE)
 
 # ============================================================================
-# BEAT 11 - WHY IT'S A MULTIPLIER
+# BEAT 12 - WHY IT'S A MULTIPLIER
 # ============================================================================
-ox = beat_head(11, "Why it's a multiplier")
+ox = beat_head(12, "Why it's a multiplier")
 sx, sy = ox + 120, 460
 claude_face(sx, sy, r=48, color=TEAL)
 text_centered(sx, sy + 80, "builds the\nProject once", size=SMALL, color=GREYD)
@@ -382,12 +419,12 @@ text(ox + 40, 800, "One person builds Customer Replies. The support team\ndrafts
 text(ox + 40, 900, "Sharing is available on Team and Enterprise plans.", size=SMALL, color=GREY)
 
 # ============================================================================
-# BEAT 12 - SHARING, AND WHO CAN DO WHAT
+# BEAT 13 - SHARING, AND WHO CAN DO WHAT
 # ============================================================================
 # The mechanics behind beat 11's fan-out, per the help-centre article: two
 # permission levels, three ways to share, and the admin switch that can turn
 # organisation-wide sharing off.
-ox = beat_head(12, "Sharing, and who can do what")
+ox = beat_head(13, "Sharing, and who can do what")
 # what each level can actually do - ticks and crosses, not prose
 levels = [(40, "Can view", jit(1.0),
            [(True, "read what is in it"), (True, "chat in it"), (False, "change it")]),
@@ -407,17 +444,17 @@ for lx, ttl, la, rows in levels:
         yy += 52
 text(ox + 40, 636, "Share it with one person, add people in bulk, or make it visible to the\n"
                    "whole organisation.", size=BODY, color=INK)
-ry12 = 746
-for r12 in ['They get an email, and find it under "Shared with me".',
+ry13 = 746
+for r13 in ['They get an email, and find it under "Shared with me".',
             "Team and Enterprise plans only.",
             "An admin can switch organisation-wide sharing off."]:
-    check_item(ox + 40, ry12, r12, accent=VIOLET)
-    ry12 += 58
+    check_item(ox + 40, ry13, r13, accent=VIOLET)
+    ry13 += 58
 
 # ============================================================================
-# BEAT 13 - LET'S BUILD ONE, LIVE
+# BEAT 14 - LET'S BUILD ONE, LIVE
 # ============================================================================
-ox = beat_head(13, "Let's build one - live")
+ox = beat_head(14, "Let's build one - live")
 steps = ["Name it, and set who can see it",
          "Write the custom instructions",
          "Add two or three reference files, then chat"]
@@ -429,23 +466,23 @@ for k, s in enumerate(steps):
 demo_badge(ox + 140, 320 + 3 * 150 + 10, "show in Claude desktop app:  building a Customer Replies Project")
 
 # ============================================================================
-# BEAT 14 - PAUSE HERE, AND TRY IT
+# BEAT 15 - PAUSE HERE, AND TRY IT
 # ============================================================================
-ox = beat_head(14, "Pause here, and try it")
+ox = beat_head(15, "Pause here, and try it")
 pause_icon(ox + 40, 322, 80, color=YELLOW)
-lines14 = ["Think of one task you repeat.",
+lines15 = ["Think of one task you repeat.",
            "Open claude.ai/projects and create it\nnow - even empty.",
            "Fill it as you watch the rest of\nthis module."]
 yy = 332
-for s in lines14:
+for s in lines15:
     text(ox + 170, yy, s, size=H3, color=INK)
     yy += text_h(s, H3) + 28
 text(ox + 170, yy + 8, "two minutes - then carry on.", size=BODY, color=GREYD)
 
 # ============================================================================
-# BEAT 15 - SLOW VS LIVE  (two halves, stacked)
+# BEAT 16 - SLOW VS LIVE  (two halves, stacked)
 # ============================================================================
-ox = beat_head(15, "Slow vs live")
+ox = beat_head(16, "Slow vs live")
 # TOP half - the slow-changing stuff, which is exactly what a Project holds
 obj_files(ox + 80, 340, BLUE, BLUE_BG)
 text(ox + 320, 350, "slow-changing lives here", size=H3, color=BLUE)
@@ -459,9 +496,9 @@ text(ox + 320, 762, "stock levels, tickets, today's numbers -\nstale the moment 
 text(ox + 320, 858, "That is a Connector's job, not a Project's.", size=BODY, color=INK)
 
 # ============================================================================
-# BEAT 16 - ONE PROJECT, TWENTY MINUTES (close)
+# BEAT 17 - ONE PROJECT, TWENTY MINUTES (close)
 # ============================================================================
-ox = beat_head(16, "One Project. Twenty minutes.")
+ox = beat_head(17, "One Project. Twenty minutes.")
 highlighter(ox + 36, 318, 620, 64, VIOLET_BG, angle=0.0)
 text(ox + 50, 330, "Use it once a day for a month.", size=H3, color=INK)
 text(ox + 50, 410, "Then tell me Projects didn't\nchange how you work.", size=H3, color=VIOLET)

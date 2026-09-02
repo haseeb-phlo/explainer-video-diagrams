@@ -1,8 +1,8 @@
-# Day 4: Claude Projects - narration script (~12 minutes, Loom)
+# Day 4: Claude Projects - narration script (~13 minutes, Loom)
 
-Board: `videos/ai-training/4-claude-projects/claude-projects.excalidraw` (16 beats, one slot each, `GAP = 800`).
+Board: `videos/ai-training/4-projects/claude-projects.excalidraw` (17 beats, one slot each, `GAP = 800`).
 
-Beats 10 and 12 are the plan / sharing mechanics. If you need a shorter cut for
+Beats 11 and 13 are the plan / sharing mechanics. If you need a shorter cut for
 an all-staff audience, those two are the ones to drop - nothing later depends on
 them.
 
@@ -32,16 +32,19 @@ you ask your actual question. That's maybe ten minutes a day of just setting the
 and you do it again tomorrow, and the day after. Call it an hour a week, every week,
 forever. It's invisible, so it never lands on a to-do list. Projects delete that hour.
 
-## 0:55 - 1:35 · Every chat starts from zero [BOARD: beat 2]
+## 0:55 - 1:35 · It remembers you, not the job [BOARD: beat 2]
 
-Look at what's actually happening in the chat window. Monday, you paste in the team tone
-guide, then ask for a reply. Wednesday, new chat, you paste the same tone guide in again,
-then ask for a rewrite. Friday, same thing. Three pastes of the identical document, and
-they're not even tidy - it's whatever survived the clipboard that morning.
+Now, let me head off the obvious objection, because Claude does remember you. If you're
+on Pro or Max, memory is on by default - Claude picks up how you work and how you like
+your answers and carries that between chats. And whatever you put in "Instructions for
+Claude" in Settings applies to every conversation you have, on any plan.
 
-That's not Claude being forgetful. A new chat genuinely starts from zero every time; it
-has no memory of yesterday's brief. So the context you need lives in your clipboard,
-and it gets re-typed, re-found and re-pasted for as long as you keep working this way.
+So why is this chat window still full of the same paste, three times over? Because what
+carries over is about *you*. It isn't this job's tone guide, this job's example replies,
+or this job's do-not-say list. Claude remembers you; it doesn't know the job. So on
+Monday you paste the tone guide, on Wednesday you paste it again, and on Friday you
+paste it again - and none of them are tidy, it's whatever survived the clipboard that
+morning.
 
 ## 1:35 - 2:45 · Every chat starts briefed [BOARD: beat 3]
 
@@ -73,13 +76,32 @@ Here's the part that matters: every chat you start inside the Project automatica
 inherits the instructions and the files. You never paste them again. The context lives in
 the Project, not in your clipboard.
 
-## 3:30 - 4:00 · The shift [BOARD: beat 5]
+## 3:30 - 4:15 · Three places context can live [BOARD: beat 5]
+
+Let's put that side by side, because there are three different places context can live
+and people mix them up constantly.
+
+"Instructions for Claude", in Settings - account-wide, on every plan. How you like
+answers, everywhere. Set once and forget it.
+
+Memory - Settings, then Memory. What Claude picks up about you as you work. On by
+default on Pro and Max. On Team and Enterprise it's off until an owner switches it on
+for the organisation, so if you can't find it, that's why. It isn't on Free at all.
+
+And a Project. This job's rules, this job's files - and here's the bit worth knowing:
+each Project keeps its own separate memory space, so what Claude learns in one Project
+doesn't bleed into another.
+
+The first two follow you everywhere. Only the third is about one job. And only the third
+is something you can hand to somebody else - which is where this is going.
+
+## 4:15 - 4:45 · The shift [BOARD: beat 6]
 
 So the whole shift is this. Before: paste context every time, hope you remembered all of
 it. After: context is permanent, applied to every chat without you lifting a finger. You
 write the brief once, and Claude uses it every single time.
 
-## 4:00 - 4:45 · The instructions field [BOARD: beat 6]
+## 4:45 - 5:30 · The instructions field [BOARD: beat 7]
 
 If you only get one thing right, get this one right. Open the Project out and most of
 what's inside is reference material - the tone guide, the examples, the do-not-say list,
@@ -91,7 +113,7 @@ square inch in the whole product. Four lines in there - who you are, your house 
 what never to say, British English - will do more for your output than another ten files.
 Spend your twenty minutes here.
 
-## 4:45 - 5:35 · Write it like you mean it [BOARD: beat 7]
+## 5:30 - 6:20 · Write it like you mean it [BOARD: beat 8]
 
 So how do you write four good lines? The same way you would write anything someone has
 to act on: make it checkable. "Be professional" is not an instruction - nobody can tell
@@ -111,7 +133,7 @@ And for the engineers watching: this is exactly the job a CLAUDE.md file does in
 Code. You write the standing rules, Claude keeps its own notes alongside them, and the
 same discipline applies - specific, short, no contradictions. Link is at the end.
 
-## 5:35 - 6:30 · Three examples [BOARD: beat 8]
+## 6:20 - 7:15 · Three examples [BOARD: beat 9]
 
 What does that look like on your team? Three real examples. One - "customer reply
 drafting": your house tone guide, a set of genuinely good replies, and the do-not-say
@@ -124,12 +146,12 @@ pattern - the context that makes the work good, captured once.
 Note the red bar on the first one: Claude drafts, a person checks and sends. Nothing goes
 out on its own.
 
-## 6:30 - 7:00 · The maths [BOARD: beat 9]
+## 7:15 - 7:45 · The maths [BOARD: beat 10]
 
 Quick maths. Setup is about twenty minutes, once. The saving is hours a week, for as long
 as you do the job. That's the best twenty minutes you'll spend this month.
 
-## 7:00 - 7:45 · What you get on your plan [BOARD: beat 10]
+## 7:45 - 8:30 · What you get on your plan [BOARD: beat 11]
 
 Two practical questions before you go and build one.
 
@@ -142,14 +164,14 @@ parts rather than everything - which stretches capacity by up to ten times while
 the answers as good. That happens automatically, on paid plans; you don't configure
 anything. So don't ration your files.
 
-## 7:45 - 8:10 · Why it's a multiplier [BOARD: beat 11]
+## 8:30 - 8:55 · Why it's a multiplier [BOARD: beat 12]
 
 And it gets better, because Projects are shareable. One person builds Customer Replies
 properly, and the whole support team drafts in your house voice from day one - nobody
 else has to figure it out. That's why this is a multiplier and not just a personal
 tidy-up. Sharing's available on our Team and Enterprise plans.
 
-## 8:10 - 8:55 · Sharing, and who can do what [BOARD: beat 12]
+## 8:55 - 9:40 · Sharing, and who can do what [BOARD: beat 13]
 
 Worth knowing how that actually works, because you get to choose. There are two levels.
 "Can view" means someone can read what's in the Project and chat in it, but not change
@@ -161,7 +183,7 @@ organisation. Whoever you share with gets an email and finds it under "Shared wi
 Two caveats: sharing is Team and Enterprise only, and an admin can switch
 organisation-wide sharing off, so if you can't see that option, that's why.
 
-## 8:55 - 10:15 · Build one, properly [BOARD: beat 13]
+## 9:40 - 11:00 · Build one, properly [BOARD: beat 14]
 
 Three steps, and you've seen them all already. Name it and set who can see it. Write the
 custom instructions. Add two or three reference files, then chat.
@@ -190,13 +212,13 @@ completely different. Same voice, same rules, no pasting. That's the unlock.
 
 `[BACK TO BOARD]`
 
-## 10:15 - 10:40 · Pause and try [BOARD: beat 14]
+## 11:00 - 11:25 · Pause and try [BOARD: beat 15]
 
 Your turn. Pause the video right here. Think of one task you repeat - drafting, reviewing,
 summarising, anything. Open claude.ai/projects and create it now, even if it's empty. Then
 fill it in as you watch the rest of this module. Go.
 
-## 10:40 - 11:15 · Slow vs live [BOARD: beat 15]
+## 11:25 - 12:00 · Slow vs live [BOARD: beat 16]
 
 One thing to be clear about, so you don't get disappointed. A Project holds slow-changing
 material: the tone guide, the templates, the standards - things that change monthly, not
@@ -207,7 +229,7 @@ that is stale the moment you paste it. That's a Connector's job, not a Project's
 it's the next video in this module. Projects give Claude your standards; Connectors give
 it today's numbers.
 
-## 11:15 - 11:40 · Resources [BOARD: beat 16]
+## 12:00 - 12:25 · Resources [BOARD: beat 17]
 
 Three things to take away. Anthropic's Help Centre has a short guide - search "How can I
 create and manage projects" on support.claude.com. In the AI training series, the Prompt
@@ -217,7 +239,7 @@ Code is documented at code.claude.com/docs/en/memory.
 
 And the rule of thumb that's on the board: third paste of the week, it wants a Project.
 
-## 11:40 - 11:55 · Close [CAM]
+## 12:25 - 12:40 · Close [CAM]
 
 One Project. Twenty minutes. Use it once a day for a month. Then tell me Projects didn't
 change how you work.

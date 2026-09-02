@@ -218,7 +218,7 @@ Voiceover script: "What an LLM actually is"
 
   --- 
 
-  Scene 6 — No memory by default (5:00–5:45) 
+  Scene 6 — Memory is a layer, not the model (5:00–5:45) 
 
    
 
@@ -228,7 +228,9 @@ Voiceover script: "What an LLM actually is"
 
   
 
-  ▎ A practical quirk: by default, LLMs have no memory across conversations. 
+  ▎ A practical quirk: the model itself has no memory across conversations. Claude does remember you now - memory is on by 
+
+  ▎ default on Pro and Max - but that is a feature layered on top, and it works exactly the way we are about to see. 
 
   ▎ 
 
@@ -240,11 +242,11 @@ Voiceover script: "What an LLM actually is"
 
   ▎ 
 
-  ▎ Conversation two, the next morning. You ask, "What's my name?" It has no idea. As far as it's concerned, you've never met. 
+  ▎ Conversation two, the next morning, with memory off. You ask, "What's my name?" It has no idea. As far as it's concerned, you've never met. 
 
   ▎ 
 
-  ▎ The fix is context. Features like Projects, custom instructions, and "memory" all do the same thing - they re-feed your background into every new conversation, 
+  ▎ The fix is context. Features like Projects, "Instructions for Claude", and memory all do the same thing - they re-feed your background into every new conversation, 
 
   ▎  so the model "remembers" what you've told it. 
 

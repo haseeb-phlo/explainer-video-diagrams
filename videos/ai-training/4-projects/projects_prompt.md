@@ -1,6 +1,6 @@
 # Brief - Day 4: Claude Projects board
 
-**Folder:** `videos/ai-training/4-claude-projects/`
+**Folder:** `videos/ai-training/4-projects/`
 **File:** `build_projects.py` -> `claude-projects.excalidraw`
 **Curriculum ref:** Day 4 of the AI training day-by-day series, following Day 3
 (Prompting & CRISPE Framework). Day 3 teaches one good prompt; Day 4 teaches how
@@ -20,8 +20,8 @@ illustrations. Never hand-place elements in the `.excalidraw`; change the build
 script and regenerate.
 
 ```bash
-python3 videos/ai-training/4-claude-projects/build_projects.py   # rebuild this board
-python3 preview.py videos/ai-training/4-claude-projects/claude-projects.excalidraw out.png
+python3 videos/ai-training/4-projects/build_projects.py   # rebuild this board
+python3 preview.py videos/ai-training/4-projects/claude-projects.excalidraw out.png
 python3 preview.py <scene> out.png XMIN XMAX            # close-up on one beat
 python3 build_all.py                                    # rebuild all + Style-B guard
 ```
@@ -32,7 +32,7 @@ overflow and text/text collisions before writing. The board must build with
 
 ## Layout
 
-Sixteen beats, one uniform slot each - content ~1120 x 980 (~1.15 : 1), `GAP = 800`
+Seventeen beats, one uniform slot each - content ~1120 x 980 (~1.15 : 1), `GAP = 800`
 of whitespace between slots. You record by panning left to right and framing one beat
 at a time on a 14" laptop; the whitespace is the camera. No two neighbouring beats
 share an accent, so every pan lands on a fresh colour.
@@ -40,30 +40,49 @@ share an accent, so every pan lands on a fresh colour.
 | # | Heading | Accent | |
 |---|---|---|---|
 | 1 | The tax you pay every morning | red | |
-| 2 | Every chat starts from zero | orange | cold chat |
+| 2 | It remembers you, not the job | orange | cold chat |
 | 3 | Every chat starts briefed | green | briefed chat, demo badge |
 | 4 | What a Project actually is | violet | |
-| 5 | The shift | blue | |
-| 6 | The instructions field | violet | the highest-leverage square inch |
-| 7 | Write it like you mean it | indigo | how to write the instructions |
-| 8 | Three Projects you could build this week | green | |
-| 9 | The maths | orange | |
-| 10 | What you get on your plan | blue | plans, the five-Project cap, retrieval |
-| 11 | Why it's a multiplier | teal | |
-| 12 | Sharing, and who can do what | violet | view / edit, and who can see it |
-| 13 | Let's build one - live | indigo | demo badge |
-| 14 | Pause here, and try it | yellow | |
-| 15 | Slow vs live | blue | signposts Connectors and MCP |
-| 16 | One Project. Twenty minutes. | violet | closing chip, lower-left |
+| 5 | Three places context can live | teal | Instructions / Memory / Project |
+| 6 | The shift | blue | |
+| 7 | The instructions field | violet | the highest-leverage square inch |
+| 8 | Write it like you mean it | indigo | how to write the instructions |
+| 9 | Three Projects you could build this week | green | |
+| 10 | The maths | orange | |
+| 11 | What you get on your plan | blue | plans, the five-Project cap, retrieval |
+| 12 | Why it's a multiplier | teal | |
+| 13 | Sharing, and who can do what | violet | view / edit, and who can see it |
+| 14 | Let's build one - live | indigo | demo badge |
+| 15 | Pause here, and try it | yellow | |
+| 16 | Slow vs live | blue | signposts Connectors and MCP |
+| 17 | One Project. Twenty minutes. | violet | closing chip, lower-left |
 
-Beats 2, 3, 6 and 15 were added in the first extension, 7, 10 and 12 in the second.
-Beats 1, 4, 5, 8, 9, 11, 13, 14 and 16 are the original nine, unchanged and in their
-original order.
+Beats 2, 3, 7 and 16 were added in the first extension; 8, 11 and 13 in the second;
+beat 5 in the third, which also **rewrote beat 2**. Beats 1, 4, 6, 9, 10, 12, 14, 15
+and 17 are the original nine, unchanged and in their original order.
+
+> **Beat 2 used to be headed "Every chat starts from zero" and captioned "no memory of
+> yesterday's brief". That was false** - Claude carries memory across chats and
+> "Instructions for Claude" applies account-wide - and it contradicted Day 3, which
+> teaches memory in depth. The honest framing is the one now on the board: what carries
+> over is about *you*, not about *this job*. Don't reintroduce the old claim.
 
 ## Sources, and what was taken from them
 
 Two documents are the factual backing for the board. Check the board against them
 before re-recording; the plan and capacity figures date faster than anything else.
+
+**[Claude's memory](https://support.claude.com/en/articles/11817273)**
+- Memory is **on by default on Pro and Max**, **off on Team and Enterprise until an
+  owner enables it** org-wide, and **not available on Free** - beats 2, 5
+- Each Project keeps **its own separate memory space** and project summary, so context
+  in one Project stays out of another - beat 5
+- Controls live at **Settings > Memory** - beat 5
+
+**[Claude's personalization features](https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features)**
+- **"Instructions for Claude"** is profile-level, **account-wide, on every plan** - how
+  you like answers, everywhere - beats 2, 5
+- **Project instructions** are per-Project; Free allows up to five Projects - beats 5, 7
 
 **[What are Projects?](https://support.claude.com/en/articles/9517075-what-are-projects)**
 - Projects are self-contained workspaces with their own chat histories and knowledge
@@ -95,42 +114,51 @@ changes what a person types**.
   `/memory` command, auto-memory storage and settings. Don't add them back - this
   audience uses the Claude app.
 
-## The seven added beats, as specified
+## The eight added beats, as specified
 
 **2 - Cold chat (orange).** A chat window doodle with the same context doodle pasted
-in three times down the thread, each paste slightly rotated. Heading: "every chat
-starts from zero". The pasted object is a team tone guide.
+in three times down the thread, each paste slightly rotated. Heading: "It remembers you,
+not the job", with a tick / cross column: what carries over (how you like answers, what
+Claude knows about you) versus what does not (this job's tone guide, its examples and
+rules). The pasted object is a team tone guide.
 
 **3 - Briefed chat (green).** A Project folder doodle feeding a single fresh chat
 window - one arrow, no repeated pastes. Heading: "every chat starts briefed". Carries
 `demo_badge(x, y, "show in Claude desktop app: build the Project live")`. The folder
 holds the same team tone guide that beat 2 keeps re-pasting: same object, two fates.
 
-**6 - The instructions field (violet).** The folder opened out, contents shown as
+**7 - The instructions field (violet).** The folder opened out, contents shown as
 small neutral ink doodles, with the instructions field drawn as a single saturated
 violet sticky, larger than everything else in the folder, light rotation jitter.
 Caption in ink: "the highest-leverage square inch". **No glow, no highlighter sweep,
 no sparkles** - the size and the saturated fill do the work.
 
-**15 - Slow vs live (blue).** Two halves stacked vertically, not side by side. Top: a
+**5 - Three places context can live (teal).** Three stacked rows: "Instructions for
+Claude" and "Memory" in neutral grey (both are about *you*, everywhere), and "A Project"
+in saturated teal (the one that is about *the job*, and the only one you can hand to a
+teammate). Caption: the first two follow you everywhere, only the last is about one job.
+This beat exists to answer the objection Day 3 creates - "Claude already remembers me,
+so why do I need a Project?"
+
+**16 - Slow vs live (blue).** Two halves stacked vertically, not side by side. Top: a
 documents doodle, label "slow-changing lives here". Bottom: a small pipe doodle,
 label "live data comes next: Connectors and MCP".
 
-**7 - Write it like you mean it (indigo).** Two vague-versus-checkable instruction
+**8 - Write it like you mean it (indigo).** Two vague-versus-checkable instruction
 pairs, crossed and ticked, over a five-line checklist of the writing rules. Closes on
 a chip: "in Claude Code the same job is a CLAUDE.md file".
 
-**10 - What you get on your plan (blue).** Two stacked halves split by a faint dashed
+**11 - What you get on your plan (blue).** Two stacked halves split by a faint dashed
 rule. Top: exactly five grey folder doodles - the free cap, counted rather than
 described. Bottom: six blue folders and an ellipsis, with the retrieval paragraph and
 a "retrieval is a paid-plan feature" chip.
 
-**12 - Sharing, and who can do what (violet).** Two permission cards side by side,
+**13 - Sharing, and who can do what (violet).** Two permission cards side by side,
 each a list of ticks (and one cross on "Can view - change it"), over the three ways to
 share and the three caveats. Ticks and crosses, not prose - the difference between the
 levels has to be readable at a glance.
 
-**Closing chip.** In the lower-left of beat 16, in that beat's accent, with rotation
+**Closing chip.** In the lower-left of beat 17, in that beat's accent, with rotation
 jitter: "third paste of the week = it wants a Project". A chip inside a beat slot -
 the board has no footers.
 

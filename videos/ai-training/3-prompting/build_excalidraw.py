@@ -49,8 +49,8 @@ Recording: there is no animation any more, the camera IS the reveal. Pan
 left-to-right, one beat per frame, ~3s of narration each; cut away to the Claude
 desktop app on the two demo badges and come back to the same beat.
 
-Run:  python3 videos/ai-training/3-prompting-crispe-framework/build_excalidraw.py
-      python3 preview.py videos/ai-training/3-prompting-crispe-framework/prompting-crispe-framework.excalidraw out.png
+Run:  python3 videos/ai-training/3-prompting/build_excalidraw.py
+      python3 preview.py videos/ai-training/3-prompting/prompting-crispe-framework.excalidraw out.png
 """
 import os
 import sys

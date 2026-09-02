@@ -77,7 +77,7 @@ These must hold for every diagram:
 
 When the user requests a Learn diagram, execute this sequence:
 
-1. **Confirm the slug**: derive a kebab-case topic slug and its `videos/<series>/<NN-slug>/` folder (e.g. "Claude Projects", Day 4 of the AI training → `videos/ai-training/4-claude-projects/`). State it in your response.
+1. **Confirm the slug**: derive a kebab-case topic slug and its `videos/<series>/<NN-slug>/` folder (e.g. "Claude Projects", Day 4 of the AI training → `videos/ai-training/4-projects/`). State it in your response.
 2. **Plan the beats**: list the beats in narration order before generating — one line each. This is the left-to-right journey.
 3. **Generate the scene with a thin `build*.py`** in that folder that does `from excalidraw_kit import *` (the shared engine: palette, primitives, illustrations, `heading()`, `finish()`), then defines the scene + its per-video scaffold and calls `finish(out, max_w, total_w)`. Copy the closest existing build (canonical: `videos/claude/3-artefacts/`) as a template — the *look* is centralised in the kit; only the scene is per-video. Keep beats to the uniform ~1120×980 slot.
 4. **Eyeball it with the repo-root `preview.py`** (rasterises to PNG; pass the scene path), then run `python3 build_all.py` — it rebuilds every video and runs the Style-B guard (hard-fails on frames / non-hand fonts / off-palette). Fix overflow and any collisions it warns about.
