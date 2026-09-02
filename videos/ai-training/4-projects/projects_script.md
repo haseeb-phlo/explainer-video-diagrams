@@ -76,6 +76,11 @@ Here's the part that matters: every chat you start inside the Project automatica
 inherits the instructions and the files. You never paste them again. The context lives in
 the Project, not in your clipboard.
 
+And there's a fourth thing, along the bottom there: the Project keeps a memory space of
+its own. What Claude picks up while you work in this Project stays in this Project - it
+doesn't leak into your other Projects, and your other Projects don't leak into this one.
+So the context stays focused on the job.
+
 ## 3:30 - 4:15 · Three places context can live [BOARD: beat 5]
 
 Let's put that side by side, because there are three different places context can live

@@ -76,7 +76,8 @@ before re-recording; the plan and capacity figures date faster than anything els
 - Memory is **on by default on Pro and Max**, **off on Team and Enterprise until an
   owner enables it** org-wide, and **not available on Free** - beats 2, 5
 - Each Project keeps **its own separate memory space** and project summary, so context
-  in one Project stays out of another - beat 5
+  in one Project stays out of another - **beats 4 and 5**. It is part of what a Project
+  *is*, so it sits in the anatomy beat as well as in the three-way comparison.
 - Controls live at **Settings > Memory** - beat 5
 
 **[Claude's personalization features](https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features)**

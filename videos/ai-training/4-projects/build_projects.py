@@ -207,6 +207,9 @@ demo_badge(ox + 60, 886, "show in Claude desktop app: build the Project live")
 
 # ============================================================================
 # BEAT 4 - WHAT A PROJECT ACTUALLY IS
+# Three parts plus a memory space of its own - each Project gets a separate one
+# (support.claude.com/en/articles/11817273), so what Claude learns in one Project
+# does not leak into another. Beat 5 puts that next to account-wide memory.
 # ============================================================================
 ox = beat_head(4, "What a Project actually is")
 cont_x, cont_y, cont_w, cont_h = ox + 40, 300, 1080, 560
@@ -228,6 +231,10 @@ for k, (ttl, body, illus, acc, abg) in enumerate(parts):
         for m in range(3):
             rect(px + 24, cont_y + 150 + m * 34, pw - 90, 24, stroke="transparent", bg=FAINT, sw=1, rounded=True, prefix="msg")
     text(px + 22, cont_y + 304, body, size=SMALL, color=INK)
+rect(cont_x + 20, cont_y + 450, cont_w - 40, 88, stroke=TEAL, bg=TEAL_BG, sw=2, rough=1,
+     rounded=True, fill="solid", opacity=40)
+text(cont_x + 44, cont_y + 472, "+ its own memory space - what Claude learns in this Project stays in this Project",
+     size=SMALL, color=INK)
 text(cont_x + 20, cont_y + cont_h + 24, "One persistent space. Context lives here,\nnot in your clipboard.", size=H3, color=VIOLET)
 
 # ============================================================================
