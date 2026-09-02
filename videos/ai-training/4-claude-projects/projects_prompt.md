@@ -1,8 +1,11 @@
-# Brief - Claude Projects board (module 2.2)
+# Brief - Day 4: Claude Projects board
 
-**File:** `build_projects.py` -> `phlo-2.2-claude-projects.excalidraw`
-**Curriculum ref:** Projects (2.2 in the repo numbering; module 4 in the current
-15-module AI Ops curriculum - the filename and slug stay as they are, do not renumber)
+**Folder:** `videos/ai-training/4-claude-projects/`
+**File:** `build_projects.py` -> `claude-projects.excalidraw`
+**Curriculum ref:** Day 4 of the AI training day-by-day series, following Day 3
+(Prompting & CRISPE Framework). Day 3 teaches one good prompt; Day 4 teaches how
+to stop retyping it. Previously lived at `videos/claude/2-projects/` as module
+2.2 and was moved when the day-by-day series became authoritative.
 **Style:** Style B, per `.claude/skills/SKILL.md` and the repo `CLAUDE.md`
 
 > This file supersedes the original Style A brief (10 fixed 1920x1080 frames, purple
@@ -17,8 +20,8 @@ illustrations. Never hand-place elements in the `.excalidraw`; change the build
 script and regenerate.
 
 ```bash
-python3 videos/claude/2-projects/build_projects.py      # rebuild this board
-python3 preview.py videos/claude/2-projects/phlo-2.2-claude-projects.excalidraw out.png
+python3 videos/ai-training/4-claude-projects/build_projects.py   # rebuild this board
+python3 preview.py videos/ai-training/4-claude-projects/claude-projects.excalidraw out.png
 python3 preview.py <scene> out.png XMIN XMAX            # close-up on one beat
 python3 build_all.py                                    # rebuild all + Style-B guard
 ```
@@ -160,7 +163,7 @@ the board has no footers.
 
 1. `build_projects.py` updated in the existing scaffold, with the left-to-right pan
    order documented in the module docstring.
-2. `phlo-2.2-claude-projects.excalidraw` regenerated.
+2. `claude-projects.excalidraw` regenerated.
 3. Whole-board preview plus a close-up x-window on each changed beat; any
    text-overflow or collision warnings resolved or explicitly justified.
 4. `python3 build_all.py` clean against the Style-B guard.

@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
-"""Build phlo-2.2-claude-projects.excalidraw - ONE flowing, illustrated explainer
-for the "Claude Projects" training video (Phlo AI training, module 2.2, ~9 min).
+"""Build claude-projects.excalidraw - ONE flowing, illustrated explainer for
+DAY 4 of the Phlo AI training: "Claude Projects" (~12 min).
+
+Day 4 follows Day 3 (Prompting & CRISPE Framework): Day 3 is how to write one
+good prompt, Day 4 is how to stop writing the same one every morning. The board
+was originally the module-2.2 Claude walkthrough and moved here when the
+day-by-day training became the authoritative series.
 
 Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
 boxes, white canvas, everything in the hand font (fontFamily 1), roughness 1, a
@@ -36,7 +41,7 @@ discipline from Claude Code's memory docs. Beats 1, 4, 5, 8, 9, 11, 13, 14 and
 16 are the original nine, unchanged and in their original order.
 
 Run:  python3 build_projects.py
-      python3 ../../../preview.py phlo-2.2-claude-projects.excalidraw out.png
+      python3 ../../../preview.py claude-projects.excalidraw out.png
 """
 import os
 import sys
@@ -474,6 +479,6 @@ chip(ox + 40, 860, "third paste of the week = it wants a Project",
 # ----------------------------------------------------------------------------
 # WRITE + VALIDATE  (shared excalidraw_kit)
 # ----------------------------------------------------------------------------
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "phlo-2.2-claude-projects.excalidraw")
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "claude-projects.excalidraw")
 MAXW = max(WID.values()) + 200
 finish(out, MAXW, TOTAL_W)

@@ -1,6 +1,6 @@
-# Claude Projects - narration script (~12 minutes, Loom)
+# Day 4: Claude Projects - narration script (~12 minutes, Loom)
 
-Board: `phlo-2.2-claude-projects.excalidraw` (16 beats, one slot each, `GAP = 800`).
+Board: `videos/ai-training/4-claude-projects/claude-projects.excalidraw` (16 beats, one slot each, `GAP = 800`).
 
 Beats 10 and 12 are the plan / sharing mechanics. If you need a shorter cut for
 an all-staff audience, those two are the ones to drop - nothing later depends on
