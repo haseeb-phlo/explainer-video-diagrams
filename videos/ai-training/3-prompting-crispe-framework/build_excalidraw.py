@@ -8,7 +8,7 @@ palette colour-coded per beat. Composition + the one-off illustrations (crumpled
 note, dial, quill, phone, microphone, monitor) live here; the look lives in the
 kit.
 
-ELEVEN BEATS, each in its own 1200-wide slot with GAP = 800 of whitespace
+THIRTEEN BEATS, each in its own 1200-wide slot with GAP = 800 of whitespace
 between them. Style B has no frames - a literal Excalidraw frame is a hard
 Style-B guard failure - so the beat slots ARE the "frames": you pan to one at a
 time and the whitespace keeps its neighbours off-screen.
@@ -22,8 +22,10 @@ time and the whitespace keeps its neighbours off-screen.
    7 red     say what to do, not what not to do
    8 blue    paste first, ask last - and ask for the quotes
    9 teal    set once, never repeat - Styles + preferences  [demo]
-  10 violet  different models, different habits
-  11 yellow  capture by voice, shape at your desk
+  10 indigo  it remembers you now - memory, chat search, project memory
+  11 red     you stay in charge of it - the controls, and the rule  [demo]
+  12 violet  different models, different habits
+  13 yellow  capture by voice, shape at your desk
 
 Beats 5-8 and 10 come from Anthropic's "Prompting best practices" page
 (platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
@@ -31,8 +33,17 @@ and its per-model sub-pages. Only the parts that change what a person TYPES are
 on the board: the API-only material (effort, adaptive thinking, budget_tokens,
 prefill migration, computer-use toolsets, code-review harnesses, subagent caps)
 is deliberately left off, because this audience uses the Claude app, not the API.
-Beat 10's model habits date faster than anything else here - the beat says so on
+Beat 12's model habits date faster than anything else here - the beat says so on
 the board.
+
+Beats 10-11 come from Anthropic's support article on chat search and memory
+(support.claude.com/en/articles/11817273). They deliberately go past what video
+1.1 (claude-intro) already signposts - chat search, per-Project memory spaces,
+Topics, pause vs reset, incognito - and they run power-then-control, because on
+a regulated pharmacy's Team plan the control half is the half that matters. Note
+what beat 10 does NOT say: memory is off by default on Team and Enterprise
+plans (an owner switches it on), so the board tells people why they might not
+see it rather than promising it is already there.
 
 Recording: there is no animation any more, the camera IS the reveal. Pan
 left-to-right, one beat per frame, ~3s of narration each; cut away to the Claude
@@ -58,11 +69,12 @@ random.seed(30330)  # deterministic - re-runs produce identical files
 # ----------------------------------------------------------------------------
 # BEAT SCAFFOLD
 # ----------------------------------------------------------------------------
-N = 11
+N = 13
 GAP = 800
 WID = {i: 1200 for i in range(1, N + 1)}
 ACCENT = {1: ORANGE, 2: GREEN, 3: VIOLET, 4: BLUE, 5: INDIGO, 6: GREEN,
-          7: RED, 8: BLUE, 9: TEAL, 10: VIOLET, 11: YELLOW}
+          7: RED, 8: BLUE, 9: TEAL, 10: INDIGO, 11: RED, 12: VIOLET,
+          13: YELLOW}
 OX = {}
 _c = 0
 for _i in range(1, N + 1):
@@ -140,6 +152,41 @@ def person_big(cx, cy, color, abg, s=1.5):
          [[0, 0], [0, -26 * s], [20 * s, -58 * s], [92 * s, -58 * s],
           [112 * s, -26 * s], [112 * s, 0]],
          stroke=color, sw=3, rough=1, bg=abg, fill="solid", prefix="shoulders")
+
+
+def notebook(x, y, w=104, h=124, accent=INDIGO, abg=INDIGO_T):
+    """A little notebook: cover, spine rings, and written lines."""
+    rect(x, y, w, h, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="nb")
+    line(x + 22, y, [[0, 0], [0, h]], stroke=accent, sw=2, prefix="nbspine")
+    for k in range(3):
+        ellipse(x + 15, y + 22 + k * 34, 14, 14, stroke=accent, bg=WHITE, sw=2, prefix="nbring")
+    for k in range(4):
+        line(x + 38, y + 28 + k * 24, [[0, 0], [(w - 62 if k % 2 else w - 78), 0]],
+             stroke=GREY, sw=2, prefix="nbline")
+
+
+def magnifier(cx, cy, r=34, color=INDIGO):
+    """A search magnifier."""
+    ellipse(cx - r, cy - r, 2 * r, 2 * r, stroke=color, bg=WHITE, sw=3, rough=1, prefix="mag")
+    line(cx + r * 0.72, cy + r * 0.72, [[0, 0], [r * 0.86, r * 0.86]], stroke=color, sw=4, prefix="maghandle")
+
+
+def ghost(cx, cy, w=76, h=92, color=GREYD):
+    """The incognito ghost: a domed head, straight sides, a wavy hem, two eyes.
+    (cx, cy) is the centre of the body, so the eyes sit inside it."""
+    x0, y0 = cx - w / 2, cy - h / 2
+    pts = [[0, h * 0.95], [0, h * 0.42], [w * 0.06, h * 0.20], [w * 0.28, h * 0.02],
+           [w * 0.72, h * 0.02], [w * 0.94, h * 0.20], [w, h * 0.42], [w, h * 0.95],
+           [w * 0.80, h * 0.78], [w * 0.60, h * 0.95], [w * 0.40, h * 0.78],
+           [w * 0.20, h * 0.95], [0, h * 0.95]]
+    line(x0, y0, pts, stroke=color, sw=3, rough=1, bg=WHITE, fill="solid", prefix="ghost")
+    for dx in (-w * 0.22, w * 0.08):
+        ellipse(cx + dx, cy - h * 0.16, 11, 11, stroke=color, bg=color, sw=2, prefix="geye")
+
+
+def folder_tab(x, y, w=96, h=72, accent=INDIGO, abg=INDIGO_T):
+    rect(x, y + 14, w, h, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="fold")
+    rect(x, y, w * 0.5, 22, stroke=INK, bg=abg, sw=2, rough=1, rounded=True, prefix="foldtab")
 
 
 def phone(x, y, w, h, abg):
@@ -351,9 +398,58 @@ text(ox + 56, 722, "set once, never repeat", size=BODY, color=TEAL)
 demo_badge(ox + 40, 790, "show in Claude desktop app:  set a Style and preferences")
 
 # ============================================================================
-# BEAT 10 - DIFFERENT MODELS, DIFFERENT HABITS  (violet)
+# BEAT 10 - IT REMEMBERS YOU NOW  (indigo)
 # ============================================================================
-ox = beat_head(10, "Different models, different habits",
+ox = beat_head(10, "It remembers you now",
+               "Claude can carry context between chats. Two features,\nand one thing to know about Projects.")
+sticky(ox + 40, 290, 1040, 170, INDIGO_BG, angle=jit(1.2))
+notebook(ox + 80, 306, accent=INDIGO, abg=WHITE)
+text(ox + 230, 314, "Memory", size=H3, color=INDIGO)
+text(ox + 230, 366, "Holds your role, how you like replies and what you're\nworking on, and brings it to new chats. Say \"remember\nthis\" to save something on purpose.", size=SMALL, color=INK)
+sticky(ox + 40, 480, 1040, 170, INDIGO_T, angle=jit(-1.1))
+magnifier(ox + 132, 566, r=36, color=INDIGO)
+text(ox + 230, 504, "Chat search", size=H3, color=INDIGO)
+text(ox + 230, 556, "\"What did we discuss about the refund wording?\" - it goes\nand finds the conversation instead of you scrolling for it.", size=SMALL, color=INK)
+sticky(ox + 40, 670, 1040, 130, INDIGO_T, angle=jit(1.0))
+folder_tab(ox + 92, 700, accent=INDIGO, abg=WHITE)
+text(ox + 230, 694, "Every Project keeps its own memory", size=H3, color=INDIGO)
+text(ox + 230, 744, "Project context stays in that Project. It doesn't leak into your other chats.", size=SMALL, color=INK)
+text(ox + 40, 830, "This is CRISPE's Context dial, filled in for you - so spend the prompt on\nthe ask, not the background.", size=BODY, color=INDIGO)
+text(ox + 40, 916, "On a Team plan an owner switches memory on. If it isn't in your Settings, that's why.",
+     size=SMALL, color=GREYD)
+
+# ============================================================================
+# BEAT 11 - YOU STAY IN CHARGE OF IT  (red)
+# ============================================================================
+ox = beat_head(11, "You stay in charge of it",
+               "Everything it remembers is visible, editable and deletable -\nand some things must never go in.")
+bx = ox + 60
+for k, lab in enumerate(["Settings", "Memory", "Topics"]):
+    w, h = chip(bx, 268, lab, fill=WHITE, text_color=RED, border=RED, size=BODY)
+    bx += w
+    if k < 2:
+        arrow(bx + 10, 268 + h / 2, [[0, 0], [40, 0]], stroke=RED, sw=3)
+        bx += 56
+check_item(ox + 60, 352, "Read any topic, edit it, or delete it", accent=RED)
+check_item(ox + 60, 408, "Pause memory - keeps what's there, stops adding more", accent=RED)
+check_item(ox + 60, 464, "Reset memory - deletes the lot, and that one is permanent", accent=RED)
+text(ox + 60, 512, "Deleting a chat does not delete the memories it made - delete those here.",
+     size=SMALL, color=RED)
+ghost(ox + 128, 600, w=76, h=88, color=GREYD)
+text(ox + 220, 560, "Incognito", size=H3, color=GREYD)
+text(ox + 220, 606, "the ghost icon, top right: a chat that isn't saved to history\nand isn't remembered.", size=SMALL, color=INK)
+rect(ox + 40, 730, 1040, 196, stroke=RED, bg=RED_BG, sw=3, rough=1, rounded=True,
+     fill="solid", opacity=35, angle=jit(-1.0), prefix="rule")
+diamond(ox + 80, 692, 52, 52, stroke=RED, bg=RED_BG, sw=3)
+text_centered(ox + 106, 702, "!", size=H2, color=RED)
+text(ox + 80, 752, "The rule", size=H3, color=RED)
+text(ox + 80, 802, "Health and the other sensitive topics are left out of memory by default.\nLeave that setting alone. No patient details and nothing confidential goes\ninto a chat that memory can keep.", size=BODY, color=INK)
+demo_badge(ox + 40, 946, "show in Claude desktop app:  Settings > Memory > Topics")
+
+# ============================================================================
+# BEAT 12 - DIFFERENT MODELS, DIFFERENT HABITS  (violet)
+# ============================================================================
+ox = beat_head(12, "Different models, different habits",
                "The model you pick changes what comes back. These\nhabits move with every new model - check the docs.")
 MODELS = [
     ("Claude Opus 5",
@@ -379,9 +475,9 @@ text(ox + 40, 918, "Docs: Anthropic - Prompting best practices, platform.claude.
      size=SMALL, color=VIOLET)
 
 # ============================================================================
-# BEAT 11 - CAPTURE BY VOICE  (yellow)
+# BEAT 13 - CAPTURE BY VOICE  (yellow)
 # ============================================================================
-ox = beat_head(11, "Capture by voice",
+ox = beat_head(13, "Capture by voice",
                "Talking is faster than typing, and a rambling\nspoken prompt still beats a vague written one.")
 phone(ox + 90, 320, 250, 460, YELLOW_T)
 mic_icon(ox + 215, 540, 92, YELLOW)
