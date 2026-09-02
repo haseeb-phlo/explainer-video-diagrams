@@ -8,7 +8,7 @@ palette colour-coded per beat. Composition + the one-off illustrations (crumpled
 note, dial, quill, phone, microphone, monitor) live here; the look lives in the
 kit.
 
-THIRTEEN BEATS, each in its own 1200-wide slot with GAP = 800 of whitespace
+SIXTEEN BEATS, each in its own 1200-wide slot with GAP = 800 of whitespace
 between them. Style B has no frames - a literal Excalidraw frame is a hard
 Style-B guard failure - so the beat slots ARE the "frames": you pan to one at a
 time and the whitespace keeps its neighbours off-screen.
@@ -22,10 +22,13 @@ time and the whitespace keeps its neighbours off-screen.
    7 red     say what to do, not what not to do
    8 blue    paste first, ask last - and ask for the quotes
    9 teal    set once, never repeat - Styles + preferences  [demo]
-  10 indigo  it remembers you now - memory, chat search, project memory
-  11 red     you stay in charge of it - the controls, and the rule  [demo]
-  12 violet  different models, different habits
-  13 yellow  capture by voice, shape at your desk
+  10 orange  Projects hold the context - instructions, knowledge, memory  [demo]
+  11 indigo  it remembers you now - memory, chat search, project memory
+  12 red     you stay in charge of it - the controls, and the rule  [demo]
+  13 violet  so does CRISPE still matter? - three dials automated, three yours
+  14 teal    how the sharp end works - what heavy users actually do
+  15 indigo  different models, different habits
+  16 yellow  capture by voice, shape at your desk
 
 Beats 5-8 and 10 come from Anthropic's "Prompting best practices" page
 (platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
@@ -36,14 +39,29 @@ is deliberately left off, because this audience uses the Claude app, not the API
 Beat 12's model habits date faster than anything else here - the beat says so on
 the board.
 
-Beats 10-11 come from Anthropic's support article on chat search and memory
-(support.claude.com/en/articles/11817273). They deliberately go past what video
-1.1 (claude-intro) already signposts - chat search, per-Project memory spaces,
-Topics, pause vs reset, incognito - and they run power-then-control, because on
+THE AI TRAINING SERIES IS AUTHORITATIVE. A Day covers its topic IN FULL, even
+where an older Module 2 (claude/) video already covered it - Projects and
+memory are on this board for exactly that reason. Never trim a Day down to
+"see the other video"; the older per-feature walkthroughs do not limit what a
+Day says.
+
+Beats 11-12 come from Anthropic's support article on chat search and memory
+(support.claude.com/en/articles/11817273) and run power-then-control, because on
 a regulated pharmacy's Team plan the control half is the half that matters. Note
-what beat 10 does NOT say: memory is off by default on Team and Enterprise
+what beat 11 does NOT say: memory is off by default on Team and Enterprise
 plans (an owner switches it on), so the board tells people why they might not
 see it rather than promising it is already there.
+
+Beat 13 is the synthesis, and it is the answer to "does memory make CRISPE
+redundant": no - memory, Project instructions and Styles set Context, Role and
+Style once, which leaves Instructions, Parameters and Example as the half you
+still type every time, and adds a new failure mode (a dial set wrong behind
+your back). That is why beat 4 gained a fourth row pointing at Memory rather
+than at a dial. Beat 14 is the practice layer from the 2026 context-engineering
+material: hygiene, not clever wording. Deliberately NOT on beat 14: "ask me
+questions before you execute" - it contradicts beat 15's Claude Opus 5 row, and
+"XML tags are obsolete" - Anthropic's own reference still says to wrap examples
+in <example> tags, which is what beat 6 teaches.
 
 Recording: there is no animation any more, the camera IS the reveal. Pan
 left-to-right, one beat per frame, ~3s of narration each; cut away to the Claude
@@ -69,12 +87,12 @@ random.seed(30330)  # deterministic - re-runs produce identical files
 # ----------------------------------------------------------------------------
 # BEAT SCAFFOLD
 # ----------------------------------------------------------------------------
-N = 13
+N = 16
 GAP = 800
 WID = {i: 1200 for i in range(1, N + 1)}
 ACCENT = {1: ORANGE, 2: GREEN, 3: VIOLET, 4: BLUE, 5: INDIGO, 6: GREEN,
-          7: RED, 8: BLUE, 9: TEAL, 10: INDIGO, 11: RED, 12: VIOLET,
-          13: YELLOW}
+          7: RED, 8: BLUE, 9: TEAL, 10: ORANGE, 11: INDIGO, 12: RED,
+          13: VIOLET, 14: TEAL, 15: INDIGO, 16: YELLOW}
 OX = {}
 _c = 0
 for _i in range(1, N + 1):
@@ -287,6 +305,8 @@ highlighter(ox + 40, 862, 340, 46, VIOLET_BG, angle=0.0)
 text(ox + 56, 872, "a diagnostic, not a form", size=BODY, color=VIOLET)
 text(ox + 40, 930, "Nobody fills in all six. Check the dials this ask needs, skip the rest.",
      size=SMALL, color=GREYD)
+text(ox + 40, 968, "Other expansions of CRISPE exist online (Capacity, Insight, Statement...) - these six are ours.",
+     size=SMALL, color=GREY)
 
 # ============================================================================
 # BEAT 4 - FAULT-FINDER  (blue)
@@ -305,7 +325,13 @@ for k, (symptom, fix, gloss, frac) in enumerate(FAULTS):
     dial(ox + 392, ry + 27, frac, BLUE, BLUE_T, r=20)
     chip(ox + 445, ry, fix, fill=WHITE, text_color=BLUE, border=BLUE, size=BODY)
     text(ox + 660, ry + 14, gloss, size=SMALL, color=GREYD)
-text(ox + 60, 760, "The fault is almost never \"Claude got it wrong\".\nIt's a dial you didn't set.",
+line(ox + 60, 726, [[0, 0], [840, 0]], stroke=FAINT, sw=2, dashed=True, prefix="fdiv")
+text(ox + 60, 748, "and one fault that isn't a dial at all:", size=SMALL, color=GREY)
+chip(ox + 60, 786, "facts about you are wrong", fill=WHITE, text_color=RED, border=RED, size=BODY)
+arrow(ox + 400, 813, [[0, 0], [70, 0]], stroke=BLUE, sw=4, rough=1)
+chip(ox + 500, 786, "Memory", fill=WHITE, text_color=BLUE, border=BLUE, size=BODY)
+text(ox + 690, 800, "read Settings > Memory > Topics", size=SMALL, color=GREYD)
+text(ox + 60, 878, "The fault is almost never \"Claude got it wrong\".\nIt's a dial you didn't set - or one set wrong behind your back.",
      size=BODY, color=BLUE)
 
 # ============================================================================
@@ -398,9 +424,33 @@ text(ox + 56, 722, "set once, never repeat", size=BODY, color=TEAL)
 demo_badge(ox + 40, 790, "show in Claude desktop app:  set a Style and preferences")
 
 # ============================================================================
-# BEAT 10 - IT REMEMBERS YOU NOW  (indigo)
+# BEAT 10 - PROJECTS HOLD THE STANDING CONTEXT  (orange)
 # ============================================================================
-ox = beat_head(10, "It remembers you now",
+ox = beat_head(10, "Projects hold the context",
+               "A Project is a folder of chats with its own instructions,\nits own files and its own memory.")
+PROJ = [
+    (file_icon, "Project instructions", "Who you are, how you want replies, the rules for this\nwork. Applied to every chat in the Project.", ORANGE_BG),
+    (file_icon, "Project knowledge", "The files Claude should always have to hand, so you\nstop re-attaching them.", ORANGE_T),
+    (None,      "Its own memory", "What Claude learns in here stays in here.", ORANGE_T),
+]
+py = 290
+for icon, title, body, fill in PROJ:
+    ph = 170 if icon else 140
+    sticky(ox + 40, py, 1040, ph, fill, angle=jit(1.1))
+    if icon:
+        icon(ox + 88, py + 44, abg=ORANGE_BG)
+    else:
+        folder_tab(ox + 80, py + 34, accent=ORANGE, abg=WHITE)
+    text(ox + 210, py + 22, title, size=H3, color=ORANGE)
+    text(ox + 210, py + 76, body, size=SMALL, color=INK)
+    py += ph + 20
+text(ox + 40, 830, "One Project per piece of work - Support replies, Ops reporting, one launch.\nClean and contained beats one giant chat that drifts.", size=BODY, color=ORANGE)
+demo_badge(ox + 40, 926, "show in Claude desktop app:  a Project's instructions and knowledge")
+
+# ============================================================================
+# BEAT 11 - IT REMEMBERS YOU NOW  (indigo)
+# ============================================================================
+ox = beat_head(11, "It remembers you now",
                "Claude can carry context between chats. Two features,\nand one thing to know about Projects.")
 sticky(ox + 40, 290, 1040, 170, INDIGO_BG, angle=jit(1.2))
 notebook(ox + 80, 306, accent=INDIGO, abg=WHITE)
@@ -419,9 +469,9 @@ text(ox + 40, 916, "On a Team plan an owner switches memory on. If it isn't in y
      size=SMALL, color=GREYD)
 
 # ============================================================================
-# BEAT 11 - YOU STAY IN CHARGE OF IT  (red)
+# BEAT 12 - YOU STAY IN CHARGE OF IT  (red)
 # ============================================================================
-ox = beat_head(11, "You stay in charge of it",
+ox = beat_head(12, "You stay in charge of it",
                "Everything it remembers is visible, editable and deletable -\nand some things must never go in.")
 bx = ox + 60
 for k, lab in enumerate(["Settings", "Memory", "Topics"]):
@@ -447,9 +497,51 @@ text(ox + 80, 802, "Health and the other sensitive topics are left out of memory
 demo_badge(ox + 40, 946, "show in Claude desktop app:  Settings > Memory > Topics")
 
 # ============================================================================
-# BEAT 12 - DIFFERENT MODELS, DIFFERENT HABITS  (violet)
+# BEAT 13 - SO DOES CRISPE STILL MATTER?  (violet)
 # ============================================================================
-ox = beat_head(12, "Different models, different habits",
+ox = beat_head(13, "So does CRISPE still matter?",
+               "More than it did. Memory doesn't retire the framework -\nit moves three dials into the background.")
+text(ox + 60, 282, "set once, in the background", size=SMALL, color=GREY)
+for k, (lab, frac) in enumerate([("Context", 0.85), ("Role", 0.70), ("Style", 0.80)]):
+    cx = ox + 140 + k * 160
+    dial(cx, 396, frac, VIOLET, VIOLET_T, r=38)
+    text_centered(cx, 448, lab, size=SMALL, color=VIOLET, angle=jit(1.4))
+text(ox + 60, 496, "memory, Project instructions, your Style", size=SMALL, color=VIOLET)
+line(ox + 590, 270, [[0, 0], [0, 300]], stroke=FAINT, sw=2, dashed=True, prefix="cdiv")
+text(ox + 650, 282, "still yours to say, every time", size=SMALL, color=GREY)
+for k, (lab, frac) in enumerate([("Instructions", 0.90), ("Parameters", 0.30), ("Example", 0.65)]):
+    cx = ox + 730 + k * 160
+    dial(cx, 396, frac, VIOLET, VIOLET_T, r=38)
+    text_centered(cx, 448, lab, size=SMALL, color=VIOLET, angle=jit(1.4))
+text(ox + 650, 496, "this ask, this output", size=SMALL, color=VIOLET)
+highlighter(ox + 40, 600, 900, 46, VIOLET_BG, angle=0.0)
+text(ox + 56, 610, "Half the framework gets automated. The other half is all yours.", size=BODY, color=VIOLET)
+text(ox + 40, 690, "And the dial you can no longer see is the one that bites: if memory holds\nsomething wrong about you, every answer quietly inherits it.", size=BODY, color=INK)
+text(ox + 40, 800, "\"A diagnostic, not a form\" - more true now, not less. The framework stopped\nbeing a thing you type and became a thing you check.", size=SMALL, color=GREYD)
+
+# ============================================================================
+# BEAT 14 - HOW THE SHARP END WORKS  (teal)
+# ============================================================================
+ox = beat_head(14, "How the sharp end works",
+               "What the heaviest Claude users actually do. It's mostly\nhousekeeping, not clever wording.")
+HABITS = [
+    "A new chat per topic - start fresh when answers start drifting",
+    "One Project per piece of work, so contexts stay clean",
+    "End a session with a handoff note saved into the Project",
+    "Prune memory - read Topics now and then, delete what's stale",
+    "Ask for the outcome you want, not the steps to get there",
+    "Stop over-engineering the prompt: shorter usually wins",
+]
+for k, h in enumerate(HABITS):
+    check_item(ox + 60, 300 + k * 58, h, accent=TEAL)
+sticky(ox + 40, 690, 1040, 170, TEAL_BG, angle=jit(-1.0))
+text(ox + 80, 716, "Less scaffolding, more curation", size=H3, color=TEAL)
+text(ox + 80, 770, "Anthropic removed over 80% of Claude Code's system prompt for the newest\nmodels with no measurable loss. Long prompts are not better prompts.", size=SMALL, color=INK)
+
+# ============================================================================
+# BEAT 15 - DIFFERENT MODELS, DIFFERENT HABITS  (indigo)
+# ============================================================================
+ox = beat_head(15, "Different models, different habits",
                "The model you pick changes what comes back. These\nhabits move with every new model - check the docs.")
 MODELS = [
     ("Claude Opus 5",
@@ -467,17 +559,17 @@ MODELS = [
 ]
 for k, (name, habit, todo) in enumerate(MODELS):
     ry = 300 + k * 150
-    sticky(ox + 40, ry, 1080, 140, VIOLET_T, angle=jit(1.0))
-    text(ox + 76, ry + 18, name, size=H3, color=VIOLET)
+    sticky(ox + 40, ry, 1080, 140, INDIGO_T, angle=jit(1.0))
+    text(ox + 76, ry + 18, name, size=H3, color=INDIGO)
     text(ox + 76, ry + 64, habit, size=SMALL, color=GREYD)
     text(ox + 76, ry + 96, todo, size=BODY, color=INK)
 text(ox + 40, 918, "Docs: Anthropic - Prompting best practices, platform.claude.com",
-     size=SMALL, color=VIOLET)
+     size=SMALL, color=INDIGO)
 
 # ============================================================================
-# BEAT 13 - CAPTURE BY VOICE  (yellow)
+# BEAT 16 - CAPTURE BY VOICE  (yellow)
 # ============================================================================
-ox = beat_head(13, "Capture by voice",
+ox = beat_head(16, "Capture by voice",
                "Talking is faster than typing, and a rambling\nspoken prompt still beats a vague written one.")
 phone(ox + 90, 320, 250, 460, YELLOW_T)
 mic_icon(ox + 215, 540, 92, YELLOW)
