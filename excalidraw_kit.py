@@ -53,6 +53,10 @@ PALETTE = {WHITE, INK, GREYD, GREY, FAINT, "transparent",
            RED, RED_BG, RED_T, TEAL, TEAL_BG, TEAL_T,
            YELLOW, YELLOW_BG, YELLOW_T, INDIGO, INDIGO_BG, INDIGO_T}
 
+# accent -> its ultra-light tint, for chips/stickies that pick a fill from an accent
+TINT = {VIOLET: VIOLET_T, ORANGE: ORANGE_T, GREEN: GREEN_T, BLUE: BLUE_T,
+        RED: RED_T, TEAL: TEAL_T, YELLOW: YELLOW_T, INDIGO: INDIGO_T}
+
 # Type scale
 HERO, H1, H2, H3, BODY, LABEL, SMALL = 96, 48, 34, 28, 22, 20, 17
 HAND = 1  # the canonical hand font (Virgil) - the ONLY font allowed (see 3-artefacts)
