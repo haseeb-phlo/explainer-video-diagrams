@@ -96,7 +96,7 @@ HEAD_Y = 60
 # the three prepared files, held constant wherever they appear
 MD, SYS, TPL = BLUE, GREEN, TEAL
 MD_BG, SYS_BG, TPL_BG = BLUE_BG, GREEN_BG, TEAL_BG
-MD_T, SYS_T, TPL_T = BLUE_T, GREEN_T, TEAL_T
+# ultra-light tints come from the kit's TINT map - don't re-declare them here
 
 
 def beat_head(i, title, sub=None):
@@ -345,7 +345,7 @@ line(ox + 545, 350, [[0, 0], [0, 430]], stroke=GREY, sw=2, dashed=True)
 # left: how it LOOKS
 text(ox + 40, 300, "how it looks", size=H2, color=SYS)
 text(ox + 40, 348, "the design system", size=SMALL, color=GREY)
-rect(ox + 40, 388, 460, 320, stroke=SYS, bg=SYS_T, sw=3, rough=1, rounded=True,
+rect(ox + 40, 388, 460, 320, stroke=SYS, bg=TINT[SYS], sw=3, rough=1, rounded=True,
      prefix="lks")
 _ex = swatch_strip(ox + 70, 428, [(VIOLET, VIOLET_BG), (BLUE, BLUE_BG),
                                   (GREEN, GREEN_BG), (ORANGE, ORANGE_BG)])
