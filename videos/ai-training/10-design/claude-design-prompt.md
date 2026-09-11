@@ -5,7 +5,7 @@
 **Slug:** `claude-design` (so: `claude-design-script.md`, `claude-design-prompt.md`,
 `claude-design-resource-card.md`)
 **Style:** Style B, per `.claude/skills/SKILL.md` and the repo `CLAUDE.md`
-**Length:** 7 beats. The recorded script measures **~6 min 38** (950 spoken words at 150 wpm, plus ~18s where the cut-away takes longer to do than to say). Hard cap 8, target 4 to 6 - see Runtime budget.
+**Length:** 7 beats. The recorded script measures **~6 min 53** (988 spoken words at 150 wpm, plus ~18s where the cut-away takes longer to do than to say). Hard cap 8, target 4 to 6 - see Runtime budget.
 **Curriculum ref:** **Day 10** of the AI training day-by-day series. **No Day 10 entry
 exists in `Phlo_Mandatory_AI_Course_Curriculum.docx`** - the day series is newer than the
 docx, and the entry that exists describes the module-2.12 Claude Design product
@@ -91,6 +91,12 @@ travel.
 | 6 | red | presentable is not correct | **Adversarial.** Three interchangeable outputs, all "looks fine", then the named criterion, then all three fail it. Chip: *you will accept this if you are in a hurry*. |
 | 7 | green | human pass for brand-final | The three named iterations, the human gate (Claude drafts, a person passes it, it is brand-final), the red data rule, the demo badge, the close chip. |
 
+**Beat 2 also carries a one-line pointer to Day 11** (`videos/ai-training/11-design-md/`),
+which is the depth pass on `design.md` - the three prepared files that make this beat's
+habit permanent. It is a forward pointer to *another Day's* topic, not a signpost standing
+in for this board's own subject, so the precedence rule is intact. **Day 11 never points
+back.** The pointer added 15s to the recorded runtime.
+
 **Pan order:** left to right, beats 1 to 7, one slot at a time. Documented in the build
 script docstring.
 
@@ -111,7 +117,7 @@ beats; 1, 4 and 7 run short.
 | hook | 31 | 12s |
 | why this matters | 92 | 37s |
 | beat 1 · blank page to worth-reacting-to | 72 | 29s |
-| beat 2 · reference beats adjectives | 104 | 42s |
+| beat 2 · reference beats adjectives | 142 | 57s |
 | beat 3 · structure versus polish | 78 | 31s |
 | beat 4 · iterate by talking to it | 72 | 29s |
 | beat 5 · in units, not wholesale | 82 | 33s |
@@ -119,7 +125,7 @@ beats; 1, 4 and 7 run short.
 | beat 7 · human pass for brand-final (incl. ~18s cut-away doing time) | 131 | 70s |
 | pause-and-try | 46 | 18s |
 | close | 73 | 29s |
-| **total** | **950** | **~6 min 38** |
+| **total** | **988** | **~6 min 53** |
 
 **Re-measure if you rewrite the narration.** The first draft of the script ran **1,520
 words - over 10 minutes, past the 8-minute hard cap** - because the per-beat second
@@ -134,7 +140,7 @@ awk '/^## On-screen|^## Recording/{stop=1} stop{next}
   videos/ai-training/10-design/claude-design-script.md
 ```
 
-Hard cap 8 minutes, target 4 to 6. This runs ~38s over target and 1 min 22 under the cap, deliberately: the prose is already tight, so the route to target is the shorter cut, not thinner teaching.
+Hard cap 8 minutes, target 4 to 6. This runs ~53s over target and 1 min 07 under the cap, deliberately: the prose is already tight, so the route to target is the shorter cut, not thinner teaching.
 **If it needs a shorter cut: beats 3 and 4 are the droppable pair** - nothing later
 depends on either, and the board still lands its argument (draft → named reference → one
 unit at a time → presentable is not correct → human pass). That removes 60s and takes it to ~5 min 40, inside target. **Beat 6 is the one to protect** - it is the longest section on purpose and

@@ -66,6 +66,11 @@ beat at a time):
      6  RED     presentable is not correct       <- adversarial: the failure AND the catch
      7  GREEN   human pass for brand-final       <- [CUT TO CLAUDE DESKTOP], then the close
 
+Beat 2 carries a one-line pointer to DAY 11 (videos/ai-training/11-design-md/), which
+is the depth pass on design.md - the three prepared files that make this beat's habit
+permanent. A forward pointer to another Day's topic, not a signpost standing in for this
+board's own subject, so the precedence rule is intact. Day 11 never points back.
+
 RUNTIME (budgeted in seconds, then MEASURED against the written narration - the
 measuring is the step that matters, and the first draft of the script blew the cap):
      beats are not uniform. Measured at 150 wpm, from claude-design-script.md:
@@ -302,6 +307,11 @@ for lab in ["a screenshot", "a link", "last year's deck", "a page you like"]:
     _w, _h = chip(_cx, 846, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
     _cx += _w + 24
 text_centered(ox + 560, 936, "show it the thing you like", size=H3, color=VIOLET)
+# the hand-off to Day 11: a design.md is this beat made permanent. A forward
+# pointer to another Day's topic, which the precedence rule allows - it is not a
+# signpost standing in for this board's own subject.
+chip(ox + 320, 1000, "write the reference down once: Day 11, design.md", fill=WHITE,
+     text_color=VIOLET, border=VIOLET, size=SMALL)
 
 # ============================================================================
 # BEAT 3 - STRUCTURE VERSUS POLISH
