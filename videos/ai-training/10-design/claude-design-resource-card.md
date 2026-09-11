@@ -1,13 +1,14 @@
-# Resource Card - Design work with Claude (module 2.12)
+# Resource Card - Day 10: design work with Claude
 
-Paste this into the AI Ops Learn Resource Card for 2.12, alongside the Loom.
+Paste this into the AI Ops Learn Resource Card for Day 10, alongside the Loom.
 
 > **Three things to do before publishing this card.**
-> 1. **The module 2.12 entry in `Phlo_Mandatory_AI_Course_Curriculum.docx` was not
->    available when this was written**, and the entry that exists describes the older
->    Claude Design *product walkthrough* rather than the design-practice video this now
->    is. The links below are **named, not pasted** - put the current URLs in and check
->    each one resolves before the card goes live.
+> 1. **There is no Day 10 entry in `Phlo_Mandatory_AI_Course_Curriculum.docx`**, and the
+>    module-2.12 entry that exists describes the older Claude Design *product
+>    walkthrough* rather than the design-practice video this now is - so the "Resources
+>    linked from this video" list could not be lifted from it. The links below are
+>    **named, not pasted** - put the current URLs in and check each one resolves before
+>    the card goes live.
 > 2. Everything under "The detail that did not fit on the board" is **product surface
 >    that dates fast** - a research preview, its model and three plan rules. Re-check it
 >    all against Claude before publishing, and again at each 90-day refresh.
@@ -147,13 +148,16 @@ describe a shipping product before linking them.
 - Anthropic - *Introducing Claude Design by Anthropic Labs* (announcement)
 - Claude support - *Get started with Claude Design*
 - The Phlo AI Use Policy (internal)
-- The board itself: `videos/claude/12-design/claude-design.excalidraw` - open it
+- The board itself: `videos/ai-training/10-design/claude-design.excalidraw` - open it
   full-screen and pan beat to beat if you want the argument without the narration
 
 ## Related videos in the course
 
 - **2.3 Artifacts** - where Claude makes a thing rather than describing one. Beat 1 here
   is the design-shaped version of that.
+- **Day 8 - Cowork** - Day 10 sits after it on purpose. "Name the test before you look"
+  is what catches a plausible result, and a long unsupervised run is where plausible
+  results come from.
 - **Day 3 - Prompting and CRISPE** - beat 2 of this board is the Example dial, applied to
   visual work: a reference *is* the example.
 - **Day 7 - Skills** - if you find yourself typing the same three design corrections every

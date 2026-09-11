@@ -1,26 +1,29 @@
-# Design work with Claude - narration script (~6 min 16, Loom)
+# Day 10: design work with Claude - narration script (~6 min 38, Loom)
 
-Board: `videos/claude/12-design/claude-design.excalidraw` (7 beats, one slot each,
-`GAP = 800`). Module 2.12.
+Board: `videos/ai-training/10-design/claude-design.excalidraw` (7 beats, one slot each,
+`GAP = 800`). **Day 10** of the AI training series - it moved here from module 2.12.
 
-> **Source note.** The module 2.12 entry in `Phlo_Mandatory_AI_Course_Curriculum.docx`
-> was **not available** when this was written, and the entry that exists describes the
-> Claude Design **product walkthrough** this board replaces rather than the
-> design-practice video it now is. This narration was written from the brief in
-> `claude-design-prompt.md`. **Reconcile it against the curriculum before recording** -
-> particularly the hook, the pause-and-try and the resource list.
+> **Source note.** There is **no Day 10 entry** in
+> `Phlo_Mandatory_AI_Course_Curriculum.docx` - the day series is newer than the docx -
+> and the module-2.12 entry that does exist describes the Claude Design **product
+> walkthrough** this board replaces rather than the design-practice video it now is. This
+> narration was written from the brief in `claude-design-prompt.md`. **Reconcile it
+> against the curriculum when a Day 10 entry exists** - particularly the hook, the
+> pause-and-try and the resource list.
 
 > **What changed.** This was a nine-beat walkthrough of the Claude Design product. It is
 > now a seven-beat argument about design craft, and it names no product, plan or model on
 > purpose - so it stays true as the tooling moves. Everything that came off the board is
 > on `claude-design-resource-card.md`.
 
-> **Runtime, measured not asserted.** 909 spoken words, **~6 min 16 at 150 wpm**,
+> **Runtime, measured not asserted.** 950 spoken words, **~6 min 38 at 150 wpm**,
 > including the ~20 seconds where the cut-away takes longer to *do* than to say. The hard
-> cap is 8 minutes and the target is 4 to 6, so this sits at the top of the target with
-> about 1 min 45 of headroom. **If you ad-lib, trim as you go rather than adding** - the
-> first draft of this script ran 1,520 words and would have recorded at over 10 minutes.
-> Per-section word counts are in `claude-design-prompt.md`; re-measure if you rewrite.
+> cap is 8 minutes with a target of 4 to 6, so this runs **~38s over target and 1 min 22
+> under the cap**. That is deliberate: the prose is already tight, so the way to reach
+> target is the shorter cut below (drop beats 3 and 4 → ~5 min 40), not thinner teaching.
+> **If you ad-lib, trim as you go rather than adding** - the first draft of this script
+> ran 1,520 words and would have recorded at over 10 minutes. Per-section word counts are
+> in `claude-design-prompt.md`; re-measure if you rewrite.
 
 Cues:
 - `[CAM]` - talking to camera, board not shared
@@ -33,12 +36,12 @@ order, so you only ever pan **left to right**. Hold roughly 3 seconds of whitesp
 between beats - the gap is the transition.
 
 **If you need a shorter cut:** beats 3 and 4 are the droppable pair - nothing later
-depends on either, and the argument still lands. That takes the video to about 5 minutes.
+depends on either, and the argument still lands. That removes 60 seconds and takes the
+video to **~5 min 40**, inside the 4-to-6 target.
 **Beat 6 is the one to protect** - it is the whole reason this video exists, it is the
 longest section on purpose, and everything else was cut to pay for it.
 
-**Loom chapters:** Hook (0:00) · Why this matters (0:12) · Content (0:41) · Pause and try
-(5:38) · Close (5:56). Beat 6 is the long one - 3:21 to 4:28.
+**Loom chapters:** Hook (0:00) · Why this matters (0:12) · Content (0:49) · Pause and try (5:51) · Close (6:09). Beat 6 is the long one - 3:33 to 4:41.
 
 ---
 
@@ -47,17 +50,18 @@ longest section on purpose, and everything else was cut to pay for it.
 The design that gets you in trouble is not the ugly one. It is the one that looks fine,
 that nobody objects to and that is quietly wrong. Generic passes review.
 
-## 0:12 - 0:41 · Why this one matters [CAM]
+## 0:12 - 0:49 · Why this one matters [CAM]
 
-Everything else in this course is about getting Claude to do more. This one is about
-noticing when it has done something *acceptable* instead of something right - and in
+By now you can prompt properly, hold context in a Project, write a procedure as a Skill
+and brief a long run in Cowork - all about getting Claude to do *more*. This one is about
+noticing when it has done something *acceptable* instead of something right, and in
 visual work those two are very hard to tell apart.
 
 You will get a polished draft in ninety seconds, so polished is no longer the hard part.
 The hard part is knowing what you actually wanted and refusing something that only looks
 finished.
 
-## 0:41 - 1:09 · Blank page to worth-reacting-to [BOARD: beat 1]
+## 0:49 - 1:18 · Blank page to worth-reacting-to [BOARD: beat 1]
 
 Left: hour three of the blank page. Nothing to push against, so you have nothing.
 
@@ -67,7 +71,7 @@ available to you a minute ago.
 
 So the win is not a design you can ship. **It is a design you can argue with.**
 
-## 1:09 - 1:50 · Reference beats adjectives [BOARD: beat 2]
+## 1:18 - 2:00 · Reference beats adjectives [BOARD: beat 2]
 
 Top left, what you typed: make it **clean and modern**. Struck through - because those
 two words are a hundred different pictures, and you and Claude are each holding a
@@ -80,7 +84,7 @@ there is nothing to guess at - it can *look* at what you meant.
 **Show it the thing you like.** If you reach for an adjective, go and find a reference
 instead.
 
-## 1:50 - 2:21 · Structure versus polish [BOARD: beat 3]
+## 2:00 - 2:31 · Structure versus polish [BOARD: beat 3]
 
 Two versions of the *same content*. Left: grey boxes, right order. Nothing is styled, and
 you can still settle every decision that matters.
@@ -92,7 +96,7 @@ redraw of something already finished.
 **Settle the order while it is still cheap to move.** Polish goes last because polish is
 the cheap part.
 
-## 2:21 - 2:49 · Iterate by talking to it [BOARD: beat 4]
+## 2:31 - 3:00 · Iterate by talking to it [BOARD: beat 4]
 
 On the left, the instinct design tools have trained into you: open the panel, hunt for
 the control, nudge the slider.
@@ -103,7 +107,7 @@ quieter and give the hero room to breathe.* No panel, no hex codes, nothing to h
 You could already say that sentence. **Describe the problem, not the setting you imagine
 would fix it.**
 
-## 2:49 - 3:21 · In units, not wholesale [BOARD: beat 5]
+## 3:00 - 3:33 · In units, not wholesale [BOARD: beat 5]
 
 Left, the design you have - and circled in green, the pricing card, which was already
 right.
@@ -116,7 +120,7 @@ card is gone. You never asked for that; you asked for a new roll of the dice.
 
 So: **regenerate is not iterate.** Name the element, then name the change.
 
-## 3:21 - 4:28 · Presentable is not correct [BOARD: beat 6]
+## 3:33 - 4:41 · Presentable is not correct [BOARD: beat 6]
 
 This is the beat to stay awake for, because this is the failure you will not notice.
 
@@ -134,7 +138,7 @@ passed the eye test a moment ago. The test is the only thing you added.
 And read the red chip honestly: **you will accept this if you are in a hurry.** Not
 careless - *busy*. A presentable wrong answer at five o'clock on a Friday goes out.
 
-## 4:28 - 5:38 · Human pass for brand-final [BOARD: beat 7]
+## 4:41 - 5:51 · Human pass for brand-final [BOARD: beat 7]
 
 Three iterations, each one named: *make the header quieter*, *move the price above the
 fold*, *three cards not four*. You can see exactly what changed and why - so you can
@@ -156,19 +160,21 @@ reader see the price without scrolling?
 
 `[BACK TO BOARD]` - **nothing goes out without the human pass.**
 
-## 5:38 - 5:56 · Pause here, and try it [CAM]
+## 5:51 - 6:09 · Pause here, and try it [CAM]
 
 Pause the video. Open the last brief you wrote - a design brief, a deck request, anything
 visual. Find the adjective in it. There will be one: clean, modern, simple, professional.
 Replace it with a reference - a screenshot, a link, a page you already like.
 
-## 5:56 - 6:16 · Close [CAM]
+## 6:09 - 6:38 · Close [CAM]
 
 What you are shipping today: one design, iterated three times, with each change named.
 
 And the sentence to keep: **the failure in this kind of work is not a bad output, it is an
-acceptable one.** So write the test down before you look. Resources are on the Resource
-Card below.
+acceptable one.** So write the test down before you look - and not just for design. It is
+what catches any plausible result, including the ones a long Cowork run hands you.
+
+Resources are on the Resource Card below.
 
 ---
 

@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
-"""Build claude-design.excalidraw - ONE flowing, illustrated explainer for the
-"design work with Claude" training video (Phlo AI Ops Learn, module 2.12).
+"""Build claude-design.excalidraw - ONE flowing, illustrated explainer for
+DAY 10 of the Phlo AI training: "design work with Claude" (~6 min, hard cap 8).
+
+Day 10 is the advanced beat of the series: by here a person can prompt (Day 3),
+hold context (Day 4), write a procedure (Day 7) and supervise a long run (Day 8).
+What is left is judgement - and in visual work the failure mode is not a bad
+output, it is an acceptable one. It sits after Cowork deliberately: the habit it
+teaches (name the test before you look) is the one that catches a plausible
+result, which is exactly what a long unsupervised run produces.
 
 WHAT THIS BOARD IS NOW (it was adapted, not extended)
 -----------------------------------------------------
+This board MOVED HERE from videos/claude/12-design/ (module 2.12) when the
+day-by-day training became the authoritative series - the same move Day 4, Day 7
+and Day 8 each made out of videos/claude/. videos/claude/ now has a fourth
+numbering gap, at 12. A gap is not lost work.
+
 This used to be a NINE-beat product walkthrough of Claude Design (Anthropic
 Labs research preview): what it is, the design-system onboarding, start-from-
 anything, the export targets, three role flows, the preview caveat. That board
@@ -13,6 +25,10 @@ It is now a SEVEN-beat board about the practice, because the advanced failure in
 design work is not a bad output - it is an acceptable one. Generic passes review.
 The demo badge cuts to the Claude desktop app, not to a separate product, so
 nothing on the board depends on plan tier or on a preview that may be renamed.
+
+Per the repo precedence rule, a Day covers its topic IN FULL: this board does not
+signpost the old module-2 walkthrough and must never be trimmed to a "see the
+other video" pointer. There is no other video - 12-design is this one.
 
 Everything displaced by the reframe - Labs / research-preview status, the model
 and plan it runs on, design-system onboarding from a codebase, start-from-
@@ -59,8 +75,8 @@ measuring is the step that matters, and the first draft of the script blew the c
      Beat 6 is the longest on purpose; everything else was trimmed to pay for it.
      Shorter cut: drop beats 3 and 4 (~5 min). Never drop beat 6.
 
-Run:  python3 videos/claude/12-design/build_design.py
-      /usr/bin/python3 preview.py videos/claude/12-design/claude-design.excalidraw out.png
+Run:  python3 videos/ai-training/10-design/build_design.py
+      /usr/bin/python3 preview.py videos/ai-training/10-design/claude-design.excalidraw out.png
       /usr/bin/python3 preview.py <scene> out.png XMIN XMAX   # close-up on one beat
       python3 build_all.py            # rebuild all + Style-B guard
 """

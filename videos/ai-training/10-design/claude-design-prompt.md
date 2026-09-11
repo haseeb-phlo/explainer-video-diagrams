@@ -1,15 +1,34 @@
-# Brief - design work with Claude (module 2.12)
+# Brief - Day 10: design work with Claude
 
-**Folder:** `videos/claude/12-design/`
+**Folder:** `videos/ai-training/10-design/`
 **File:** `build_design.py` -> `claude-design.excalidraw`
 **Slug:** `claude-design` (so: `claude-design-script.md`, `claude-design-prompt.md`,
 `claude-design-resource-card.md`)
 **Style:** Style B, per `.claude/skills/SKILL.md` and the repo `CLAUDE.md`
-**Length:** 7 beats. Board budgeted at ~5 min; the recorded script measures **~6 min 16** (909 spoken words at 150 wpm). Hard cap 8.
-**Action:** ADAPT the existing folder in place. This board was **not** moved to
-`videos/ai-training/`: the brief said to adapt the folder holding `build_design.py`, and
-carried none of the "moved here from" instruction that the Day 4 / Day 7 / Day 8 moves
-each carried. It stays module 2.12 in the `claude/` series.
+**Length:** 7 beats. The recorded script measures **~6 min 38** (950 spoken words at 150 wpm, plus ~18s where the cut-away takes longer to do than to say). Hard cap 8, target 4 to 6 - see Runtime budget.
+**Curriculum ref:** **Day 10** of the AI training day-by-day series. **No Day 10 entry
+exists in `Phlo_Mandatory_AI_Course_Curriculum.docx`** - the day series is newer than the
+docx, and the entry that exists describes the module-2.12 Claude Design product
+walkthrough this board replaces. Board and narration were authored from this brief.
+**Reconcile both against the curriculum when a Day 10 entry exists.**
+**Action:** ADAPT, then MOVE. The brief said to adapt the folder holding
+`build_design.py`, which was `videos/ai-training/10-design/`; it was adapted there and then
+moved here as Day 10 when the day-by-day series was confirmed as the destination.
+
+## Where it sits in the series
+
+**Day 10 is the advanced beat.** By here a person can prompt (Day 3), hold context
+(Day 4), write a procedure (Day 7) and supervise a long run (Day 8). What is left is
+judgement. It sits **after Cowork deliberately**: the habit this board teaches - name the
+test before you look - is the one that catches a *plausible* result, which is exactly what
+a long unsupervised run produces.
+
+**Day 9 is not built and nothing here depends on it.** Day 10 makes no callback to a day
+between Cowork and this one, so the numbering can stay as it is.
+
+Per the repo precedence rule, **a Day covers its topic in full**: this board does not
+signpost the old module-2 walkthrough and must never be trimmed to a "see the other
+video" pointer. There is no other video - `claude/12-design` *is* this one, moved.
 
 ## Why this video exists
 
@@ -21,7 +40,11 @@ Generic passes review.** Everything on the board serves that one sentence.
 
 ## Where it came from, and what changed
 
-This was a **nine-beat product walkthrough of Claude Design** (the Anthropic Labs
+This board **moved here from `videos/ai-training/10-design/`** (module 2.12), the same move
+Day 4, Day 7 and Day 8 each made out of `videos/claude/`. That series now has a **fourth
+numbering gap, at 12** - a gap is not lost work.
+
+It was a **nine-beat product walkthrough of Claude Design** (the Anthropic Labs
 research preview): what it is, the design-system onboarding, start-from-anything inputs,
 the export targets, three role flows, the preview caveat, a try-it close. That board
 taught a **feature surface**.
@@ -83,20 +106,20 @@ Budgeted in seconds first, beat count second - then **measured against the writt
 script, which is the step that matters.** Beats are not uniform: 2, 5 and 6 are the hero
 beats; 1, 4 and 7 run short.
 
-| section | words | at 150 wpm |
+| section | words | on the clock |
 |---|---|---|
 | hook | 31 | 12s |
-| why this matters | 73 | 29s |
-| beat 1 · blank page | 72 | 28s |
-| beat 2 · reference beats adjectives | 104 | 41s |
+| why this matters | 92 | 37s |
+| beat 1 · blank page to worth-reacting-to | 72 | 29s |
+| beat 2 · reference beats adjectives | 104 | 42s |
 | beat 3 · structure versus polish | 78 | 31s |
-| beat 4 · iterate by talking to it | 72 | 28s |
-| beat 5 · in units, not wholesale | 82 | 32s |
-| **beat 6 · presentable is not correct** | **169** | **67s** |
-| beat 7 · human pass (+ ~18s cut-away doing time) | 131 | 52s |
+| beat 4 · iterate by talking to it | 72 | 29s |
+| beat 5 · in units, not wholesale | 82 | 33s |
+| **beat 6 · presentable is not correct** | **169** | **68s** |
+| beat 7 · human pass for brand-final (incl. ~18s cut-away doing time) | 131 | 70s |
 | pause-and-try | 46 | 18s |
-| close | 51 | 20s |
-| **total** | **909** | **~6 min 16** |
+| close | 73 | 29s |
+| **total** | **950** | **~6 min 38** |
 
 **Re-measure if you rewrite the narration.** The first draft of the script ran **1,520
 words - over 10 minutes, past the 8-minute hard cap** - because the per-beat second
@@ -108,14 +131,13 @@ awk '/^## On-screen|^## Recording/{stop=1} stop{next}
      /^(>|`\[|\[|---|- |[0-9]\. )/{next} s{w+=NF; t+=NF}
      END{printf "%-44s %4d w ~%3ds\n",substr(s,4,40),w,int(w/2.5); \
          printf "\nTOTAL %d words = %d:%02d\n",t,int(t/2.5)/60,int(t/2.5)%60}' \
-  videos/claude/12-design/claude-design-script.md
+  videos/ai-training/10-design/claude-design-script.md
 ```
 
-Hard cap 8 minutes, target 4 to 6 - this sits at the top of target with ~1 min 45 spare.
+Hard cap 8 minutes, target 4 to 6. This runs ~38s over target and 1 min 22 under the cap, deliberately: the prose is already tight, so the route to target is the shorter cut, not thinner teaching.
 **If it needs a shorter cut: beats 3 and 4 are the droppable pair** - nothing later
 depends on either, and the board still lands its argument (draft → named reference → one
-unit at a time → presentable is not correct → human pass). That takes it to about 5
-minutes. **Beat 6 is the one to protect** - it is the longest section on purpose and
+unit at a time → presentable is not correct → human pass). That removes 60s and takes it to ~5 min 40, inside target. **Beat 6 is the one to protect** - it is the longest section on purpose and
 everything else was trimmed to pay for it.
 
 ## The worked example
@@ -138,8 +160,8 @@ hand-place elements in the `.excalidraw`; change the build script and regenerate
 edit `excalidraw_kit.py`.
 
 ```bash
-python3 videos/claude/12-design/build_design.py          # rebuild this board
-/usr/bin/python3 preview.py videos/claude/12-design/claude-design.excalidraw out.png
+python3 videos/ai-training/10-design/build_design.py          # rebuild this board
+/usr/bin/python3 preview.py videos/ai-training/10-design/claude-design.excalidraw out.png
 /usr/bin/python3 preview.py <scene> out.png XMIN XMAX    # close-up on one beat
 python3 build_all.py                                     # rebuild all + Style-B guard
 ```
@@ -217,9 +239,9 @@ each would read as three real options rather than three interchangeable ones.
 ## Source note - READ BEFORE RECORDING
 
 `Phlo_Mandatory_AI_Course_Curriculum.docx` is the stated source of truth for script
-blocks and is **not in this repo**. The curriculum entry for module 2.12 was **asked for
-and not available**, and the entry that exists describes the **Claude Design product
-walkthrough this board replaces** rather than the design-practice video it now is.
+blocks and is **not in this repo**. There is **no Day 10 entry**, and the
+module-2.12 entry that exists describes the **Claude Design product walkthrough this
+board replaces** rather than the design-practice video it now is.
 
 The narration in `claude-design-script.md` was therefore written from this brief.
 **Reconcile it against the curriculum before recording** - particularly the hook, the
