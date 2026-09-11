@@ -50,13 +50,6 @@ def beat_head(i, title, sub=None):
     return ox
 
 
-# Accent -> ultra-light tint lookup, used by map_row and beat 7's stickies.
-# The kit exports the eight *_T constants but no mapping between them, and a
-# lookup table is composition rather than vocabulary, so it lives here.
-TINT = {VIOLET: VIOLET_T, ORANGE: ORANGE_T, GREEN: GREEN_T, BLUE: BLUE_T,
-        RED: RED_T, TEAL: TEAL_T, YELLOW: YELLOW_T, INDIGO: INDIGO_T}
-
-
 # ----------------------------------------------------------------------------
 # LOCAL ONE-OFF ILLUSTRATIONS
 # ----------------------------------------------------------------------------
