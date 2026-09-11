@@ -1,22 +1,68 @@
 #!/usr/bin/env python3
 """Build claude-design.excalidraw - ONE flowing, illustrated explainer for the
-"Claude Design" training video (Phlo AI Ops Learn, module 2.12).
+"design work with Claude" training video (Phlo AI Ops Learn, module 2.12).
 
-House Style B (see excalidraw_kit): one hand-drawn left-to-right journey, no
-frames, white canvas, the hand font, lively palette. Composition + one-off
-illustrations (a UI mockup, a design-system swatch strip) live here.
+WHAT THIS BOARD IS NOW (it was adapted, not extended)
+-----------------------------------------------------
+This used to be a NINE-beat product walkthrough of Claude Design (Anthropic
+Labs research preview): what it is, the design-system onboarding, start-from-
+anything, the export targets, three role flows, the preview caveat. That board
+taught a feature surface.
 
-Claude Design (Anthropic Labs, research preview, powered by Claude Opus 4.7,
-Pro+) is a design partner: you collaborate to make polished visual work -
-designs, interactive prototypes, on-brand decks, one-pagers. Its signature is
-that it BUILDS A DESIGN SYSTEM from your codebase + design files during
-onboarding, then every project uses your colours, type and components
-automatically (beat 3). You start from a prompt, uploaded images/docs, or your
-codebase, and export to PPTX or Canva. Because it's a research preview, beat 8
-flags rough edges + not uploading confidential material.
+It is now a SEVEN-beat board about the practice, because the advanced failure in
+design work is not a bad output - it is an acceptable one. Generic passes review.
+The demo badge cuts to the Claude desktop app, not to a separate product, so
+nothing on the board depends on plan tier or on a preview that may be renamed.
+
+Everything displaced by the reframe - Labs / research-preview status, the model
+and plan it runs on, design-system onboarding from a codebase, start-from-
+anything inputs, PPTX / Canva export, the designer / PM / founder flows - is on
+`claude-design-resource-card.md`. That card is a deliverable, not an afterthought:
+do not re-inflate the board with it.
+
+ONE THING MOVED RATHER THAN WENT. The old beat 8 carried the only on-screen
+data-handling rule ("confidential designs, patient-facing material, or a private
+codebase"). The seven-beat brief has no slot for it, but this is a mandatory
+course for a regulated pharmacy, so it sits on beat 7 next to the human pass
+instead of going to the card - the same call Day 7 made with its red Skill
+caution. Do not quietly drop it in a later edit.
+
+THE ADVERSARIAL BEAT (6) CARRIES ITS OWN CATCH. The failure is three outputs
+that are all presentable and all interchangeable; the catch is naming the one
+thing the design must get right BEFORE looking at it, then holding each output
+against that. Failure without the catch is a diagnosis with no test, and the
+catch is the half that has to travel - this beat is the Best Catch feeder.
+
+Style B (house style): a single hand-drawn journey, left-to-right, NO frames, NO
+boxes, white canvas, everything in the hand font (fontFamily 1), roughness 1, a
+lively colour-coded Excalidraw palette, big colour blocking, scribbled
+annotations and charming primitive illustrations. The look lives in the shared
+excalidraw_kit; this file holds only the composition and the bespoke one-offs.
+
+PAN ORDER (left to right - the whitespace between slots IS the camera; frame one
+beat at a time):
+
+     1  ORANGE  blank page to worth-reacting-to
+     2  VIOLET  reference beats adjectives        <- 'clean and modern', struck through
+     3  BLUE    structure versus polish
+     4  TEAL    iterate by talking to it
+     5  INDIGO  in units, not wholesale          <- 'regenerate is not iterate'
+     6  RED     presentable is not correct       <- adversarial: the failure AND the catch
+     7  GREEN   human pass for brand-final       <- [CUT TO CLAUDE DESKTOP], then the close
+
+RUNTIME (budgeted in seconds, then MEASURED against the written narration - the
+measuring is the step that matters, and the first draft of the script blew the cap):
+     beats are not uniform. Measured at 150 wpm, from claude-design-script.md:
+        b1 28s   b2 41s   b3 31s   b4 28s   b5 32s   b6 67s   b7 52s (+18s cut-away)
+        hook 12s   why 29s   pause-and-try 18s   close 20s
+     909 spoken words = ~6 min 16. Hard cap 8 minutes, target 4 to 6.
+     Beat 6 is the longest on purpose; everything else was trimmed to pay for it.
+     Shorter cut: drop beats 3 and 4 (~5 min). Never drop beat 6.
 
 Run:  python3 videos/claude/12-design/build_design.py
-      python3 preview.py videos/claude/12-design/claude-design.excalidraw out.png
+      /usr/bin/python3 preview.py videos/claude/12-design/claude-design.excalidraw out.png
+      /usr/bin/python3 preview.py <scene> out.png XMIN XMAX   # close-up on one beat
+      python3 build_all.py            # rebuild all + Style-B guard
 """
 import os
 import sys
@@ -29,19 +75,24 @@ sys.path.insert(0, _d)
 import random
 from excalidraw_kit import *
 
-random.seed(121210)
+random.seed(121207)  # deterministic - re-runs produce identical files
 
-N = 9
+# ----------------------------------------------------------------------------
+# BEAT SCAFFOLD - seven beats, wide gaps so one frames cleanly on a 14" laptop
+# ----------------------------------------------------------------------------
+N = 7
 GAP = 800
+# every beat uses the SAME slot, shaped ~1.15:1 (content ~1120 wide x ~980 tall,
+# the heading at y60 counted in) so framing is identical on a 14" laptop.
 WID = {i: 1200 for i in range(1, N + 1)}
-ACCENT = {1: VIOLET, 2: BLUE, 3: GREEN, 4: ORANGE, 5: TEAL,
-          6: INDIGO, 7: YELLOW, 8: ORANGE, 9: VIOLET}
+ACCENT = {1: ORANGE, 2: VIOLET, 3: BLUE, 4: TEAL, 5: INDIGO, 6: RED, 7: GREEN}
 OX = {}
 _c = 0
 for _i in range(1, N + 1):
     OX[_i] = _c
     _c += WID[_i] + GAP
 TOTAL_W = _c
+
 HEAD_Y = 60
 
 
@@ -52,197 +103,332 @@ def beat_head(i, title, sub=None):
 
 
 # ----------------------------------------------------------------------------
-# LOCAL ONE-OFF ILLUSTRATIONS
+# BESPOKE ILLUSTRATIONS for this board (one-offs stay here, never in the kit)
 # ----------------------------------------------------------------------------
-def mockup(x, y, w, h, accent=VIOLET, abg=VIOLET_BG):
-    """A polished UI mockup: header bar, hero block, two cards, a button."""
+def mockup(x, y, w, h, accent=VIOLET, abg=VIOLET_BG, shuffled=False, cards=2):
+    """A polished UI mockup: header bar, hero block, two cards, a button.
+
+    `shuffled=True` puts the SAME polished blocks in the wrong order (the
+    button first, the header last) - the "beautiful, wrong structure" half of
+    beat 3 and the regenerate on beat 5. `cards=0` drops the card row, so beat 5
+    can show that a regenerate lost the one element that was already working."""
+    hdr, hero, crd, btn = ((0.07, 0.25, 0.57, 0.85) if not shuffled
+                           else (0.86, 0.52, 0.22, 0.07))
     rect(x, y, w, h, stroke=INK, bg=WHITE, sw=2, rough=1, rounded=True, prefix="mock")
-    rect(x + 0.08 * w, y + 0.07 * h, 0.84 * w, 0.12 * h, stroke="transparent",
+    rect(x + 0.08 * w, y + hdr * h, 0.84 * w, 0.12 * h, stroke="transparent",
          bg=accent, sw=1, rough=1, rounded=True, prefix="mh")
-    rect(x + 0.08 * w, y + 0.25 * h, 0.84 * w, 0.26 * h, stroke=GREYD, bg=abg, sw=2,
+    rect(x + 0.08 * w, y + hero * h, 0.84 * w, 0.26 * h, stroke=GREYD, bg=abg, sw=2,
          rough=1, rounded=True, prefix="mhero")
-    rect(x + 0.08 * w, y + 0.57 * h, 0.38 * w, 0.22 * h, stroke=GREYD, bg=WHITE, sw=2,
-         rough=1, rounded=True, prefix="mc")
-    rect(x + 0.54 * w, y + 0.57 * h, 0.38 * w, 0.22 * h, stroke=GREYD, bg=WHITE, sw=2,
-         rough=1, rounded=True, prefix="mc")
-    rect(x + 0.08 * w, y + 0.85 * h, 0.30 * w, 0.09 * h, stroke=accent, bg=accent, sw=1,
+    for k in range(cards):
+        rect(x + (0.08 + 0.46 * k) * w, y + crd * h, 0.38 * w, 0.22 * h, stroke=GREYD,
+             bg=WHITE, sw=2, rough=1, rounded=True, prefix="mc")
+    rect(x + 0.08 * w, y + btn * h, 0.30 * w, 0.09 * h, stroke=accent, bg=accent, sw=1,
          rough=1, rounded=True, prefix="mbtn")
 
 
-def swatch_strip(x, y, cols):
-    """A design-system strip: colour swatches + a type sample + a component chip."""
-    sw_ = 52
-    for k, (c, cbg) in enumerate(cols):
-        rect(x + k * (sw_ + 14), y, sw_, sw_, stroke=c, bg=cbg, sw=2, rough=1, rounded=True, prefix="swt")
-    tx = x + len(cols) * (sw_ + 14) + 20
-    text(tx, y - 2, "Aa", size=H2, color=INK)
-    bx = tx + 90
-    rect(bx, y + 6, 120, 40, stroke=VIOLET, bg=VIOLET, sw=1, rough=1, rounded=True, prefix="swbtn")
-    text(bx + 22, y + 14, "Button", size=SMALL, color=WHITE)
+def wireframe(x, y, w, h):
+    """The same screen in grey boxes: structure only, no colour, no polish. Grey
+    and faint on purpose - it must read as unfinished and still be arguable."""
+    rect(x, y, w, h, stroke=GREYD, bg=WHITE, sw=2, rough=1, rounded=True, prefix="wf")
+    rect(x + 0.07 * w, y + 0.06 * h, 0.86 * w, 0.10 * h, stroke=GREY, bg=FAINT, sw=2,
+         rough=1, rounded=True, prefix="wfb")
+    rect(x + 0.07 * w, y + 0.20 * h, 0.86 * w, 0.26 * h, stroke=GREY, bg=WHITE, sw=2,
+         rough=1, rounded=True, prefix="wfb")
+    line(x + 0.07 * w, y + 0.20 * h, [[0, 0], [0.86 * w, 0.26 * h]], stroke=FAINT, sw=2)
+    line(x + 0.07 * w, y + 0.46 * h, [[0, 0], [0.86 * w, -0.26 * h]], stroke=FAINT, sw=2)
+    for k in range(2):  # two cards, matching mockup() - beat 3 is the SAME content twice
+        rect(x + (0.07 + 0.46 * k) * w, y + 0.52 * h, 0.38 * w, 0.22 * h, stroke=GREY,
+             bg=WHITE, sw=2, rough=1, rounded=True, prefix="wfb")
+    rect(x + 0.07 * w, y + 0.80 * h, 0.34 * w, 0.10 * h, stroke=GREYD, bg=FAINT, sw=2,
+         rough=1, rounded=True, prefix="wfb")
 
+
+def struck(x, y, s, size=H2, color=GREYD, strike=VIOLET, sw=4):
+    """Hand-struck text - the words, with a line drawn through them. The kit has
+    no strikethrough, so this is a one-off: a text element plus a line across its
+    middle. Struck in an accent so the crossing-out reads as a deliberate mark.
+
+    0.44 of the line box, not 0.5: with lineHeight 1.4 the glyphs sit high in
+    their box, so a line at the geometric middle crosses the descenders and reads
+    as an underline that slipped."""
+    e = text(x, y, s, size=size, color=color)
+    w = text_w(s, size)
+    line(x - 8, y + size * LINE_H * 0.44, [[0, 0], [w + 16, 0]], stroke=strike, sw=sw,
+         rough=1, prefix="strike")
+    return e
+
+
+def reference_frame(x, y, w, h, accent=VIOLET, abg=VIOLET_BG):
+    """A pasted reference: a bordered picture holding a rough layout, taped at both
+    top corners - 'the thing you like', stuck to the brief. Tape rather than a
+    paperclip: a clip drawn at this scale reads as a stray rectangle."""
+    rect(x, y, w, h, stroke=INK, bg=WHITE, sw=3, rough=1, rounded=True, prefix="ref")
+    rect(x + 24, y + 34, w - 48, 0.24 * h, stroke=GREYD, bg=abg, sw=2, rough=1,
+         rounded=True, prefix="refh")
+    line(x + 24, y + 0.37 * h, [[0, 0], [(w - 48) * 0.55, 0]], stroke=FAINT, sw=3)
+    for k in range(3):
+        rect(x + 24 + k * (w - 48) / 3, y + 0.44 * h, (w - 48) / 3 - 20, 0.34 * h,
+             stroke=GREYD, bg=WHITE, sw=2, rough=1, rounded=True, prefix="refc")
+    for tx, ta in ((x + 16, -0.45), (x + w - 90, 0.45)):
+        rect(tx, y - 14, 74, 28, stroke=accent, bg=abg, sw=2, rough=1, rounded=False,
+             fill="solid", angle=ta, opacity=75, prefix="tape")
+
+
+def settings_panel(x, y, w, h):
+    """The reflex a design tool trains: rows of sliders, a dropdown and a hex
+    field. Drawn grey on purpose - it is the thing you are NOT reaching for."""
+    rect(x, y, w, h, stroke=GREYD, bg=WHITE, sw=2, rough=1, rounded=True, prefix="pnl")
+    text(x + 24, y + 16, "Properties", size=SMALL, color=GREY)
+    line(x, y + 54, [[0, 0], [w, 0]], stroke=FAINT, sw=2)
+    for k in range(3):
+        sy = y + 92 + k * 62
+        line(x + 24, sy, [[0, 0], [w - 100, 0]], stroke=GREY, sw=3)
+        ellipse(x + 24 + (w - 100) * (0.28 + 0.22 * k), sy - 10, 20, 20, stroke=GREYD,
+                bg=WHITE, sw=2)
+    rect(x + 24, y + 286, w - 48, 44, stroke=GREY, bg=WHITE, sw=2, rough=1, rounded=True,
+         prefix="pnlf")
+    line(x + w - 76, y + 301, [[0, 0], [14, 16], [28, 0]], stroke=GREYD, sw=3)
+    rect(x + 24, y + 338, w - 48, 44, stroke=GREY, bg=WHITE, sw=2, rough=1, rounded=True,
+         prefix="pnlf")
+    text(x + 42, y + 348, "#1e1e1e", size=SMALL, color=GREY)
+
+
+def human_gate(cx, cy, color=GREEN, abg=GREEN_BG, s=1.0):
+    """The human-in-loop marker for beat 7: a head plus rounded shoulders, filled.
+
+    This is safety-bearing - SKILL.md requires the human decision point to be
+    unmistakable - so it does not use the kit's person(), which is sized for a
+    crowd of tiny figures and reads as a paper dart when it has to stand alone.
+    Same reason Day 3 keeps its own person_big()."""
+    r = 26 * s
+    ellipse(cx - r, cy - 62 * s, 2 * r, 2 * r, stroke=color, bg=WHITE, sw=3, rough=1,
+            prefix="hghead")
+    line(cx - 50 * s, cy + 46 * s,
+         [[0, 0], [0, -22 * s], [18 * s, -50 * s], [82 * s, -50 * s],
+          [100 * s, -22 * s], [100 * s, 0]],
+         stroke=color, sw=3, rough=1, bg=abg, fill="solid", prefix="hgbody")
+
+
+# ----------------------------------------------------------------------------
+# THE WORKED EXAMPLE - one generic landing page, carried across beats 1, 4, 5
+# and 7 so the board tells a single story: the first draft you can argue with,
+# the correction said in plain words, that one correction applied to one
+# element and the three named iterations you ship. Deliberately everyday
+# business (an internal tool's landing page), never Phlo-specific.
+# ----------------------------------------------------------------------------
+HEADER_FIX = "the header is fighting the hero -\nmake the header quieter"
+NAMED_CHANGES = ["'the header is fighting the hero - make it quieter'",
+                 "'move the price above the fold'",
+                 "'three cards, not four - drop the last one'"]
+# The criterion on beat 6 is the catch. It is one sentence, falsifiable by
+# looking at the output, and written BEFORE the output is judged.
+CRITERION = "'a first-time reader can see the price without scrolling'"
 
 # ============================================================================
 # BOARD TITLE
 # ============================================================================
-text(OX[1], -300, "Claude Design", size=HERO, color=INK)
+text(OX[1], -300, "Design with Claude", size=HERO, color=INK)
 text(OX[1] + 6, -300 + HERO * LINE_H + 4,
-     "describe it - and watch it get designed, on-brand", size=H2, color=VIOLET)
+     "get to something worth arguing with - then earn the finish", size=H2, color=ORANGE)
 
 # ============================================================================
-# BEAT 1 - HOOK
+# BEAT 1 - BLANK PAGE TO WORTH-REACTING-TO
 # ============================================================================
-ox = beat_head(1, "Describe it, see it designed",
-               "not a wall of text describing a screen - an actual,\npolished design you can look at")
-by = 360
-bw, bh = 500, 130
-sticky(ox + 40, by, bw, bh, GREY, angle=jit(1.5))
-text(ox + 72, by + 30, "design a clean landing\npage for the new tool", size=BODY, color=WHITE)
-line(ox + 90, by + bh, [[0, 0], [-18, 30], [22, -2]], stroke=GREY, sw=3)
-arrow(ox + 40 + bw + 30, by + bh / 2, [[0, 0], [140, 0]], stroke=VIOLET, sw=5, rough=1)
-mx = ox + 40 + bw + 210
-ellipse(mx - 30, by - 40, 300, 320, stroke=VIOLET, bg=VIOLET_BG, sw=2, rough=1, fill="solid", opacity=45)
-mockup(mx, by - 20, 240, 280, accent=VIOLET, abg=VIOLET_BG)
-text(mx - 10, by + 274, "a real design, not a\ndescription of one", size=SMALL, color=VIOLET)
-
-# ============================================================================
-# BEAT 2 - WHAT IT IS
-# ============================================================================
-ox = beat_head(2, "A design partner from Anthropic Labs",
-               "Work with Claude to make polished visual things -\ndesigns, prototypes, decks, one-pagers.")
-mockup(ox + 120, 340, 380, 420, accent=BLUE, abg=BLUE_BG)
-outs = [("interactive prototypes", 60), ("on-brand decks", 180), ("one-pagers", 300)]
-for lab, yy in outs:
-    text(ox + 560, 340 + yy, lab, size=BODY, color=BLUE)
-    arrow(ox + 555, 360 + yy, [[0, 0], [-50, 0]], stroke=BLUE, sw=3)
-chx = ox + 120
-for lab in ["research preview", "powered by Claude Opus", "Pro and up"]:
-    w, _ = chip(chx, 784, lab, fill=WHITE, text_color=BLUE, border=BLUE, size=SMALL)
-    chx += w + 26
-
-# ============================================================================
-# BEAT 3 - IT LEARNS YOUR STYLE  (signature)
-# ============================================================================
-ox = beat_head(3, "It learns your house style",
-               "Onboarding, once: Claude reads your codebase and\ndesign files and builds your design system.")
-file_icon(ox + 70, 360, abg=GREEN_BG)
-file_icon(ox + 140, 380, abg=BLUE_BG)
-text(ox + 60, 470, "your codebase\n+ design files", size=SMALL, color=GREYD)
-arrow(ox + 230, 400, [[0, 0], [110, 0]], stroke=GREEN, sw=4)
-# the learned design system
-sticky(ox + 360, 330, 720, 200, GREEN_BG, angle=jit(-0.8))
-text(ox + 390, 352, "your design system", size=H3, color=GREEN)
-swatch_strip(ox + 392, 420, [(VIOLET, VIOLET_BG), (BLUE, BLUE_BG), (GREEN, GREEN_BG),
-                             (ORANGE, ORANGE_BG)])
-text(ox + 60, 580, "then every project after that uses your colours, type and components - automatically",
+ox = beat_head(1, "blank page to worth-reacting-to",
+               "The win is not a design you can ship. It is a design you can\nargue with - and arguing is the fast part.")
+# left: the blank page, with nothing on it but a cursor
+rect(ox + 50, 330, 300, 390, stroke=GREY, bg=WHITE, sw=2, rough=1, rounded=True)
+line(ox + 200, 480, [[0, 0], [0, 76]], stroke=GREY, sw=4)
+text(ox + 50, 740, "hour three of\nthe blank page", size=SMALL, color=GREY)
+arrow(ox + 378, 520, [[0, 0], [104, 0]], stroke=ORANGE, sw=5, rough=1)
+# right: ninety seconds of Claude, and suddenly you have opinions
+mockup(ox + 510, 330, 320, 390, accent=ORANGE, abg=ORANGE_BG)
+text(ox + 510, 740, "ninety seconds later", size=SMALL, color=GREY)
+text(ox + 862, 296, "and now you have opinions", size=SMALL, color=GREY)
+for k, note in enumerate(["the hero says\nnothing", "price should be\nhigher up",
+                          "three cards,\nnot four"]):
+    ny = 340 + k * 130
+    sticky(ox + 862, ny, 250, 100, ORANGE_BG, angle=jit(2.0))
+    text(ox + 886, ny + 24, note, size=SMALL, color=INK)
+    arrow(ox + 852, ny + 48, [[0, 0], [-18, 0]], stroke=ORANGE, sw=3, rough=1)
+text(ox + 50, 812,
+     "A draft you disagree with tells you what you actually wanted.\nA blank page tells you nothing at all.",
      size=BODY, color=GREYD)
-chip(ox + 60, 650, "on-brand by default, not by copy-paste", fill=WHITE, text_color=GREEN, border=GREEN, size=SMALL)
+chip(ox + 50, 918, "get to something worth reacting to", fill=ORANGE_BG,
+     text_color=ORANGE, border=ORANGE, size=LABEL)
 
 # ============================================================================
-# BEAT 4 - START FROM ANYTHING
+# BEAT 2 - REFERENCE BEATS ADJECTIVES
 # ============================================================================
-ox = beat_head(4, "Start from almost anything",
-               "A prompt, a pile of files, or your live site -\nClaude meets you where your idea already is.")
-starts = [("a text prompt", VIOLET, VIOLET_BG),
-          ("images & docs (DOCX, PPTX, XLSX)", BLUE, BLUE_BG),
-          ("your codebase", GREEN, GREEN_BG),
-          ("grab elements off your live site", ORANGE, ORANGE_BG)]
-sy = 340
-for k, (lab, acc, abg) in enumerate(starts):
-    yy = sy + k * 110
-    sticky(ox + 60, yy, 760, 86, abg, angle=jit(1.0))
-    ellipse(ox + 84, yy + 22, 40, 40, stroke=acc, bg=WHITE, sw=3)
-    text_centered(ox + 104, yy + 28, str(k + 1), size=H3, color=acc)
-    text(ox + 150, yy + 24, lab, size=H3, color=INK)
-text(ox + 60, sy + 4 * 110 + 16, "the web-capture tool grabs real elements, so prototypes look like the real product",
-     size=SMALL, color=GREYD)
+ox = beat_head(2, "reference beats adjectives",
+               "'Clean and modern' is a phrase you both think you understand.\nShow it the thing you like instead.")
+# left: the adjective brief, struck through
+text(ox + 50, 292, "what you typed", size=SMALL, color=GREY)
+sticky(ox + 50, 326, 500, 208, VIOLET_T, angle=jit(1.4))
+text(ox + 86, 352, "make the landing page", size=BODY, color=GREYD)
+struck(ox + 86, 400, "clean and modern", size=H2, color=GREYD, strike=VIOLET)
+xmark(ox + 88, 472, GREY, s=22)
+text(ox + 130, 466, "two words, a hundred readings", size=SMALL, color=GREYD)
+# right: the reference you paste instead
+arrow(ox + 566, 420, [[0, 0], [44, 0]], stroke=VIOLET, sw=5, rough=1)
+text(ox + 620, 292, "what to paste instead", size=SMALL, color=GREY)
+reference_frame(ox + 620, 326, 460, 290)
+text(ox + 620, 636, "the page you already like", size=BODY, color=VIOLET)
+# the swap, spelled out: words it guesses at, against things it can look at
+text(ox + 50, 700, "words it has to guess at", size=SMALL, color=GREY)
+_sx = ox + 50
+for word in ["clean", "modern", "professional", "on-brand"]:
+    struck(_sx, 736, word, size=H3, color=GREYD, strike=VIOLET)
+    _sx += text_w(word, H3) + 56
+text(ox + 50, 812, "things it can actually look at", size=SMALL, color=GREY)
+_cx = ox + 50
+for lab in ["a screenshot", "a link", "last year's deck", "a page you like"]:
+    _w, _h = chip(_cx, 846, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
+    _cx += _w + 24
+text_centered(ox + 560, 936, "show it the thing you like", size=H3, color=VIOLET)
 
 # ============================================================================
-# BEAT 5 - WHAT YOU GET OUT
+# BEAT 3 - STRUCTURE VERSUS POLISH
 # ============================================================================
-ox = beat_head(5, "What you get out",
-               "Things you can share, test and ship - not just pictures.")
-outs = [("Interactive prototypes", "shareable and user-testable -\nno code review, no PRs", TEAL, TEAL_BG),
-        ("Feature flows", "sketch it, hand it to\nClaude Code to build", INDIGO, INDIGO_BG),
-        ("On-brand decks", "export to PPTX, or\nsend straight to Canva", VIOLET, VIOLET_BG)]
-gx2, gy = ox + 50, 340
-cw2 = 340
-for k, (head, cap, acc, abg) in enumerate(outs):
-    bx = gx2 + k * (cw2 + 30)
-    sticky(bx, gy, cw2, 380, abg, angle=jit(1.0))
-    text(bx + 28, gy + 26, head, size=H3, color=acc)
-    text(bx + 28, gy + 96, cap, size=BODY, color=INK)
-    mockup(bx + 60, gy + 190, 220, 160, accent=acc, abg=abg)
+ox = beat_head(3, "structure versus polish",
+               "The same content, twice. Polish laid over the wrong structure is\nthe most expensive work you can do.")
+# left: grey boxes, right order
+text(ox + 50, 292, "grey boxes, right order", size=H3, color=BLUE)
+wireframe(ox + 50, 344, 460, 396)
+tick(ox + 52, 768, GREEN)
+text(ox + 98, 762, "you can settle this in a ten-minute\nconversation", size=SMALL, color=GREYD)
+# right: beautiful, wrong order - the same blocks, shuffled
+text(ox + 610, 292, "beautiful, wrong order", size=H3, color=BLUE)
+mockup(ox + 610, 344, 460, 396, accent=BLUE, abg=BLUE_BG, shuffled=True)
+xmark(ox + 612, 766, RED, s=22)
+text(ox + 656, 762, "every fix from here is a redraw", size=SMALL, color=GREYD)
+text(ox + 50, 836,
+     "Settle the order of things while they are still cheap to move.\nPolish is the last pass, never the first.",
+     size=BODY, color=GREYD)
+chip(ox + 50, 940, "polish on bad structure is a redraw", fill=BLUE_BG,
+     text_color=BLUE, border=BLUE, size=LABEL)
 
 # ============================================================================
-# BEAT 6 - WHO IT'S FOR
+# BEAT 4 - ITERATE BY TALKING TO IT
 # ============================================================================
-ox = beat_head(6, "Three handy flows",
-               "One per job - designer, PM, founder.")
-flows = [("Designers", "static mockup -> interactive prototype to user-test", VIOLET),
-         ("Product managers", "sketch a feature flow -> hand to Claude Code", BLUE),
-         ("Founders & AEs", "rough outline -> a complete, on-brand deck", ORANGE)]
-fy = 350
-for k, (who, what, acc) in enumerate(flows):
-    yy = fy + k * 130
-    text(ox + 60, yy, who, size=H3, color=acc)
-    chip(ox + 60, yy + 50, what, fill=WHITE, text_color=acc, border=acc, size=SMALL)
-demo_badge(ox + 60, fy + 3 * 130 + 10,
-           "show in Claude Design:  a prompt -> an on-brand mockup, then export")
+ox = beat_head(4, "iterate by talking to it",
+               "You already know what is wrong with it. Say that - in the words\nyou would use to a colleague.")
+# left: the settings-panel instinct
+text(ox + 50, 292, "the old instinct", size=SMALL, color=GREY)
+settings_panel(ox + 50, 330, 420, 400)
+xmark(ox + 52, 762, GREY, s=22)
+text(ox + 96, 756, "hunting for the control\nthat does the thing", size=SMALL, color=GREYD)
+# right: the correction, in plain language
+text(ox + 560, 292, "what you say instead", size=SMALL, color=GREY)
+sticky(ox + 560, 330, 520, 188, TEAL_BG, angle=jit(1.4))
+text(ox + 596, 360, HEADER_FIX + ",\nand give the hero room\nto breathe", size=BODY, color=INK)
+tick(ox + 562, 566, GREEN)
+text(ox + 608, 560, "no panel, no hex codes,\nnothing to hunt for", size=SMALL, color=GREYD)
+text(ox + 50, 836,
+     "It is a conversation, not a control surface. Describe the problem,\nnot the setting you imagine would fix it.",
+     size=BODY, color=GREYD)
+chip(ox + 50, 940, "say what is wrong, in words", fill=TEAL_BG, text_color=TEAL,
+     border=TEAL, size=LABEL)
 
 # ============================================================================
-# BEAT 7 - WHERE IT SHINES  (a gallery of mockups)
+# BEAT 5 - IN UNITS, NOT WHOLESALE
 # ============================================================================
-ox = beat_head(7, "What to make first")
-jobs = [("A quick prototype", "clickable, to test today", TEAL, TEAL_BG),
-        ("An on-brand deck", "a pitch, in your style", VIOLET, VIOLET_BG),
-        ("A tidy one-pager", "made to look finished", ORANGE, ORANGE_BG),
-        ("A feature flow", "agree the shape first", BLUE, BLUE_BG)]
-fx0, fy0, step = ox + 50, 360, 285
-for k, (head, cap, acc, abg) in enumerate(jobs):
-    bx = fx0 + k * step
-    mockup(bx, fy0, 232, 180, accent=acc, abg=abg)
-    text(bx, fy0 + 202, head, size=BODY, color=acc, width=250)
-    text(bx, fy0 + 244, cap, size=SMALL, color=GREYD, width=250)
+ox = beat_head(5, "in units, not wholesale",
+               "Change one element at a time. A full regenerate throws away the\nparts that were already working.")
+# the design you have, with the one element that was already right
+text(ox + 50, 330, "what you have", size=SMALL, color=GREY)
+mockup(ox + 50, 370, 280, 240, accent=INDIGO, abg=INDIGO_BG)
+circle_around(ox + 64, 498, 126, 72, GREEN)
+text(ox + 50, 630, "the pricing card was\nalready right", size=SMALL, color=GREYD)
+text(ox + 50, 730,
+     "Name the element,\nthen name the change.\n\nA regenerate is a fresh\nroll of the dice. It can\nlose what you had\nalready won.",
+     size=BODY, color=GREYD)
+# the fork: one element, or the lot
+arrow(ox + 344, 450, [[0, 0], [128, -66]], stroke=INDIGO, sw=4, rough=1)
+arrow(ox + 344, 534, [[0, 0], [128, 186]], stroke=GREYD, sw=4, rough=1, dashed=True)
+# top branch - one element, named
+text(ox + 500, 330, "change one thing", size=H3, color=INDIGO)
+chip(ox + 500, 386, "'make the header quieter'", fill=WHITE, text_color=INDIGO,
+     border=INDIGO, size=SMALL)
+mockup(ox + 500, 452, 250, 210, accent=INDIGO, abg=INDIGO_BG)
+circle_around(ox + 512, 458, 228, 44, INDIGO)
+tick(ox + 790, 472, GREEN)
+text(ox + 836, 466, "the header changed.\nNothing else did.", size=SMALL, color=GREYD)
+chip(ox + 790, 690, "regenerate is not iterate", fill=INDIGO_BG, text_color=INDIGO,
+     border=INDIGO, size=LABEL)
+# bottom branch - start again, and lose the card
+text(ox + 500, 700, "start again", size=H3, color=GREYD)
+chip(ox + 500, 756, "'try another version'", fill=WHITE, text_color=GREYD,
+     border=GREYD, size=SMALL)
+mockup(ox + 500, 820, 250, 210, accent=INDIGO, abg=INDIGO_BG, shuffled=True, cards=0)
+xmark(ox + 792, 842, RED, s=22)
+text(ox + 836, 836, "different everywhere -\nand the card is gone", size=SMALL, color=GREYD)
 
 # ============================================================================
-# BEAT 8 - SAFETY  (draft -> refine -> final, not a caution box)
+# BEAT 6 - PRESENTABLE IS NOT CORRECT   (adversarial: the failure AND the catch)
 # ============================================================================
-ox = beat_head(8, "A preview - so treat the output as a draft")
-mw, mh = 240, 190
-xs = [ox + 60, ox + 440, ox + 820]
-accs = [(ORANGE, ORANGE_BG), (BLUE, BLUE_BG), (GREEN, GREEN_BG)]
-labs = ["first draft", "you refine it", "your final"]
-for k, (mxx, (acc, abg), lab) in enumerate(zip(xs, accs, labs)):
-    mockup(mxx, 380, mw, mh, accent=acc, abg=abg)
-    text_centered(mxx + mw / 2, 590, lab, size=BODY, color=acc)
-    if k < 2:
-        arrow(mxx + mw + 10, 470, [[0, 0], [80, 0]], stroke=VIOLET, sw=4)
-chip(ox + 60, 330, "research preview - rough edges, and it changes", fill=WHITE,
-     text_color=ORANGE, border=ORANGE, size=SMALL)
-rect(ox + 60, 650, 1020, 120, stroke=ORANGE, bg=ORANGE_T, sw=2, rough=1, rounded=True)
-text(ox + 92, 672, "Keep out unless it's been approved", size=H3, color=ORANGE)
-text(ox + 92, 726, "confidential designs, patient-facing material, or a private codebase", size=BODY, color=INK)
+ox = beat_head(6, "presentable is not correct",
+               "Three outputs. All acceptable, all interchangeable, not one of them\nright - and you cannot tell by looking.")
+# three near-identical outputs. NO jitter and one neutral colour: the sameness IS
+# the point, and a tilt or a colour each would read as three real options.
+for k, lab in enumerate(["version A", "version B", "version C"]):
+    bx = ox + 50 + k * 370
+    text(bx, 300, lab, size=SMALL, color=GREY)
+    mockup(bx, 334, 300, 200, accent=GREY, abg=FAINT)
+    text(bx, 552, "looks fine", size=BODY, color=GREYD)
+# the catch - named before you look, so "it looks fine" cannot be the verdict
+text(ox + 50, 616, "the catch", size=SMALL, color=RED)
+text(ox + 50, 650, "name what it has to get right - before you look at it", size=H3, color=RED)
+sticky(ox + 50, 706, 1040, 78, RED_T, angle=jit(1.0))
+text(ox + 86, 727, CRITERION, size=BODY, color=INK)
+for k in range(3):
+    bx = ox + 50 + k * 370
+    xmark(bx + 2, 830, RED, s=22)
+    text(bx + 46, 824, "fails it", size=BODY, color=RED)
+text(ox + 50, 886,
+     "All three passed the eye test. All three fail the one test that\nmattered - and the test is the only thing you added.",
+     size=BODY, color=GREYD)
+chip(ox + 50, 968, "you will accept this if you are in a hurry", fill=RED_BG,
+     text_color=RED, border=RED, size=LABEL)
 
 # ============================================================================
-# BEAT 9 - TRY / CLOSE  (a prompt -> a mockup, and the module wrap)
+# BEAT 7 - HUMAN PASS FOR BRAND-FINAL   (the cut-away, then the close)
 # ============================================================================
-ox = beat_head(9, "Describe one screen you wish existed")
-sticky(ox + 60, 340, 540, 160, VIOLET_BG, angle=jit(1.3))
-text(ox + 96, 366, "Try this", size=H3, color=VIOLET)
-text(ox + 96, 426, "describe one screen or deck\nyou wish already existed", size=BODY, color=INK)
-arrow(ox + 620, 420, [[0, 0], [70, 0]], stroke=VIOLET, sw=4)
-mockup(ox + 720, 350, 240, 200, accent=VIOLET, abg=VIOLET_BG)
-ex_x = ox + 60
-for lab in ["a landing page", "a pitch deck", "a settings screen"]:
-    w, h = chip(ex_x, 560, lab, fill=WHITE, text_color=VIOLET, border=VIOLET, size=SMALL)
-    ex_x += w + 32
-text(ox + 60, 648, "see the first design, then refine it in plain English", size=BODY, color=GREYD)
-text(ox + 40, 708, "Claude gets you a polished start - you shape it into the finished thing.",
-     size=H3, color=INK)
-text(ox + 40, 770, "That's the Claude module - nice work getting through it.", size=BODY, color=GREEN)
-text(ox + 60, 836, "Docs: Anthropic - Introducing Claude Design, and Get started with Claude Design",
-     size=SMALL, color=VIOLET)
+ox = beat_head(7, "human pass for brand-final",
+               "Claude gets you a strong draft, fast. A person owns what actually\ngoes out of the door.")
+text(ox + 50, 292, "three iterations, each one named", size=SMALL, color=GREY)
+for k, change in enumerate(NAMED_CHANGES):
+    ry = 326 + k * 86
+    num_badge(ox + 50, ry, k + 1, GREEN)
+    text(ox + 112, ry + 4, change, size=BODY, color=INK)
+# the human gate: Claude drafts, a person passes it, then it is brand-final
+mockup(ox + 50, 570, 230, 165, accent=GREEN, abg=GREEN_BG)
+arrow(ox + 296, 652, [[0, 0], [86, 0]], stroke=GREEN, sw=5, rough=1)
+human_gate(ox + 470, 676, GREEN, GREEN_BG)
+arrow(ox + 556, 652, [[0, 0], [86, 0]], stroke=GREEN, sw=5, rough=1)
+mockup(ox + 680, 570, 230, 165, accent=GREEN, abg=GREEN_BG)
+tick(ox + 942, 620, GREEN)
+text(ox + 50, 748, "Claude's draft", size=SMALL, color=GREYD)
+text_centered(ox + 470, 748, "you: the last pass", size=SMALL, color=GREEN)
+text(ox + 680, 748, "brand-final", size=SMALL, color=GREEN)
+# the data rule - red, because it is the only on-screen data-handling rule here
+highlighter(ox + 40, 800, 1080, 96, RED_BG, angle=0.0)
+diamond(ox + 56, 816, 44, 44, stroke=RED, bg=RED_BG, sw=3)
+text_centered(ox + 78, 820, "!", size=H3, color=RED)
+text(ox + 124, 816,
+     "Nothing confidential goes in: no unapproved designs, no private\ncodebase, nothing patient-facing.",
+     size=BODY, color=RED)
+demo_badge(ox + 50, 908,
+           "show in Claude desktop app: one design, three targeted iterations")
+chip(ox + 50, 984, "nothing goes out without the human pass", fill=GREEN_BG,
+     text_color=GREEN, border=GREEN, size=LABEL)
+
+# No connector spine, no inter-beat arrows and no footer: the seven beats read as
+# one picture through consistent shape and rhythm, and the whitespace is the camera.
 
 # ----------------------------------------------------------------------------
+# WRITE + VALIDATE  (shared excalidraw_kit; hard-fails on frames / off-palette)
+# ----------------------------------------------------------------------------
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "claude-design.excalidraw")
-finish(out, max(WID.values()) + 200, TOTAL_W)
+MAXW = max(WID.values()) + 200
+finish(out, MAXW, TOTAL_W)
