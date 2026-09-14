@@ -63,7 +63,7 @@ Everything below is invented, generic data. No patient information, no Phlo spec
 ## Section 4 - Design rationale
 
 - **House Style B**, built by `build_word.py` (imports the shared `excalidraw_kit`); re-run to regenerate.
-- **Distinct angle from its file-type siblings**: PowerPoint (2.7) owns decks; Excel (2.8) owns formulas; **this one owns long-form prose - tracked-change editing on a selection, cited Q&A, and thematic (meaning-based) search.** Beats 3 (citations/thematic search) and 4 (selection + tracked changes) are the signature beats.
+- **Distinct angle from its file-type siblings**: PowerPoint (now Day 12, `videos/ai-training/12-powerpoint/`) owns decks; Excel (2.8) owns formulas; **this one owns long-form prose - tracked-change editing on a selection, cited Q&A, and thematic (meaning-based) search.** Beats 3 (citations/thematic search) and 4 (selection + tracked changes) are the signature beats.
 - **Two real capabilities, not conflated**: (1) "Create and edit files with Claude" - chat builds a genuine .docx, all plans; (2) "Claude for Word" - the add-in, Pro+. Beat 5 is the hinge.
 - **Safety kept honest**: documented prompt-injection caution on untrusted files, plus "read tracked changes, don't bulk-accept" - maps onto Phlo's human-owns-the-final guardrail for legal/regulated wording.
 

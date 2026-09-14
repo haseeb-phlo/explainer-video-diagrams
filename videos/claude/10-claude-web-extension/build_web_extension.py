@@ -7,7 +7,8 @@ House Style B (see excalidraw_kit): one hand-drawn left-to-right journey, no
 frames, white canvas, the hand font, lively palette. Composition + a one-off
 browser illustration live here.
 
-Unlike the file-type videos (2.7-2.9), this is an AGENTIC tool: Claude in Chrome
+Unlike the file-type videos (2.8-2.9, plus PowerPoint - now Day 12), this is
+an AGENTIC tool: Claude in Chrome
 navigates, clicks and fills forms in your browser, with your logins and context,
 across tabs - and can record/repeat and schedule browser tasks. So the shape is
 different: no "build a real file" beat; instead the PERMISSION MODEL and the

@@ -6,7 +6,8 @@ House Style B (see excalidraw_kit): one hand-drawn left-to-right journey, no
 frames, white canvas, the hand font, lively palette. This file holds only the
 composition + a one-off document illustration.
 
-Sibling to PowerPoint (2.7, decks) and Excel (2.8, formulas). To keep the trio
+Sibling to Excel (2.8, formulas) and to the PowerPoint video, which is now
+Day 12 (videos/ai-training/12-powerpoint/, decks). To keep the trio
 distinct, THIS one's angle is long-form prose: edits that land as TRACKED changes
 on a selection (surrounding styles preserved), document Q&A with clickable
 citations, and THEMATIC search (every passage on a theme, not keyword hits). Two
