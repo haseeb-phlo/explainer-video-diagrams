@@ -64,7 +64,7 @@ Everything below is invented, generic data. No patient information, no Phlo spec
 ## Section 4 - Design rationale
 
 - **House Style B**, built by `build_excel.py` (imports the shared `excalidraw_kit`); re-run to regenerate.
-- **Distinct angle from its file-type siblings**: PowerPoint (2.7) owns decks/structure; Word (2.9) owns long-form/formatting; **this one owns live formula relationships, cell-cited answers and debugging** - the things only a spreadsheet has. Beat 4 (formulas stay alive) and beat 6 (tracing a #REF) are the signature beats.
+- **Distinct angle from its file-type siblings**: PowerPoint (now Day 12, `videos/ai-training/12-powerpoint/`) owns decks/structure; Word (2.9) owns long-form/formatting; **this one owns live formula relationships, cell-cited answers and debugging** - the things only a spreadsheet has. Beat 4 (formulas stay alive) and beat 6 (tracing a #REF) are the signature beats.
 - **Two real capabilities, not conflated**: (1) "Create and edit files with Claude" - chat builds a genuine .xlsx, all plans; (2) "Claude for Excel" - the Home-ribbon add-in, Pro+. Beat 5 is the hinge.
 - **Safety kept honest**: documented prompt-injection caution on untrusted files, plus human ownership of figures that drive decisions - maps onto Phlo's "human owns the final" guardrail.
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Build claude-design-md.excalidraw - ONE flowing, illustrated explainer for
-DAY 12 of the Phlo AI training: "design.md" (~7 min, hard cap 8).
+DAY 13 of the Phlo AI training: "design.md" (~7 min, hard cap 8).
 
-Day 12 is the depth pass on the three files Day 10 only points at. Day 10 teaches
+Day 13 is the depth pass on the three files Day 10 only points at. Day 10 teaches
 the judgement (reference beats adjectives, presentable is not correct, the human
-pass). Day 12 teaches the plumbing that makes that judgement permanent: a
+pass). Day 13 teaches the plumbing that makes that judgement permanent: a
 design.md, the design system built from it, and the template built from that -
 prepared BEFORE you prompt, so the first output is already close and every
 correction afterwards compounds.
@@ -58,8 +58,8 @@ beat at a time):
      7  RED     everything compounds, mistakes too      <- adversarial: failure AND catch
      8  YELLOW  then it leaves the room                 <- export, then the human pass
 
-Run:  python3 videos/ai-training/12-design-md/build_design_md.py
-      /usr/bin/python3 preview.py videos/ai-training/12-design-md/claude-design-md.excalidraw out.png
+Run:  python3 videos/ai-training/13-design-md/build_design_md.py
+      /usr/bin/python3 preview.py videos/ai-training/13-design-md/claude-design-md.excalidraw out.png
       /usr/bin/python3 preview.py <scene> out.png XMIN XMAX   # close-up on one beat
       python3 build_all.py            # rebuild all + Style-B guard
 """

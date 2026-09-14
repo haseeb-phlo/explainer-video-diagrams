@@ -10,7 +10,7 @@
 target 4 to 6 - see Runtime below.
 **Curriculum ref:** **Day 11**. **No Day 11 entry exists in
 `Phlo_Mandatory_AI_Course_Curriculum.docx`** - the day series is newer than the docx, as
-with Day 10 and Day 12. **Reconcile board and narration against the curriculum when a
+with Day 10 and Day 13. **Reconcile board and narration against the curriculum when a
 Day 11 entry exists.**
 
 **Ships:** one job off the board, run end to end through the six-step loop.
@@ -21,32 +21,32 @@ for the empty state before you send it anywhere.
 
 This board is new work and took slot **11**. To make room:
 
-- `videos/ai-training/11-design-md/` moved to **`videos/ai-training/12-design-md/`**, and
-  every "Day 11" inside it became "Day 12".
+- `videos/ai-training/11-design-md/` moved to **`videos/ai-training/13-design-md/`**. It
+  went 11 -> 12 first, to free slot 11; then 12 -> 13 when **Claude PowerPoint landed on
+  Day 12** from another branch mid-flight. Every "Day 11" inside it became "Day 13".
 - **Day 10's beat 2 pointer chip was regenerated** to read "write the reference down once:
-  Day 12, design.md", and Day 10's script, prompt and Resource Card were updated to match.
+  Day 13, design.md", and Day 10's script, prompt and Resource Card were updated to match.
   The replacement string is the same length and the seed is unchanged, so Day 10's scene
   diff is exactly those two strings - **nothing moved, and a recorded Day 10 does not need
   re-recording.**
-- **Claude PowerPoint is reserved for Day 13** (`videos/claude/7-claude-powerpoint/`).
-  That number **reuses the retired day 13**, whose Dispatch content went to Day 8 beat 8.
-  The folder move has **not** been made - reserve the number, then move it the way Day 4,
-  Day 7, Day 8 and Day 10 were moved.
+- **Claude PowerPoint is Day 12**, at `videos/ai-training/12-powerpoint/` - that move
+  landed on main independently and this branch merged it rather than duplicating it.
+  **Day 13 reuses the number of the retired day 13**, whose Dispatch content went to
+  Day 8 beat 8: the number is free, the old content is not coming back.
 
 ## Where it sits, and what kind of board it is
 
 **This is topic coverage, not an argument.** Day 10 is the argument about judgement
-(reference beats adjectives, presentable is not correct). Day 12 is the plumbing
+(reference beats adjectives, presentable is not correct). Day 13 is the plumbing
 (design.md, design system, template). **Day 11 walks the actual jobs**, in the order the
 sources cover them, built on one repeatable six-step loop.
 
 The brief was explicit: *ignore anything already covered in the earlier Claude Design
 boards, cover those as a brief reminder, and cover everything new from wireframing
 onwards.* **Beat 1 is that reminder and it is 20 seconds** - four Day 10 chips, a forward
-chip to Day 12, and a chip sending full on-brand decks to Day 12 and the Claude PowerPoint
-video. That is not a breach of the precedence rule ("each Day covers its topic in full"):
+chip to Day 13, and a chip sending full on-brand decks to Day 12, Claude PowerPoint. That is not a breach of the precedence rule ("each Day covers its topic in full"):
 the rule governs a Day's **own** subject, and this board's subject starts at beat 2.
-Day 10's own beat 2 pointer to Day 12 is the standing precedent for a forward chip.
+Day 10's own beat 2 pointer to Day 13 is the standing precedent for a forward chip.
 **Beat 1 must never grow into a re-teach.**
 
 ## Sources, and the hierarchy between them
@@ -88,7 +88,7 @@ passages were carried across.
 
 ### What was deliberately left out
 
-- **Every plan, model and button.** Same filter as Day 12: the board names none of them,
+- **Every plan, model and button.** Same filter as Day 13: the board names none of them,
   which is why it does not date. **Fix the card, not the board.**
 - **"Go to another vendor's model for images."** That is one source's answer to the image
   limit. For a regulated pharmacy the routing decision belongs to the AI Use Policy, not
@@ -133,9 +133,9 @@ if an export button ships; if one does, that is the line to revisit.
 | 9 | green | where it stops, and who owns it | four jobs that belong elsewhere, the human pass, the data rule |
 
 Orange repeats on 1 and 6 and that is allowed - never on adjacent beats. **Green = the
-human pass** is held constant across Day 10, Day 11 and Day 12 so the rule reads as the
+human pass** is held constant across Day 10, Day 11 and Day 13 so the rule reads as the
 same rule wherever a viewer meets it. There is deliberately **no second object-colour
-system** here: Day 12 owns blue = design.md, green = design system, teal = template, and
+system** here: Day 13 owns blue = design.md, green = design system, teal = template, and
 beat 1 draws those three as neutral chips rather than re-using semantics out of context.
 
 ## One numbered process per board
@@ -292,5 +292,5 @@ everything displaced from the board.
 
 **Curriculum.** `Phlo_Mandatory_AI_Course_Curriculum.docx` is the stated source of truth
 for script blocks and is not in the repo. It was asked for; **there is no Day 11 entry**,
-and the Day 10 / Day 12 precedent was used instead - a source note at the top of the script
+and the Day 10 / Day 13 precedent was used instead - a source note at the top of the script
 and a "before publishing" header on the card.

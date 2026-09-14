@@ -1,13 +1,13 @@
-# Day 12: design.md - narration script (~7 min 10, Loom)
+# Day 13: design.md - narration script (~7 min 10, Loom)
 
-Board: `videos/ai-training/12-design-md/claude-design-md.excalidraw` (8 beats, one slot
-each, `GAP = 800`). **Day 12** of the AI training series.
+Board: `videos/ai-training/13-design-md/claude-design-md.excalidraw` (8 beats, one slot
+each, `GAP = 800`). **Day 13** of the AI training series.
 
-> **Source note.** There is **no Day 12 entry** in
+> **Source note.** There is **no Day 13 entry** in
 > `Phlo_Mandatory_AI_Course_Curriculum.docx` - the day series is newer than the docx.
 > Board and narration were written from `claude-design-md-prompt.md`, which was in turn
 > distilled from a third-party tutorial transcript. **Reconcile against the curriculum
-> when a Day 12 entry exists** - particularly the hook, the pause-and-try and the
+> when a Day 13 entry exists** - particularly the hook, the pause-and-try and the
 > resource list.
 
 > **One deliberate departure from the source, and do not undo it.** The tutorial this is

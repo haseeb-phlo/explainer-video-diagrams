@@ -91,10 +91,10 @@ travel.
 | 6 | red | presentable is not correct | **Adversarial.** Three interchangeable outputs, all "looks fine", then the named criterion, then all three fail it. Chip: *you will accept this if you are in a hurry*. |
 | 7 | green | human pass for brand-final | The three named iterations, the human gate (Claude drafts, a person passes it, it is brand-final), the red data rule, the demo badge, the close chip. |
 
-**Beat 2 also carries a one-line pointer to Day 12** (`videos/ai-training/12-design-md/`),
+**Beat 2 also carries a one-line pointer to Day 13** (`videos/ai-training/13-design-md/`),
 which is the depth pass on `design.md` - the three prepared files that make this beat's
 habit permanent. It is a forward pointer to *another Day's* topic, not a signpost standing
-in for this board's own subject, so the precedence rule is intact. **Day 12 never points
+in for this board's own subject, so the precedence rule is intact. **Day 13 never points
 back.** The pointer added 15s to the recorded runtime.
 
 **Pan order:** left to right, beats 1 to 7, one slot at a time. Documented in the build

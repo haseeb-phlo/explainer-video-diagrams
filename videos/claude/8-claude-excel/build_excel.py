@@ -6,7 +6,8 @@ House Style B (see excalidraw_kit): one hand-drawn left-to-right journey, no
 frames, white canvas, the hand font, lively colour-coded palette. This file holds
 only the composition + a couple of one-off illustrations (a spreadsheet grid).
 
-Sibling to the PowerPoint (2.7) and Word (2.9) file-type videos. To stop the three
+Sibling to the Word (2.9) file-type video, and to the PowerPoint one
+that is now Day 12 (videos/ai-training/12-powerpoint/). To stop the three
 reading as copy-paste, THIS one's angle is what's unique to spreadsheets: live
 FORMULA relationships - Claude answers about your actual cells with citations,
 changes an assumption and every dependent cell recomputes, and traces broken

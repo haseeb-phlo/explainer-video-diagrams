@@ -5,7 +5,7 @@ Board: `videos/ai-training/11-design-workflows/claude-design-workflows.excalidra
 
 > **Source note.** There is **no Day 11 entry** in
 > `Phlo_Mandatory_AI_Course_Curriculum.docx` - the day series is newer than the docx, as
-> with Day 10 and Day 12. Written from `claude-design-workflows-prompt.md`, which was
+> with Day 10 and Day 13. Written from `claude-design-workflows-prompt.md`, which was
 > distilled from **two third-party sources** (a video transcript and a published workflow
 > playbook) and then **checked against Anthropic's own documentation**, which outranks
 > both. **Reconcile against the curriculum when a Day 11 entry exists** - particularly the
@@ -13,7 +13,8 @@ Board: `videos/ai-training/11-design-workflows/claude-design-workflows.excalidra
 
 > **Numbering.** This board took slot 11 as new work. The `design.md` board moved
 > **11 to 12** at the same time, and Day 10's beat 2 pointer chip was regenerated to read
-> "Day 12, design.md". Claude PowerPoint is reserved for **Day 13**.
+> "Day 13, design.md". **Claude PowerPoint landed on Day 12** from another branch while
+> this board was in progress, so design.md moved twice: 11 to 12, then 12 to 13.
 
 > **Two things not to change.** Beat 1 is a 20-second reminder and must stay that short -
 > this board's subject starts at beat 2. And **the six-step loop is the only numbered
@@ -57,7 +58,7 @@ the actual jobs, and the one loop underneath all of them.
 
 ## 0:12 - 0:33 · Why this one matters [CAM]
 
-Day 10 was the judgement. Day 12 is the files you prepare. This one is the work itself:
+Day 10 was the judgement. Day 13 is the files you prepare. This one is the work itself:
 wireframes, one-pagers, roadmaps, motion graphics for video.
 
 It is one loop repeated seven times, plus one beat at the end about the review this tool
@@ -68,8 +69,8 @@ does of its own work - the part that catches people.
 Four lines from Day 10, and I am not re-teaching them. Reference beats adjectives.
 Structure before polish. One element at a time. Presentable is not correct.
 
-On the right, the three files Day 12 covers. If you want a full on-brand deck, that is
-Day 12 and the PowerPoint video.
+On the right, the three files Day 13 covers. If you want a full on-brand deck, that is
+Day 12, the PowerPoint video.
 
 Today is the jobs.
 

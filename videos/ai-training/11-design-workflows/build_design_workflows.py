@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
 """Build claude-design-workflows.excalidraw - ONE flowing, illustrated explainer
 for DAY 11 of the Phlo AI training: "Claude Design, workflow by workflow"
-(~6 min 45, hard cap 8).
+(~6 min 42, hard cap 8).
 
 WHAT THIS BOARD IS
 ------------------
 Topic coverage, not an argument. Day 10 is the argument about judgement and
-Day 12 is the plumbing (design.md, design system, template). This Day walks the
+Day 13 is the plumbing (design.md, design system, template). This Day walks the
 actual jobs people bring to Claude Design, in the order the sources cover them,
 built on ONE repeatable six-step loop.
 
-NUMBERING. This board is new work and took slot 11; the design.md board moved
-11 -> 12 at the same time, and Day 10's beat 2 pointer chip was regenerated to
-read "Day 12, design.md". Claude PowerPoint is reserved for Day 13.
+NUMBERING. This board is new work and took slot 11. The design.md board moved
+TWICE: 11 -> 12 to free slot 11, then 12 -> 13 when Claude PowerPoint landed on
+Day 12 from another branch while this board was in progress. Day 10's beat 2
+pointer chip was regenerated to read "Day 13, design.md".
 
 BEAT 1 IS A DELIBERATE RE-RUN, AND IT IS DELIBERATELY SHORT. The brief was
 "ignore anything already covered in the Day 10 / design.md boards, cover those
 as a brief reminder, then everything new from wireframing onwards". Beat 1 is
-that reminder - four Day 10 chips, a forward chip to Day 12, and a chip sending
-full on-brand decks to Day 12 and the Claude PowerPoint video. ~20 seconds. It
-is NOT a re-teach and must never grow into one; this board's subject starts at
-beat 2. Day 10's own beat 2 -> Day 12 chip is the precedent for a forward chip.
+that reminder - four Day 10 chips, a forward chip to Day 13, and a chip sending
+full on-brand decks to Day 12, Claude PowerPoint. ~20 seconds.
+It is NOT a re-teach and must never grow into one; this board's subject starts at
+beat 2. Day 10's own beat 2 -> Day 13 chip is the precedent for a forward chip.
 
 SOURCES - TWO THIRD-PARTY, ONE FIRST-PARTY, AND THEY ARE NOT EQUAL
 -------------------------------------------------------------------
@@ -67,8 +68,8 @@ shape Day 10's beat 6 established. This beat is the Best Catch feeder, and the
 demo badge sits here because this is the payload.
 
 ONE COLOUR IS HELD CONSTANT ACROSS THREE BOARDS: GREEN = the human pass. Day 10
-closes on it, Day 12 closes on it, beat 9 here closes on it. Deliberately no
-second object-colour system - Day 12 already owns blue = design.md,
+closes on it, Day 13 closes on it, beat 9 here closes on it. Deliberately no
+second object-colour system - Day 13 already owns blue = design.md,
 green = design system, teal = template, and beat 1 draws those three as neutral
 chips rather than re-using the semantics out of context.
 
@@ -301,7 +302,7 @@ def human_gate(cx, cy, color=GREEN, abg=GREEN_BG, s=1.0):
 
     Safety-bearing, so it does not use the kit's person(), which is sized for a
     crowd of tiny figures and reads as a paper dart standing alone. Same helper
-    and same green as Day 10's and Day 12's closing beats, on purpose."""
+    and same green as Day 10's and Day 13's closing beats, on purpose."""
     r = 26 * s
     ellipse(cx - r, cy - 62 * s, 2 * r, 2 * r, stroke=color, bg=WHITE, sw=3, rough=1,
             prefix="hghead")
@@ -342,7 +343,7 @@ text(OX[1] + 6, -300 + HERO * LINE_H + 4,
 # BEAT 1 - YOU ALREADY HAVE THE HABITS   (the brief reminder - keep it SHORT)
 # ============================================================================
 ox = beat_head(1, "you already have the habits",
-               "Day 10 gave you the judgement. Day 12 gives you the files that make it\nstick. One minute on both, and then today is the jobs themselves.")
+               "Day 10 gave you the judgement. Day 13 gives you the files that make it\nstick. One minute on both, and then today is the jobs themselves.")
 text(ox + 50, 300, "from Day 10, in four lines", size=SMALL, color=GREY)
 for k, hab in enumerate(["reference beats adjectives",
                          "structure before polish",
@@ -350,7 +351,7 @@ for k, hab in enumerate(["reference beats adjectives",
                          "presentable is not correct"]):
     chip(ox + 50, 342 + k * 78, hab, fill=WHITE, text_color=ORANGE, border=ORANGE,
          size=LABEL)
-text(ox + 620, 300, "and Day 12 goes deep on these", size=SMALL, color=GREY)
+text(ox + 620, 300, "and Day 13 goes deep on these", size=SMALL, color=GREY)
 for k, (nm, cap) in enumerate([("design.md", "the rules, written down"),
                                ("design system", "those rules, built in"),
                                ("template", "how a deck is laid out")]):
@@ -361,9 +362,9 @@ for k, (nm, cap) in enumerate([("design.md", "the rules, written down"),
          rounded=True, prefix="remh")
     text(ox + 700, ry + 4, nm, size=BODY, color=INK)
     text(ox + 700, ry + 38, cap, size=SMALL, color=GREY)
-chip(ox + 620, 650, "prepare once, inherit forever - Day 12", fill=WHITE,
+chip(ox + 620, 650, "prepare once, inherit forever - Day 13", fill=WHITE,
      text_color=ORANGE, border=ORANGE, size=SMALL)
-chip(ox + 620, 718, "a full on-brand deck - Day 12, then Claude PowerPoint",
+chip(ox + 620, 718, "a full on-brand deck - Day 12, Claude PowerPoint",
      fill=WHITE, text_color=ORANGE, border=ORANGE, size=SMALL)
 text(ox + 50, 792, "today is the jobs themselves", size=H3, color=ORANGE)
 text(ox + 50, 846,

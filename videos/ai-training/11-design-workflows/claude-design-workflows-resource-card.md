@@ -4,7 +4,7 @@ Paste this into the AI Ops Learn Resource Card for Day 11, alongside the Loom.
 
 > **Four things to do before publishing this card.**
 > 1. **There is no Day 11 entry in `Phlo_Mandatory_AI_Course_Curriculum.docx`** - the day
->    series is newer than the docx, as with Day 10 and Day 12. The links below are
+>    series is newer than the docx, as with Day 10 and Day 13. The links below are
 >    **named, not pasted** - put the current URLs in and check each one resolves.
 > 2. Everything under **"The version-specific detail"** dates fast: a beta, a model, four
 >    plan rules, an export list and a connector list. **Re-check it against Claude before
@@ -59,7 +59,7 @@ before it is read - a known rough edge - paste the same feedback into the chat i
 5. **Landing pages**, from references rather than from adjectives.
 6. **Reusable social templates**, sized once and handed to whoever posts.
 7. **Motion graphics for talking-head video** - see below, it is the surprising one.
-8. **A tailored deck** - but that is Day 12 and the Claude PowerPoint video, not this one.
+8. **A tailored deck** - but that is **Day 12, Claude PowerPoint**, not this one.
 
 ## Explore before you commit
 
@@ -143,7 +143,7 @@ under the same retention rules as everything else you put into Claude.
 video deliberately names no third-party image tool; that call is the policy's.
 
 **3. A design is never brand-final because Claude produced it.** A person does the last
-pass and owns what ships. Carried over from Day 10 and Day 12 unchanged.
+pass and owns what ships. Carried over from Day 10 and Day 13 unchanged.
 
 ---
 
@@ -175,7 +175,7 @@ Kept off the board on purpose - **all of it dates faster than anything on the bo
 - Your codebase, or a design-system repository.
 - A web capture tool that grabs elements from a live site.
 
-### The design system (Day 12 teaches this - here is the product surface)
+### The design system (Day 13 teaches this - here is the product surface)
 
 - Built at **organisation** level from what you upload: a codebase or component library,
   prototypes and screenshots, decks or PDFs, or individual assets - logo, colour palette,
@@ -252,9 +252,9 @@ Paste the current URLs and check each resolves.
 
 - **Day 10 - design work with Claude** - the judgement half: reference beats adjectives,
   one element at a time, presentable is not correct. **Watch it first.**
-- **Day 12 - design.md** - the three files you prepare before you prompt, so the first
-  output is already close. Day 11's loop gets cheaper once Day 12 is done.
-- **Claude PowerPoint** - the deck job in full.
+- **Day 13 - design.md** - the three files you prepare before you prompt, so the first
+  output is already close. Day 11's loop gets cheaper once Day 13 is done.
+- **Day 12 - Claude PowerPoint** - the deck job in full.
 - **Day 7 - Skills** - where "test on a known input" comes from, and where your three
   repeated design corrections belong.
 - **Day 8 - Cowork** - the same argument at a different scale: a long unsupervised run is
