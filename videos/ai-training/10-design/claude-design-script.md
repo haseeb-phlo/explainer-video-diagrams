@@ -19,7 +19,7 @@ Board: `videos/ai-training/10-design/claude-design.excalidraw` (7 beats, one slo
 > **Runtime, measured not asserted.** 988 spoken words, **~6 min 53 at 150 wpm**,
 > including the ~20 seconds where the cut-away takes longer to *do* than to say. The hard
 > cap is 8 minutes with a target of 4 to 6, so this runs **~53s over target and 1 min 07
-> under the cap** (the beat 2 pointer to Day 11 added 15s). That is deliberate: the prose is already tight, so the way to reach
+> under the cap** (the beat 2 pointer to Day 12 added 15s). That is deliberate: the prose is already tight, so the way to reach
 > target is the shorter cut below (drop beats 3 and 4 → ~5 min 40), not thinner teaching.
 > **If you ad-lib, trim as you go rather than adding** - the first draft of this script
 > ran 1,520 words and would have recorded at over 10 minutes. Per-section word counts are
@@ -86,7 +86,7 @@ there is nothing to guess at - it can *look* at what you meant.
 instead.
 
 And bottom right - you can write that reference down once, as a file, so you never paste
-it again. That is Day 11, and it is the whole of Day 11, so I will leave it there.
+it again. That is Day 12, and it is the whole of Day 12, so I will leave it there.
 
 ## 2:15 - 2:46 · Structure versus polish [BOARD: beat 3]
 

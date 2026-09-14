@@ -1,6 +1,6 @@
-# Brief - Day 11: design.md
+# Brief - Day 12: design.md
 
-**Folder:** `videos/ai-training/11-design-md/`
+**Folder:** `videos/ai-training/12-design-md/`
 **File:** `build_design_md.py` -> `claude-design-md.excalidraw`
 **Slug:** `claude-design-md` (so: `claude-design-md-script.md`,
 `claude-design-md-prompt.md`, `claude-design-md-resource-card.md`)
@@ -8,13 +8,13 @@
 **Length:** 8 beats. The recorded script measures **~7 min 10** (1,027 spoken words at
 150 wpm, plus ~20s where the cut-away takes longer to do than to say). Hard cap 8, target
 4 to 6 - see Runtime below.
-**Curriculum ref:** **Day 11**. **No Day 11 entry exists in
+**Curriculum ref:** **Day 12**. **No Day 12 entry exists in
 `Phlo_Mandatory_AI_Course_Curriculum.docx`** - the day series is newer than the docx.
-**Reconcile board and narration against the curriculum when a Day 11 entry exists.**
+**Reconcile board and narration against the curriculum when a Day 12 entry exists.**
 
 ## Where it sits, and why it is separate from Day 10
 
-**Day 10 teaches the judgement. Day 11 teaches the plumbing that makes that judgement
+**Day 10 teaches the judgement. Day 12 teaches the plumbing that makes that judgement
 permanent.** Day 10's beat 2 says "reference beats adjectives" and a `design.md` is the
 industrial-strength version of exactly that - so Day 10 *mentions* design.md on beat 2
 with a one-line chip and hands off here.
@@ -23,7 +23,7 @@ That split was a deliberate instruction, not a convenience: design.md is a big e
 topic to need its own day, and Day 10 would have lost its argument if it had to carry the
 three-file workflow too.
 
-Per the repo precedence rule, **Day 11 covers its topic in full** and never points back
+Per the repo precedence rule, **Day 12 covers its topic in full** and never points back
 at Day 10 for substance. The Day 10 dependencies it *does* lean on are stated as
 callbacks, not prerequisites: "no settings panel, exactly as on Day 10" (beat 4) and
 "looking finished and being right are different things" (beat 8).
@@ -104,7 +104,7 @@ Catch feeder.
 
 **2. The three-way `CLAUDE.md` collision is on beat 6 and must stay there.** The repo
 already warns that Day 3 (the Claude app remembering you) and Day 4 (Claude Code's
-`CLAUDE.md` instruction-writing discipline) must not merge. Day 11 adds a third: a
+`CLAUDE.md` instruction-writing discipline) must not merge. Day 12 adds a third: a
 `CLAUDE.md` that Claude Design writes inside a design project. All three are named on the
 board with their Day numbers, in one row each. **Do not remove that row to save space** -
 it is the only place a viewer sees the three side by side.
@@ -151,7 +151,7 @@ awk '/^## On-screen|^## Recording/{stop=1} stop{next}
      /^(>|`\[|\[|---|- |[0-9]\. )/{next} s{w+=NF; t+=NF}
      END{printf "%-44s %4d w ~%3ds\n",substr(s,4,40),w,int(w/2.5); \
          printf "\nTOTAL %d words = %d:%02d\n",t,int(t/2.5)/60,int(t/2.5)%60}' \
-  videos/ai-training/11-design-md/claude-design-md-script.md
+  videos/ai-training/12-design-md/claude-design-md-script.md
 ```
 
 This is over the 4-to-6 target and 50 seconds inside the cap. **If it needs to come
@@ -172,8 +172,8 @@ brand's assets.
 ## How it is built
 
 ```bash
-python3 videos/ai-training/11-design-md/build_design_md.py     # rebuild this board
-/usr/bin/python3 preview.py videos/ai-training/11-design-md/claude-design-md.excalidraw out.png
+python3 videos/ai-training/12-design-md/build_design_md.py     # rebuild this board
+/usr/bin/python3 preview.py videos/ai-training/12-design-md/claude-design-md.excalidraw out.png
 /usr/bin/python3 preview.py <scene> out.png XMIN XMAX          # close-up on one beat
 python3 build_all.py                                           # rebuild all + Style-B guard
 ```

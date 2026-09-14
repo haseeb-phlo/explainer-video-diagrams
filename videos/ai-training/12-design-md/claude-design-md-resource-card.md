@@ -1,9 +1,9 @@
-# Resource Card - Day 11: design.md
+# Resource Card - Day 12: design.md
 
-Paste this into the AI Ops Learn Resource Card for Day 11, alongside the Loom.
+Paste this into the AI Ops Learn Resource Card for Day 12, alongside the Loom.
 
 > **Three things to do before publishing this card.**
-> 1. **There is no Day 11 entry in `Phlo_Mandatory_AI_Course_Curriculum.docx`**, so the
+> 1. **There is no Day 12 entry in `Phlo_Mandatory_AI_Course_Curriculum.docx`**, so the
 >    "Resources linked from this video" list could not be lifted from it. The links below
 >    are **named, not pasted** - put the current URLs in and check each one resolves
 >    before the card goes live.
@@ -89,7 +89,7 @@ here too.
 |---|---|---|
 | **Claude's memory** | What Claude remembers about **you**, across chats. Off by default on Team and Enterprise. | Day 3, beats 11-12 |
 | **`CLAUDE.md` in Claude Code** | Standing instructions for how to work in **a codebase**. | Day 4, beat 8 (the instruction-writing discipline only) |
-| **`CLAUDE.md` in a design project** | Standing instructions for **these designs** - written when you ask for feedback to be saved, and read before every new design in that project. | **Day 11, beat 6** |
+| **`CLAUDE.md` in a design project** | Standing instructions for **these designs** - written when you ask for feedback to be saved, and read before every new design in that project. | **Day 12, beat 6** |
 
 Same filename in two of the three. Three completely different jobs.
 
@@ -210,15 +210,18 @@ Paste the current URLs and check each resolves.
   building a `design.md` from. **If this does not exist as a single findable thing, that
   is worth fixing before this video ships** - the whole day assumes people can answer
   "where did this colour come from?"
-- The board itself: `videos/ai-training/11-design-md/claude-design-md.excalidraw` - open
+- The board itself: `videos/ai-training/12-design-md/claude-design-md.excalidraw` - open
   it full-screen and pan beat to beat if you want the argument without the narration
 
 ## Related videos in the course
 
 - **Day 10 - design work with Claude** - the judgement half. Reference beats adjectives,
-  one element at a time, presentable is not correct. **Watch it first**; Day 11 makes its
+  one element at a time, presentable is not correct. **Watch it first**; Day 12 makes its
   habits permanent.
-- **Day 7 - Skills** - where "test on a known input" comes from. Day 11's catch is the
+- **Day 11 - Claude Design, job by job** - sits between Day 10 and this one in the running
+  order: the six-step loop, wireframes, the handoff, motion graphics, and the review that
+  only looks like a review. **Watch it before this one.**
+- **Day 7 - Skills** - where "test on a known input" comes from. Day 12's catch is the
   same rule pointed at a design system.
 - **Day 4 - Claude Projects** - where the instruction-writing discipline comes from, and
   one of the three things called `CLAUDE.md`.

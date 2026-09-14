@@ -155,10 +155,10 @@ describe a shipping product before linking them.
 
 - **2.3 Artifacts** - where Claude makes a thing rather than describing one. Beat 1 here
   is the design-shaped version of that.
-- **Day 11 - design.md** - the depth pass on the pointer in beat 2. Beat 2 says "show it
-  the thing you like"; Day 11 writes that reference down as a file, builds a design system
+- **Day 12 - design.md** - the depth pass on the pointer in beat 2. Beat 2 says "show it
+  the thing you like"; Day 12 writes that reference down as a file, builds a design system
   from it, and makes every later correction carry forward. **Watch Day 10 first, then
-  Day 11.**
+  Day 12.**
 - **Day 8 - Cowork** - Day 10 sits after it on purpose. "Name the test before you look"
   is what catches a plausible result, and a long unsupervised run is where plausible
   results come from.
