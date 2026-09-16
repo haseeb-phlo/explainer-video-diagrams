@@ -51,7 +51,7 @@ afterthought: do not re-inflate the board with it, and WHEN A FACT MOVES, FIX
 THE CARD, NOT THE BOARD. This is the same on-board / on-card line Day 12 drew,
 and it is why the two halves' conflicting tier claims (the old Word script says
 the add-in is "Pro and up"; the Day 12 card, verified 2026-09-14, says GA on
-Pro, Max, Team AND Enterprise with an owner enable on Team) are a card problem
+Pro, Max, Team AND Enterprise, re-verified 2026-09-16) are a card problem
 here and not a board problem.
 
 BEAT 5 IS THE FASTEST-DATING LINE ON THE BOARD. "Strong at the ends, thinner

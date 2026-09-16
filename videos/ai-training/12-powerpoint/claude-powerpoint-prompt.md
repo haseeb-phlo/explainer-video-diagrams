@@ -151,11 +151,12 @@ blocked by Phlo's Team plan.
 
 The badge stays on the chat path anyway, for two better reasons. **One:** the chat path is
 what the seven beats actually teach - agree an outline, then build from it - and the
-add-in is a different surface with its own install. **Two:** both paths need an owner to
-switch something on for a Team org (file creation under *Organization settings >
-Capabilities*; the add-in under *Organization settings > Office agents*), so neither is
-guaranteed to be live on the day, and the chat path is the one with fewer moving parts on
-camera.
+add-in is a different surface with its own install. **Two:** the add-in has to be installed
+from the Microsoft add-in store before it exists at all, so it is not guaranteed to be live
+on the day, and the chat path is the one with fewer moving parts on camera. (**Corrected
+2026-09-16:** this used to say both paths needed an owner to switch something on for a Team
+org. File creation is enabled by default on Team, and the add-in's gates are Microsoft's,
+not Claude's.)
 
 **If the add-in is enabled for Phlo, add a second badge on beat 5** rather than moving
 this one - beat 5 is where template behaviour is discussed, and the sidebar demonstrates
@@ -287,10 +288,13 @@ script did, naming **downloaded templates** explicitly. That is the documented b
 beat 7's red rule, and it lands hardest on beat 4, the beat that tells people to feed
 outside files in.
 
-**What was newly found and added to the card:** file creation and the add-in **both need
-an owner to enable them on a Team plan** (*Organization settings > Capabilities* and
-*Organization settings > Office agents* respectively) - the Day 3 / Day 8 "say why you may
-not see it" pattern, and load-bearing because **Phlo is on a Team plan**. Also added: the
+**What was newly found and added to the card:** ~~file creation and the add-in both need an
+owner to enable them on a Team plan~~ - **WRONG, and corrected on 2026-09-16 when the Excel
+doc check (Day 15) exposed it.** File creation is **enabled by default** for Team and for
+new Enterprise organisations; an owner can only *disable* it. The add-in has **no
+Claude-side org gate at all** - the *Organization settings > Office agents > "Let Claude
+work across apps"* path is not in the documentation. The real gates are Microsoft's: the
+Office Store setting and Integrated apps deployment. Also added: the
 add-in's own **"not recommended for"** list, which independently backs beats 5, 6 and 7;
 and the governance facts that add-in activity is **not in Enterprise audit logs** and
 **does not inherit custom org data-retention settings**, with Compliance API coverage in

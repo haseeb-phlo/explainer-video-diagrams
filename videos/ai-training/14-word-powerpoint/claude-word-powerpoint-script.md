@@ -79,7 +79,7 @@ Quickly, the mechanics. Most people do the copy-paste shuttle, rebuilding the co
 single time. Claude sits in a panel beside the file instead - same panel in Word, same
 panel in PowerPoint. The file is the context, so you stop pasting it.
 
-If you cannot see it, an owner has to switch it on. That is on the Resource Card.
+If you cannot see it, it is not installed - it comes from the Microsoft add-in store. The card has the steps.
 
 ## 1:39 - 2:14 · Review as a diff [BOARD: beat 3]
 

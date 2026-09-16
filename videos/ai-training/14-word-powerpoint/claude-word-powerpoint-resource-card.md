@@ -141,11 +141,15 @@ PowerPoint, Google Docs, Google Slides or Keynote like any file a colleague woul
 - **Maximum 30MB per file**, for both uploads and downloads.
 - Creates `.xlsx`, `.pptx`, `.docx` and `.pdf`, plus Python scripts and PNG visualisations.
   **Download the file, or save it straight to Google Drive.**
-- **It has to be switched on, and on a Team plan that is not your switch.** Free, Pro and
-  Max users enable it themselves under **Settings > Capabilities**. On **Team and
-  Enterprise an owner enables it organisation-wide** under **Organization settings >
-  Capabilities**, with optional network-access restrictions. **Phlo is on a Team plan**, so
-  if you cannot find it, that is why - ask an owner rather than assuming it is gone.
+- **You should already have it, and on Team that is not your switch either way.** Free, Pro
+  and Max users turn it on themselves under **Settings > Capabilities** ("Code execution
+  and file creation"). It is **enabled by default for Team organisations**, and for new
+  Enterprise organisations. An owner can **disable** it under **Organization settings >
+  Capabilities**, and can restrict network egress there (off / package managers only, the
+  default / package managers plus named domains). **Phlo is on a Team plan, so it should
+  already be on.** If it is missing, an owner has switched it *off* - that is the question
+  to ask. **CORRECTED 2026-09-16:** this card previously said an owner had to enable it on
+  Team. That is the wrong way round.
 
 ### 2. The add-ins - Claude for Word and Claude for PowerPoint · verified 2026-09-14 in the Day 12 card
 
@@ -159,9 +163,24 @@ is the panel beat 2 draws.
   and Outlook, and it **shares context across those apps** - one conversation can span your
   open document, deck, workbook and inbox. That shared family is why the board teaches the
   sidebar once rather than twice.
-- **Team and Enterprise gate:** an organisation owner must turn on **Organization settings
-  > Office agents > "Let Claude work across apps"** before an individual can enable it.
-  Same pattern as file creation above, and the same answer if you cannot see it.
+- **CORRECTED 2026-09-16: there is no Claude-side org gate. The gates are Microsoft's.**
+  This card previously said an owner had to turn on *Organization settings > Office agents
+  > "Let Claude work across apps"*. **That path does not appear anywhere in the current
+  documentation** - do not repeat it. What the docs actually describe: either you install
+  the add-in yourself from Microsoft AppSource, or a Microsoft 365 admin deploys it under
+  **Settings > Integrated apps**, which requires **"Let users access the Office Store"** to
+  be on in the Microsoft 365 Admin Center. Where the Office Store is disabled, admins
+  deploy the custom manifest XML instead.
+- **Activate it** from **Home > Add-ins** on Windows or **Tools > Add-ins** on Mac, then
+  sign in with your Claude account.
+- **Known Microsoft bug:** if your organisation uses Entra Privileged Identity Management
+  for admin roles, the Integrated apps page does not recognise PIM-activated roles and
+  deployment fails (Microsoft tracking ID 11126536). Deploy from an account whose role is
+  permanently active rather than PIM-eligible. Individuals can always self-install.
+- **Custom manifest XML:** `https://pivot.claude.ai/manifest-powerpoint.xml` for
+  PowerPoint, `https://pivot.claude.ai/manifest-excel.xml` for Excel.
+- **Routing AI traffic through Amazon Bedrock, Google Cloud Vertex AI, Azure AI Foundry or
+  an LLM gateway?** Admins can deploy the add-in without individual Claude accounts.
 - **Install:** the "Claude for Microsoft 365" listing on Microsoft AppSource, then sign in
   from Word or PowerPoint. Admins can deploy org-wide through the Microsoft 365 Admin
   Center (Settings > Integrated apps), or via a custom manifest XML if the Office Store is
