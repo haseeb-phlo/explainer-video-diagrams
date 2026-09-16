@@ -1,5 +1,9 @@
 # Day 15 - Claude in Microsoft Excel - Resource Card
 
+> **Audience: advanced.** This video was retargeted on 2026-09-16 at advanced users - people
+> fluent in Excel *and* fluent with Claude. It is not general-audience material and does not
+> behave like the rest of the AI Ops Learn series. See *Where this sits* at the end.
+
 Everything the board deliberately leaves off, in one place. **The board names the tool and
 never the tier**, which is what keeps it from dating. Every product fact lives here instead.
 
@@ -85,9 +89,9 @@ create data validation dropdowns. Just ask for them directly.
 
 **Not supported:** data tables · macros and VBA.
 
-> **Beat 5 of the board frames four of these as jobs you ask for, not as a feature list.**
+> **Beat 4 of the board frames four of these as jobs you ask for, not as a feature list.**
 > "Tell me which rows did not match" is a reasonable ask rather than a documented feature -
-> the documented capability underneath it is multi-tab working. Do not read beat 5 back as
+> the documented capability underneath it is multi-tab working. Do not read beat 4 back as
 > though it were Anthropic's own list; this section is.
 
 ---
@@ -97,8 +101,8 @@ create data validation dropdowns. Just ask for them directly.
 **Persistent Instructions.** Open **Settings in the add-in sidebar** → the **Instructions**
 field. It applies to every conversation in Excel - formatting conventions, currency and
 locale, recurring context about your workflow. **Instructions set in Excel apply only to
-Excel**; PowerPoint and Word each have their own. *This is what beat 4's chip points at: you
-describe the sheet once, not every chat.*
+Excel**; PowerPoint and Word each have their own. *This is what beat 2's chip points at: you
+set the model's contract once, not every chat.*
 
 **Skills, invoked with `/`.** Skills you have enabled in Claude settings are available in
 every Claude for Microsoft 365 add-in, and Claude applies relevant ones automatically. Type
@@ -117,6 +121,16 @@ at: the audit you want probably already exists as a Skill.*
 
 These are guardrails, not a safety net. They are why beat 2 says what it says, and they do
 not replace beat 7.
+
+### One claim on the board that is NOT from the docs
+
+**Beat 5's first half - "it is not deterministic" - is a property of the model, not a
+documented behaviour of Claude for Excel.** Anthropic's Excel page says nothing about
+run-to-run variation. It is on the board because it is true of every LLM and because it
+changes what an advanced user does (re-verify after a re-run), but if anyone challenges it,
+it is not citable to this page. **Beat 5's second half IS documented**: "longer
+conversations are automatically compacted into new conversations to avoid running out of
+context."
 
 ---
 
@@ -219,7 +233,18 @@ a superseded September-2025 launch post.
 
 ## Related videos in the course
 
-- **Day 3 - Prompting and CRISPE.** Beat 4 is the Context dial, pointed at a spreadsheet.
-- **Day 7 - Skills.** "Test on a known input" is the same instinct as "check one row" - and beat 8's auditing Skill is a Day 7 artefact.
+- **Day 3 - Prompting and CRISPE.** Beat 2 is the Context dial, pointed at a spreadsheet - and pushed past where Day 3 leaves it.
+- **Day 7 - Skills.** "Test on a known input" is the same instinct as reconciling a second way - and beat 8's auditing Skill is a Day 7 artefact.
 - **Day 10 - design work with Claude.** Where *an acceptable output is the dangerous one* is argued in full. This board is that argument with a number instead of a page.
-- **Day 12 / Day 14 - Claude in PowerPoint, and in Word and PowerPoint.** The deck the £376,600 on beat 1 ends up in. Same Microsoft 365 add-in family, and context is shared across all of them in one conversation.
+- **Day 12 / Day 14 - Claude in PowerPoint, and in Word and PowerPoint.** The deck the £18.33 on beat 1 ends up in. Same Microsoft 365 add-in family, and context is shared across all of them in one conversation.
+
+## Where this sits - and a decision somebody has to make
+
+This board assumes fluency in both Excel and Claude. It uses modelling vocabulary without
+glossing it, and its central beat only works on a room that will *try* to find the bug and
+fail. **That makes it a poor fit for the mandatory all-staff course**, which is written for
+clinical, ops, commercial and support colleagues as well as analysts.
+
+If it goes into the mandatory track it needs either a general-audience sibling or an explicit
+**advanced / optional** label on the Loom. That is a curriculum call, not something to fix by
+softening the board - a version pitched at everyone would lose the only thing this one has.

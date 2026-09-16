@@ -1,139 +1,162 @@
-# Claude in Microsoft Excel - narration script
+# Day 15 - Claude in Microsoft Excel - narration script
 
-**Board:** `videos/ai-training/15-excel/claude-excel.excalidraw` (built by `build_excel.py`) · **9 beats** · **~7 min 00 board + ~30s live cut-away = ~7 min 30** (hard cap 8:00)
-**Format:** one flowing Excalidraw board you pan across left to right, full-screen, framing one beat at a time. The whitespace between slots is the camera. British English, generic examples, no Phlo branding and no patient or clinical specifics.
+**Board:** `videos/ai-training/15-excel/claude-excel.excalidraw` (built by `build_excel.py`) · **9 beats**
+**Audience: advanced.** People fluent in Excel *and* fluent with Claude. Deliberately not general-audience material - see the note at the end.
 
-**Measured:** 1050 words in the narration blocks below (`[BEAT n]` / `[BACK TO BOARD]` prose only), ~150 wpm.
-**Re-measure after every edit** - this repo's one recorded process lesson is that per-beat second budgets drift by up to 2x against the written prose, and it has bitten twice already:
+**Measured: 1042 words = ~6 min 56 board + ~30s cut-away** (hard cap 8:00).
+
+Re-measure after every edit. This repo's recorded process lesson is that per-beat second budgets drift by up to 2x against written prose, and it has bitten on Day 10, on Day 14, and again on the first draft of this script, which came in at 8:40 against a 7:00 budget:
 
 ```bash
-sed -n '/^## Narration/,/^## Demo steps/p' claude-excel-script.md | grep -v '^\[' | grep -v '^\*\*' | wc -w
+awk '/^## Narrat/,/^## Demo/' claude-excel-script.md | grep -vE '^(#|>|\*\*|\[|-)' | wc -w
 ```
 
-> **Reconcile before recording.** `Phlo_Mandatory_AI_Course_Curriculum.docx` is not in this repo, and the module-2.8 entry that exists describes the *product walkthrough* this video replaces. This script was written from `claude-excel-prompt.md` with the user's explicit go-ahead (2026-09-15) - the same route Days 10, 11, 12, 13 and 14 took.
+> **Reconcile before recording.** No curriculum entry exists for this video. Written from `claude-excel-prompt.md` with the user's explicit go-ahead. Product facts verified against Anthropic's live docs on 2026-09-16 - see `claude-excel-resource-card.md`.
 
 ---
 
 ## Narration
 
-Voice: warm, plain, a colleague showing you something that will save you an embarrassment.
+> **Voice:** peer to peer. You are not teaching them Excel and you are not teaching them Claude. You are handing them one failure mode they have probably already shipped, and the discipline that catches it. No hedging, no "always double-check".
 
-### [BEAT 1] 0:00 - 0:55 · orange · *a number nobody checked*
+### [BEAT 1] 0:00 - 0:50 · orange · *the error that survives a spot-check*
 
-**Hook (0:00 - 0:10)**
+**Hook (0:00 - 0:12)**
 
-"Here is a number: three hundred and seventy-six thousand, six hundred pounds. It is wrong. Nobody in this chain is going to notice."
+"Eighteen pounds thirty-three. That is a cost per unit, it came out of a model, and it is wrong by twelve per cent. Every single cell behind it is correct."
 
-**Why this matters (0:10 - 0:55)**
+**Why this matters (0:12 - 0:50)**
 
-"That figure started life in a cell. It got pasted onto a slide. The slide said spend is under control, and on the strength of it somebody renewed a contract. Nothing in that chain asked where it came from.
+"It became a price, then a margin, then a signature. Nothing in that chain asked how it was computed, because there was nothing visibly wrong to ask about.
 
-Every other tool in this course fails where you can see it. A deck that says nothing looks like a deck that says nothing. A rewrite that drops a clause is at least a sentence you can read. A spreadsheet is different. It fails as a plausible number sitting in a cell that nobody queries, and then it travels. So this whole video is really one habit: check one row."
+You are not the audience for 'always double-check your AI'. You already do. The failure that costs you is the one where every input is right, every formula is valid, every range is correct - and the answer is still wrong, because the method was wrong. Claude produces it fluently, in a form that passes review, because review looks at cells.
 
-### [BEAT 2] 0:55 - 1:40 · violet · *it edits the live sheet*
+Nine beats. The middle one is the point."
 
-"First, the thing that surprises people. When Claude works on a spreadsheet it edits the sheet you have open. Not a copy, not a draft to review later. It warns you before it overwrites something, and asks you to confirm anything risky.
+### [BEAT 2] 0:50 - 1:30 · violet · *give it the contract*
 
-Useful guardrails - and still the reason Anthropic's own guidance says to start on a copy of the workbook.
+"Context first, but not the version you have been told to give it. 'Each row is one month' is table stakes - it can infer that.
 
-Because undo is smaller than people think. It reaches the edit you just watched land, and this workbook while it is still open. It does not reach the version you already saved and sent, the figure already pasted into a deck, or the decision somebody made on it. Undo is a safety net for the file. That chain on the last beat is not in the file."
+What it cannot infer is the contract. Which columns are entered and which are derived. Which one is the source of truth when two disagree - here, units, not the order log. What it must never touch: column D is a formula, and replacing a formula with its value is how a model quietly dies. And your conventions: ex-VAT, sterling, sign-positive.
 
-### [BEAT 3] 1:40 - 2:25 · blue · *ask for the formula, not the answer*
+It matters because the add-in edits the live workbook. 'Do not touch' is the protection undo does not give you - undo reaches the edit you just watched, not the version you already sent on.
 
-"Second habit, and this one costs you nothing. Ask for the formula, not the answer.
+Put the contract in the add-in's Instructions and you set it once, not every chat."
 
-Ask what our average monthly spend is and you get a sentence: your average monthly spend is thirty-four thousand, four hundred and eight pounds. You can agree with that or disagree with it. That is the whole menu.
+### [BEAT 3] 1:30 - 2:10 · blue · *ask for the assumption*
 
-Ask for the formula and the range it covers, and you get equals AVERAGE, B2 to B13. Column B, rows two to thirteen, all twelve months. Now you can read it. Now you can check it.
+"Second habit, and this is where it diverges from the beginner version.
 
-A formula is inspectable. An answer is not. So ask for both, every time. And remember that range: twelve months of data live in B2 to B13."
+Everyone says ask for the formula, not the answer. But you read formulas fluently, and that fluency is what hides this failure. Look: equals AVERAGE, D2 to D13. Valid. Correct range. Nothing to object to.
 
-### [BEAT 4] 2:25 - 3:05 · teal · *describe the sheet first*
+So ask for the formula and the assumption it encodes. Same formula back, plus one sentence: 'I assumed each month should count equally.'
 
-"Third: describe the sheet before you ask it anything. Claude can see your cells. It cannot see what you know about them.
+There it is. That sentence is the entire error, and it was never going to show up in the syntax. Make it permanent in your Instructions: state the assumption behind any aggregate, one sentence, every time."
 
-Three sentences will do it. What a row represents. Which range is the actual data. Which columns are worked out rather than typed, so it does not overwrite them.
+### [BEAT 4] 2:10 - 2:40 · teal · *where it actually beats you*
 
-Type that once at the start and everything after it is better. Better still, set it once in the add-in's own Instructions and it applies to every conversation in Excel, so you stop retyping it. Skip it and Claude will guess. It guesses well, which is exactly the problem."
+"Quick and honest, because most demos aimed at you are insulting.
 
-### [BEAT 5] 3:05 - 3:35 · indigo · *what it is genuinely good at*
+It is not faster than you at building a model. It is faster at reading somebody else's nested formula three levels deep, tracing precedents across tabs, matching two data sets and listing what did not match, and sweeping a workbook for every buried constant without getting bored on row four thousand.
 
-"A quick, honest list of what it is genuinely good at. Cleaning a messy export: splitting the columns, fixing the dates, stripping the blank rows. Finding what is broken: tracing a hash-REF back to the cell that actually caused it, across tabs. Looking up across sheets, and asking which rows did not match. And explaining a formula somebody else wrote.
+The pattern: use it where thoroughness beats judgement. Not the reverse."
 
-Notice what is not on that list: deciding whether the answer is right."
+### [BEAT 5] 2:40 - 3:10 · indigo · *the session drifts*
 
-### [BEAT 6] 3:35 - 4:50 · red · *a formula that looks right* — **the beat the day is built on**
+"Two things that catch experienced people out.
 
-"Right. This is the beat that matters.
+One: it is not deterministic. Same prompt, same workbook, twice, and you get a different model - different formulas, different structure, same plausible output. So 'I checked it' is a claim about one run. Re-run it and you have not checked the new one.
 
-Here is a sheet. Twelve months of supplier spend, January to December, down column B. Claude wrote the total. Equals SUM, B2 to B12. It returned three hundred and seventy-six thousand, six hundred pounds.
+Two: long conversations get compacted automatically to avoid running out of context, so the contract you set at minute five is summarised, not preserved. Re-state it.
 
-It ran without an error. It is a valid formula. It is formatted correctly. Nobody flagged it, because there is nothing to flag.
+Verification is per-run, not per-tool."
 
-It is also wrong.
+### [BEAT 6] 3:10 - 4:20 · red · *every row is right, and the answer is wrong* — the beat the day is built on
 
-Take ten seconds. Look at the blue box, and look at where it stops."
+"Right. Here is the one.
 
-> **HOLD THE SILENCE. Count to ten on camera. Do not talk over it, do not point at the sheet, and do not move the mouse.** The board deliberately flags nothing, so the room can find it unaided. If you narrate through this pause the beat is gone and so is the video.
+Twelve months of supplier spend. B is spend, C is units, D is cost per unit. I asked for the average cost per unit for the year. It wrote equals AVERAGE of D2 to D13, and returned eighteen pounds thirty-three.
 
-"The data runs to row thirteen. The formula stops at row twelve. December is sitting right there, thirty-five thousand three hundred pounds, outside the range. The total is short by a whole month, and it is short in a way that looks completely normal. That is what makes this different from every other failure in this programme: there is nothing on screen to catch."
+Check the range: all twelve months, nothing missed. Check the function: AVERAGE is right for an average. Check a row - July, forty thousand eight hundred over three thousand four hundred is twelve pounds exactly. Correct. Pick any other row. Also correct. Every cell on this sheet is right.
 
-### [BEAT 7] 4:50 - 5:45 · yellow · *check one row by hand*
+The answer is still wrong by twelve per cent.
 
-"So here is the catch, and it is small enough that you will actually do it.
+Take ten seconds."
 
-Recompute one row by hand, and check that the row you picked is inside the range. Pick the last one.
+> ⏸ **HOLD THE SILENCE. Count to ten on camera.** Do not narrate, do not point, do not move the mouse. There is genuinely nothing on the sheet to find - the marquee covers the whole column, correctly - and that is the lesson. An advanced room will hunt for a bad cell and fail, and *that failure is the payload*. Talk through this and the beat is gone, and so is the video.
 
-December, thirty-five thousand three hundred. Add it back. Three hundred and seventy-six thousand six hundred, plus thirty-five thousand three hundred, is four hundred and eleven thousand nine hundred. The sheet says three hundred and seventy-six thousand six hundred. Caught, in about fifteen seconds.
+"You cannot find it by looking, and neither could I. There is nothing on screen to catch."
 
-And it has to be you. Claude wrote the formula, so it cannot also be the thing that checks it.
+### [BEAT 7] 4:20 - 5:15 · yellow · *reconcile, do not spot-check*
 
-You are not auditing the whole sheet. You are checking that the row you picked is inside the range, which is exactly why you pick the last one. One row, every time, before it leaves the sheet."
+"Here is the catch, and notice what it is not. It is not 'check a row'. Checking rows finds nothing here, because every row is right. A spot-check scales linearly while a model does not, and against a method error it fails completely.
 
-### [BEAT 8] 5:45 - 6:25 · green · *audit, do not just build*
+Compute the number a second, independent way. Total spend over total units: sixteen pounds thirty-one.
 
-"One more move, and it is the higher-value one. Most people ask Claude to build them a sheet. Point it at a sheet somebody else built instead.
+They do not tie. Twelve per cent apart, and the mean is the wrong one - an unweighted average over-weights your quiet months, which are your expensive ones. Twelve per cent on a unit cost is a pricing decision, not a rounding difference.
 
-Ask what breaks if this number doubles. Ask what is hard-coded that should be a reference. Ask what assumes this sheet never gets another row. And you do not have to write that from scratch - a ready-made auditing Skill ships with it. Type a forward slash in the sidebar to find it.
+So: tie the headline to a control total you already trust. Cross-foot. Rebuild it a second way from different cells. Any of the three catches this in under a minute.
 
-Building a new sheet is the obvious ask. Auditing an old one is worth more, because the old one is already making decisions."
+The second calculation can be Claude's. The agreement cannot."
 
-### [BEAT 9] 6:25 - 7:10 · orange · *do it live*
+### [BEAT 8] 5:15 - 5:50 · green · *hunt the hardcodes*
 
-"Let me show you the whole thing in about thirty seconds."
+"The highest-value thing to point it at is not a blank sheet. It is a model somebody else built that is still in use every month.
+
+Every constant buried inside a formula, with its cell. Every range that will not grow when a row is added. Every lookup whose key is not unique - that one is worth the price of admission on its own. Every cell that is an input on one tab and a formula on another.
+
+Ask for a list with cell references, not a narrative. Then you check the list, which is quick, instead of the model, which is not. Evidence you can verify, not a reassurance you cannot.
+
+This is the one place it is unambiguously better than you."
+
+### [BEAT 9] 5:50 - 6:40 · orange · *do it live*
+
+"Let me do the whole loop in thirty seconds."
 
 **[CUT TO CLAUDE DESKTOP]** — see Demo steps below (~30s)
 
 **[BACK TO BOARD]**
 
-"Two things before you go. A workbook from outside is a file from outside, and it can carry instructions you did not write, so treat one like any other attachment. And never put confidential or personal data into a sheet you are going to share.
+"Two rules, and the second is ours rather than Anthropic's.
 
-Then pause here and try it: open a sheet an AI touched this month, and recompute a single row yourself. That is the whole exercise.
+Theirs: a workbook from outside can carry instructions you did not write, so treat a vendor template like any untrusted file - and nothing confidential or personal goes into a sheet you will share.
 
-One row, every time, before it leaves the sheet. See you in the next one."
+Ours: Claude for Excel is not in Enterprise audit logs and does not inherit your retention settings. Nothing records that anyone checked this, so your reconciliation is the only audit trail there is. Write it down.
+
+Pause and try it: take a model you own and reconcile its headline number a second way. If it ties, you lost four minutes. If it does not, you just found something.
+
+If it does not tie, it is not done."
 
 ---
 
 ## Demo steps
 
-Everything below is invented, generic data. No patient information and no Phlo specifics, at any point.
+Invented, generic data throughout. No patient information and no Phlo specifics, at any point.
 
-**Demo - break the range on purpose (~30s)**
+**Demo — the reconciliation loop (~30s)**
 
-1. Open Claude Desktop on a fictional workbook: one column of twelve monthly figures, nothing else. Say out loud that every number here is made up.
-2. Ask: `Give me the total spend, and the formula you used, and the range it covers.`
-3. Read the range back on camera. This is beat 3, live.
-4. Now break it, the same way the board does: **edit the formula yourself so it stops one row short** - change the range to end at the second-to-last row. (Or ask Claude to total "January to November", then treat that as the annual figure.) Do not announce which row you dropped.
-5. Recompute the **last** row by hand against the total, out loud. It will not add up, and that is the point: this is the same failure the room spent ten seconds finding on beat 6, caught on camera in about fifteen seconds.
+1. Open Claude Desktop on a fictional workbook: months, spend, units, a derived cost-per-unit column. Say out loud that every figure is made up.
+2. Ask: `What was our average cost per unit last year? Give me the formula and the assumption it encodes.`
+3. Read the assumption sentence back on camera. This is beat 3, live, and it is the fastest win in the video.
+4. Ask: `Now compute the same figure a second, independent way, using different cells.`
+5. Put the two numbers side by side. If they tie, say so and say why that is still worth the forty seconds. If they do not, ask: `Which assumption differs between the two?`
 
-> If it wobbles, describe the problem plainly ("the total has not moved") and keep talking - re-runs are cheap. Invented numbers only.
+> If it wobbles, describe the problem plainly and keep talking — re-runs are cheap. Invented numbers only, and never a real workbook on camera.
 
 ---
 
 ## Ships
 
-One workbook, either built or audited, with **one row verified by hand**.
+One model, reconciled a second way, with the tie-out written down.
 
 ## Pause-and-try
 
-Open a sheet an AI touched this month and recompute a single row yourself.
+Take a model you own and reconcile its headline number a second way.
+
+---
+
+## A note on where this sits
+
+This board is pitched at advanced users and it does not behave like the rest of the AI Ops Learn series. It assumes fluency in both Excel and Claude, it uses modelling vocabulary without glossing it, and its central beat only works on a room that will try to find the bug and fail.
+
+**That makes it a poor fit for the mandatory all-staff course**, which is written for clinical, ops, commercial and support colleagues as well as analysts. If it is going into the mandatory track it needs either a general-audience sibling or an explicit "advanced / optional" label on the Loom. That is a call for whoever owns the curriculum, not one to fix by softening the board — a version pitched at everyone would lose the only thing this one has.
