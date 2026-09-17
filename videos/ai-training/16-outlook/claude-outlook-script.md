@@ -3,6 +3,11 @@
 **Board:** `videos/ai-training/16-outlook/claude-outlook.excalidraw` (built by `build_outlook.py`) · **7 beats**
 **This is the CLOSE of the Microsoft block** - Word, Excel, PowerPoint, then this. Beat 7 is the block's payoff, not this video's, and it assumes the other three have been watched.
 
+> **The recording for this board is filed under Day 14.** The Outlook add-in Loom (<https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912>)
+> was attached to `videos/ai-training/14-word-powerpoint/` on 2026-09-17 at the user's
+> request. **Day 16 carries the board and the product detail; Day 14 carries the video.**
+> Day 14's pause-and-try was widened to three strands so its task covers the reply too.
+
 **Measured: 776 spoken words = ~5 min 10 board, + a 10s hold on beat 6 and a ~30s cut-away on beat 7 = ~5 min 50** (hard cap 8:00).
 The first draft measured 822 against a 756-word budget - this repo's 2x-drift lesson landing for the fourth time, on a script whose own header warns about it. Trimmed twice.
 

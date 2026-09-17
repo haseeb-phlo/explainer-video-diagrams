@@ -130,9 +130,14 @@ that per-beat second budgets drift by 2x against written prose):
         b1 38s  b2 24s  b3 33s  b4 26s  b5 23s  b6 36s  b7 26s
         b8 21s  b9 23s  b10 76s  b11 32s
         hook 9s   why 28s   pause-and-try + close 27s
-     1,053 spoken words = 7 min 01, plus ~30s across the two cut-aways where
-     the doing takes longer than the saying = ~7 min 31.
-     Hard cap 8 minutes - 29 seconds of headroom. RE-MEASURE IF YOU REWRITE.
+     1,086 spoken words = 7 min 14, plus ~30s across the two cut-aways where
+     the doing takes longer than the saying = ~7 min 44.
+     Hard cap 8 minutes - 16 seconds of headroom. RE-MEASURE IF YOU REWRITE.
+     (Was 1,053 / ~7 min 31. On 2026-09-17 the Outlook add-in Loom was attached
+     to this Day and the pause-and-try was widened from two strands to three -
+     document, deck, reply - which cost ~8s. THE BOARD WAS NOT CHANGED: it is
+     still Word and PowerPoint, and the Outlook board is Day 16. The measuring
+     command now lives in the script header.)
      Beat 10 is the longest on purpose; everything else was trimmed to pay for
      it. Shorter cut: beats 8 and 9 are the droppable pair (-44s, ~6 min 48) -
      nothing later depends on either. NEVER drop beat 10.

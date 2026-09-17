@@ -2,6 +2,16 @@
 
 Paste this into the AI Ops Learn Resource Card for Day 14, alongside the Loom.
 
+**Loom - Claude in Microsoft Outlook (the add-in):** <https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912>
+
+> Attached to Day 14 on 2026-09-17 at the user's request. **The Outlook board is Day 16**
+> (`videos/ai-training/16-outlook/`), which has its own script and Resource Card - this Day
+> carries the recording, Day 16 carries the diagram it was recorded from. **Day 14's own
+> board is unchanged and still covers Word and PowerPoint only.** If you are looking for
+> the Outlook product detail - plan tiers, the Microsoft Graph consent step, retention and
+> audit, the beta's "not recommended for" list - it is on
+> `videos/ai-training/16-outlook/claude-outlook-resource-card.md`, not here.
+
 > **Provenance - read this before you quote anything below.** This card merges the Day 12
 > PowerPoint card with the product detail displaced from the older module-2.9 Word
 > walkthrough. The two halves have **different verification status**, and the card marks
@@ -33,13 +43,15 @@ Paste this into the AI Ops Learn Resource Card for Day 14, alongside the Loom.
 
 ## What you are shipping today
 
-**One real document edited, with every change reviewed as a diff before you accept it - and
-one deck built from an agreed outline, with a headline on every slide that states a
-position.**
+**One real document edited, with every change reviewed as a diff before you accept it. One
+deck built from an agreed outline, with a headline on every slide that states a position.
+And one drafted reply, read for what it commits to before you send it.**
 
 **Pause-and-try:** take a paragraph you wrote this week and ask for a *change* rather than a
-rewrite. Or take your last deck and rewrite three slide titles so each states a claim.
-Three, not the whole deck.
+rewrite. Or take your last deck and rewrite three slide titles so each states a claim -
+three, not the whole deck. Or take a reply you sent this week and read it for what it
+*promises*, not for how it reads: a date, a number, an obligation you agreed to without
+noticing you had agreed.
 
 ## The one sentence to take away
 

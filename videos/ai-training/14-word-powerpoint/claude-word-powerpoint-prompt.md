@@ -41,10 +41,18 @@ PowerPoint it means a deck that is well made and argues nothing. Same failure, t
 artefacts, and that is why these are one video rather than two.
 
 **Ships:** one real document edited with every change reviewed as a diff before acceptance,
-and one deck built from an agreed outline with a headline on every slide that states a
-position.
+one deck built from an agreed outline with a headline on every slide that states a
+position, and - since 2026-09-17, when the Outlook add-in Loom was attached to this Day -
+one drafted reply read for what it commits to before sending.
 **Pause-and-try:** take a paragraph you wrote this week and ask for a change rather than a
-rewrite - or take your last deck and rewrite three slide titles so each states a claim.
+rewrite - or take your last deck and rewrite three slide titles so each states a claim - or
+take a reply you sent this week and read it for what it promises, not how it reads.
+
+**Why the third strand belongs here and is not padding.** Day 14's thesis is that Claude is
+best at the surface and the surface is exactly what a reviewer checks. The Outlook failure
+is the same failure a third time: a warm, well-pitched reply that passes review on tone and
+quietly agrees to a date, a price or a liability. Adding the reply to the task makes the
+Day's one argument land on all three artefacts it now covers.
 
 ## The merge, and what it cost
 

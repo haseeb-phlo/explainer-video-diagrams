@@ -4,6 +4,25 @@ Board: `videos/ai-training/14-word-powerpoint/claude-word-powerpoint.excalidraw`
 one slot each, `GAP = 800`; beat 10 is the one wide slot at 1600). **Day 14** of the AI
 training series.
 
+> **Day 14 also carries the Outlook add-in Loom**, added 2026-09-17 at the user's request:
+> <https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912>
+> That recording's *board* is **Day 16** (`videos/ai-training/16-outlook/`) - this Day
+> carries the video, Day 16 carries the diagram it was recorded from. The board in this
+> folder is unchanged and is still Word and PowerPoint only. The pause-and-try below was
+> widened to three strands so the task covers the reply as well as the document and the
+> deck.
+
+**Measured: 1,086 spoken words = ~7 min 14 board + ~30s across the two cut-aways = ~7 min
+44** (hard cap 8:00, so 16 seconds of headroom). The per-section timings in the headings
+below are the original author's and run a few seconds optimistic against this measure; the
+total is the re-measured one and is what binds. Re-measure after every edit - this repo's
+recorded lesson is that per-beat second budgets drift by up to 2x against written prose:
+
+```bash
+awk '/^## 0:00/,/^## On-screen/' claude-word-powerpoint-script.md \
+  | grep -vE '^(#|>|\*|\[|-|\|)' | wc -w
+```
+
 > **Source note - read before recording.** `Phlo_Mandatory_AI_Course_Curriculum.docx` is
 > the stated source of truth for script blocks and is **not in this repo**. There is **no
 > Day 14 entry** - the module-2.9 entry describes the Word *product walkthrough* and the
@@ -197,14 +216,15 @@ One rule before either leaves your hands. Nothing confidential goes into a docum
 deck you are sending out, and do not open a file, or build on a template, you do not trust
 - a file from outside can carry instructions of its own.
 
-## 7:05 - 7:32 · Pause and try, and close [CAM]
+## 7:05 - 7:44 · Pause and try, and close [CAM]
 
-Pause here and do one of two things. Take a paragraph you wrote this week and ask for a
-change rather than a rewrite. Or take your last deck and rewrite three slide titles so each
-states a claim.
+Pause here and do one of three things. Take a paragraph you wrote this week and ask for a
+change rather than a rewrite. Take your last deck and rewrite three slide titles so each
+states a claim. Or take a reply you sent this week and read it for what it promises, not how
+it reads.
 
-Accept nothing you have not read as a diff. The argument is the deliverable. And if you
-keep one thing from today: name the test before you look.
+Accept nothing you have not read as a diff, and send nothing you have not read twice. The
+argument is the deliverable - name the test before you look.
 
 ---
 

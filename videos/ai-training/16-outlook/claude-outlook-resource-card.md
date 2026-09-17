@@ -8,6 +8,12 @@ the tier**, which is what keeps it from dating. Every product fact lives here in
 
 **Post this under the Loom.** It is a deliverable of the video, not an afterthought.
 
+> **The recording for this board is filed under Day 14.** The Outlook add-in Loom (<https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912>)
+> was attached to `videos/ai-training/14-word-powerpoint/` on 2026-09-17 at the user's
+> request. **Day 16 carries the board and the product detail; Day 14 carries the video.**
+> Day 14's pause-and-try was widened to three strands so its task covers the reply too.
+
+
 ---
 
 ## ✅ Verified against Anthropic's live documentation on 2026-09-17
