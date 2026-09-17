@@ -194,8 +194,7 @@ When a video is ready:
 1. **Upload to Loom** with the title in the format `[Module].[NN] — [Title]`.
 2. **Hand-correct the captions.** Auto-captions aren't enough.
 3. **Add Loom chapters** at hook / content / pause-and-try / close.
-4. **Add it to the Learn page in the `ai-ops` app.** *Uploading to Loom does not publish anything* — these are two separate steps, and this is the one that makes a video appear. The Learn page (`/learn`) renders rows from the `learn_videos` table, and only a **super_admin** sees the *Add video* button that creates one. Paste the `https://www.loom.com/share/...` URL, add a title and description, and pick a **topic** — *AI Ops*, *AI Foundations*, *Prompt Engineering* or *AI Tools* (under *AI Tools* you can also pick the *Claude* subtopic).
-   **There is no `is_published` flag, and no `published_at` or `last_reviewed_at`.** A row is visible to every signed-in user the moment it exists — the read policy is `USING (true)` — and a row with no topic still shows, under **Uncategorized**. (This step used to describe those three fields; they have never existed in the platform.)
+4. **Update the AI Ops Learn record** for that video: change `is_published` to true, paste the Loom URL, set `published_at`, set `last_reviewed_at` to today.
 5. **Verify the Resource Card** linked from the video has the resources from the curriculum entry.
 6. **Test the page** with a colleague who hasn't seen it. Specifically: do the pause-and-try moments work? Are the resources right? Does the next-video CTA fire?
 7. **Announce in #ai-at-phlo** with one sentence on what shipped and one sentence on what changes for the team.
@@ -207,7 +206,6 @@ When a video is ready:
 - **`build_excalidraw.py` prints `[warn] N text/text overlaps`** — two labels are colliding. Decorative overlap (a highlighter behind text) is fine; check the listed pairs aren't two captions landing on each other.
 - **Diagram looks flat / boring** — you've drifted from the [Design system](#design-system): check it's frameless, white, the Virgil hand font everywhere, colour-coded per beat via vivid elements, with NO connector spine and NO sparkles. Compare against `videos/claude/3-artefacts/`.
 - **Diagrams look generic** — confirm the skill is loaded by asking Claude: "What skills do you have available?" The list should include `phlo-learn-videos`. If it doesn't, you launched `claude` from the wrong directory.
-- **A video doesn't appear on the Learn page** — uploading to Loom is not enough; the video also has to be added to the Learn page itself (step 4 of the handoff above). Nothing in the platform hides a video: reads are open to any signed-in user, the page query is unfiltered, and untopic'd rows render under *Uncategorized*. So if it isn't there, the `learn_videos` row almost certainly was never created — check whether you have the *Add video* button, which is **super_admin only**, and confirm you're looking at the same environment you added it in.
 - **Can't frame one beat at a time when recording** — increase the `GAP` constant in `build_excalidraw.py` and regenerate; bigger gaps push neighbouring beats off-screen.
 - **(Legacy) Excalimate / `make-learn-video.sh` issues** — Excalimate is no longer used and is known-broken; don't try to revive it for a new video. Use the static workflow above instead.
 
@@ -238,6 +236,5 @@ That last one is the highest-leverage onboarding artefact. Make it the first thi
 
 - `Phlo_Mandatory_AI_Course_Curriculum.docx` — the full curriculum, every video's script blocks, exercises, and resources. **Source of truth.**
 - `Claude_Code_Prompt_Learn_Page.md` — the AI Ops Learn platform extension spec. Where the finished videos live.
-- The **`ai-ops` repo** (`github.com/haseeb-phlo/ai-ops`) — the actual Learn platform: a Next.js + Supabase app whose `/learn` page is the video library. **This bundle cannot make a video appear** — it only produces the diagrams that get recorded. Publishing happens there.
 - The Phlo AI Use Policy one-pager — referenced from videos 1.5, 1.6, 4.6, 5.5.
 - The #ai-at-phlo Slack channel — where each shipped video gets announced.
