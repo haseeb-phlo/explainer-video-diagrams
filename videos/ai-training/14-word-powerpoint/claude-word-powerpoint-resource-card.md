@@ -1,16 +1,24 @@
 # Resource Card - Day 14: Claude in Microsoft Word and PowerPoint
 
-Paste this into the AI Ops Learn Resource Card for Day 14, alongside the Loom.
+## Videos for this Day
 
-**Loom - Claude in Microsoft Outlook (the add-in):** <https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912>
+| Recording | Board it was recorded from | Link |
+|---|---|---|
+| **Day 14 - Claude in Microsoft Word and PowerPoint** (this Day's own video) | this folder | **No URL supplied yet** - paste the Loom link here once it is recorded |
+| **Claude in Microsoft Outlook (the add-in)** | **Day 16** - `videos/ai-training/16-outlook/` | <https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912> |
 
-> Attached to Day 14 on 2026-09-17 at the user's request. **The Outlook board is Day 16**
-> (`videos/ai-training/16-outlook/`), which has its own script and Resource Card - this Day
-> carries the recording, Day 16 carries the diagram it was recorded from. **Day 14's own
-> board is unchanged and still covers Word and PowerPoint only.** If you are looking for
-> the Outlook product detail - plan tiers, the Microsoft Graph consent step, retention and
-> audit, the beta's "not recommended for" list - it is on
-> `videos/ai-training/16-outlook/claude-outlook-resource-card.md`, not here.
+> **This Day carries two recordings, and only one of them is linked.** The Outlook video was
+> attached to Day 14 on 2026-09-17 at the user's request; the Word and PowerPoint video that
+> this board and script were written for has not been linked here. If you came looking for
+> "the Day 14 video" and found an Outlook link, that is why.
+>
+> **Day 14's own board is unchanged** and still covers Word and PowerPoint only. The Outlook
+> board, its narration and its product detail (plan tiers, the Microsoft Graph consent step,
+> retention and audit, the beta's "not recommended for" list) all live on **Day 16**.
+
+---
+
+Paste this into the AI Ops Learn Resource Card for Day 14, alongside the Looms above.
 
 > **Provenance - read this before you quote anything below.** This card merges the Day 12
 > PowerPoint card with the product detail displaced from the older module-2.9 Word

@@ -1,21 +1,31 @@
 # Day 14: Claude in Microsoft Word and PowerPoint - narration script (Loom)
 
+## Videos for this Day
+
+| Recording | Board it was recorded from | Link |
+|---|---|---|
+| **Day 14 - Claude in Microsoft Word and PowerPoint** (the script below) | this folder | **No URL supplied yet** - paste the Loom link here once it is recorded |
+| **Claude in Microsoft Outlook (the add-in)** | **Day 16** - `videos/ai-training/16-outlook/` | <https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912> |
+
+> **This Day carries two recordings, and only one of them is linked.** The Outlook video was
+> attached to Day 14 on 2026-09-17 at the user's request; the Word and PowerPoint video that
+> this board and script were written for has not been linked here. If you came looking for
+> "the Day 14 video" and found an Outlook link, that is why.
+>
+> **Day 14's own board is unchanged** and still covers Word and PowerPoint only. The Outlook
+> board, its narration and its product detail (plan tiers, the Microsoft Graph consent step,
+> retention and audit, the beta's "not recommended for" list) all live on **Day 16**.
+
+---
+
 Board: `videos/ai-training/14-word-powerpoint/claude-word-powerpoint.excalidraw` (11 beats,
 one slot each, `GAP = 800`; beat 10 is the one wide slot at 1600). **Day 14** of the AI
 training series.
 
-> **Day 14 also carries the Outlook add-in Loom**, added 2026-09-17 at the user's request:
-> <https://www.loom.com/share/10e4eaa90c0c4cf584c1fc562b3ed912>
-> That recording's *board* is **Day 16** (`videos/ai-training/16-outlook/`) - this Day
-> carries the video, Day 16 carries the diagram it was recorded from. The board in this
-> folder is unchanged and is still Word and PowerPoint only. The pause-and-try below was
-> widened to three strands so the task covers the reply as well as the document and the
-> deck.
-
 **Measured: 1,086 spoken words = ~7 min 14 board + ~30s across the two cut-aways = ~7 min
 44** (hard cap 8:00, so 16 seconds of headroom). The per-section timings in the headings
 below are the original author's and run a few seconds optimistic against this measure; the
-total is the re-measured one and is what binds. Re-measure after every edit - this repo's
+total is the re-measured one and is what binds. The pause-and-try was widened to three strands on 2026-09-17 (document, deck, reply) when the Outlook recording was attached to this Day. Re-measure after every edit - this repo's
 recorded lesson is that per-beat second budgets drift by up to 2x against written prose:
 
 ```bash
